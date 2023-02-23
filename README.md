@@ -5,6 +5,11 @@
   <br>Igor Kawczyński - backend dev
   <br>Grzegorz Krych - backend dev
   <br>Maciej Makowski - frontend dev
+  <br>
+  <br>
+  <a href=https://trello.com/b/k4doIHgc/todo>
+    <b>Our Trello</b>
+  </a>
 </p>
 
 ## Technologies we are using :
