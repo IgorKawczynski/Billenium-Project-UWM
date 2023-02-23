@@ -1,10 +1,10 @@
 # MAGI - Team Project for Billenium ( Kanban Table )
 
 <p>
-  <br> Adam Trentowski - Scrum Master
-  <br> Igor Kawczyński
-  <br> Grzegorz Krych
-  <br> Maciej Makowski
+  <br> Adam Trentowski - backedn dev - Scrum Master
+  <br> Igor Kawczyński - backedn dev
+  <br> Grzegorz Krych  - backedn dev
+  <br> Maciej Makowski - frontend dev
 </p>
 
 ## Technologies we are using :
