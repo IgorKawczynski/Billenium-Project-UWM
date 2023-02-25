@@ -43,4 +43,7 @@
 </a> <b> Typescript 4.9.5 </b> <br>
 <a href=https://en.wikipedia.org/wiki/TypeScript>
   <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/react/react-original.svg" alt="react" width="35" height="35" />      
-</a> <b> React 18 </b>
+</a> <b> React 18 </b> <br>
+<a href=https://github.com/vitejs/vite>
+  <img src="https://camo.githubusercontent.com/61e102d7c605ff91efedb9d7e47c1c4a07cef59d3e1da202fd74f4772122ca4e/68747470733a2f2f766974656a732e6465762f6c6f676f2e737667" alt="react" width="35" height="35" />      
+</a> <b> Vite 3 </b>
