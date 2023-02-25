@@ -1,19 +1,45 @@
 import React from 'react'
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+import Card from "./card";
 
-interface columnData{
+interface Props {
+    id: string;
     title: string;
-    amount: number;
+    items: Array<any>;
 }
 
-const Column = (props:columnData) => {
-
-
+const Column: React.FC<Props> = (props) => {
     return(
-        <div className="column">
-            <div className="columnTop">
-            <div className="columnTitle">{props.title}</div>
-            <div className="columnAmount">{props.amount}</div>
-            <button className="columnAddTask">+</button>
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+            <h2>{props.title}</h2>
+            <div style={{margin:8}}>
+                <Droppable droppableId={props.id} key={props.id}>
+                    {(provided, snapshot) =>{
+                        return(
+                            <div
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                                style={{
+                                    background: snapshot.isDraggingOver ? 'lightblue' : 'lightgrey',
+                                    padding: 4,
+                                    width: 250,
+                                    minHeight:500
+                                }}
+                            >
+                                {props.items.map((item:any, index:any) => {
+                                        return (
+                                            <Card
+                                                id={item.id}
+                                                index={index}
+                                                content={item.content}
+                                                desc={item.desc}
+                                            />
+                                        )
+                                    }
+                                )}
+                            </div>
+                        )}}
+                </Droppable>
             </div>
         </div>
     )
