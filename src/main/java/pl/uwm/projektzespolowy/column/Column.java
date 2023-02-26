@@ -15,10 +15,10 @@ import java.util.List;
 public class Column extends BasicEntity {
 
     private String title;
-    private Integer limit;
+    private Integer cardsLimit;
     private Integer position;
     @ManyToOne
-    @JoinColumn(name = "board_id")
+    @JoinColumn(name = "board_id", referencedColumnName = "id")
     private Board board;
 
     @OneToMany(mappedBy = "column",
@@ -29,10 +29,11 @@ public class Column extends BasicEntity {
     public final static int UNLIMITED_SIZE = 0;
     public final static int DEFAULT_SIZE = 3;
 
-    public Column(String title, Integer limit, Integer position) {
+    public Column(String title, Integer cardsLimit, Integer position, Board board) {
         this.title = title;
-        this.limit = limit;
+        this.cardsLimit = cardsLimit;
         this.position = position;
+        this.board = board;
         this.cards = new ArrayList<>();
     }
 
@@ -44,8 +45,8 @@ public class Column extends BasicEntity {
         return title;
     }
 
-    public Integer getLimit() {
-        return limit;
+    public Integer getCardsLimit() {
+        return cardsLimit;
     }
 
     public Integer getPosition() {

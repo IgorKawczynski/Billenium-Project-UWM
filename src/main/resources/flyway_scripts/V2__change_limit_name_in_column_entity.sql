@@ -1,0 +1,1 @@
+alter table columns rename column "limit" to cards_limit
