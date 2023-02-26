@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import pl.uwm.projektzespolowy.basic.BasicEntity;
 import pl.uwm.projektzespolowy.board.Board;
 import pl.uwm.projektzespolowy.card.Card;
+import pl.uwm.projektzespolowy.column.dtos.ColumnDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,17 @@ public class Column extends BasicEntity {
         this.position = position;
         this.board = board;
         this.cards = new ArrayList<>();
+    }
+
+    public ColumnDTO toDto() {
+        return ColumnDTO.builder()
+                .title(this.title)
+                .cardsLimit(this.cardsLimit)
+                .position(this.position)
+                .cards(this.cards.stream()
+                        .map(Card::toDto)
+                        .toList())
+                .build();
     }
 
     public void assign(Card card) {

@@ -50,6 +50,10 @@ public class User extends BasicEntity {
         this.cards = new HashSet<>();
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     public String getFirstName() {
         return firstName;
     }

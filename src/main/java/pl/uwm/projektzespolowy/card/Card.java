@@ -3,6 +3,7 @@ package pl.uwm.projektzespolowy.card;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import pl.uwm.projektzespolowy.basic.BasicEntity;
+import pl.uwm.projektzespolowy.card.dtos.CardDTO;
 import pl.uwm.projektzespolowy.column.Column;
 import pl.uwm.projektzespolowy.user.User;
 
@@ -29,6 +30,13 @@ public class Card extends BasicEntity {
         this.description = description;
         this.column = column;
         this.assignedUsers = new HashSet<>();
+    }
+
+    public CardDTO toDto() {
+        return CardDTO.builder()
+                .title(this.title)
+                .description(this.description)
+                .build();
     }
 
     public String getTitle() {

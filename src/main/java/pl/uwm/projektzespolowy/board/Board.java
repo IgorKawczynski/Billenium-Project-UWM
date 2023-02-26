@@ -42,7 +42,14 @@ public class Board extends BasicEntity {
     }
 
     public BoardResponseDTO toDto() {
-        return new BoardResponseDTO();
+        return BoardResponseDTO.builder()
+                .title(this.title)
+                .creatorName(this.creator.getFullName())
+                .assignedUsers(this.assignedUsers)
+                .columnList(this.columns.stream()
+                        .map(Column::toDto)
+                        .toList())
+                .build();
     }
 
     public void assign(Column column) {

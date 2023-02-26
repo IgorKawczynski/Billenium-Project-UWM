@@ -13,8 +13,8 @@ public class BoardController {
     private final BoardFacade facade;
 
     @GetMapping("/{boardId}")
-    public Board getBoardById(@PathVariable Long boardId) {
-        return facade.getBoardById(boardId);
+    public BoardResponseDTO getBoardById(@PathVariable Long boardId) {
+        return facade.getBoardById(boardId).toDto();
     }
 
     @PostMapping("")
