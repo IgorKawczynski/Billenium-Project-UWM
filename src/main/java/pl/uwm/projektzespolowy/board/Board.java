@@ -3,6 +3,7 @@ package pl.uwm.projektzespolowy.board;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import pl.uwm.projektzespolowy.basic.BasicEntity;
+import pl.uwm.projektzespolowy.board.dtos.BoardResponseDTO;
 import pl.uwm.projektzespolowy.column.Column;
 import pl.uwm.projektzespolowy.user.User;
 
@@ -25,7 +26,7 @@ public class Board extends BasicEntity {
     private Set<User> assignedUsers;
 
     @OneToMany(mappedBy = "board",
-              cascade = CascadeType.ALL,
+              cascade = { CascadeType.MERGE,CascadeType.PERSIST },
               orphanRemoval = true)
     private List<Column> columns;
 
@@ -34,10 +35,14 @@ public class Board extends BasicEntity {
         this.creator = creator;
         this.assignedUsers = new HashSet<>(Collections.singletonList(creator));
         this.columns = List.of(
-                new Column("Todo", UNLIMITED_SIZE, 0),
-                new Column("In progress", DEFAULT_SIZE, 1),
-                new Column("Done", UNLIMITED_SIZE, 2)
+                new Column("Todo", UNLIMITED_SIZE, 0, this),
+                new Column("In progress", DEFAULT_SIZE, 1, this),
+                new Column("Done", UNLIMITED_SIZE, 2, this)
         );
+    }
+
+    public BoardResponseDTO toDto() {
+        return new BoardResponseDTO();
     }
 
     public void assign(Column column) {
