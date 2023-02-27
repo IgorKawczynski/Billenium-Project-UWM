@@ -1,30 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {DragDropContext} from 'react-beautiful-dnd';
 import Column from './column'
+import _board from "../interfaces/Board"
+import AddColumnButton from "./addColumnButton";
 
-interface Props {
-    children: React.ReactNode;
-    columns: {
-        [key: string]: {
-            title: string;
-            items: {
-                id: string;
-                content: string;
-                desc:string;
-            }[];
-        };
-    };
-    setColumns: React.Dispatch<React.SetStateAction<{
-        [key: string]: {
-            title: string;
-            items: {
-                id: string;
-                content: string;
-                desc:string;
-            }[];
-        };
-    }>>;
-}
 const onDragEnd = (result: any, columns:any, setColumns:any) => {
     if(!result.destination) return
     const {source, destination} = result;
@@ -61,27 +40,43 @@ const onDragEnd = (result: any, columns:any, setColumns:any) => {
         })
     }
 }
-const Board: React.FC<Props> = (props) => {
-
-
+const Board = (props:_board) => {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
     return (
-        <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
-            <DragDropContext
-                onDragEnd={(result) =>
-                    onDragEnd(result, props.columns, props.setColumns)
-                }
-            >
-                {Object.entries(props.columns).map(([id, column]) => {
-                    return (
-                        <Column
-                            id={id}
-                            title={column.title}
-                            items={column.items} // Add the items prop
-                        />
-                    );
-                })}
-            </DragDropContext>
-            {props.children}
+        <div style={{display:"flex", justifyContent:"center", flexDirection:"column"}}>
+            <h2 style={{textAlign:"center"}}>Tablica</h2>
+            <AddColumnButton
+                columns={props.columns}
+                setColumns={props.setColumns}
+            />
+            <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
+                <DragDropContext
+                    onDragEnd={(result) =>
+                        onDragEnd(result, props.columns, props.setColumns)
+                    }
+                >
+                    {Object.entries(props.columns).map(([id, column]) => {
+                        return (
+                            <Column
+                                key={id}
+                                id={id}
+                                title={column.title}
+                                items={column.items}
+                                index={column.index}
+                                columns={props.columns}
+                                setColumns={props.setColumns}
+                            />
+                        );
+                    })}
+                </DragDropContext>
+                {props.children}
+            </div>
         </div>
     );
 }
