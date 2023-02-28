@@ -7,7 +7,7 @@ import pl.uwm.projektzespolowy.board.dtos.BoardCreateDTO;
 
 @Component
 @RequiredArgsConstructor
-public class BoardFacade {
+public class BoardCRUDService {
 
     private final BoardReader reader;
     private final BoardCreator creator;

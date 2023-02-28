@@ -10,16 +10,16 @@ import pl.uwm.projektzespolowy.board.dtos.BoardResponseDTO;
 @RequestMapping("/api/boards")
 public class BoardController {
 
-    private final BoardFacade facade;
+    private final BoardCRUDService boardCRUDService;
 
     @GetMapping("/{boardId}")
     public BoardResponseDTO getBoardById(@PathVariable Long boardId) {
-        return facade.getBoardById(boardId).toDto();
+        return boardCRUDService.getBoardById(boardId).toDto();
     }
 
     @PostMapping("")
     public BoardResponseDTO createBoard(@RequestBody BoardCreateDTO boardCreateDTO) {
-        return facade.createBoard(boardCreateDTO).toDto();
+        return boardCRUDService.createBoard(boardCreateDTO).toDto();
     }
 
 }
