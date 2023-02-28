@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.Cascade;
 import pl.uwm.projektzespolowy.basic.BasicEntity;
 import pl.uwm.projektzespolowy.board.dtos.BoardResponseDTO;
 import pl.uwm.projektzespolowy.column.Column;
@@ -27,7 +28,15 @@ public class Board extends BasicEntity {
     @JoinColumn(name = "creator_id", referencedColumnName = "id")
     User creator;
 
-    @ManyToMany(mappedBy = "boards")
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    },
+            fetch = FetchType.LAZY)
+    @JoinTable(name = "users_boards",
+            joinColumns = @JoinColumn(name = "board_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     Set<User> assignedUsers;
 
     @OneToMany(mappedBy = "board",
@@ -38,7 +47,8 @@ public class Board extends BasicEntity {
     public Board(String title, User creator) {
         this.title = title;
         this.creator = creator;
-        this.assignedUsers = new HashSet<>(Collections.singletonList(creator));
+        this.assignedUsers = new HashSet<>();
+        this.assignedUsers.add(creator);
         this.columns = List.of(
                 new Column("Todo", UNLIMITED_SIZE, 0, this),
                 new Column("In progress", DEFAULT_SIZE, 1, this),
@@ -50,7 +60,9 @@ public class Board extends BasicEntity {
         return BoardResponseDTO.builder()
                 .title(this.title)
                 .creatorName(this.creator.getFullName())
-                .assignedUsers(this.assignedUsers)
+                .assignedUsers(this.assignedUsers.stream()
+                        .map(User::toUserResponseDTO)
+                        .toList())
                 .columnList(this.columns.stream()
                         .map(Column::toDto)
                         .toList())

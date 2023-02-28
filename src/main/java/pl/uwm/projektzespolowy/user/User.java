@@ -8,6 +8,7 @@ import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.basic.BasicEntity;
 import pl.uwm.projektzespolowy.board.Board;
 import pl.uwm.projektzespolowy.card.Card;
+import pl.uwm.projektzespolowy.user.dtos.UserResponseDTO;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,15 +25,7 @@ public class User extends BasicEntity {
     String firstName;
     String lastName;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-            },
-            fetch = FetchType.LAZY)
-    @JoinTable(name = "users_boards",
-        joinColumns = @JoinColumn(name = "board_id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+    @ManyToMany(mappedBy = "assignedUsers")
     Set<Board> boards;
 
     @ManyToMany(cascade = {
@@ -53,6 +46,14 @@ public class User extends BasicEntity {
         this.lastName = lastName;
         this.boards = new HashSet<>();
         this.cards = new HashSet<>();
+    }
+
+    public UserResponseDTO toUserResponseDTO() {
+        return UserResponseDTO.builder()
+                .id(this.id)
+                .firstName(this.firstName)
+                .lastName(this.lastName)
+                .build();
     }
 
     public String getFullName() {
