@@ -3,6 +3,7 @@ package pl.uwm.projektzespolowy.column;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.basic.BasicEntity;
 import pl.uwm.projektzespolowy.board.Board;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "columns")
+@Setter
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Column extends BasicEntity {
