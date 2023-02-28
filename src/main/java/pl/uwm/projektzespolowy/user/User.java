@@ -1,7 +1,10 @@
 package pl.uwm.projektzespolowy.user;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.basic.BasicEntity;
 import pl.uwm.projektzespolowy.board.Board;
 import pl.uwm.projektzespolowy.card.Card;
@@ -11,13 +14,15 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@Setter
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class User extends BasicEntity {
 
-    private String email;
-    private String password;
-    private String firstName;
-    private String lastName;
+    String email;
+    String password;
+    String firstName;
+    String lastName;
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
@@ -28,7 +33,7 @@ public class User extends BasicEntity {
         joinColumns = @JoinColumn(name = "board_id"),
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<Board> boards;
+    Set<Board> boards;
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
@@ -39,7 +44,7 @@ public class User extends BasicEntity {
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "card_id")
     )
-    private Set<Card> cards;
+    Set<Card> cards;
 
     public User(String email, String password, String firstName, String lastName) {
         this.email = email;

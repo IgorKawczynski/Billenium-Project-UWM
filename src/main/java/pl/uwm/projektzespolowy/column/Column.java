@@ -1,7 +1,9 @@
 package pl.uwm.projektzespolowy.column;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.basic.BasicEntity;
 import pl.uwm.projektzespolowy.board.Board;
 import pl.uwm.projektzespolowy.card.Card;
@@ -13,19 +15,20 @@ import java.util.List;
 @Entity
 @Table(name = "columns")
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Column extends BasicEntity {
 
-    private String title;
-    private Integer cardsLimit;
-    private Integer position;
+    String title;
+    Integer cardsLimit;
+    Integer position;
     @ManyToOne
     @JoinColumn(name = "board_id", referencedColumnName = "id")
-    private Board board;
+    Board board;
 
     @OneToMany(mappedBy = "column",
                cascade = CascadeType.ALL,
                orphanRemoval = true)
-    private List<Card> cards;
+    List<Card> cards;
 
     public final static int UNLIMITED_SIZE = 0;
     public final static int DEFAULT_SIZE = 3;

@@ -1,7 +1,10 @@
 package pl.uwm.projektzespolowy.board;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.basic.BasicEntity;
 import pl.uwm.projektzespolowy.board.dtos.BoardResponseDTO;
 import pl.uwm.projektzespolowy.column.Column;
@@ -14,21 +17,23 @@ import static pl.uwm.projektzespolowy.column.Column.UNLIMITED_SIZE;
 
 @Entity
 @Table(name = "boards")
+@Setter
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Board extends BasicEntity {
 
-    private String title;
+    String title;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id", referencedColumnName = "id")
-    private User creator;
+    User creator;
 
     @ManyToMany(mappedBy = "boards")
-    private Set<User> assignedUsers;
+    Set<User> assignedUsers;
 
     @OneToMany(mappedBy = "board",
-              cascade = { CascadeType.MERGE,CascadeType.PERSIST },
+              cascade = { CascadeType.MERGE, CascadeType.PERSIST },
               orphanRemoval = true)
-    private List<Column> columns;
+    List<Column> columns;
 
     public Board(String title, User creator) {
         this.title = title;

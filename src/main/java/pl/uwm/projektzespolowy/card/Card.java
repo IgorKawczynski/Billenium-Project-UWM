@@ -1,7 +1,10 @@
 package pl.uwm.projektzespolowy.card;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.basic.BasicEntity;
 import pl.uwm.projektzespolowy.card.dtos.CardDTO;
 import pl.uwm.projektzespolowy.column.Column;
@@ -12,18 +15,20 @@ import java.util.Set;
 
 @Entity
 @Table(name = "cards")
+@Setter
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Card extends BasicEntity {
 
-    private String title;
-    private String description;
+    String title;
+    String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "column_id")
-    private Column column;
+    Column column;
 
     @ManyToMany(mappedBy = "cards")
-    private Set<User> assignedUsers;
+    Set<User> assignedUsers;
 
     public Card(String title, String description, Column column) {
         this.title = title;
