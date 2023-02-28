@@ -12,7 +12,7 @@ public class BoardReader {
 
     public Board getBoardById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Board with id: " + id + " doesn't exists!"));
+                .orElseThrow(() -> new EntityNotFoundException("Board with id: " + id + " does not exist!"));
     }
 
 }
