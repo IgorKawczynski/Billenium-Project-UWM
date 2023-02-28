@@ -8,4 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/columns")
 public class ColumnController {
+
+    private final ColumnCRUDService service;
+
+//    TODO: dto czy encja
+
 }
