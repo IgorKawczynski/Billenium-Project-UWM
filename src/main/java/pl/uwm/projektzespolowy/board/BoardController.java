@@ -22,4 +22,9 @@ public class BoardController {
         return boardCRUDService.createBoard(boardCreateDTO).toDto();
     }
 
+    @GetMapping("/test/")
+    public String getTest() {
+        return "TEST TEST TEST";
+    }
+
 }
