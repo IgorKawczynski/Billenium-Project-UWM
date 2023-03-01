@@ -5,10 +5,10 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.Cascade;
 import pl.uwm.projektzespolowy.basic.BasicEntity;
 import pl.uwm.projektzespolowy.board.dtos.BoardResponseDTO;
 import pl.uwm.projektzespolowy.column.Column;
+import pl.uwm.projektzespolowy.column.dtos.ColumnDTO;
 import pl.uwm.projektzespolowy.user.User;
 
 import java.util.*;
@@ -65,6 +65,7 @@ public class Board extends BasicEntity {
                         .toList())
                 .columnList(this.columns.stream()
                         .map(Column::toDto)
+                        .sorted(Comparator.comparingInt(ColumnDTO::position))
                         .toList())
                 .build();
     }
