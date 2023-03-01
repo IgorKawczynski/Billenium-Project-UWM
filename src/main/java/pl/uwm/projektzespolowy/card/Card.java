@@ -23,6 +23,8 @@ public class Card extends BasicEntity {
     String title;
     String description;
 
+    // TODO: add Position
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "column_id")
     Column column;
@@ -39,6 +41,7 @@ public class Card extends BasicEntity {
 
     public CardDTO toDto() {
         return CardDTO.builder()
+                .id(this.id)
                 .title(this.title)
                 .description(this.description)
                 .build();
