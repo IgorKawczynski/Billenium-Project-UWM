@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
 import pl.uwm.projektzespolowy.exceptions.ErrorMessage;
 
 @RestControllerAdvice
@@ -17,4 +16,11 @@ public class VOExceptions {
 //    public ErrorMessage exampleException(ExampleException exception) {
 //        return new ErrorMessage(exception.getMessage());
 //    }
+
+    @ExceptionHandler(value = StringValidatorException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage invalidTitleValue(StringValidatorException exception) {
+        return new ErrorMessage(exception.getMessage());
+    }
+
 }
