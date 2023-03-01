@@ -33,13 +33,13 @@ public class UserUpdater {
                 user.setPassword(password);
             }
         }
+        userRepository.saveAndFlush(user);
     }
 
-    // Error handling
+    // TODO: Error handling
     public void updateUser(UpdateDTO updateDTO){
         var user = userReader.getUserById(updateDTO.id());
         updateUserField(user, updateDTO.fieldName(), updateDTO.value());
     }
-
 
 }
