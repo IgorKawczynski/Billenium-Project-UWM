@@ -2,6 +2,8 @@ package pl.uwm.projektzespolowy.board;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import pl.uwm.projektzespolowy.basic.UpdateDTO;
+import pl.uwm.projektzespolowy.board.crud.BoardCRUDService;
 import pl.uwm.projektzespolowy.board.dtos.BoardCreateDTO;
 import pl.uwm.projektzespolowy.board.dtos.BoardResponseDTO;
 
@@ -10,21 +12,26 @@ import pl.uwm.projektzespolowy.board.dtos.BoardResponseDTO;
 @RequestMapping("/api/boards")
 public class BoardController {
 
-    private final BoardCRUDService boardCRUDService;
-
-    @GetMapping("/{boardId}")
-    public BoardResponseDTO getBoardById(@PathVariable Long boardId) {
-        return boardCRUDService.getBoardById(boardId).toDto();
-    }
+    private final BoardCRUDService service;
 
     @PostMapping("")
     public BoardResponseDTO createBoard(@RequestBody BoardCreateDTO boardCreateDTO) {
-        return boardCRUDService.createBoard(boardCreateDTO).toDto();
+        return service.createBoard(boardCreateDTO).toDto();
     }
 
-    @GetMapping("/test/")
-    public String getTest() {
-        return "TEST TEST TEST";
+    @GetMapping("/{boardId}")
+    public BoardResponseDTO getBoardById(@PathVariable Long boardId) {
+        return service.getBoardById(boardId).toDto();
+    }
+
+    @PatchMapping("")
+    public void updateBoard(@RequestBody UpdateDTO updateDTO) {
+        service.updateBoard(updateDTO);
+    }
+
+    @DeleteMapping("/{boardId}")
+    public void deleteBoardById(@PathVariable Long boardId) {
+        service.deleteBoard(boardId);
     }
 
 }
