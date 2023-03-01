@@ -1,16 +1,19 @@
-package pl.uwm.projektzespolowy.column;
+package pl.uwm.projektzespolowy.column.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.basic.UpdateDTO;
 import pl.uwm.projektzespolowy.basic.ValidatorService;
+import pl.uwm.projektzespolowy.column.Column;
+import pl.uwm.projektzespolowy.column.ColumnRepository;
 
 @Component
 @RequiredArgsConstructor
 public class ColumnUpdater {
 
-    private final ColumnReader columnReader;
+    private final ColumnRepository columnRepository;
 
+    private final ColumnReader columnReader;
     private final ValidatorService validatorService;
 
     public void updateColumnField(Column column, String fieldName, Object value) {
@@ -29,6 +32,7 @@ public class ColumnUpdater {
                 column.setPosition(position);
             }
         }
+        columnRepository.saveAndFlush(column);
     }
 
     // TODO: Error handling

@@ -1,7 +1,9 @@
-package pl.uwm.projektzespolowy.column;
+package pl.uwm.projektzespolowy.column.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.uwm.projektzespolowy.column.Column;
+import pl.uwm.projektzespolowy.column.ColumnRepository;
 import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
 
 @Component

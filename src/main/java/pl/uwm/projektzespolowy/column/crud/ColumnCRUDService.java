@@ -1,15 +1,16 @@
-package pl.uwm.projektzespolowy.column;
+package pl.uwm.projektzespolowy.column.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uwm.projektzespolowy.basic.UpdateDTO;
+import pl.uwm.projektzespolowy.column.Column;
 import pl.uwm.projektzespolowy.column.dtos.ColumnCreateDTO;
 
 @Service
 @RequiredArgsConstructor
 public class ColumnCRUDService {
 
-    private final AddColumnToBoardService creator;
+    private final ColumnCreatorLogic creator;
     private final ColumnReader reader;
     private final ColumnUpdater updater;
     private final ColumnDeleter deleter;

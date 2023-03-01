@@ -1,8 +1,10 @@
-package pl.uwm.projektzespolowy.column;
+package pl.uwm.projektzespolowy.column.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.board.BoardRepository;
+import pl.uwm.projektzespolowy.column.Column;
+import pl.uwm.projektzespolowy.column.ColumnRepository;
 import pl.uwm.projektzespolowy.column.dtos.ColumnCreateDTO;
 
 import java.util.Comparator;
@@ -12,7 +14,7 @@ import static pl.uwm.projektzespolowy.column.Column.UNLIMITED_SIZE;
 
 @Component
 @RequiredArgsConstructor
-public class AddColumnToBoardService {
+public class ColumnCreatorLogic {
 
     private final ColumnCreator columnCreator;
     private final ColumnRepository columnRepository;

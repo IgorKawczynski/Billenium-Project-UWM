@@ -1,4 +1,4 @@
 package pl.uwm.projektzespolowy.column.dtos;
 
-public record ColumnCreateDTO(String title, Long boardId) {
+public record ColumnCreateDTO(Long boardId, String title) {
 }
