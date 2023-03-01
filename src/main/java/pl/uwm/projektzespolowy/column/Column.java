@@ -45,6 +45,7 @@ public class Column extends BasicEntity {
 
     public ColumnDTO toDto() {
         return ColumnDTO.builder()
+                .id(this.id)
                 .title(this.title)
                 .cardsLimit(this.cardsLimit)
                 .position(this.position)
