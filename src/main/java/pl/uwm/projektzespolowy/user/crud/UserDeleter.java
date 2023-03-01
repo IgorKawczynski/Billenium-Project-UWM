@@ -1,7 +1,8 @@
-package pl.uwm.projektzespolowy.user;
+package pl.uwm.projektzespolowy.user.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.uwm.projektzespolowy.user.UserRepository;
 
 @Component
 @RequiredArgsConstructor
