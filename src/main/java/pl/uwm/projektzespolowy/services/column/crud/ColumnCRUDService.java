@@ -1,8 +1,8 @@
-package pl.uwm.projektzespolowy.column.crud;
+package pl.uwm.projektzespolowy.services.column.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.uwm.projektzespolowy.basic.UpdateDTO;
+import pl.uwm.projektzespolowy.models.UpdateDTO;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.column.ColumnCreateDTO;
 

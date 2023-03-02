@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.column;
+package pl.uwm.projektzespolowy.services.column;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
