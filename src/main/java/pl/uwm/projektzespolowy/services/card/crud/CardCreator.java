@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.services.card.CardRepository;
 import pl.uwm.projektzespolowy.services.column.crud.ColumnReader;
-import pl.uwm.projektzespolowy.exceptions.VOExceptions.StringValidatorException;
 
 @Component
 @RequiredArgsConstructor
@@ -15,15 +14,8 @@ public class CardCreator {
     private final ColumnReader columnReader;
 
     public Card create(String title, String description, Long columnId) {
-        validate(title);
         var column = columnReader.getColumnById(columnId);
         return cardRepository.saveAndFlush(new Card(title, description, column));
-    }
-
-    public void validate(String title) {
-        if(title == null || title.isEmpty()) {
-            throw new StringValidatorException("Title can not be empty!");
-        }
     }
 
 }

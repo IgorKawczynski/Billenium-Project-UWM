@@ -14,7 +14,7 @@ public class ColumnReader {
 
     public Column getColumnById(Long id) {
         return columnRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Column with id: " + id + " does not exist!"));
+                .orElseThrow(() -> new EntityNotFoundException("column", "Column with id: " + id + " does not exist!"));
     }
 
 }

@@ -2,10 +2,11 @@ package pl.uwm.projektzespolowy.exceptions;
 
 public class EntityNotFoundException extends RuntimeException {
 
-    private String message;
+    public String entityName;
 
-    public EntityNotFoundException(String message) {
+    public EntityNotFoundException(String entityName, String message) {
         super(message);
+        this.entityName = entityName;
     }
 
 }

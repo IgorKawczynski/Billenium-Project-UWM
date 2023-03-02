@@ -18,7 +18,7 @@ public class UserReader {
     public User getUserById(Long id) {
         return userRepository
                 .findById(id)
-                .orElseThrow( () -> new EntityNotFoundException("User with id: " + id + " does not exist!"));
+                .orElseThrow( () -> new EntityNotFoundException("user", "User with id: " + id + " does not exist!"));
     }
 
     public List<User> getAllUsers() {
