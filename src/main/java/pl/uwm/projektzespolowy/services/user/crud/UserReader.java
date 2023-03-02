@@ -1,11 +1,11 @@
-package pl.uwm.projektzespolowy.user.crud;
+package pl.uwm.projektzespolowy.services.user.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
 import pl.uwm.projektzespolowy.models.user.User;
-import pl.uwm.projektzespolowy.user.UserRepository;
+import pl.uwm.projektzespolowy.services.user.UserRepository;
 
 import java.util.List;
 

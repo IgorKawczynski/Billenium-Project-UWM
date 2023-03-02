@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.user.crud;
+package pl.uwm.projektzespolowy.services.user.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

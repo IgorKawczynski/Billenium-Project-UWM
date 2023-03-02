@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.user;
+package pl.uwm.projektzespolowy.services.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
