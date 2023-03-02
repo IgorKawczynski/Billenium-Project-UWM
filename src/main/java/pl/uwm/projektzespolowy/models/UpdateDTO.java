@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.basic;
+package pl.uwm.projektzespolowy.models;
 
 public record UpdateDTO(Long id, String fieldName, Object value) {
 }
