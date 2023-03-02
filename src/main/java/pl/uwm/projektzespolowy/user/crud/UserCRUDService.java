@@ -2,7 +2,7 @@ package pl.uwm.projektzespolowy.user.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.uwm.projektzespolowy.user.User;
+import pl.uwm.projektzespolowy.models.user.User;
 
 import java.util.List;
 

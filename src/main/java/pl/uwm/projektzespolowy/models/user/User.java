@@ -1,14 +1,13 @@
-package pl.uwm.projektzespolowy.user;
+package pl.uwm.projektzespolowy.models.user;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import pl.uwm.projektzespolowy.basic.BasicEntity;
-import pl.uwm.projektzespolowy.board.Board;
-import pl.uwm.projektzespolowy.card.Card;
-import pl.uwm.projektzespolowy.user.dtos.UserResponseDTO;
+import pl.uwm.projektzespolowy.models.BasicEntity;
+import pl.uwm.projektzespolowy.models.board.Board;
+import pl.uwm.projektzespolowy.models.card.Card;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.basic.UpdateDTO;
 import pl.uwm.projektzespolowy.basic.ValidatorService;
-import pl.uwm.projektzespolowy.user.User;
+import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.user.UserRepository;
 
 @Component

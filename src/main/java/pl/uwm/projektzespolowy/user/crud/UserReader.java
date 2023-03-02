@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
-import pl.uwm.projektzespolowy.user.User;
+import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.user.UserRepository;
 
 import java.util.List;

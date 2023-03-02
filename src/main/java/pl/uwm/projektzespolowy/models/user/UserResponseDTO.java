@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.user.dtos;
+package pl.uwm.projektzespolowy.models.user;
 
 import lombok.Builder;
 
