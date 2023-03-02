@@ -9,18 +9,16 @@ import pl.uwm.projektzespolowy.exceptions.ErrorMessage;
 @RestControllerAdvice
 public class VOExceptions {
 
-    // TODO
-    // Exceptions for VO like; Name too long, bad credentials, itp
-//    @ExceptionHandler(value = IntegerValidatorException.class)
-//    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-//    public ErrorMessage exampleException(ExampleException exception) {
-//        return new ErrorMessage(exception.getMessage());
-//    }
-
-    @ExceptionHandler(value = StringValidatorException.class)
+    @ExceptionHandler(value = EmptyTitleException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ErrorMessage invalidTitleValue(StringValidatorException exception) {
-        return new ErrorMessage(exception.getMessage());
+    public ErrorMessage emptyTitleHandler(EmptyTitleException exception) {
+        return new ErrorMessage("title", exception.getMessage());
+    }
+
+    @ExceptionHandler(value = InvalidTitleLengthException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage invalidTitleLengthHandler(InvalidTitleLengthException exception) {
+        return new ErrorMessage("title", exception.getMessage());
     }
 
 }
