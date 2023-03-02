@@ -3,14 +3,14 @@ package pl.uwm.projektzespolowy.column.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.board.BoardRepository;
-import pl.uwm.projektzespolowy.column.Column;
+import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.column.ColumnRepository;
-import pl.uwm.projektzespolowy.column.dtos.ColumnCreateDTO;
+import pl.uwm.projektzespolowy.models.column.ColumnCreateDTO;
 
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
-import static pl.uwm.projektzespolowy.column.Column.UNLIMITED_SIZE;
+import static pl.uwm.projektzespolowy.models.column.Column.UNLIMITED_SIZE;
 
 @Component
 @RequiredArgsConstructor

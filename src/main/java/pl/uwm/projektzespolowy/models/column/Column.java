@@ -1,14 +1,13 @@
-package pl.uwm.projektzespolowy.column;
+package pl.uwm.projektzespolowy.models.column;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import pl.uwm.projektzespolowy.basic.BasicEntity;
-import pl.uwm.projektzespolowy.board.Board;
-import pl.uwm.projektzespolowy.card.Card;
-import pl.uwm.projektzespolowy.column.dtos.ColumnDTO;
+import pl.uwm.projektzespolowy.models.BasicEntity;
+import pl.uwm.projektzespolowy.models.board.Board;
+import pl.uwm.projektzespolowy.models.card.Card;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +42,8 @@ public class Column extends BasicEntity {
         this.cards = new ArrayList<>();
     }
 
-    public ColumnDTO toDto() {
-        return ColumnDTO.builder()
+    public ColumnResponseDTO toDto() {
+        return ColumnResponseDTO.builder()
                 .id(this.id)
                 .title(this.title)
                 .cardsLimit(this.cardsLimit)

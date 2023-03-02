@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.projektzespolowy.basic.UpdateDTO;
 import pl.uwm.projektzespolowy.column.crud.ColumnCRUDService;
-import pl.uwm.projektzespolowy.column.dtos.ColumnCreateDTO;
-import pl.uwm.projektzespolowy.column.dtos.ColumnDTO;
+import pl.uwm.projektzespolowy.models.column.ColumnCreateDTO;
+import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,12 +15,12 @@ public class ColumnController {
     private final ColumnCRUDService service;
 
     @PostMapping("")
-    public ColumnDTO createColumn(@RequestBody ColumnCreateDTO columnCreateDTO) {
+    public ColumnResponseDTO createColumn(@RequestBody ColumnCreateDTO columnCreateDTO) {
         return service.createColumn(columnCreateDTO).toDto();
     }
 
     @GetMapping("/{columnId}")
-    public ColumnDTO getColumnById(@PathVariable Long columnId) {
+    public ColumnResponseDTO getColumnById(@PathVariable Long columnId) {
         return service.getColumnById(columnId).toDto();
     }
 

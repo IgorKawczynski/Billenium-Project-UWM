@@ -3,8 +3,8 @@ package pl.uwm.projektzespolowy.column.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uwm.projektzespolowy.basic.UpdateDTO;
-import pl.uwm.projektzespolowy.column.Column;
-import pl.uwm.projektzespolowy.column.dtos.ColumnCreateDTO;
+import pl.uwm.projektzespolowy.models.column.Column;
+import pl.uwm.projektzespolowy.models.column.ColumnCreateDTO;
 
 @Service
 @RequiredArgsConstructor
