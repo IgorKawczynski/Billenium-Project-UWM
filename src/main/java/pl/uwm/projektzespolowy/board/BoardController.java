@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.projektzespolowy.basic.UpdateDTO;
 import pl.uwm.projektzespolowy.board.crud.BoardCRUDService;
-import pl.uwm.projektzespolowy.board.dtos.BoardCreateDTO;
-import pl.uwm.projektzespolowy.board.dtos.BoardResponseDTO;
+import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
+import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
 
 @RestController
 @RequiredArgsConstructor

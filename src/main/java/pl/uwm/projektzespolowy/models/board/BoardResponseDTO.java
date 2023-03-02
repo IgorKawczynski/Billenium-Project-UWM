@@ -1,15 +1,15 @@
-package pl.uwm.projektzespolowy.board.dtos;
+package pl.uwm.projektzespolowy.models.board;
 
 import lombok.Builder;
-import pl.uwm.projektzespolowy.column.dtos.ColumnDTO;
-import pl.uwm.projektzespolowy.user.dtos.UserResponseDTO;
+import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
+import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 
 import java.util.List;
 
 public record BoardResponseDTO(String title,
                                String creatorName,
                                List<UserResponseDTO> assignedUsers,
-                               List<ColumnDTO> columnList) {
+                               List<ColumnResponseDTO> columnList) {
 
     @Builder public BoardResponseDTO {}
 }

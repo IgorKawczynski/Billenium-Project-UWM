@@ -1,20 +1,19 @@
-package pl.uwm.projektzespolowy.board;
+package pl.uwm.projektzespolowy.models.board;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import pl.uwm.projektzespolowy.basic.BasicEntity;
-import pl.uwm.projektzespolowy.board.dtos.BoardResponseDTO;
-import pl.uwm.projektzespolowy.column.Column;
-import pl.uwm.projektzespolowy.column.dtos.ColumnDTO;
-import pl.uwm.projektzespolowy.user.User;
+import pl.uwm.projektzespolowy.models.BasicEntity;
+import pl.uwm.projektzespolowy.models.column.Column;
+import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
+import pl.uwm.projektzespolowy.models.user.User;
 
 import java.util.*;
 
-import static pl.uwm.projektzespolowy.column.Column.DEFAULT_SIZE;
-import static pl.uwm.projektzespolowy.column.Column.UNLIMITED_SIZE;
+import static pl.uwm.projektzespolowy.models.column.Column.DEFAULT_SIZE;
+import static pl.uwm.projektzespolowy.models.column.Column.UNLIMITED_SIZE;
 
 @Entity
 @Table(name = "boards")
@@ -65,7 +64,7 @@ public class Board extends BasicEntity {
                         .toList())
                 .columnList(this.columns.stream()
                         .map(Column::toDto)
-                        .sorted(Comparator.comparingInt(ColumnDTO::position))
+                        .sorted(Comparator.comparingInt(ColumnResponseDTO::position))
                         .toList())
                 .build();
     }

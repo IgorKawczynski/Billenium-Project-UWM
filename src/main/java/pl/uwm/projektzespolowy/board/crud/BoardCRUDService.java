@@ -4,8 +4,8 @@ package pl.uwm.projektzespolowy.board.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.basic.UpdateDTO;
-import pl.uwm.projektzespolowy.board.Board;
-import pl.uwm.projektzespolowy.board.dtos.BoardCreateDTO;
+import pl.uwm.projektzespolowy.models.board.Board;
+import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
 
 @Component
 @RequiredArgsConstructor
