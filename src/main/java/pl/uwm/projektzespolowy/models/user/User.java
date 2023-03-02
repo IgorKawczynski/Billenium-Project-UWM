@@ -5,7 +5,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import pl.uwm.projektzespolowy.models.BasicEntity;
+import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.card.Card;
 

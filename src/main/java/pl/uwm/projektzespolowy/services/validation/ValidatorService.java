@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.services;
+package pl.uwm.projektzespolowy.services.validation;
 
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.exceptions.VOExceptions.IntegerValidatorException;

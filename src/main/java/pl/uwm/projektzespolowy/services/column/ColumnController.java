@@ -2,7 +2,7 @@ package pl.uwm.projektzespolowy.services.column;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.projektzespolowy.models.UpdateDTO;
+import pl.uwm.projektzespolowy.models.basic.UpdateDTO;
 import pl.uwm.projektzespolowy.services.column.crud.ColumnCRUDService;
 import pl.uwm.projektzespolowy.models.column.ColumnCreateDTO;
 import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;

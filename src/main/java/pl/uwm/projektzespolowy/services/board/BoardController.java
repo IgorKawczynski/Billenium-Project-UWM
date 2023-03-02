@@ -2,7 +2,7 @@ package pl.uwm.projektzespolowy.services.board;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.projektzespolowy.models.UpdateDTO;
+import pl.uwm.projektzespolowy.models.basic.UpdateDTO;
 import pl.uwm.projektzespolowy.services.board.crud.BoardCRUDService;
 import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
 import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;

@@ -2,8 +2,8 @@ package pl.uwm.projektzespolowy.services.user.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.uwm.projektzespolowy.models.UpdateDTO;
-import pl.uwm.projektzespolowy.services.ValidatorService;
+import pl.uwm.projektzespolowy.models.basic.UpdateDTO;
+import pl.uwm.projektzespolowy.services.validation.ValidatorService;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.services.user.UserRepository;
 
