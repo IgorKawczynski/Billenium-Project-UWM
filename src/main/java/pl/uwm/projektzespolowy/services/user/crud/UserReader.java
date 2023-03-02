@@ -5,6 +5,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.services.user.UserRepository;
 
 import java.util.List;
@@ -24,5 +25,13 @@ public class UserReader {
     public List<User> getAllUsers() {
         return userRepository
                 .findAll(Sort.by(Sort.Direction.DESC, "email"));
+    }
+
+    public List<UserResponseDTO> getAllUsersResponseDTO() {
+        return userRepository
+                .findAll(Sort.by(Sort.Direction.DESC, "email"))
+                .stream()
+                .map(User::toUserResponseDTO)
+                .toList();
     }
 }
