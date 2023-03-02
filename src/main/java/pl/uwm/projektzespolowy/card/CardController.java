@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.projektzespolowy.card.crud.CardCRUDService;
-import pl.uwm.projektzespolowy.card.dtos.CardCreateDTO;
-import pl.uwm.projektzespolowy.card.dtos.CardDTO;
-import pl.uwm.projektzespolowy.card.dtos.CardUpdateDTO;
+import pl.uwm.projektzespolowy.models.card.CardCreateDTO;
+import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
+import pl.uwm.projektzespolowy.models.card.CardUpdateDTO;
 
 @RestController
 @RequestMapping("/api/cards")
@@ -16,19 +16,19 @@ public class CardController {
     private final CardCRUDService cardCRUDService;
 
     @GetMapping("/{cardId}")
-    public CardDTO getCardById(@PathVariable Long cardId) {
+    public CardResponseDTO getCardById(@PathVariable Long cardId) {
         return cardCRUDService.getCardById(cardId).toDto();
     }
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public CardDTO addCardToColumn(@RequestBody CardCreateDTO cardCreateDTO) {
+    public CardResponseDTO addCardToColumn(@RequestBody CardCreateDTO cardCreateDTO) {
         return cardCRUDService.addCardToColumn(cardCreateDTO).toDto();
     }
 
     @PatchMapping("")
     @ResponseStatus(HttpStatus.OK)
-    public CardDTO updateCard(@RequestBody CardUpdateDTO cardUpdateDTO) {
+    public CardResponseDTO updateCard(@RequestBody CardUpdateDTO cardUpdateDTO) {
         return cardCRUDService.updateCard(cardUpdateDTO).toDto();
     }
 

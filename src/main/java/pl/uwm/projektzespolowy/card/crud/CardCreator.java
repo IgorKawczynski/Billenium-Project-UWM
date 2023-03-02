@@ -2,7 +2,7 @@ package pl.uwm.projektzespolowy.card.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.uwm.projektzespolowy.card.Card;
+import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.card.CardRepository;
 import pl.uwm.projektzespolowy.column.crud.ColumnReader;
 import pl.uwm.projektzespolowy.exceptions.VOExceptions.StringValidatorException;

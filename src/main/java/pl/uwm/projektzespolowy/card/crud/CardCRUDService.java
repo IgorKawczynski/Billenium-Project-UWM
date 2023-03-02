@@ -2,9 +2,9 @@ package pl.uwm.projektzespolowy.card.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.uwm.projektzespolowy.card.Card;
-import pl.uwm.projektzespolowy.card.dtos.CardCreateDTO;
-import pl.uwm.projektzespolowy.card.dtos.CardUpdateDTO;
+import pl.uwm.projektzespolowy.models.card.Card;
+import pl.uwm.projektzespolowy.models.card.CardCreateDTO;
+import pl.uwm.projektzespolowy.models.card.CardUpdateDTO;
 
 @Component
 @RequiredArgsConstructor

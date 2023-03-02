@@ -1,14 +1,13 @@
-package pl.uwm.projektzespolowy.card;
+package pl.uwm.projektzespolowy.models.card;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import pl.uwm.projektzespolowy.basic.BasicEntity;
-import pl.uwm.projektzespolowy.card.dtos.CardDTO;
-import pl.uwm.projektzespolowy.column.Column;
-import pl.uwm.projektzespolowy.user.User;
+import pl.uwm.projektzespolowy.models.BasicEntity;
+import pl.uwm.projektzespolowy.models.column.Column;
+import pl.uwm.projektzespolowy.models.user.User;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,8 +38,8 @@ public class Card extends BasicEntity {
         this.assignedUsers = new HashSet<>();
     }
 
-    public CardDTO toDto() {
-        return CardDTO.builder()
+    public CardResponseDTO toDto() {
+        return CardResponseDTO.builder()
                 .id(this.id)
                 .title(this.title)
                 .description(this.description)
