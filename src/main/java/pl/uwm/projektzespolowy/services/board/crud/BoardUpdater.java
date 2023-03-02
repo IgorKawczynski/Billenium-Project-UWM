@@ -1,11 +1,11 @@
-package pl.uwm.projektzespolowy.board.crud;
+package pl.uwm.projektzespolowy.services.board.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.uwm.projektzespolowy.basic.UpdateDTO;
-import pl.uwm.projektzespolowy.basic.ValidatorService;
+import pl.uwm.projektzespolowy.models.UpdateDTO;
+import pl.uwm.projektzespolowy.services.ValidatorService;
 import pl.uwm.projektzespolowy.models.board.Board;
-import pl.uwm.projektzespolowy.board.BoardRepository;
+import pl.uwm.projektzespolowy.services.board.BoardRepository;
 
 @Component
 @RequiredArgsConstructor

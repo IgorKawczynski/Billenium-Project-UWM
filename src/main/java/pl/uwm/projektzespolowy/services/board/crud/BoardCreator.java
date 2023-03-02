@@ -1,10 +1,10 @@
-package pl.uwm.projektzespolowy.board.crud;
+package pl.uwm.projektzespolowy.services.board.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.board.Board;
-import pl.uwm.projektzespolowy.board.BoardRepository;
-import pl.uwm.projektzespolowy.user.UserRepository;
+import pl.uwm.projektzespolowy.services.board.BoardRepository;
+import pl.uwm.projektzespolowy.services.user.UserRepository;
 
 @Component
 @RequiredArgsConstructor
