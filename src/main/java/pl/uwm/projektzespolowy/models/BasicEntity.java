@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.basic;
+package pl.uwm.projektzespolowy.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
