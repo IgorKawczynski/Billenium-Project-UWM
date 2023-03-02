@@ -5,7 +5,7 @@ import Avatar from './avatar'
 import {CardActionArea} from "@mui/material"
 import _task from '../interfaces/Task'
 import EditCardButton from './editCardButton'
-const Task = (props:_task) => {
+const Task = (props:any) => {
     return(
         <Draggable key={props.id} draggableId={props.id} index={props.index}>
             {(provided:any, snapshot:any) => {

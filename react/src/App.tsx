@@ -1,54 +1,78 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import Board from "./componenets/board"
+import {_Data} from "./interfaces/Data";
+import {Simulate} from "react-dom/test-utils";
+import change = Simulate.change;
 
 const itemsFromBacked = [
-    {id:uuidv4(), content: 'FirstTask', desc:'Description to task 1'},
-    {id:uuidv4(), content: 'SecondTask', desc:'Description to task 2'},
-    {id:uuidv4(), content: 'ThirdTask', desc:'Description to task 3'},
-    {id:uuidv4(), content: 'ThirdTask', desc:'Description to task 3, Description to task 3, Description to task 3, Description to task 3, Description to task 3'},
-    {id:uuidv4(), content: 'ThirdTask', desc:'Description to task 3'},
-    {id:uuidv4(), content: 'ThirdTask', desc:'Description to task 3'},
-    {id:uuidv4(), content: 'ThirdTask', desc:'Description to task 3'},
-    {id:uuidv4(), content: 'ThirdTask', desc:'Description to task 3'}
+    {id:uuidv4(), title: 'FirstTask', desc:'Description to task 1'},
+    {id:uuidv4(), title: 'SecondTask', desc:'Description to task 2'},
+    {id:uuidv4(), title: 'ThirdTask', desc:'Description to task 3'},
+    {id:uuidv4(), title: 'ThirdTask', desc:'Description to task 3, Description to task 3, Description to task 3, Description to task 3, Description to task 3'},
+    {id:uuidv4(), title: 'ThirdTask', desc:'Description to task 3'},
+    {id:uuidv4(), title: 'ThirdTask', desc:'Description to task 3'},
+    {id:uuidv4(), title: 'ThirdTask', desc:'Description to task 3'},
+    {id:uuidv4(), title: 'ThirdTask', desc:'Description to task 3'}
+]
+
+const users = [
+    {id:uuidv4(), name: 'Maciek'}
 ]
 
 const columnsFromBackend = {
     [uuidv4()]: {
+        id: uuidv4(),
         title: 'Open',
-        items: itemsFromBacked,
-        index: 0
+        cardsLimit: 0,
+        position:0,
+        cards: itemsFromBacked,
     },
     [uuidv4()]: {
-        title: 'Progress',
-        items: [],
-        index: 1
+        id: uuidv4(),
+        title: 'In progress',
+        cardsLimit: 3,
+        position:1,
+        cards: [],
 
     },
     [uuidv4()]: {
-        title: 'Done',
-        items: [],
-        index: 2
+        id: uuidv4(),
+        title: 'Tested',
+        cardsLimit: 3,
+        position:2,
+        cards: [],
     },
     [uuidv4()]: {
-        title: 'Saved',
-        items: [],
-        index: 3
+        id: uuidv4(),
+        title: 'Done',
+        cardsLimit: 0,
+        position:3,
+        cards: [],
     }
 };
 
+const dataFromBackEnd = {
+    id:0,
+    title:"Nazwa Tablicy",
+    creatorName: "maciek",
+    assignedUsers: users,
+    columnList: columnsFromBackend
+}
 function test() {
-    const [columns, setColumns] = useState(columnsFromBackend);
-    const [items, setItems] = useState(itemsFromBacked);
+    const [data, setData] = useState(dataFromBackEnd);
+
+    const handleDataChange = (newData:_Data["data"]) => {
+        setData(newData);
+    }
 
     return (
         <Board
-            columns={columns}
-            setColumns={setColumns}
-            items={items}
-            setItems={setItems}
+            data={data}
+            handleDataChange={handleDataChange}
         >
         </Board>
+
     )
 }
 

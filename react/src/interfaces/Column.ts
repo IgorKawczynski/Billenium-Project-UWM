@@ -3,14 +3,15 @@ import _board from "./Board";
 interface _column {
     id: string;
     title: string;
-    items: {
+    cardsLimit: number;
+    position:number;
+    cards: {
         id: string;
-        content: string;
-        desc:string;
+        title: string;
+        desc: string;
     }[];
-    index: number;
-    columns: _board['columns'];
-    setColumns: _board['setColumns'];
+    removeColumn:any;
+    editColumn:any;
 
 }
 

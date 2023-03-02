@@ -178,56 +178,6 @@ export default function EditCardButton(props:EditCardButtonProps) {
                     Delete
                 </MenuItem>
             </StyledMenu>
-            <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                open={modal}
-                onClose={modalClose}
-                closeAfterTransition
-                slots={{ backdrop: Backdrop }}
-                slotProps={{
-                    backdrop: {
-                        timeout: 500,
-                    },
-                }}
-            >
-                <Fade in={modal}>
-                    <Box sx={style}>
-                        <Typography id="transition-modal-title" variant="h6" component="h2">
-                            Set column name
-                        </Typography>
-                        <div style={{display:"flex", justifyContent:"space-between"}}>
-                            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                                <TextField
-                                    sx={{margin:'0 0 8px 0'}}
-                                    id="outlined-basic"
-                                    label="Name"
-                                    variant="outlined"
-                                    value={name}
-                                    onChange={handleNameChange}
-                                />
-                                <TextField
-                                    sx={{margin:'0 0 8px 0'}}
-                                    multiline
-                                    id="outlined-basic"
-                                    label="Description"
-                                    variant="outlined"
-                                    value={desc}
-                                    maxRows={5}
-                                    onChange={handleDescChange}
-                                />
-                            </Typography>
-                        </div>
-                        <Button
-                            sx={{maxHeight:'50px'}}
-                            onClick={() => updateCard(name,desc)}
-                            variant="contained"
-                        >
-                            Dodaj
-                        </Button>
-                    </Box>
-                </Fade>
-            </Modal>
         </div>
     );
 }

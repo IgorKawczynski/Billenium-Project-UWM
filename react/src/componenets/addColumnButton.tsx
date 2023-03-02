@@ -22,9 +22,9 @@ const style = {
 
 export default function AddColumnButton(props:any) {
     const [open, setOpen] = React.useState(false);
-    const [name, setName] = useState("");
+    const [columnName, setColumnName] = useState("");
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setName(event.target.value);
+        setColumnName(event.target.value);
     };
 
     const handleSubmit = ({event}: { event: any }) => {
@@ -37,14 +37,31 @@ export default function AddColumnButton(props:any) {
 
     function addColumn(name:string) {
         const newColumnId = uuidv4();
+        const columns = props.data.columnList;
+        const lastColumnId = Object.keys(columns)[Object.keys(columns).length - 1];
         const newColumn = {
+            id: newColumnId,
             title: name,
-            items: [],
-            index: Object.keys(props.columns).length, // use current length of columns as index
+            cardsLimit: 3,
+            cards: [],
+            position: Object.keys(columns).length - 1,
         };
-        props.setColumns({ ...props.columns, [newColumnId]: newColumn });
+        const columnsExceptLast = Object.entries(columns)
+            .filter(([id, column]) => id !== lastColumnId)
+            .reduce((obj, [id, column]) => {
+                return { ...obj, [id]: column };
+            }, {});
+        props.handleDataChange({
+            ...props.data,
+                columnList: {
+                    ...columnsExceptLast,
+                    [newColumnId]: newColumn,
+                    [lastColumnId]: {...columns[lastColumnId], position: Object.keys(columns).length},
+                }});
         handleClose();
+        setColumnName("")
     }
+
 
     return (
         <div>
@@ -82,12 +99,12 @@ export default function AddColumnButton(props:any) {
                                 id="outlined-basic"
                                 label="Name"
                                 variant="outlined"
-                                value={name}
+                                value={columnName}
                                 onChange={handleNameChange}
                             />
                         </Typography>
                         <Button
-                            onClick={() => addColumn(name)}
+                            onClick={() => addColumn(columnName)}
                             variant="contained"
                         >
                             Dodaj
