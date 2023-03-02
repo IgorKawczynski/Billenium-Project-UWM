@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.card.Card;
 import pl.uwm.projektzespolowy.card.dtos.CardCreateDTO;
+import pl.uwm.projektzespolowy.card.dtos.CardUpdateDTO;
 
 @Component
 @RequiredArgsConstructor
@@ -20,6 +21,10 @@ public class CardCRUDService {
 
     public Card addCardToColumn(CardCreateDTO cardCreateDTO) {
         return cardCreator.create(cardCreateDTO.title(), cardCreateDTO.description(), cardCreateDTO.columnId());
+    }
+
+    public Card updateCard(CardUpdateDTO cardUpdateDTO) {
+        return cardUpdater.editCard(cardUpdateDTO.cardId(), cardUpdateDTO.title(), cardUpdateDTO.description());
     }
 
 }

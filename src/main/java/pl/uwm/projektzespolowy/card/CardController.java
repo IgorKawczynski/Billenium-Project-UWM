@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.uwm.projektzespolowy.card.crud.CardCRUDService;
 import pl.uwm.projektzespolowy.card.dtos.CardCreateDTO;
 import pl.uwm.projektzespolowy.card.dtos.CardDTO;
+import pl.uwm.projektzespolowy.card.dtos.CardUpdateDTO;
 
 @RestController
 @RequestMapping("/api/cards")
@@ -23,6 +24,12 @@ public class CardController {
     @ResponseStatus(HttpStatus.CREATED)
     public CardDTO addCardToColumn(@RequestBody CardCreateDTO cardCreateDTO) {
         return cardCRUDService.addCardToColumn(cardCreateDTO).toDto();
+    }
+
+    @PatchMapping("")
+    @ResponseStatus(HttpStatus.OK)
+    public CardDTO updateCard(@RequestBody CardUpdateDTO cardUpdateDTO) {
+        return cardCRUDService.updateCard(cardUpdateDTO).toDto();
     }
 
 }
