@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.card;
+package pl.uwm.projektzespolowy.services.card;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

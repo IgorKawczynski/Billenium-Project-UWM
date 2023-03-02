@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.card.crud;
+package pl.uwm.projektzespolowy.services.card.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

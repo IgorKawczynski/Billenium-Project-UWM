@@ -1,9 +1,9 @@
-package pl.uwm.projektzespolowy.card;
+package pl.uwm.projektzespolowy.services.card;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.projektzespolowy.card.crud.CardCRUDService;
+import pl.uwm.projektzespolowy.services.card.crud.CardCRUDService;
 import pl.uwm.projektzespolowy.models.card.CardCreateDTO;
 import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
 import pl.uwm.projektzespolowy.models.card.CardUpdateDTO;
