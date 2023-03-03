@@ -2,8 +2,8 @@ package pl.uwm.projektzespolowy.services.column.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.uwm.projektzespolowy.services.board.BoardRepository;
 import pl.uwm.projektzespolowy.models.column.Column;
+import pl.uwm.projektzespolowy.services.board.crud.BoardReader;
 import pl.uwm.projektzespolowy.services.column.ColumnRepository;
 import pl.uwm.projektzespolowy.models.column.ColumnCreateDTO;
 
@@ -15,7 +15,7 @@ public class ColumnCreatorLogic {
 
     private final ColumnCreator columnCreator;
     private final ColumnRepository columnRepository;
-    private final BoardRepository boardRepository;
+    private final BoardReader boardReader;
 
     public Column createColumnInPenultimatePosition(ColumnCreateDTO createDTO) {
         var lastColumn = getLastColumnInBoard(createDTO.boardId());
@@ -29,7 +29,7 @@ public class ColumnCreatorLogic {
     }
 
     private Column getLastColumnInBoard(Long boardId) {
-        var board = boardRepository.getReferenceById(boardId);
+        var board = boardReader.getBoardById(boardId);
         var columns = board.getColumns();
         return columns.stream()
                 .reduce((c1, c2) -> c1.getPosition() > c2.getPosition() ? c1 : c2)
