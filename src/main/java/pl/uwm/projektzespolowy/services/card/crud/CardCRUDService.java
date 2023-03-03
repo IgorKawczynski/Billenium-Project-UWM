@@ -24,7 +24,8 @@ public class CardCRUDService {
     }
 
     public Card updateCard(CardUpdateDTO cardUpdateDTO) {
-        return cardUpdater.editCard(cardUpdateDTO.cardId(), cardUpdateDTO.title(), cardUpdateDTO.description());
+        var cardToChange = cardReader.getCardById(cardUpdateDTO.cardId());
+        return cardUpdater.editCard(cardToChange, cardUpdateDTO.title(), cardUpdateDTO.description());
     }
 
 }

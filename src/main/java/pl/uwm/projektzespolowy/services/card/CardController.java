@@ -26,7 +26,7 @@ public class CardController {
         return cardCRUDService.addCardToColumn(cardCreateDTO).toDto();
     }
 
-    @PatchMapping("")
+    @PutMapping("")
     @ResponseStatus(HttpStatus.OK)
     public CardResponseDTO updateCard(@RequestBody CardUpdateDTO cardUpdateDTO) {
         return cardCRUDService.updateCard(cardUpdateDTO).toDto();

@@ -3,6 +3,7 @@ package pl.uwm.projektzespolowy.services.board.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.basic.UpdateDTO;
+import pl.uwm.projektzespolowy.models.valueobjects.Title;
 import pl.uwm.projektzespolowy.services.validation.ValidatorService;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.services.board.BoardRepository;
@@ -20,7 +21,7 @@ public class BoardUpdater {
         switch (fieldName) {
             case "title" -> {
                 String title = (String) value;
-                board.setTitle(title);
+                board.setTitle(new Title(title));
             }
         }
         boardRepository.saveAndFlush(board);
