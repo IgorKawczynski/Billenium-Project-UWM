@@ -60,7 +60,7 @@ const dataFromBackEnd = {
     assignedUsers: users,
     columnList: columnsFromBackend
 }
-function test() {
+function KabanTable() {
 
     const [data, setData] = useState(dataFromBackEnd);
     // const apiUrl = 'http://localhost:8080/api/1001';
@@ -90,4 +90,4 @@ function test() {
     )
 }
 
-export default test
+export default KabanTable

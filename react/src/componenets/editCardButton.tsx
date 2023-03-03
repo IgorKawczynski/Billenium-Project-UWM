@@ -208,10 +208,10 @@ export default function EditCardButton(props:EditCardButtonProps) {
                 <Fade in={modalEdit}>
                     <Box sx={style}>
                         <Typography id="transition-modal-title" variant="h6" component="h2">
-                            Set column name
+                            Editing task: {props.title}
                         </Typography>
-                        <div style={{display:"flex", justifyContent:"space-between"}}>
                             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                                <div style={{display:"flex", justifyContent:"space-between"}}>
                                 <TextField
                                     sx={{margin:'0 0 8px 0'}}
                                     id="outlined-basic"
@@ -225,11 +225,14 @@ export default function EditCardButton(props:EditCardButtonProps) {
                                     id="outlined-basic"
                                     label="Desc"
                                     variant="outlined"
+                                    multiline={true}
+                                    maxRows={5}
                                     value={desc}
                                     onChange={handleDescChange}
                                 />
+                                </div>
                             </Typography>
-                        </div>
+                        <div style={{width:'100%', display:"flex", justifyContent:"center"}}>
                         <Button
                             sx={{maxHeight:'50px'}}
                             onClick={() => updateCard(title,desc)}
@@ -237,6 +240,7 @@ export default function EditCardButton(props:EditCardButtonProps) {
                         >
                             Edit
                         </Button>
+                        </div>
                     </Box>
                 </Fade>
             </Modal>
@@ -256,11 +260,9 @@ export default function EditCardButton(props:EditCardButtonProps) {
                 <Fade in={modalDelete}>
                     <Box sx={style}>
                         <Typography id="transition-modal-title" variant="h6" component="h2" sx={{textAlign:"center"}}>
-                            Are you sure?
+                            Are you sure you want to delete {props.title}?
                         </Typography>
-                        <div style={{display:"flex", justifyContent:"space-between"}}>
-                        </div>
-                        <div style={{display:"flex", justifyContent:"space-between", width:"100%"}}>
+                        <div style={{display:"flex", justifyContent:"space-between", width:"100%", marginTop:"8px"}}>
                         <Button
                             sx={{maxHeight:'50px'}}
                             onClick={() => modalDeleteClose()}
