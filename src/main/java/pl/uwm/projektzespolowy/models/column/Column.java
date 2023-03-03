@@ -8,6 +8,7 @@ import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.card.Card;
+import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Column extends BasicEntity {
 
-    String title;
+    Title title;
     Integer cardsLimit;
     Integer position;
     @ManyToOne
@@ -34,7 +35,7 @@ public class Column extends BasicEntity {
     public final static int UNLIMITED_SIZE = 0;
     public final static int DEFAULT_SIZE = 3;
 
-    public Column(String title, Integer cardsLimit, Integer position, Board board) {
+    public Column(Title title, Integer cardsLimit, Integer position, Board board) {
         this.title = title;
         this.cardsLimit = cardsLimit;
         this.position = position;
@@ -45,7 +46,7 @@ public class Column extends BasicEntity {
     public ColumnResponseDTO toDto() {
         return ColumnResponseDTO.builder()
                 .id(this.id.toString())
-                .title(this.title)
+                .title(this.title.toString())
                 .cardsLimit(this.cardsLimit)
                 .position(this.position)
                 .cards(this.cards.stream()
@@ -58,7 +59,7 @@ public class Column extends BasicEntity {
         this.cards.add(card);
     }
 
-    public String getTitle() {
+    public Title getTitle() {
         return title;
     }
 

@@ -8,6 +8,7 @@ import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +20,7 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Card extends BasicEntity {
 
-    String title;
+    Title title;
     String description;
 
     // TODO: add Position
@@ -31,7 +32,7 @@ public class Card extends BasicEntity {
     @ManyToMany(mappedBy = "cards")
     Set<User> assignedUsers;
 
-    public Card(String title, String description, Column column) {
+    public Card(Title title, String description, Column column) {
         this.title = title;
         this.description = description;
         this.column = column;
@@ -41,12 +42,12 @@ public class Card extends BasicEntity {
     public CardResponseDTO toDto() {
         return CardResponseDTO.builder()
                 .id(this.id.toString())
-                .title(this.title)
+                .title(this.title.toString())
                 .description(this.description)
                 .build();
     }
 
-    public String getTitle() {
+    public Title getTitle() {
         return title;
     }
 

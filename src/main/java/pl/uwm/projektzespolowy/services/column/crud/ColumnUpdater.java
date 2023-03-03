@@ -3,6 +3,7 @@ package pl.uwm.projektzespolowy.services.column.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.basic.UpdateDTO;
+import pl.uwm.projektzespolowy.models.valueobjects.Title;
 import pl.uwm.projektzespolowy.services.validation.ValidatorService;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.services.column.ColumnRepository;
@@ -21,7 +22,7 @@ public class ColumnUpdater {
         switch (fieldName) {
             case "title" -> {
                 String title = (String) value;
-                column.setTitle(title);
+                column.setTitle(new Title(title));
             }
             case "cardsLimit" -> {
                 Integer cardsLimit = (Integer) value;

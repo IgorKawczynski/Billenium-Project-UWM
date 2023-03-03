@@ -9,6 +9,7 @@ import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import java.util.*;
 
@@ -22,7 +23,7 @@ import static pl.uwm.projektzespolowy.models.column.Column.UNLIMITED_SIZE;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Board extends BasicEntity {
 
-    String title;
+    Title title;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id", referencedColumnName = "id")
     User creator;
@@ -43,21 +44,21 @@ public class Board extends BasicEntity {
               orphanRemoval = true)
     List<Column> columns;
 
-    public Board(String title, User creator) {
+    public Board(Title title, User creator) {
         this.title = title;
         this.creator = creator;
         this.assignedUsers = new HashSet<>();
         this.assignedUsers.add(creator);
         this.columns = List.of(
-                new Column("Todo", UNLIMITED_SIZE, 0, this),
-                new Column("In progress", DEFAULT_SIZE, 1, this),
-                new Column("Done", UNLIMITED_SIZE, 2, this)
+                new Column(new Title("Todo"), UNLIMITED_SIZE, 0, this),
+                new Column(new Title("In progress"), DEFAULT_SIZE, 1, this),
+                new Column(new Title("Done"), UNLIMITED_SIZE, 2, this)
         );
     }
 
     public BoardResponseDTO toDto() {
         return BoardResponseDTO.builder()
-                .title(this.title)
+                .title(this.title.toString())
                 .creatorName(this.creator.getFullName())
                 .assignedUsers(this.assignedUsers.stream()
                         .map(User::toUserResponseDTO)
@@ -77,7 +78,7 @@ public class Board extends BasicEntity {
         this.assignedUsers.add(user);
     }
 
-    public String getTitle() {
+    public Title getTitle() {
         return title;
     }
 
