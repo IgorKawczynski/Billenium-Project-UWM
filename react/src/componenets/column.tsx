@@ -102,6 +102,7 @@ const Column = (props:ColumnProps) => {
 
             <ModalRemoveColumn
                 id={props.id}
+                title={props.title}
                 modalDeleteClose={modalDeleteClose}
                 modalDelete={modalDelete}
                 data={props.data}

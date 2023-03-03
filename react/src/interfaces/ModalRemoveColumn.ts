@@ -3,6 +3,7 @@ import {_Data} from "./Data";
 import React from "react";
 interface ModalRemoveColumnProps {
     id:string
+    title:string
     modalDelete:boolean
     modalDeleteClose:() => void
     data:_Data["data"]

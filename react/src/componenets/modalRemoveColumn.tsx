@@ -61,7 +61,7 @@ const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
                     <Box sx={style}>
                         <div style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
                             <div style={{textAlign:"center", fontSize:"24px"}}>
-                                Are you sure?
+                                Are you sure you want to delete column {props.title}?
                             </div>
                             <div style={{ display:"flex", justifyContent:"space-between", width:"100%"}}>
                                 <Button

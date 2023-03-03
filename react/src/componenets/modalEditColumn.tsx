@@ -61,7 +61,7 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
                 <Fade in={props.modalEdit}>
                     <Box sx={style}>
                         <Typography id="transition-modal-title" variant="h6" component="h2">
-                            Set column name
+                            Editing column: {props.title}
                         </Typography>
                         <div style={{display:"flex", justifyContent:"space-between"}}>
                             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
