@@ -3,9 +3,11 @@ package pl.uwm.projektzespolowy.services.column;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.projektzespolowy.models.basic.UpdateDTO;
-import pl.uwm.projektzespolowy.services.column.crud.ColumnCRUDService;
 import pl.uwm.projektzespolowy.models.column.ColumnCreateDTO;
 import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
+import pl.uwm.projektzespolowy.services.column.crud.ColumnCRUDService;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +24,11 @@ public class ColumnController {
     @GetMapping("/{columnId}")
     public ColumnResponseDTO getColumnById(@PathVariable Long columnId) {
         return service.getColumnById(columnId).toDto();
+    }
+
+    @GetMapping("/{boardId}/all")
+    public List<ColumnResponseDTO> getAllColumnsByBoardId(@PathVariable Long boardId) {
+        return service.getColumnsByBoardId(boardId);
     }
 
     @PatchMapping("")
