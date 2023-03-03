@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import Board from "./componenets/board"
 import {_Data} from "./interfaces/Data";
 import {Simulate} from "react-dom/test-utils";
+import axios from "axios";
 import change = Simulate.change;
+import './App.css'
 
 const itemsFromBacked = [
     {id:uuidv4(), title: 'FirstTask', desc:'Description to task 1'},
@@ -53,23 +55,35 @@ const columnsFromBackend = {
 };
 
 const dataFromBackEnd = {
-    id:0,
     title:"Nazwa Tablicy",
     creatorName: "maciek",
     assignedUsers: users,
     columnList: columnsFromBackend
 }
 function test() {
-    const [data, setData] = useState(dataFromBackEnd);
 
-    const handleDataChange = (newData:_Data["data"]) => {
-        setData(newData);
-    }
+    const [data, setData] = useState(dataFromBackEnd);
+    // const apiUrl = 'http://localhost:8080/api/1001';
+    // useEffect(() => {
+    //     axios.get(apiUrl)
+    //         .then(response => {
+    //             // Handle successful response
+    //             setData(response.data)
+    //         })
+    //         .catch(error => {
+    //             // Handle error
+    //             console.error(error);
+    //         });
+    // }, []);
+
+    // const handleDataChange = (newData:_Data["data"]) => {
+    //     setData(newData);
+    // }
 
     return (
         <Board
             data={data}
-            handleDataChange={handleDataChange}
+            handleDataChange={setData}
         >
         </Board>
 
