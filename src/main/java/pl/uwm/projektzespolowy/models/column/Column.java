@@ -44,7 +44,7 @@ public class Column extends BasicEntity {
 
     public ColumnResponseDTO toDto() {
         return ColumnResponseDTO.builder()
-                .id(this.id)
+                .id(this.id.toString())
                 .title(this.title)
                 .cardsLimit(this.cardsLimit)
                 .position(this.position)
