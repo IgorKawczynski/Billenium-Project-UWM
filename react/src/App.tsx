@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
-import Board from "./componenets/board"
+import Board from "./componenets/board/board"
 import {_Data} from "./interfaces/Data";
 import {Simulate} from "react-dom/test-utils";
 import axios from "axios";
