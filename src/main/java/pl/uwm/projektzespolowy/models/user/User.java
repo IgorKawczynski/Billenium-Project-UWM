@@ -49,7 +49,7 @@ public class User extends BasicEntity {
 
     public UserResponseDTO toUserResponseDTO() {
         return UserResponseDTO.builder()
-                .id(this.id)
+                .id(this.id.toString())
                 .firstName(this.firstName)
                 .lastName(this.lastName)
                 .build();
