@@ -40,7 +40,7 @@ public class Card extends BasicEntity {
 
     public CardResponseDTO toDto() {
         return CardResponseDTO.builder()
-                .id(this.id)
+                .id(this.id.toString())
                 .title(this.title)
                 .description(this.description)
                 .build();
