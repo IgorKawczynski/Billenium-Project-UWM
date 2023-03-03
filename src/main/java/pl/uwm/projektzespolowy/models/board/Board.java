@@ -40,7 +40,7 @@ public class Board extends BasicEntity {
     Set<User> assignedUsers;
 
     @OneToMany(mappedBy = "board",
-              cascade = { CascadeType.MERGE, CascadeType.PERSIST },
+              cascade = CascadeType.ALL,
               orphanRemoval = true)
     List<Column> columns;
 
@@ -73,6 +73,11 @@ public class Board extends BasicEntity {
 
     public void assign(Column column) {
         this.columns.add(column);
+    }
+
+    public void deleteColumn(Column column) {
+        this.columns.remove(column);
+        column.setBoard(null);
     }
 
     public void assign(User user) {

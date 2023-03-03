@@ -28,7 +28,8 @@ public class ColumnCRUDService {
     }
 
     public void deleteColumn(Long id) {
-        deleter.deleteColumnById(id);
+        var columnToDelete = reader.getColumnById(id);
+        deleter.deleteColumn(columnToDelete);
     }
 
 }
