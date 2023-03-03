@@ -21,7 +21,7 @@ const style = {
     p: 4,
 };
 
-export default function AddColumnButton(props:AddCardButtonProps) {
+export default function AddColumnButton(props:any) {
     const [open, setOpen] = React.useState(false);
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
@@ -40,12 +40,14 @@ export default function AddColumnButton(props:AddCardButtonProps) {
     const handleClose = () => setOpen(false);
     const addCard = (name: string, desc: string) => {
         const newItemId = uuidv4();
-        const newItem = { id: newItemId, content: name, desc: desc };
-        const firstColumnId = Object.keys(props.columns)[0];
-        console.log(Object.keys(props.columns)[0]);
-        const updatedItems = [...props.columns[firstColumnId].items, newItem];
-        const updatedColumns = { ...props.columns, [firstColumnId]: { ...props.columns[firstColumnId], items: updatedItems } };
-        props.setColumns(updatedColumns);
+        const newItem = { id: newItemId, title: name, desc: desc };
+        const firstColumnId = Object.keys(props.data.columnList)[0];
+        const updatedItems = [...props.data.columnList[firstColumnId].cards, newItem];
+        const updatedColumns = { ...props.data.columnList, [firstColumnId]: { ...props.data.columnList[firstColumnId], cards: updatedItems } };
+        props.handleDataChange({
+            ...props.data,
+            columnList: updatedColumns
+        });
         handleClose();
     };
 

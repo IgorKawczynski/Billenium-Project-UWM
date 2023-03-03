@@ -1,11 +1,12 @@
-import _board from "./Board";
-interface EditCardButtonEditProps {
-    columns: _board['columns'];
-    setColumns: _board['setColumns'];
+import {_Data} from "./Data";
+interface EditCardButtonProps {
+
     id: string;
     columnId:string;
-    content:string;
+    title:string;
     desc:string;
+    data:_Data["data"]
+    handleDataChange:_Data["setData"]
 }
 
-export default EditCardButtonEditProps
+export default EditCardButtonProps

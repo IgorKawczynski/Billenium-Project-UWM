@@ -1,10 +1,10 @@
 import React from "react";
 import {_Data} from "./Data";
-interface _board {
-    children: React.ReactNode;
-    data: _Data["data"];
-    handleDataChange:any;
+interface BoardProps {
+    children: React.ReactNode
+    data: _Data["data"]
+    handleDataChange:_Data["setData"]
 
 }
 
-export default _board
+export default BoardProps

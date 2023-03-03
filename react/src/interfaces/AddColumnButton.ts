@@ -1,7 +1,7 @@
-import _board from "./Board";
+import {_Data} from "./Data";
 interface AddColumnButtonProps {
-    columns: _board['columns'];
-    setColumns: _board['setColumns'];
+    data:_Data["data"]
+    handleDataChange:_Data["setData"]
 }
 
 export default AddColumnButtonProps

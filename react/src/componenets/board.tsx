@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {DragDropContext} from 'react-beautiful-dnd';
 import Column from './column'
-import _board from "../interfaces/Board"
+import BoardProps from "../interfaces/Board"
 import AddColumnButton from "./addColumnButton";
 
 const onDragEnd = (result: any, columns:any, setData:any, data:any) => {
@@ -45,7 +45,7 @@ const onDragEnd = (result: any, columns:any, setData:any, data:any) => {
         })
     }
 }
-const Board = (props:_board) => {
+const Board = (props:BoardProps) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const openModal = () => {
         setModalIsOpen(true);
@@ -57,7 +57,7 @@ const Board = (props:_board) => {
 
     return (
         <div style={{display:"flex", justifyContent:"center", flexDirection:"column"}}>
-            <h2 style={{textAlign:"center"}}>Tablica</h2>
+            <h2 style={{textAlign:"center"}}>{props.data.title}</h2>
             <AddColumnButton
                 data={props.data}
                 handleDataChange={props.handleDataChange}
@@ -75,9 +75,8 @@ const Board = (props:_board) => {
                                 id={id}
                                 title={column.title}
                                 cardsLimit={column.cardsLimit}
-                                cards={column.cards}
                                 position={column.position}
-                                columns={props.data.columnList}
+                                cards={column.cards}
                                 data={props.data}
                                 handleDataChange={props.handleDataChange}
                             />

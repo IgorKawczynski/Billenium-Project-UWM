@@ -1,6 +1,6 @@
 import React from "react";
-import _board from "./Board";
-interface _column {
+import {_Data} from "./Data";
+interface ColumnProps {
     id: string;
     title: string;
     cardsLimit: number;
@@ -10,9 +10,9 @@ interface _column {
         title: string;
         desc: string;
     }[];
-    removeColumn:any;
-    editColumn:any;
+    data:_Data["data"]
+    handleDataChange:_Data["setData"]
 
 }
 
-export default _column
+export default ColumnProps

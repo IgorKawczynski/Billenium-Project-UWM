@@ -1,7 +1,8 @@
-import _board from "./Board";
+import BoardProps from "./Board";
+import {_Data} from "./Data";
 interface AddCardButtonProps {
-    columns: _board['columns'];
-    setColumns: _board['setColumns'];
+    data:_Data["data"]
+    handleDataChange:_Data["setData"]
 }
 
 export default AddCardButtonProps

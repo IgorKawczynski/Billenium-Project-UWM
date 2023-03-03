@@ -3,9 +3,9 @@ import {Draggable} from 'react-beautiful-dnd'
 import Card from "@mui/material/Card"
 import Avatar from './avatar'
 import {CardActionArea} from "@mui/material"
-import _task from '../interfaces/Task'
+import CardProps from '../interfaces/Card'
 import EditCardButton from './editCardButton'
-const Task = (props:any) => {
+const Task = (props:CardProps) => {
     return(
         <Draggable key={props.id} draggableId={props.id} index={props.index}>
             {(provided:any, snapshot:any) => {
@@ -32,7 +32,7 @@ const Task = (props:any) => {
                         }}>
                             <div>
                                 <div style={{fontSize:'1.3rem'}}>
-                                    {props.content}
+                                    {props.title}
                                 </div>
                                 <br/>
                                 {props.index}
@@ -41,17 +41,18 @@ const Task = (props:any) => {
                             </div>
                             <div>
                                 <div style={{display:"flex", flexDirection:"column",alignItems:"center", minWidth:'50px'}}>
-                                <Avatar name={"Maciek"} lastName={"Janek"}/>
-                                <Avatar name={"Maciek"} lastName={"Makowski"}/>
-                                <Avatar name={"Kuba"} lastName={"laczek"}/>
+                                {/*<Avatar name={"Maciek"} lastName={"Janek"}/>*/}
+                                {/*<Avatar name={"Maciek"} lastName={"Makowski"}/>*/}
+                                {/*<Avatar name={"Kuba"} lastName={"laczek"}/>*/}
                                 </div>
                             </div>
                         </div>
-                        <EditCardButton id={props.id} columnId={props.columnId} columns={props.columns} setColumns={props.setColumns} content={props.content} desc={props.desc}/>
+                        <EditCardButton id={props.id} columnId={props.columnId} title={props.title} desc={props.desc} data={props.data} handleDataChange={props.handleDataChange}/>
                     </Card>
                 )
             }}
         </Draggable>
+
     )
 }
 export default Task

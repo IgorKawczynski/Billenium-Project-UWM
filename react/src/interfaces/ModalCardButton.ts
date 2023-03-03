@@ -1,7 +1,7 @@
-import _board from "./Board";
+import BoardProps from "./Board";
 interface ModalCardButtonProps {
-    columns: _board['columns'];
-    setColumns: _board['setColumns'];
+    columns: BoardProps['columns'];
+    setColumns: BoardProps['setColumns'];
     id: string;
     columnId:string;
     content:string;

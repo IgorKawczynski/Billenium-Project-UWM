@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Droppable} from 'react-beautiful-dnd';
 import Task from "./card";
-import _column from '../interfaces/Column'
+import ColumnProps from '../interfaces/Column'
 import AddCardButton from "./addCardButton";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -13,6 +13,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import CardProps from "../interfaces/Card";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -26,7 +27,7 @@ const style = {
     p: 4,
 };
 
-const Column = (props:any) => {
+const Column = (props:ColumnProps) => {
     const [name, setName] = useState(props.title);
     const [limit, setLimit] = useState(props.cardsLimit);
     const [modal, setModal] = useState(false);
@@ -42,14 +43,6 @@ const Column = (props:any) => {
         const value = parseInt(event.target.value);
         setLimit(value);
     };
-    const handleRemoveColumn = () => {
-        props.removeColumn();
-    };
-
-    const handleEditColumn = (title:string, cardLimit:number) => {
-        props.editColumn(title,cardLimit);
-    };
-
     const removeColumn = (id:string) => {
         // utwórz nową tablicę bez usuwanej kolumny
         const newColumns = { ...props.data.columnList };
@@ -96,7 +89,7 @@ const Column = (props:any) => {
                 >
                     <SettingsIcon />
                 </IconButton>
-                {props.position !== 0 && props.position !== Object.keys(props.columns).length-1 && (
+                {props.position !== 0 && props.position !== Object.keys(props.data.columnList).length-1 && (
                     <IconButton
                         aria-label="delete"
                         onClick={() => modalDeleteOpen()}
@@ -108,7 +101,7 @@ const Column = (props:any) => {
                 </div>
             </h2>
             <div style={{margin:8}}>
-                {props.position === 0 && <AddCardButton columns={props.columns} setColumns={props.setData}/>}
+                {props.position === 0 && <AddCardButton data={props.data} handleDataChange={props.handleDataChange}/>}
                 <Droppable droppableId={props.id} key={props.id}>
                     {(provided, snapshot) =>{
                         return(
@@ -116,21 +109,23 @@ const Column = (props:any) => {
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
                                 style={{
-                                    backgroundColor: props.cards && props.cards.length > props.cardsLimit && props.position != 0 && props.position != Object.keys(props.columns).length-1 ? '#f24e53' : 'white',
+                                    backgroundColor: props.cards && props.cards.length > props.cardsLimit && props.cardsLimit != 0 && props.position != 0 && props.position != Object.keys(props.data.columnList).length-1 ? '#f24e53' : 'white',
                                     padding: 4,
                                     width: 250,
                                     minHeight:150
                                 }}
                             >
-                                { props.cards && props.cards.map((item:any, index:any) => {
+                                { props.cards && props.cards.map((item:any, index:number) => {
                                         return (
                                             <Task
                                                 key={item.id}
                                                 id={item.id}
-                                                index={index}
-                                                content={item.content}
+                                                title={item.title}
                                                 desc={item.desc}
+                                                index={index}
                                                 columnId={props.id}
+                                                handleDataChange={props.handleDataChange}
+                                                data={props.data}
                                             />
                                         )
                                     }

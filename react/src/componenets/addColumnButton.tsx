@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import {v4 as uuidv4} from "uuid";
+import AddColumnButtonProps from "../interfaces/AddColumnButton";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -20,7 +21,7 @@ const style = {
     p: 4,
 };
 
-export default function AddColumnButton(props:any) {
+export default function AddColumnButton(props:AddColumnButtonProps) {
     const [open, setOpen] = React.useState(false);
     const [columnName, setColumnName] = useState("");
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
