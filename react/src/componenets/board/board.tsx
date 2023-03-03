@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import {DragDropContext} from 'react-beautiful-dnd';
-import Column from './column'
-import BoardProps from "../interfaces/Board"
-import AddColumnButton from "./addColumnButton";
+import Column from './componetns/column/column'
+import BoardProps from "./interface/Board"
+import AddColumnButton from "./componetns/column/components/addColumnButton/addColumnButton";
 
 const onDragEnd = (result: any, columns:any, setData:any, data:any) => {
     if(!result.destination) return

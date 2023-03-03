@@ -1,5 +1,5 @@
 import React from "react";
-import _avatar from "../interfaces/Avatar"
+import _avatar from "./interface/Avatar"
 
 
 const Avatar = (props:_avatar) => {

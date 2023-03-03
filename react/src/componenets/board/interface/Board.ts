@@ -1,5 +1,5 @@
 import React from "react";
-import {_Data} from "./Data";
+import {_Data} from "../../../interfaces/Data";
 interface BoardProps {
     children: React.ReactNode
     data: _Data["data"]

@@ -1,10 +1,10 @@
 import React from "react";
 import {Draggable} from 'react-beautiful-dnd'
 import Card from "@mui/material/Card"
-import Avatar from './avatar'
+import Avatar from './componetnts/Avatar/avatar'
 import {CardActionArea} from "@mui/material"
-import CardProps from '../interfaces/Card'
-import EditCardButton from './editCardButton'
+import CardProps from './interface/Card'
+import EditCardButton from './componetnts/editCardButton/editCardButton'
 const Task = (props:CardProps) => {
     return(
         <Draggable key={props.id} draggableId={props.id} index={props.index}>

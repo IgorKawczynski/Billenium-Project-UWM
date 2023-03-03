@@ -1,4 +1,4 @@
-import {_Data} from "./Data";
+import {_Data} from "../../../../../../../../../interfaces/Data";
 interface EditCardButtonProps {
 
     id: string;

@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import {v4 as uuidv4} from "uuid";
-import AddColumnButtonProps from "../interfaces/AddColumnButton";
+import ModalAddColumnProps from "./interface/ModalAddColumn";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -21,8 +21,7 @@ const style = {
     p: 4,
 };
 
-export default function AddColumnButton(props:AddColumnButtonProps) {
-    const [open, setOpen] = React.useState(false);
+export default function ModalAddColumn(props:ModalAddColumnProps) {
     const [columnName, setColumnName] = useState("");
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setColumnName(event.target.value);
@@ -33,8 +32,6 @@ export default function AddColumnButton(props:AddColumnButtonProps) {
         console.log(name);
         // możesz tutaj przesłać dane do serwera lub zaktualizować stan aplikacji
     };
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
 
     function addColumn(name:string) {
         const newColumnId = uuidv4();
@@ -59,28 +56,17 @@ export default function AddColumnButton(props:AddColumnButtonProps) {
                     [newColumnId]: newColumn,
                     [lastColumnId]: {...columns[lastColumnId], position: Object.keys(columns).length},
                 }});
-        handleClose();
+        props.handleClose();
         setColumnName("")
     }
 
 
     return (
-        <div>
-            <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
-                Add Column
-            <Button
-                onClick={handleOpen}
-                sx={{width:"200px", maxHeight:"50px"}}
-                variant="outlined"
-            >
-                +
-            </Button>
-            </div>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                open={open}
-                onClose={handleClose}
+                open={props.open}
+                onClose={props.handleClose}
                 closeAfterTransition
                 slots={{ backdrop: Backdrop }}
                 slotProps={{
@@ -89,10 +75,10 @@ export default function AddColumnButton(props:AddColumnButtonProps) {
                     },
                 }}
             >
-                <Fade in={open}>
+                <Fade in={props.open}>
                     <Box sx={style}>
                         <Typography id="transition-modal-title" variant="h6" component="h2">
-                            Set column name
+                            Add new column
                         </Typography>
                         <div style={{display:"flex", justifyContent:"space-between"}}>
                         <Typography id="transition-modal-description" sx={{ mt: 2 }}>
@@ -108,12 +94,11 @@ export default function AddColumnButton(props:AddColumnButtonProps) {
                             onClick={() => addColumn(columnName)}
                             variant="contained"
                         >
-                            Dodaj
+                            Add
                         </Button>
                         </div>
                     </Box>
                 </Fade>
             </Modal>
-        </div>
     );
 }
