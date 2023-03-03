@@ -12,7 +12,7 @@ export interface _Data {
             cards: {
                 id: string;
                 title: string;
-                desc: string;
+                description: string;
             }[];
         }>;
     };
@@ -29,7 +29,7 @@ export interface _Data {
                 cards: {
                     id: string;
                     title: string;
-                    desc: string;
+                    description: string;
                 }[];
             }>;
         }>

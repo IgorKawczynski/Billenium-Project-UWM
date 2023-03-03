@@ -1,81 +1,57 @@
 import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import Board from "./componenets/board/board"
-import {_Data} from "./interfaces/Data";
+import {_Data} from "./interfaces/DataBoard";
 import {Simulate} from "react-dom/test-utils";
 import axios from "axios";
 import change = Simulate.change;
 import './App.css'
+import transformData from "./services/transromData";
 
-const itemsFromBacked = [
-    {id:uuidv4(), title: 'FirstTask', desc:'Description to task 1'},
-    {id:uuidv4(), title: 'SecondTask', desc:'Description to task 2'},
-    {id:uuidv4(), title: 'ThirdTask', desc:'Description to task 3'},
-    {id:uuidv4(), title: 'ThirdTask', desc:'Description to task 3, Description to task 3, Description to task 3, Description to task 3, Description to task 3'},
-    {id:uuidv4(), title: 'ThirdTask', desc:'Description to task 3'},
-    {id:uuidv4(), title: 'ThirdTask', desc:'Description to task 3'},
-    {id:uuidv4(), title: 'ThirdTask', desc:'Description to task 3'},
-    {id:uuidv4(), title: 'ThirdTask', desc:'Description to task 3'}
-]
-
-const users = [
-    {id:uuidv4(), name: 'Maciek'}
-]
-
-const columnsFromBackend = {
-    [uuidv4()]: {
-        id: uuidv4(),
-        title: 'Open',
-        cardsLimit: 0,
-        position:0,
-        cards: itemsFromBacked,
-    },
-    [uuidv4()]: {
-        id: uuidv4(),
-        title: 'In progress',
-        cardsLimit: 3,
-        position:1,
-        cards: [],
-
-    },
-    [uuidv4()]: {
-        id: uuidv4(),
-        title: 'Tested',
-        cardsLimit: 3,
-        position:2,
-        cards: [],
-    },
-    [uuidv4()]: {
-        id: uuidv4(),
-        title: 'Done',
-        cardsLimit: 0,
-        position:3,
-        cards: [],
-    }
-};
-
-const dataFromBackEnd = {
-    title:"Nazwa Tablicy",
-    creatorName: "maciek",
-    assignedUsers: users,
-    columnList: columnsFromBackend
-}
 function KabanTable() {
 
-    const [data, setData] = useState(dataFromBackEnd);
-    // const apiUrl = 'http://localhost:8080/api/1001';
-    // useEffect(() => {
-    //     axios.get(apiUrl)
-    //         .then(response => {
-    //             // Handle successful response
-    //             setData(response.data)
-    //         })
-    //         .catch(error => {
-    //             // Handle error
-    //             console.error(error);
-    //         });
-    // }, []);
+    const [data, setData] = useState<_Data['data']>({
+        title:"Nazwa Tablicy",
+        creatorName: "Twórca",
+        assignedUsers: [{id:uuidv4(), name: 'twórca'}],
+        columnList: {
+            [uuidv4()]: {
+                id: uuidv4(),
+                title: 'Open',
+                cardsLimit: 0,
+                position:0,
+                cards: [{id:uuidv4(), title: 'Tak', description:'Task description'}],
+            },
+            [uuidv4()]: {
+                id: uuidv4(),
+                title: 'In progress',
+                cardsLimit: 3,
+                position:1,
+                cards: [],
 
+            },
+            [uuidv4()]: {
+                id: uuidv4(),
+                title: 'Done',
+                cardsLimit: 0,
+                position:2,
+                cards: [],
+            }
+        }
+    });
+    const apiUrl = 'http://localhost:8080/api/boards/1001';
+    useEffect(() => {
+        axios.get(apiUrl)
+            .then(response => {
+                // Handle successful response
+                setData(transformData(response.data))
+            })
+            .catch(error => {
+                // Handle error
+                console.error(error);
+            });
+    }, []);
+    console.log(data)
     // const handleDataChange = (newData:_Data["data"]) => {
     //     setData(newData);
     // }

@@ -1,4 +1,4 @@
-import {_Data} from "../../../../../../../../../../../interfaces/Data";
+import {_Data} from "../../../../../../../../../../../interfaces/DataBoard";
 interface ModalEditCardProps {
 
     id: string;

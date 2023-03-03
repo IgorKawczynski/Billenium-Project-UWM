@@ -1,5 +1,5 @@
 import BoardProps from "../../../../../../../interface/Board";
-import {_Data} from "../../../../../../../../../interfaces/Data";
+import {_Data} from "../../../../../../../../../interfaces/DataBoard";
 import React from "react";
 interface ModalAddColumnProps {
     open:boolean

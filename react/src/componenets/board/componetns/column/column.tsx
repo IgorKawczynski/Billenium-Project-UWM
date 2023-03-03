@@ -76,7 +76,7 @@ const Column = (props:ColumnProps) => {
                                                 key={item.id}
                                                 id={item.id}
                                                 title={item.title}
-                                                desc={item.desc}
+                                                desc={item.description}
                                                 index={index}
                                                 columnId={props.id}
                                                 handleDataChange={props.handleDataChange}

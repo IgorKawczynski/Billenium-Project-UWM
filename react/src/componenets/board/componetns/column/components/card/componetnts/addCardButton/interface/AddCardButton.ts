@@ -1,5 +1,5 @@
 import BoardProps from "../../../../../../../interface/Board";
-import {_Data} from "../../../../../../../../../interfaces/Data";
+import {_Data} from "../../../../../../../../../interfaces/DataBoard";
 interface AddCardButtonProps {
     data:_Data["data"]
     handleDataChange:_Data["setData"]

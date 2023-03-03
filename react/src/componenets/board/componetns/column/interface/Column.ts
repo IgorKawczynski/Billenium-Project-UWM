@@ -1,5 +1,5 @@
 import React from "react";
-import {_Data} from "../../../../../interfaces/Data";
+import {_Data} from "../../../../../interfaces/DataBoard";
 interface ColumnProps {
     id: string;
     title: string;
@@ -8,7 +8,7 @@ interface ColumnProps {
     cards: {
         id: string;
         title: string;
-        desc: string;
+        description: string;
     }[];
     data:_Data["data"]
     handleDataChange:_Data["setData"]
