@@ -18,14 +18,15 @@ public class ColumnCreatorLogic {
     private final BoardReader boardReader;
 
     public Column createColumnInPenultimatePosition(ColumnCreateDTO createDTO) {
-        var lastColumn = getLastColumnInBoard(createDTO.boardId());
+        var boardIdLong = Long.parseLong(createDTO.boardId());
+        var lastColumn = getLastColumnInBoard(boardIdLong);
         if (lastColumn == null) {
-            return columnCreator.createColumn(createDTO.title(), DEFAULT_SIZE, 0, createDTO.boardId());
+            return columnCreator.createColumn(createDTO.title(), DEFAULT_SIZE, 0, boardIdLong);
         }
 
         Integer newPenultimatePosition = lastColumn.getPosition();
         updateIncrementedLastPositionColumn(lastColumn);
-        return columnCreator.createColumn(createDTO.title(), DEFAULT_SIZE, newPenultimatePosition, createDTO.boardId());
+        return columnCreator.createColumn(createDTO.title(), DEFAULT_SIZE, newPenultimatePosition, boardIdLong);
     }
 
     private Column getLastColumnInBoard(Long boardId) {
