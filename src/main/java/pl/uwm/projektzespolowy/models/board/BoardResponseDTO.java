@@ -6,7 +6,8 @@ import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 
 import java.util.List;
 
-public record BoardResponseDTO(String title,
+public record BoardResponseDTO(String id,
+                               String title,
                                String creatorName,
                                List<UserResponseDTO> assignedUsers,
                                List<ColumnResponseDTO> columnList) {

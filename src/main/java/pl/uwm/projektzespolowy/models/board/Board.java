@@ -58,6 +58,7 @@ public class Board extends BasicEntity {
 
     public BoardResponseDTO toDto() {
         return BoardResponseDTO.builder()
+                .id(String.valueOf(this.id))
                 .title(this.title.toString())
                 .creatorName(this.creator.getFullName())
                 .assignedUsers(this.assignedUsers.stream()
