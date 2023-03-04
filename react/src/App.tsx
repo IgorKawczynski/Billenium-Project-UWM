@@ -7,54 +7,25 @@ import axios from "axios";
 import change = Simulate.change;
 import './App.css'
 import transformData from "./services/transromData";
+import {loadBoardFromBackend} from "./services/boardService";
+import {loadDefaultData} from "./services/boardService";
 
 function KabanTable() {
-
-    const [data, setData] = useState<_Data['data']>({
-        title:"Nazwa Tablicy",
-        creatorName: "Twórca",
-        assignedUsers: [{id:uuidv4(), name: 'twórca'}],
-        columnList: {
-            [uuidv4()]: {
-                id: uuidv4(),
-                title: 'Open',
-                cardsLimit: 0,
-                position:0,
-                cards: [{id:uuidv4(), title: 'Tak', description:'Task description'}],
-            },
-            [uuidv4()]: {
-                id: uuidv4(),
-                title: 'In progress',
-                cardsLimit: 3,
-                position:1,
-                cards: [],
-
-            },
-            [uuidv4()]: {
-                id: uuidv4(),
-                title: 'Done',
-                cardsLimit: 0,
-                position:2,
-                cards: [],
+    const [data, setData] = useState<_Data['data']> (loadDefaultData);
+    async function fetchData() {
+        const result = await loadBoardFromBackend("1001");
+        if (result) {
+            try {
+                setData(result);
+            }
+            catch{
+                setData(loadDefaultData())
             }
         }
-    });
-    const apiUrl = 'http://localhost:8080/api/boards/1001';
+    }
     useEffect(() => {
-        axios.get(apiUrl)
-            .then(response => {
-                // Handle successful response
-                setData(transformData(response.data))
-            })
-            .catch(error => {
-                // Handle error
-                console.error(error);
-            });
+        fetchData();
     }, []);
-    console.log(data)
-    // const handleDataChange = (newData:_Data["data"]) => {
-    //     setData(newData);
-    // }
 
     return (
         <Board

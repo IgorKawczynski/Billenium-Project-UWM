@@ -1,5 +1,6 @@
 import React from 'react';
 export default interface DataFromBackend {
+        id:string
         title: string;
         creatorName: string;
         assignedUsers: { id: number; name: string }[];

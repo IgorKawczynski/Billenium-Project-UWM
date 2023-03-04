@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function transformData(inputData: DataFromBackend): _Data["data"] {
     return {
+        id: inputData.id,
         title: inputData.title,
         creatorName: inputData.creatorName,
         assignedUsers: inputData.assignedUsers.map((user) => ({
@@ -15,7 +16,7 @@ export default function transformData(inputData: DataFromBackend): _Data["data"]
             id: column.id,
             cards: column.cards.map((card) => ({...card})),
         })).reduce((columns, column) => {
-            columns[uuidv4()] = {
+            columns[column.id] = {
                 id: column.id,
                 title: column.title,
                 cardsLimit: column.cardsLimit,
@@ -35,5 +36,24 @@ export default function transformData(inputData: DataFromBackend): _Data["data"]
             }[];
         }>),
     };
+}
+
+export function transformColumns(inputColumns: DataFromBackend['columnList']): Record<string, any>{
+    return Object.fromEntries(
+        Object.entries(inputColumns).map(([id, column]) => [
+            column.id,
+            {
+                id:column.id,
+                title: column.title,
+                cardsLimit: column.cardsLimit,
+                position: column.position,
+                cards: column.cards.map((card) => ({
+                    id: card.id,
+                    title: card.title,
+                    description: card.description,
+                })),
+            },
+        ])
+    );
 }
 

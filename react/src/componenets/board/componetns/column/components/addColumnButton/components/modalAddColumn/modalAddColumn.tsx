@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import {v4 as uuidv4} from "uuid";
 import ModalAddColumnProps from "./interface/ModalAddColumn";
-
+import {addColumnToBackend, getColumnFromBackend} from "../../../../../../../../services/columnService";
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -34,30 +34,25 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
     };
 
     function addColumn(name:string) {
-        const newColumnId = uuidv4();
-        const columns = props.data.columnList;
-        const lastColumnId = Object.keys(columns)[Object.keys(columns).length - 1];
-        const newColumn = {
-            id: newColumnId,
-            title: name,
-            cardsLimit: 3,
-            cards: [],
-            position: Object.keys(columns).length - 1,
-        };
-        const columnsExceptLast = Object.entries(columns)
-            .filter(([id, column]) => id !== lastColumnId)
-            .reduce((obj, [id, column]) => {
-                return { ...obj, [id]: column };
-            }, {});
-        props.handleDataChange({
-            ...props.data,
-                columnList: {
-                    ...columnsExceptLast,
-                    [newColumnId]: newColumn,
-                    [lastColumnId]: {...columns[lastColumnId], position: Object.keys(columns).length},
-                }});
-        props.handleClose();
-        setColumnName("")
+        addColumnToBackend(props.data.id, name)
+            .then(res => {
+                getColumnFromBackend(props.data.id)
+                    .then( res => {
+                        props.handleDataChange({
+                            ...props.data,
+                            columnList: res
+
+                        })
+                        props.handleClose();
+                        setColumnName("")
+                        }
+                    )
+                // tutaj możesz wykonywać operacje na otrzymanym id
+            })
+            .catch(error => {
+                console.error(error);
+                // obsługa błędów
+            });
     }
 
 

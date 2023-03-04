@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Droppable} from 'react-beautiful-dnd';
+import {Droppable, Draggable} from 'react-beautiful-dnd';
 import Task from "./components/card/card";
 import ColumnProps from './interface/Column'
 import AddCardButton from "./components/card/componetnts/addCardButton/addCardButton";
@@ -32,8 +32,16 @@ const Column = (props:ColumnProps) => {
 
     return(
         <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-            <h2 style={{width:'100%', display:"flex", justifyContent:"space-around"}}>
-                <div style={{display:"flex", alignItems:"center"}}>
+            <Draggable draggableId={props.id.toString()} index={props.position}>
+                {provided => (
+                    <div
+                        {...provided.draggableProps}
+                        ref={provided.innerRef}
+                    >
+                <h2 style={{width:'100%', display:"flex", justifyContent:"space-around"}}>
+                <div
+                    {...provided.dragHandleProps}
+                    style={{display:"flex", alignItems:"center"}}>
                     {props.title }
                 </div>
                 ( {props.cardsLimit} )
@@ -57,14 +65,20 @@ const Column = (props:ColumnProps) => {
             </h2>
             <div style={{margin:8}}>
                 {props.position === 0 && <AddCardButton data={props.data} handleDataChange={props.handleDataChange}/>}
-                <Droppable droppableId={props.id} key={props.id}>
+                <Droppable droppableId={props.id} type="task">
                     {(provided, snapshot) =>{
                         return(
                             <div
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
                                 style={{
-                                    backgroundColor: props.cards && props.cards.length > props.cardsLimit && props.cardsLimit != 0 && props.position != 0 && props.position != Object.keys(props.data.columnList).length-1 ? '#f24e53' : 'white',
+                                    backgroundColor:
+                                        props.cards
+                                        && props.cards.length > props.cardsLimit
+                                        && props.cardsLimit != 0
+                                        && props.position != 0
+                                        && props.position != Object.keys(props.data.columnList).length-1 ? '#f24e53' : 'white'
+                                        && props.isDragging ? 'rgba(154,154,154,0.11)': 'white',
                                     padding: 4,
                                     width: 250,
                                     minHeight:150
@@ -89,7 +103,9 @@ const Column = (props:ColumnProps) => {
                             </div>
                         )}}
                 </Droppable>
-            </div>
+            </div></div>
+                    )}
+            </Draggable>
             <ModalEditColumn
                 id={props.id}
                 title={props.title}

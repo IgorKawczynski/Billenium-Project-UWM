@@ -1,6 +1,7 @@
 import React from "react";
 import {_Data} from "../../../../../interfaces/DataBoard";
 interface ColumnProps {
+    key:string
     id: string;
     title: string;
     cardsLimit: number;
@@ -13,6 +14,7 @@ interface ColumnProps {
     data:_Data["data"]
     handleDataChange:_Data["setData"]
 
+    isDragging:boolean
 }
 
 export default ColumnProps

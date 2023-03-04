@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import ModalRemoveColumnProps from "./interface/ModalRemoveColumn";
-
+import {getColumnFromBackend, removeColumnToBackend} from "../../../../../../services/columnService";
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -23,24 +23,19 @@ const style = {
 
 const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
     const removeColumn = (id:string) => {
-        // utwórz nową tablicę bez usuwanej kolumny
-        const newColumns = { ...props.data.columnList };
-        delete newColumns[id];
-        const lastColumnId = Object.keys(newColumns)[Object.keys(newColumns).length - 1];
-        Object.values(newColumns).forEach((column:any, index) => {
-            if (column.position > index) {
-                column.position = index;
-            }
-        });
-        // przypisz nową tablicę do state'u
-        props.handleDataChange({
-            ...props.data,
-            columnList: {
-                ...newColumns,
-                [lastColumnId]: { ...newColumns[lastColumnId], position: Object.keys(newColumns).length - 1 },
-            },
-        })
+        removeColumnToBackend(id)
+            .then(res => {
+                getColumnFromBackend(props.data.id)
+                    .then( res => {
+                            props.handleDataChange({
+                                ...props.data,
+                                columnList: res
 
+                            })
+
+                        }
+                    )
+            })
     };
 
     return(

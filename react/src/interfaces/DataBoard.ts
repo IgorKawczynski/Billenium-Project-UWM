@@ -1,6 +1,7 @@
 import React from 'react';
 export interface _Data {
     data: {
+        id:string
         title: string;
         creatorName: string;
         assignedUsers: { id: string; name: string }[];
@@ -18,6 +19,7 @@ export interface _Data {
     };
     setData: React.Dispatch<
         React.SetStateAction<{
+            id:string
             title: string;
             creatorName: string;
             assignedUsers: { id: string; name: string }[];
