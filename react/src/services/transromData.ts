@@ -38,10 +38,10 @@ export default function transformData(inputData: DataFromBackend): _Data["data"]
     };
 }
 
-export function transformColumns(inputColumns: DataFromBackend['columnList']): Record<string, any>{
+export function transformColumns(inputColumns: DataFromBackend['columnList']):  _Data["data"]["columnList"]{
     return Object.fromEntries(
         Object.entries(inputColumns).map(([id, column]) => [
-            column.id,
+            [column.id],
             {
                 id:column.id,
                 title: column.title,

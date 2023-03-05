@@ -1,14 +1,12 @@
 import React, {useState} from 'react'
-import ColumnProps from '../../interface/Column'
 import Modal from "@mui/material/Modal";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import ModalRemoveColumnProps from "./interface/ModalRemoveColumn";
 import {getColumnFromBackend, removeColumnToBackend} from "../../../../../../services/columnService";
+import {_Data} from "../../../../../../interfaces/DataBoard";
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -19,7 +17,8 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-};
+    fontFamily: 'Open Sans',
+}
 
 const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
     const removeColumn = (id:string) => {
@@ -27,14 +26,14 @@ const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
             .then(res => {
                 getColumnFromBackend(props.data.id)
                     .then( res => {
+                        if(res) {
+                            const columns:_Data["data"]['columnList'] = res
                             props.handleDataChange({
                                 ...props.data,
-                                columnList: res
+                                columnList: columns
 
                             })
-
-                        }
-                    )
+                        }})
             })
     };
 
@@ -53,11 +52,10 @@ const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
                 }}
             >
                 <Fade in={props.modalDelete}>
-                    <Box sx={style}>
-                        <div style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
-                            <div style={{textAlign:"center", fontSize:"24px"}}>
+                    <Stack sx={style} spacing={3}>
+                        <div style={{display:"flex", flexDirection:"column", justifyContent:"center",fontSize:"18px"}}>
                                 Are you sure you want to delete column {props.title}?
-                            </div>
+                        </div>
                             <div style={{ display:"flex", justifyContent:"space-between", width:"100%"}}>
                                 <Button
                                     sx={{maxHeight:'50px'}}
@@ -74,8 +72,7 @@ const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
                                     Delete
                                 </Button>
                             </div>
-                        </div>
-                    </Box>
+                    </Stack>
                 </Fade>
             </Modal>
     )

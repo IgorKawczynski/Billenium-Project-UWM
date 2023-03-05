@@ -32,7 +32,7 @@ const Column = (props:ColumnProps) => {
 
     return(
         <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-            <Draggable draggableId={props.id.toString()} index={props.position}>
+            <Draggable draggableId={props.id} index={props.position}>
                 {provided => (
                     <div
                         {...provided.draggableProps}

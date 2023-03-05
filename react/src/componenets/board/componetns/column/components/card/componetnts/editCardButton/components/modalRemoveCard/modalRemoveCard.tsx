@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import ModalRemoveCardProps from "./interface/ModalRemoveCard";
+import Stack from "@mui/material/Stack";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -48,11 +49,13 @@ export default function ModalRemoveCard(props:ModalRemoveCardProps) {
             }}
         >
             <Fade in={props.modalDelete}>
-                <Box sx={style}>
-                    <Typography id="transition-modal-title" variant="h6" component="h2" sx={{textAlign:"center"}}>
+                <Stack sx={style} spacing={3}>
+                    <div>
+                    <Typography id="transition-modal-title" variant="h6" component="h2" sx={{textAlign:"center", fontSize:'18px'}}>
                         Are you sure you want to delete card: {props.title}?
                     </Typography>
-                    <div style={{display:"flex", justifyContent:"space-between", width:"100%", marginTop:"8px"}}>
+                    </div>
+                    <div style={{display:"flex", justifyContent:"space-between", width:"100%"}}>
                         <Button
                             sx={{maxHeight:'50px'}}
                             onClick={() => props.modalDeleteClose()}
@@ -68,7 +71,7 @@ export default function ModalRemoveCard(props:ModalRemoveCardProps) {
                             Delete
                         </Button>
                     </div>
-                </Box>
+                </Stack>
             </Fade>
         </Modal>
     );

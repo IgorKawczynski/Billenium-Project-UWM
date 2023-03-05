@@ -36,7 +36,7 @@ export default function ModalAddCard(props:ModalAddCardProps) {
     };
     const addCard = (name: string, desc: string) => {
         const newItemId = uuidv4();
-        const newItem = { id: newItemId, title: name, desc: desc };
+        const newItem = { id: newItemId, title: name, description: desc };
         const firstColumnId = Object.keys(props.data.columnList)[0];
         const updatedItems = [...props.data.columnList[firstColumnId].cards, newItem];
         const updatedColumns = { ...props.data.columnList, [firstColumnId]: { ...props.data.columnList[firstColumnId], cards: updatedItems } };

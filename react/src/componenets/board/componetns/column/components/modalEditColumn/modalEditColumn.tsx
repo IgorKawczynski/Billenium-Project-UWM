@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import ColumnProps from '../../interface/Column'
 import Modal from "@mui/material/Modal";
 import Backdrop from "@mui/material/Backdrop";
@@ -7,7 +7,10 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Checkbox from '@mui/material/Checkbox';
 import ModalEditColumnProps from "./interface/ModalEditColumn";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Stack from "@mui/material/Stack";
 
 
 const style = {
@@ -15,7 +18,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 300,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -25,12 +28,17 @@ const style = {
 const ModalEditColumn = (props:ModalEditColumnProps) => {
     const [name, setName] = useState(props.title);
     const [limit, setLimit] = useState(props.cardsLimit);
+    const [checkLimit, setCheckLimit] = useState(false);
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
     };
     const handleLimitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(event.target.value);
         setLimit(value);
+    };
+
+    const handleCheckLimitChange = () => {
+        setCheckLimit((prevState) => !prevState);
     };
     const editColumn = (newTitle: string, limit: number, id:string) => {
         const newColumns = { ...props.data.columnList };
@@ -59,12 +67,10 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
                 }}
             >
                 <Fade in={props.modalEdit}>
-                    <Box sx={style}>
+                    <Stack sx={style} spacing={2} direction={'column'}>
                         <Typography id="transition-modal-title" variant="h6" component="h2">
                             Editing column: {props.title}
                         </Typography>
-                        <div style={{display:"flex", justifyContent:"space-between"}}>
-                            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
                                 <TextField
                                     sx={{margin:'0 0 8px 0'}}
                                     id="outlined-basic"
@@ -74,16 +80,22 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
                                     onChange={handleNameChange}
                                 />
                                 <TextField
-                                    sx={{margin:'0 0 8px 0'}}
+                                    disabled={checkLimit}
+                                    sx={{margin:'0 0 8px 8px'}}
                                     id="outlined-basic"
                                     label="Limit"
                                     variant="outlined"
+
                                     type="number"
                                     value={limit}
                                     onChange={handleLimitChange}
                                 />
-                            </Typography>
-                        </div>
+                                <FormControlLabel
+                                    label="Unlimited"
+                                    control={<Checkbox checked={checkLimit} onChange={handleCheckLimitChange}/>}
+                                    labelPlacement="top"
+
+                                />
                         <Button
                             sx={{maxHeight:'50px'}}
                             onClick={() => editColumn(name,limit, props.id)}
@@ -91,7 +103,7 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
                         >
                             Edit
                         </Button>
-                    </Box>
+                    </Stack>
                 </Fade>
             </Modal>
     )

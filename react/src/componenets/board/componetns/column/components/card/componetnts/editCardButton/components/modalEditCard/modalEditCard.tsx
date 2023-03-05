@@ -15,13 +15,14 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
 import ModalEditCardProps from "./interface/ModalEditCard";
+import Stack from "@mui/material/Stack";
 
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 300,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -104,12 +105,10 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                 }}
             >
                 <Fade in={props.modalEdit}>
-                    <Box sx={style}>
+                    <Stack sx={style} spacing={2}>
                         <Typography id="transition-modal-title" variant="h6" component="h2">
                             Editing card: {props.title}
                         </Typography>
-                            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                                <div style={{display:"flex", justifyContent:"space-between"}}>
                                 <TextField
                                     sx={{margin:'0 0 8px 0'}}
                                     id="outlined-basic"
@@ -128,9 +127,6 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                     value={desc}
                                     onChange={handleDescChange}
                                 />
-                                </div>
-                            </Typography>
-                        <div style={{width:'100%', display:"flex", justifyContent:"center"}}>
                         <Button
                             sx={{maxHeight:'50px'}}
                             onClick={() => updateCard(title,desc)}
@@ -138,8 +134,7 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                         >
                             Edit
                         </Button>
-                        </div>
-                    </Box>
+                    </Stack>
                 </Fade>
             </Modal>
     );

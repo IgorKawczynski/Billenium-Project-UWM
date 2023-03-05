@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
@@ -9,12 +9,13 @@ import TextField from '@mui/material/TextField';
 import {v4 as uuidv4} from "uuid";
 import ModalAddColumnProps from "./interface/ModalAddColumn";
 import {addColumnToBackend, getColumnFromBackend} from "../../../../../../../../services/columnService";
+import {_Data} from "../../../../../../../../interfaces/DataBoard";
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 300,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -38,13 +39,16 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
             .then(res => {
                 getColumnFromBackend(props.data.id)
                     .then( res => {
-                        props.handleDataChange({
-                            ...props.data,
-                            columnList: res
+                        if(res) {
+                            const columns:_Data["data"]['columnList'] = res
+                            props.handleDataChange({
+                                ...props.data,
+                                columnList: columns
 
-                        })
-                        props.handleClose();
-                        setColumnName("")
+                            })
+                            props.handleClose();
+                            setColumnName("")
+                        }
                         }
                     )
                 // tutaj możesz wykonywać operacje na otrzymanym id
@@ -57,6 +61,7 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
 
 
     return (
+        <div>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -71,29 +76,29 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
                 }}
             >
                 <Fade in={props.open}>
-                    <Box sx={style}>
+                    <Stack sx={style} spacing={2}>
                         <Typography id="transition-modal-title" variant="h6" component="h2">
                             Add new column
                         </Typography>
-                        <div style={{display:"flex", justifyContent:"space-between"}}>
-                        <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                            <TextField
+                        <TextField
                                 id="outlined-basic"
                                 label="Name"
                                 variant="outlined"
                                 value={columnName}
                                 onChange={handleNameChange}
-                            />
-                        </Typography>
+                        />
+                        <div style={{width:'100%'}}>
                         <Button
+                            style={{marginTop:'8px', width:'100%'}}
                             onClick={() => addColumn(columnName)}
                             variant="contained"
                         >
                             Add
                         </Button>
                         </div>
-                    </Box>
+                    </Stack>
                 </Fade>
             </Modal>
+        </div>
     );
 }

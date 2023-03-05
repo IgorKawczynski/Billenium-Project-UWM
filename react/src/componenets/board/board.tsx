@@ -7,6 +7,7 @@ import {Container} from "@mui/material";
 
 const onDragEnd = (result: any, columns:any, setData:any, data:any) => {
     if(!result.destination) return
+    console.log(result)
     const {source, destination} = result;
     if (source.droppableId !== destination.droppableId){
         const sourceColumn = columns[source.droppableId];
