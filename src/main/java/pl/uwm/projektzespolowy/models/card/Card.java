@@ -5,9 +5,11 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import pl.uwm.projektzespolowy.models.Positionable;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import java.util.HashSet;
@@ -18,12 +20,12 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Card extends BasicEntity {
+public class Card extends BasicEntity implements Positionable {
 
     Title title;
     String description;
 
-    // TODO: add Position
+    Position position;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "column_id")
@@ -32,10 +34,11 @@ public class Card extends BasicEntity {
     @ManyToMany(mappedBy = "cards")
     Set<User> assignedUsers;
 
-    public Card(Title title, String description, Column column) {
+    public Card(Title title, String description, Column column, int position) {
         this.title = title;
         this.description = description;
         this.column = column;
+        this.position = new Position(position);
         this.assignedUsers = new HashSet<>();
     }
 
@@ -44,7 +47,12 @@ public class Card extends BasicEntity {
                 .id(this.id.toString())
                 .title(this.title.toString())
                 .description(this.description)
+                .position(this.position.value())
                 .build();
+    }
+
+    public Position getPosition() {
+        return position;
     }
 
     public Title getTitle() {
