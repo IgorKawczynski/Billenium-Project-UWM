@@ -36,7 +36,8 @@ public class CardCRUDService {
     }
 
     public Card updateCard(CardUpdateDTO cardUpdateDTO) {
-        var cardToChange = cardReader.getCardById(cardUpdateDTO.cardId());
+        var cardId = Long.parseLong(cardUpdateDTO.cardId());
+        var cardToChange = cardReader.getCardById(cardId);
         return cardUpdater.editCard(cardToChange, cardUpdateDTO.title(), cardUpdateDTO.description());
     }
 
