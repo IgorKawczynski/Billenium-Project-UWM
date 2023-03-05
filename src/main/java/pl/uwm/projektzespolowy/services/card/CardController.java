@@ -17,26 +17,37 @@ public class CardController {
 
     private final CardCRUDService cardCRUDService;
 
-    @GetMapping("/{cardId}")
-    public CardResponseDTO getCardById(@PathVariable Long cardId) {
-        return cardCRUDService.getCardById(cardId);
-    }
-
     @GetMapping("/")
     public List<CardResponseDTO> getAllCards() {
         return cardCRUDService.getAllCards();
     }
 
+    @RequestMapping(method = RequestMethod.GET, params = {"cardId"})
+    public CardResponseDTO getCardById(@RequestParam Long cardId) {
+        return cardCRUDService.getCardById(cardId);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, params = {"columnId"})
+    public List<CardResponseDTO> getAllCardsByColumnId(@RequestParam Long columnId) {
+        return cardCRUDService.getAllCardsByColumnId(columnId);
+    }
+
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public CardResponseDTO addCardToColumn(@RequestBody CardCreateDTO cardCreateDTO) {
-        return cardCRUDService.addCardToColumn(cardCreateDTO).toDto();
+        return cardCRUDService.addCardToColumn(cardCreateDTO);
     }
 
     @PutMapping("")
     @ResponseStatus(HttpStatus.OK)
     public CardResponseDTO updateCard(@RequestBody CardUpdateDTO cardUpdateDTO) {
-        return cardCRUDService.updateCard(cardUpdateDTO).toDto();
+        return cardCRUDService.updateCard(cardUpdateDTO);
+    }
+
+    @DeleteMapping("{cardId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteCard(@PathVariable Long cardId) {
+        cardCRUDService.deleteCard(cardId);
     }
 
 }

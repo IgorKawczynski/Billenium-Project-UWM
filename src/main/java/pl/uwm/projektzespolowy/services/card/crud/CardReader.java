@@ -18,17 +18,25 @@ public class CardReader {
     private final CardRepository cardRepository;
     private final ColumnRepository columnRepository;
 
+    public List<CardResponseDTO> getAllCards() {
+        return cardRepository
+                .findAll()
+                .stream()
+                .map(Card::toDto)
+                .toList();
+    }
+
     public Card getCardById(Long id) {
         return cardRepository
                 .findById(id)
                 .orElseThrow(
-                    () -> new EntityNotFoundException("card", "Card with id: " + id + " does not exist!")
+                        () -> new EntityNotFoundException("card", "Card with id: " + id + " does not exist!")
                 );
     }
 
-    public List<CardResponseDTO> getAllCards() {
+    public List<CardResponseDTO> getAllCardsByColumnId(Long columnId) {
         return cardRepository
-                .findAll()
+                .findAllByColumnId(columnId)
                 .stream()
                 .map(Card::toDto)
                 .toList();

@@ -20,23 +20,43 @@ public class CardCRUDService {
     private final CardDeleter cardDeleter;
     private final ColumnReader columnReader;
 
-    public CardResponseDTO getCardById(Long id) {
-        return cardReader.getCardById(id).toDto();
-    }
-
     public List<CardResponseDTO> getAllCards() {
         return cardReader.getAllCards();
     }
 
-
-    public Card addCardToColumn(CardCreateDTO cardCreateDTO) {
-        var column = columnReader.getColumnById(cardCreateDTO.columnId());
-        return cardCreator.create(cardCreateDTO.title(), cardCreateDTO.description(), column);
+    public CardResponseDTO getCardById(Long id) {
+        return cardReader.getCardById(id).toDto();
     }
 
-    public Card updateCard(CardUpdateDTO cardUpdateDTO) {
+    public List<CardResponseDTO> getAllCardsByColumnId(Long columnId) {
+        return cardReader.getAllCardsByColumnId(columnId);
+    }
+
+    public CardResponseDTO addCardToColumn(CardCreateDTO cardCreateDTO) {
+        var column = columnReader.getColumnById(cardCreateDTO.columnId());
+        return cardCreator
+                .create(
+                        cardCreateDTO.title(),
+                        cardCreateDTO.description(),
+                        column
+                )
+                .toDto();
+    }
+
+    public CardResponseDTO updateCard(CardUpdateDTO cardUpdateDTO) {
         var cardToChange = cardReader.getCardById(cardUpdateDTO.cardId());
-        return cardUpdater.editCard(cardToChange, cardUpdateDTO.title(), cardUpdateDTO.description());
+        return cardUpdater
+                .editCard(
+                        cardToChange,
+                        cardUpdateDTO.title(),
+                        cardUpdateDTO.description(),
+                        cardUpdateDTO.position()
+                )
+                .toDto();
+    }
+
+    public void deleteCard(Long cardId) {
+        cardDeleter.deleteCardById(cardId);
     }
 
 }
