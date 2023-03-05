@@ -30,7 +30,8 @@ public class CardCRUDService {
 
 
     public Card addCardToColumn(CardCreateDTO cardCreateDTO) {
-        var column = columnReader.getColumnById(cardCreateDTO.columnId());
+        var columnId = Long.parseLong(cardCreateDTO.columnId());
+        var column = columnReader.getColumnById(columnId);
         return cardCreator.create(cardCreateDTO.title(), cardCreateDTO.description(), column);
     }
 
