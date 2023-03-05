@@ -31,7 +31,8 @@ public class ColumnCRUDService {
     }
 
     public Column updateColumn(ColumnUpdateDTO columnUpdateDTO) {
-        var columnToChange = reader.getColumnById(columnUpdateDTO.columnId());
+        var columnId = Long.parseLong(columnUpdateDTO.columnId());
+        var columnToChange = reader.getColumnById(columnId);
         return updater.editColumn(columnToChange, columnUpdateDTO.title(), columnUpdateDTO.cardsLimit(), columnUpdateDTO.isUnlimited());
     }
 
