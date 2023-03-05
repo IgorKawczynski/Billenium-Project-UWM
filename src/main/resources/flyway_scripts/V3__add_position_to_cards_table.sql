@@ -1,0 +1,1 @@
+alter table cards add position int;

@@ -5,9 +5,11 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import pl.uwm.projektzespolowy.models.Positionable;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.card.Card;
+import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import java.util.ArrayList;
@@ -18,11 +20,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Column extends BasicEntity {
+public class Column extends BasicEntity implements Positionable {
 
     Title title;
     Integer cardsLimit;
-    Integer position;
+    Position position;
     @ManyToOne
     @JoinColumn(name = "board_id", referencedColumnName = "id")
     Board board;
@@ -35,7 +37,7 @@ public class Column extends BasicEntity {
     public final static int UNLIMITED_SIZE = 0;
     public final static int DEFAULT_SIZE = 3;
 
-    public Column(Title title, Integer cardsLimit, Integer position, Board board) {
+    public Column(Title title, Integer cardsLimit, Position position, Board board) {
         this.title = title;
         this.cardsLimit = cardsLimit;
         this.position = position;
@@ -48,11 +50,15 @@ public class Column extends BasicEntity {
                 .id(this.id.toString())
                 .title(this.title.toString())
                 .cardsLimit(this.cardsLimit)
-                .position(this.position)
+                .position(this.position.value())
                 .cards(this.cards.stream()
                         .map(Card::toDto)
                         .toList())
                 .build();
+    }
+
+    public int getPositionForNewCard() {
+        return this.getCards().size() + 1;
     }
 
     public void assign(Card card) {
@@ -67,7 +73,7 @@ public class Column extends BasicEntity {
         return cardsLimit;
     }
 
-    public Integer getPosition() {
+    public Position getPosition() {
         return position;
     }
 

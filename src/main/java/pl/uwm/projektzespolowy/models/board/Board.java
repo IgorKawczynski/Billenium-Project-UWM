@@ -9,6 +9,7 @@ import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import java.util.*;
@@ -50,9 +51,9 @@ public class Board extends BasicEntity {
         this.assignedUsers = new HashSet<>();
         this.assignedUsers.add(creator);
         this.columns = List.of(
-                new Column(new Title("Todo"), UNLIMITED_SIZE, 0, this),
-                new Column(new Title("In progress"), DEFAULT_SIZE, 1, this),
-                new Column(new Title("Done"), UNLIMITED_SIZE, 2, this)
+                new Column(new Title("Todo"), UNLIMITED_SIZE, Position.first(), this),
+                new Column(new Title("In progress"), DEFAULT_SIZE, Position.second(), this),
+                new Column(new Title("Done"), UNLIMITED_SIZE, Position.third(), this)
         );
     }
 

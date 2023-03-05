@@ -28,10 +28,6 @@ public class ColumnUpdater {
                 Integer cardsLimit = (Integer) value;
                 column.setCardsLimit(cardsLimit);
             }
-            case "position" -> {
-                Integer position = (Integer) value;
-                column.setPosition(position);
-            }
         }
         columnRepository.saveAndFlush(column);
     }
