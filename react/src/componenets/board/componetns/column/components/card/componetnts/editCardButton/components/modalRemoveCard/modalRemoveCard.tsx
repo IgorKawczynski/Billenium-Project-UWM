@@ -50,12 +50,12 @@ export default function ModalRemoveCard(props:ModalRemoveCardProps) {
         >
             <Fade in={props.modalDelete}>
                 <Stack sx={style} spacing={3}>
-                    <div>
+                    <Box>
                     <Typography id="transition-modal-title" variant="h6" component="h2" sx={{textAlign:"center", fontSize:'18px'}}>
                         Are you sure you want to delete card: {props.title}?
                     </Typography>
-                    </div>
-                    <div style={{display:"flex", justifyContent:"space-between", width:"100%"}}>
+                    </Box>
+                    <Box style={{display:"flex", justifyContent:"space-between", width:"100%"}}>
                         <Button
                             sx={{maxHeight:'50px'}}
                             onClick={() => props.modalDeleteClose()}
@@ -70,7 +70,7 @@ export default function ModalRemoveCard(props:ModalRemoveCardProps) {
                         >
                             Delete
                         </Button>
-                    </div>
+                    </Box>
                 </Stack>
             </Fade>
         </Modal>

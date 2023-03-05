@@ -4,7 +4,10 @@ export interface _Data {
         id:string
         title: string;
         creatorName: string;
-        assignedUsers: { id: string; name: string }[];
+        assignedUsers: {
+            id: string;
+            name: string;
+        }[];
         columnList: Record<string, {
             id: string;
             title: string;
@@ -14,6 +17,7 @@ export interface _Data {
                 id: string;
                 title: string;
                 description: string;
+                position:number;
             }[];
         }>;
     };
@@ -32,6 +36,7 @@ export interface _Data {
                     id: string;
                     title: string;
                     description: string;
+                    position:number;
                 }[];
             }>;
         }>

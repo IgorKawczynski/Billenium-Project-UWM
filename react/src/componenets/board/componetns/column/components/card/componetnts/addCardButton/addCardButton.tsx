@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-
 import Button from '@mui/material/Button';
-
+import Box from "@mui/material/Box";
 import AddCardButtonProps from "./interface/AddCardButton";
 import ModalAddCard from "./components/modalAddCard/modalAddCard";
 const style = {
@@ -21,8 +20,8 @@ export default function AddColumnButton(props:AddCardButtonProps) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     return (
-        <div>
-            <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+        <Box>
+            <Box style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
                 <Button
                     onClick={handleOpen}
                     sx={{width:"100%", maxHeight:"50px"}}
@@ -30,9 +29,9 @@ export default function AddColumnButton(props:AddCardButtonProps) {
                 >
                     +
                 </Button>
-            </div>
-            <ModalAddCard open={open} handleOpen={handleOpen} handleClose={handleClose} data={props.data} handleDataChange={props.handleDataChange}/>
+            </Box>
+            <ModalAddCard open={open} handleOpen={handleOpen} handleClose={handleClose} columnId={props.columnId} data={props.data} handleDataChange={props.handleDataChange}/>
 
-        </div>
+        </Box>
     );
 }

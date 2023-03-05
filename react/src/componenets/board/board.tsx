@@ -1,13 +1,14 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 import Column from './componetns/column/column'
 import BoardProps from "./interface/Board"
 import AddColumnButton from "./componetns/column/components/addColumnButton/addColumnButton";
-import {Container} from "@mui/material";
-
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import {_Data} from "../../interfaces/DataBoard";
+import {loadBoardFromBackend, loadDefaultData} from "../../services/boardService";
 const onDragEnd = (result: any, columns:any, setData:any, data:any) => {
     if(!result.destination) return
-    console.log(result)
     const {source, destination} = result;
     if (source.droppableId !== destination.droppableId){
         const sourceColumn = columns[source.droppableId];
@@ -47,7 +48,22 @@ const onDragEnd = (result: any, columns:any, setData:any, data:any) => {
         })
     }
 }
-const Board = (props:BoardProps) => {
+const Board = () => {
+    const [data, setData] = useState<_Data['data']> (loadDefaultData);
+    async function fetchData() {
+        const result = await loadBoardFromBackend("1001");
+        if (result) {
+            try {
+                setData(result);
+            }
+            catch{
+                setData(loadDefaultData())
+            }
+        }
+    }
+    useEffect(() => {
+        fetchData();
+    }, []);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const openModal = () => {
         setModalIsOpen(true);
@@ -58,33 +74,30 @@ const Board = (props:BoardProps) => {
 
 
     return (
-        <div style={{display:"flex", justifyContent:"center", flexDirection:"column"}}>
-            <h2 style={{textAlign:"center"}}>{props.data.title}</h2>
+        <Stack spacing={2} display={"flex"} alignItems={"center"} >
+            <h2 style={{textAlign:"center"}}>{data.title}</h2>
             <AddColumnButton
-                data={props.data}
-                handleDataChange={props.handleDataChange}
+                data={data}
+                handleDataChange={setData}
             />
-            <div style={{ display: "flex", justifyContent: "center", height: "100%", flexDirection:"row" }}>
+            <Box sx={{display:'flex', width:'100%', justifyContent:'space-around', overflow:'visible'}}>
                 <DragDropContext
                     onDragEnd={(result) =>
-                        onDragEnd(result, props.data.columnList, props.handleDataChange, props.data)
+                        onDragEnd(result, data.columnList, setData, data)
                     }
                 >
                     <Droppable
-                        droppableId={props.data.id}
+                        droppableId={data.id}
                         direction="horizontal"
                         type="column">
                         {(provided, snapshot) => (
-                            <div style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                height: "100%",
-                                flexDirection:"row",
-                            }}
+                            <Stack
+                                spacing={2}
+                                direction={"row"}
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
                             >
-                                {Object.values(props.data.columnList)
+                                {Object.values(data.columnList)
                                     .sort((a, b) => a.position - b.position) // sortowanie po pozycji
                                     .map((column) => (
                                         <Column
@@ -94,18 +107,19 @@ const Board = (props:BoardProps) => {
                                             cardsLimit={column.cardsLimit}
                                             position={column.position}
                                             cards={column.cards}
-                                            data={props.data}
-                                            handleDataChange={props.handleDataChange}
+                                            data={data}
+                                            handleDataChange={setData}
                                             isDragging={snapshot.isDraggingOver}
                                         />
                                     ))}
                                 {provided.placeholder}
-                            </div>
+
+                            </Stack>
                         )}
                     </Droppable>
                 </DragDropContext>
-            </div>
-        </div>
+            </Box>
+        </Stack>
     );
 }
 

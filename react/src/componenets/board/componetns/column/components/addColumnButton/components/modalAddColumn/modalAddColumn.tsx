@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
 import {v4 as uuidv4} from "uuid";
 import ModalAddColumnProps from "./interface/ModalAddColumn";
@@ -61,7 +62,7 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
 
 
     return (
-        <div>
+        <Box>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -87,7 +88,7 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
                                 value={columnName}
                                 onChange={handleNameChange}
                         />
-                        <div style={{width:'100%'}}>
+                        <Box style={{width:'100%'}}>
                         <Button
                             style={{marginTop:'8px', width:'100%'}}
                             onClick={() => addColumn(columnName)}
@@ -95,10 +96,10 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
                         >
                             Add
                         </Button>
-                        </div>
+                        </Box>
                     </Stack>
                 </Fade>
             </Modal>
-        </div>
+        </Box>
     );
 }

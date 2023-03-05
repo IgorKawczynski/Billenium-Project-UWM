@@ -33,6 +33,7 @@ export default function transformData(inputData: DataFromBackend): _Data["data"]
                 id: string;
                 title: string;
                 description: string;
+                position:number;
             }[];
         }>),
     };
@@ -51,6 +52,7 @@ export function transformColumns(inputColumns: DataFromBackend['columnList']):  
                     id: card.id,
                     title: card.title,
                     description: card.description,
+                    position: card.position,
                 })),
             },
         ])

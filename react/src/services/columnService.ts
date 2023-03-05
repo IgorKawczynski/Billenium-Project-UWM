@@ -31,3 +31,13 @@ export async function getColumnFromBackend(boardId:string){
     }
 }
 
+export async function updateColumnToBackend(columnId:string,title:string, cardsLimit:number, isUnlimited:boolean){
+    try{
+        const response = await axios.put(`http://localhost:8080/api/columns`, {columnId,title, cardsLimit, isUnlimited})
+        return response.data
+    }catch(error:any){
+        return alert(error.response.data.fieldName)
+    }
+
+}
+

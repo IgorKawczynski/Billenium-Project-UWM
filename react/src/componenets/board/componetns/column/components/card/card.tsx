@@ -5,6 +5,7 @@ import Avatar from './componetnts/Avatar/avatar'
 import {CardActionArea} from "@mui/material"
 import CardProps from './interface/Card'
 import EditCardButton from './componetnts/editCardButton/editCardButton'
+import Box from "@mui/material/Box";
 const Task = (props:CardProps) => {
     return(
         <Draggable key={props.id} draggableId={props.id} index={props.index}>
@@ -26,27 +27,26 @@ const Task = (props:CardProps) => {
 
                         }}
                     >
-                        <div style={{
+                        <Box style={{
                             display:"flex",
                             justifyContent:"space-between"
                         }}>
-                            <div>
-                                <div style={{fontSize:'1.3rem'}}>
+                            <Box>
+                                <Box style={{fontSize:'1.3rem'}}>
                                     {props.title}
-                                </div>
-                                <br/>
+                                </Box>
                                 {props.index}
                                 {props.desc}
 
-                            </div>
-                            <div>
-                                <div style={{display:"flex", flexDirection:"column",alignItems:"center", minWidth:'50px'}}>
-                                {/*<Avatar name={"Maciek"} lastName={"Janek"}/>*/}
+                            </Box>
+                            <Box>
+                                <Box style={{display:"flex", flexDirection:"column",alignItems:"center", minWidth:'50px'}}>
+                                <Avatar name={"Maciek"} lastName={"Janek"}/>
                                 {/*<Avatar name={"Maciek"} lastName={"Makowski"}/>*/}
                                 {/*<Avatar name={"Kuba"} lastName={"laczek"}/>*/}
-                                </div>
-                            </div>
-                        </div>
+                                </Box>
+                            </Box>
+                        </Box>
                         <EditCardButton id={props.id} columnId={props.columnId} title={props.title} desc={props.desc} data={props.data} handleDataChange={props.handleDataChange}/>
                     </Card>
                 )

@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import ColumnProps from '../../interface/Column'
 import Modal from "@mui/material/Modal";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -11,6 +9,8 @@ import Checkbox from '@mui/material/Checkbox';
 import ModalEditColumnProps from "./interface/ModalEditColumn";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Stack from "@mui/material/Stack";
+import {getColumnFromBackend, updateColumnToBackend} from "../../../../../../services/columnService";
+import {_Data} from "../../../../../../interfaces/DataBoard";
 
 
 const style = {
@@ -41,14 +41,27 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
         setCheckLimit((prevState) => !prevState);
     };
     const editColumn = (newTitle: string, limit: number, id:string) => {
-        const newColumns = { ...props.data.columnList };
-        newColumns[id] = { ...newColumns[id], title: newTitle, cardsLimit:limit };
-        props.handleDataChange({
-            ...props.data,
-            columnList: {
-                ...newColumns
-            },
-        });
+        updateColumnToBackend(id, newTitle, limit, checkLimit)
+            .then(res => {
+                getColumnFromBackend(props.data.id)
+                    .then( res => {
+                            if(res) {
+                                const columns:_Data["data"]['columnList'] = res
+                                props.handleDataChange({
+                                    ...props.data,
+                                    columnList: columns
+
+                                })
+                                props.modalEditClose();
+                            }
+                        }
+                    )
+                // tutaj możesz wykonywać operacje na otrzymanym id
+            })
+            .catch(error => {
+                // console.log(error.response.fieldName);
+                // obsługa błędów
+            });
         props.modalEditClose()
     }
 

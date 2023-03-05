@@ -6,21 +6,9 @@ import AddCardButton from "./components/card/componetnts/addCardButton/addCardBu
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SettingsIcon from '@mui/icons-material/Settings';
-import CardProps from "./components/card/interface/Card";
 import ModalEditColumn from "./components/modalEditColumn/modalEditColumn";
 import ModalRemoveColumn from "./components/modalRemoveColumn/modalRemoveColumn";
-
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+import Box from "@mui/material/Box";
 
 const Column = (props:ColumnProps) => {
     const [modalEdit, setModalEdit] = useState(false);
@@ -31,21 +19,21 @@ const Column = (props:ColumnProps) => {
     const modalEditClose = () => setModalEdit(false);
 
     return(
-        <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+        <Box style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
             <Draggable draggableId={props.id} index={props.position}>
                 {provided => (
-                    <div
+                    <Box
                         {...provided.draggableProps}
                         ref={provided.innerRef}
                     >
                 <h2 style={{width:'100%', display:"flex", justifyContent:"space-around"}}>
-                <div
+                <Box
                     {...provided.dragHandleProps}
                     style={{display:"flex", alignItems:"center"}}>
                     {props.title }
-                </div>
+                </Box>
                 ( {props.cardsLimit} )
-                <div>
+                <Box>
                 <IconButton
                     aria-label="settingsColumn"
                     onClick={() => modalEditOpen()}
@@ -61,14 +49,14 @@ const Column = (props:ColumnProps) => {
                     </IconButton>
 
                 )}
-                </div>
+                </Box>
             </h2>
-            <div style={{margin:8}}>
-                {props.position === 0 && <AddCardButton data={props.data} handleDataChange={props.handleDataChange}/>}
+            <Box style={{margin:8}}>
+                <AddCardButton columnId={props.id} data={props.data} handleDataChange={props.handleDataChange}/>
                 <Droppable droppableId={props.id} type="task">
                     {(provided, snapshot) =>{
                         return(
-                            <div
+                            <Box
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
                                 style={{
@@ -77,8 +65,8 @@ const Column = (props:ColumnProps) => {
                                         && props.cards.length > props.cardsLimit
                                         && props.cardsLimit != 0
                                         && props.position != 0
-                                        && props.position != Object.keys(props.data.columnList).length-1 ? '#f24e53' : 'white'
-                                        && props.isDragging ? 'rgba(154,154,154,0.11)': 'white',
+                                        && props.position != Object.keys(props.data.columnList).length-1 ? '#f24e53' : 'transparent'
+                                        && props.isDragging ? 'rgba(154,154,154,0.11)': 'transparent',
                                     padding: 4,
                                     width: 250,
                                     minHeight:150
@@ -100,11 +88,12 @@ const Column = (props:ColumnProps) => {
                                     }
                                 )}
                                 {provided.placeholder}
-                            </div>
+                            </Box>
                         )}}
                 </Droppable>
-            </div></div>
-                    )}
+            </Box>
+        </Box>
+      )}
             </Draggable>
             <ModalEditColumn
                 id={props.id}
@@ -124,7 +113,7 @@ const Column = (props:ColumnProps) => {
                 data={props.data}
                 handleDataChange={props.handleDataChange}
             />
-        </div>
+        </Box>
     )
 }
 

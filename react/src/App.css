@@ -1,3 +1,8 @@
+body{
+  background: url("./resources/imgs/michael_scot.jpg");
+  background-size: cover;
+  background-attachment: fixed ;
+}
 #root {
   font-family: 'Open Sans','Shantell Sans', Helvetica sans-serif;
 }

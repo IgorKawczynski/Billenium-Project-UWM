@@ -8,6 +8,9 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import {v4 as uuidv4} from "uuid";
 import ModalAddCardProps from "./interface/ModalAddCard";
+import {addColumnToBackend, getColumnFromBackend} from "../../../../../../../../../../services/columnService";
+import {_Data} from "../../../../../../../../../../interfaces/DataBoard";
+import {addCardToBackend} from "../../../../../../../../../../services/cardService";
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -35,16 +38,29 @@ export default function ModalAddCard(props:ModalAddCardProps) {
         // możesz tutaj przesłać dane do serwera lub zaktualizować stan aplikacji
     };
     const addCard = (name: string, desc: string) => {
-        const newItemId = uuidv4();
-        const newItem = { id: newItemId, title: name, description: desc };
-        const firstColumnId = Object.keys(props.data.columnList)[0];
-        const updatedItems = [...props.data.columnList[firstColumnId].cards, newItem];
-        const updatedColumns = { ...props.data.columnList, [firstColumnId]: { ...props.data.columnList[firstColumnId], cards: updatedItems } };
-        props.handleDataChange({
-            ...props.data,
-            columnList: updatedColumns
-        });
-        props.handleClose();
+        addCardToBackend(props.columnId, name, desc)
+            .then(res => {
+                getColumnFromBackend(props.data.id)
+                    .then( res => {
+                            if(res) {
+                                const columns:_Data["data"]['columnList'] = res
+                                props.handleDataChange({
+                                    ...props.data,
+                                    columnList: columns
+
+                                })
+                                props.handleClose();
+                                setName("")
+                                setDesc("")
+                            }
+                        }
+                    )
+                // tutaj możesz wykonywać operacje na otrzymanym id
+            })
+            .catch(error => {
+                console.error(error);
+                // obsługa błędów
+            });
     };
 
     return (
@@ -66,7 +82,7 @@ export default function ModalAddCard(props:ModalAddCardProps) {
                         <Typography id="transition-modal-title" variant="h6" component="h2">
                             Set column name
                         </Typography>
-                        <div style={{display:"flex", justifyContent:"space-between"}}>
+                        <Box style={{display:"flex", justifyContent:"space-between"}}>
                             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
                                 <TextField
                                     sx={{margin:'0 0 8px 0'}}
@@ -93,7 +109,7 @@ export default function ModalAddCard(props:ModalAddCardProps) {
                             >
                                 Dodaj
                             </Button>
-                        </div>
+                        </Box>
                     </Box>
                 </Fade>
             </Modal>

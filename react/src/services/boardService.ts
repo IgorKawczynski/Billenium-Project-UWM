@@ -15,7 +15,7 @@ export function loadDefaultData(){
                 title: "Open",
                 cardsLimit: 0,
                 position: 0,
-                cards: [{id: uuidv4(), title: "Tak", description: "Task description"}],
+                cards: [{id: uuidv4(), title: "Tak", description: "Task description", position:0}],
             },
             [uuidv4()]: {
                 id: uuidv4(),

@@ -1,18 +1,8 @@
 import React from 'react';
 import Button from '@mui/material/Button';
+import Box from "@mui/material/Box";
 import AddColumnButtonProps from "./interface/AddColumnButton";
 import ModalAddColumn from "./components/modalAddColumn/modalAddColumn";
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
 
 export default function AddColumnButton(props:AddColumnButtonProps) {
     const [open, setOpen] = React.useState(false);
@@ -22,8 +12,8 @@ export default function AddColumnButton(props:AddColumnButtonProps) {
 
 
     return (
-        <div>
-            <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+        <Box>
+            <Box style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
                 Add Column
                 <Button
                     onClick={handleOpen}
@@ -32,8 +22,8 @@ export default function AddColumnButton(props:AddColumnButtonProps) {
                 >
                 +
                 </Button>
-            </div>
+            </Box>
             <ModalAddColumn open={open} handleOpen={handleOpen} handleClose={handleClose} data={props.data} handleDataChange={props.handleDataChange}/>
-        </div>
+        </Box>
     );
 }

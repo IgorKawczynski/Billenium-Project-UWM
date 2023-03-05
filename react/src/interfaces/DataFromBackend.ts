@@ -13,6 +13,7 @@ export default interface DataFromBackend {
                 id: string;
                 title: string;
                 description: string;
+                position:number;
             }[];
         }[];
 }

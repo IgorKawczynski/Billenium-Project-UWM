@@ -1,21 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import Menu, { MenuProps } from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import EditIcon from '@mui/icons-material/Edit';
-import ArchiveIcon from '@mui/icons-material/Archive';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import EditCardButtonProps from "../../interface/EditCardButton";
-import {v4 as uuidv4} from "uuid";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
 import ModalEditCardProps from "./interface/ModalEditCard";
 import Stack from "@mui/material/Stack";
+import {updateCardToBackend} from "../../../../../../../../../../services/cardService";
+import {getColumnFromBackend} from "../../../../../../../../../../services/columnService";
+import {_Data} from "../../../../../../../../../../interfaces/DataBoard";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -55,39 +49,33 @@ export default function ModalEditCard(props:ModalEditCardProps) {
         // możesz tutaj przesłać dane do serwera lub zaktualizować stan aplikacji
     };
 
-    const updateCard = (name: string, desc: string) => {
-        const newItemId = uuidv4();
-        const newItem = { id: newItemId, title: name, desc: desc };
-        const column = props.data.columnList[props.columnId];
-        const newItems = column.cards.map((card:any) => {
-            if (card.id === props.id) {
-                // jeśli to jest zadanie, które chcemy zaktualizować, to zwracamy nowe zadanie
-                return {
-                    ...card,
-                    ...newItem
-                };
-            }
-            // w przeciwnym przypadku zwracamy istniejące zadanie bez zmian
-            return card;
-        });
+    const updateCard = (title: string, desc: string) => {
+        updateCardToBackend(props.id, title, desc)
+            .then(res => {
+                if(res == Array){
+                    alert(res[0] + res[1])
+                }
+                getColumnFromBackend(props.data.id)
+                    .then( res => {
+                            if(res) {
+                                const columns:_Data["data"]['columnList'] = res
+                                props.handleDataChange({
+                                    ...props.data,
+                                    columnList: columns
 
-        // tworzymy nową kolumnę z zaktualizowanymi zadaniami
-        const newColumn = {
-            ...column,
-            cards: newItems
-        };
-
-        // zaktualizowana lista kolumn
-        const newColumns = {
-            ...props.data.columnList,
-            [props.columnId]: newColumn
-        };
-
-        props.handleDataChange({
-            ...props.data,
-            columnList: newColumns
-        })
-        props.modalEditClose();
+                                })
+                                props.modalEditClose();
+                                setTitle("")
+                                setDesc("")
+                            }
+                        }
+                    )
+                // tutaj możesz wykonywać operacje na otrzymanym id
+            })
+            .catch(error => {
+                // console.log(error.response.fieldName);
+                // obsługa błędów
+            });
     };
 
     return (
