@@ -8,6 +8,8 @@ import pl.uwm.projektzespolowy.models.card.CardCreateDTO;
 import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
 import pl.uwm.projektzespolowy.models.card.CardUpdateDTO;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/cards")
 @RequiredArgsConstructor
@@ -17,7 +19,12 @@ public class CardController {
 
     @GetMapping("/{cardId}")
     public CardResponseDTO getCardById(@PathVariable Long cardId) {
-        return cardCRUDService.getCardById(cardId).toDto();
+        return cardCRUDService.getCardById(cardId);
+    }
+
+    @GetMapping("/")
+    public List<CardResponseDTO> getAllCards() {
+        return cardCRUDService.getAllCards();
     }
 
     @PostMapping("")
