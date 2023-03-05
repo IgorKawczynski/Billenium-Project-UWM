@@ -3,6 +3,7 @@ package pl.uwm.projektzespolowy.services.column.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.column.Column;
+import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.services.board.crud.BoardReader;
 import pl.uwm.projektzespolowy.services.column.ColumnRepository;
 import pl.uwm.projektzespolowy.models.column.ColumnCreateDTO;
@@ -24,7 +25,7 @@ public class ColumnCreatorLogic {
             return columnCreator.createColumn(createDTO.title(), DEFAULT_SIZE, 0, boardIdLong);
         }
 
-        Integer newPenultimatePosition = lastColumn.getPosition();
+        Integer newPenultimatePosition = lastColumn.getPosition().value();
         updateIncrementedLastPositionColumn(lastColumn);
         return columnCreator.createColumn(createDTO.title(), DEFAULT_SIZE, newPenultimatePosition, boardIdLong);
     }
@@ -33,13 +34,13 @@ public class ColumnCreatorLogic {
         var board = boardReader.getBoardById(boardId);
         var columns = board.getColumns();
         return columns.stream()
-                .reduce((c1, c2) -> c1.getPosition() > c2.getPosition() ? c1 : c2)
+                .reduce((c1, c2) -> c1.getPosition().value() > c2.getPosition().value() ? c1 : c2)
                 .orElse(null);
     }
 
     private void updateIncrementedLastPositionColumn(Column column) {
-        Integer newLastPosition = column.getPosition() + 1;
-        column.setPosition(newLastPosition);
+        int newLastPosition = column.getPosition().value() + 1;
+        column.setPosition(new Position(newLastPosition));
         columnRepository.saveAndFlush(column);
     }
 
