@@ -1,10 +1,11 @@
 package pl.uwm.projektzespolowy.services.column;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.projektzespolowy.models.basic.UpdateDTO;
 import pl.uwm.projektzespolowy.models.column.ColumnCreateDTO;
 import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
+import pl.uwm.projektzespolowy.models.column.ColumnUpdateDTO;
 import pl.uwm.projektzespolowy.services.column.crud.ColumnCRUDService;
 
 import java.util.List;
@@ -31,9 +32,10 @@ public class ColumnController {
         return service.getColumnsByBoardId(boardId);
     }
 
-    @PatchMapping("")
-    public void updateColumn(@RequestBody UpdateDTO updateDTO) {
-        service.updateColumn(updateDTO);
+    @PutMapping("")
+    @ResponseStatus(HttpStatus.OK)
+    public ColumnResponseDTO updateColumn(@RequestBody ColumnUpdateDTO columnUpdateDTO) {
+        return service.updateColumn(columnUpdateDTO).toDto();
     }
 
     @DeleteMapping("/{columnId}")

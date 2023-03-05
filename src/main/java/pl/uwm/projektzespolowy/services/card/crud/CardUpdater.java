@@ -12,12 +12,12 @@ public class CardUpdater {
 
     private final CardRepository cardRepository;
 
-    public Card editCard(Card cardToChange, String givenTitle, String descrption) {
+    public Card editCard(Card cardToChange, String givenTitle, String description) {
         if (givenTitle != null) {
             cardToChange.setTitle(new Title(givenTitle));
         }
-        if (descrption != null) {
-            cardToChange.setDescription(descrption);
+        if (description != null) {
+            cardToChange.setDescription(description);
         }
         return cardRepository.saveAndFlush(cardToChange);
     }
