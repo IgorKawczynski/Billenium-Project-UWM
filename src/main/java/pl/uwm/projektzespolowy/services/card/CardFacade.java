@@ -42,4 +42,8 @@ public class CardFacade {
         return card.toDto();
     }
 
+    public void deleteCard(Long cardId) {
+        cardCRUDService.deleteCard(cardId);
+    }
+
 }
