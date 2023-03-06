@@ -6,24 +6,13 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Checkbox from '@mui/material/Checkbox';
+import Box from '@mui/material/Box';
 import ModalEditColumnProps from "./interface/ModalEditColumn";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Stack from "@mui/material/Stack";
 import {getColumnFromBackend, updateColumnToBackend} from "../../../../../../services/columnService";
 import {_Data} from "../../../../../../interfaces/DataBoard";
-
-
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 300,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+import {modalStyle} from "../../../../../../assets/themes/modalStyle";
 
 const ModalEditColumn = (props:ModalEditColumnProps) => {
     const [name, setName] = useState(props.title);
@@ -80,8 +69,8 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
                 }}
             >
                 <Fade in={props.modalEdit}>
-                    <Stack sx={style} spacing={2} direction={'column'}>
-                        <Typography id="transition-modal-title" variant="h6" component="h2">
+                    <Stack sx={modalStyle} spacing={2} direction={'column'}>
+                        <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
                             Editing column: {props.title}
                         </Typography>
                                 <TextField
@@ -103,12 +92,14 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
                                     value={limit}
                                     onChange={handleLimitChange}
                                 />
-                                <FormControlLabel
-                                    label="Unlimited"
-                                    control={<Checkbox checked={checkLimit} onChange={handleCheckLimitChange}/>}
-                                    labelPlacement="top"
-
-                                />
+                                <Box sx={{display:'flex', width:'100%', justifyContent:'center', flexDirection:'column', textAlign:'center'}}>
+                                    <Typography color={'textPrimary'}>
+                                        Unlimited
+                                    </Typography>
+                                    <div>
+                                    <Checkbox checked={checkLimit} onChange={handleCheckLimitChange}/>
+                                    </div>
+                                </Box>
                         <Button
                             sx={{maxHeight:'50px'}}
                             onClick={() => editColumn(name,limit, props.id)}

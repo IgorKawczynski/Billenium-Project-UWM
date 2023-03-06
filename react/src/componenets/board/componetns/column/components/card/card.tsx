@@ -2,11 +2,13 @@ import React from "react";
 import {Draggable} from 'react-beautiful-dnd'
 import Card from "@mui/material/Card"
 import Avatar from './componetnts/Avatar/avatar'
-import {CardActionArea} from "@mui/material"
+import {CardActionArea, useTheme} from "@mui/material"
 import CardProps from './interface/Card'
 import EditCardButton from './componetnts/editCardButton/editCardButton'
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 const Task = (props:CardProps) => {
+    const theme = useTheme()
     return(
         <Draggable key={props.id} draggableId={props.id} index={props.index}>
             {(provided:any, snapshot:any) => {
@@ -17,11 +19,12 @@ const Task = (props:CardProps) => {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         style={{
+                            boder:'Primary',
                             userSelect: 'none',
                             padding: 16,
                             margin: '0 0 8px 0',
                             minHeight: '50px',
-                            background: snapshot.isDragging ? '#d0d0d0' : 'white',
+                            background: snapshot.isDragging ? theme.palette.background.drag : theme.palette.background.default,
                             color: 'black',
                             ...provided.draggableProps.style
 
@@ -32,16 +35,17 @@ const Task = (props:CardProps) => {
                             justifyContent:"space-between"
                         }}>
                             <Box>
-                                <Box style={{fontSize:'1.3rem'}}>
+                                <Typography color={'textPrimary'} variant={'h6'}>
                                     {props.title}
-                                </Box>
-                                {props.index}
-                                {props.desc}
+                                </Typography>
+                                <Typography color={'textPrimary'} variant={'body2'}>
+                                    {props.desc}
+                                </Typography>
 
                             </Box>
                             <Box>
                                 <Box style={{display:"flex", flexDirection:"column",alignItems:"center", minWidth:'50px'}}>
-                                <Avatar name={"Maciek"} lastName={"Janek"}/>
+                                {/*<Avatar name={"Maciek"} lastName={"Janek"}/>*/}
                                 {/*<Avatar name={"Maciek"} lastName={"Makowski"}/>*/}
                                 {/*<Avatar name={"Kuba"} lastName={"laczek"}/>*/}
                                 </Box>

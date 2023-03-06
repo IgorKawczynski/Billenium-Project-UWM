@@ -9,6 +9,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import ModalEditColumn from "./components/modalEditColumn/modalEditColumn";
 import ModalRemoveColumn from "./components/modalRemoveColumn/modalRemoveColumn";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 const Column = (props:ColumnProps) => {
     const [modalEdit, setModalEdit] = useState(false);
@@ -26,13 +27,15 @@ const Column = (props:ColumnProps) => {
                         {...provided.draggableProps}
                         ref={provided.innerRef}
                     >
-                <h2 style={{width:'100%', display:"flex", justifyContent:"space-around"}}>
+                <Box style={{width:'100%', display:"flex", justifyContent:"space-around"}}>
                 <Box
                     {...provided.dragHandleProps}
                     style={{display:"flex", alignItems:"center"}}>
-                    {props.title }
+                    <Typography color={'textPrimary'} variant={'h5'}>
+                        {props.title}
+                    </Typography>
+                    { props.cardsLimit != 0 && (<Typography color={'textSecondary'} sx={{ height:'80%', display:'flex', flexDirection:'column', justifyContent:'end'}} variant={'caption'}> Limit: {props.cardsLimit} </Typography>)}
                 </Box>
-                ( {props.cardsLimit} )
                 <Box>
                 <IconButton
                     aria-label="settingsColumn"
@@ -50,7 +53,7 @@ const Column = (props:ColumnProps) => {
 
                 )}
                 </Box>
-            </h2>
+            </Box>
             <Box style={{margin:8}}>
                 <AddCardButton columnId={props.id} data={props.data} handleDataChange={props.handleDataChange}/>
                 <Droppable droppableId={props.id} type="task">

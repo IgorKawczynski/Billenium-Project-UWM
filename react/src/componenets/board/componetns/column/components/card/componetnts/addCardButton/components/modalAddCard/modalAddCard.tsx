@@ -11,17 +11,7 @@ import ModalAddCardProps from "./interface/ModalAddCard";
 import {addColumnToBackend, getColumnFromBackend} from "../../../../../../../../../../services/columnService";
 import {_Data} from "../../../../../../../../../../interfaces/DataBoard";
 import {addCardToBackend} from "../../../../../../../../../../services/cardService";
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+import {modalStyle} from "../../../../../../../../../../assets/themes/modalStyle";
 
 export default function ModalAddCard(props:ModalAddCardProps) {
     const [name, setName] = useState("");
@@ -78,12 +68,11 @@ export default function ModalAddCard(props:ModalAddCardProps) {
                 }}
             >
                 <Fade in={props.open}>
-                    <Box sx={style}>
-                        <Typography id="transition-modal-title" variant="h6" component="h2">
-                            Set column name
+                    <Box sx={modalStyle}>
+                        <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
+                            Add card
                         </Typography>
-                        <Box style={{display:"flex", justifyContent:"space-between"}}>
-                            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                        <Box style={{display:"flex",flexDirection:'column', justifyContent:"space-between"}}>
                                 <TextField
                                     sx={{margin:'0 0 8px 0'}}
                                     id="outlined-basic"
@@ -102,7 +91,6 @@ export default function ModalAddCard(props:ModalAddCardProps) {
                                     maxRows={5}
                                     onChange={handleDescChange}
                                 />
-                            </Typography>
                             <Button
                                 onClick={() => addCard(name,desc)}
                                 variant="contained"

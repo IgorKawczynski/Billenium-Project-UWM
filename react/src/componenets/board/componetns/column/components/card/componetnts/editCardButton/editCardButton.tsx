@@ -11,6 +11,7 @@ import EditCardButtonProps from "./interface/EditCardButton";
 import ModalEditCard from "./components/modalEditCard/modalEditCard";
 import ModalRemoveCard from "./components/modalRemoveCard/modalRemoveCard";
 
+
 const StyledMenu = styled((props: MenuProps) => (
     <Menu
         elevation={0}
@@ -81,7 +82,7 @@ export default function EditCardButton(props:EditCardButtonProps) {
                 aria-controls={open ? 'demo-customized-menu' : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
-                variant="contained"
+                variant="text"
                 disableElevation
                 onClick={handleClick}
                 endIcon={<KeyboardArrowDownIcon />}
