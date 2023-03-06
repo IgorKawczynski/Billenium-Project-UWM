@@ -3,19 +3,16 @@ package pl.uwm.projektzespolowy.services.card;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.projektzespolowy.services.card.crud.CardCRUDService;
 import pl.uwm.projektzespolowy.models.card.CardCreateDTO;
 import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
 import pl.uwm.projektzespolowy.models.card.CardUpdateDTO;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/cards")
 @RequiredArgsConstructor
 public class CardController {
 
-    private final CardCRUDService cardCRUDService;
+    private final CardFacade cardFacade;
 
     @GetMapping("/")
     public List<CardResponseDTO> getAllCards() {
@@ -35,19 +32,25 @@ public class CardController {
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public CardResponseDTO addCardToColumn(@RequestBody CardCreateDTO cardCreateDTO) {
-        return cardCRUDService.addCardToColumn(cardCreateDTO);
+        return cardCRUDService.addCardToColumn(cardCreateDTO).toDto();
     }
 
     @PutMapping("")
     @ResponseStatus(HttpStatus.OK)
     public CardResponseDTO updateCard(@RequestBody CardUpdateDTO cardUpdateDTO) {
-        return cardCRUDService.updateCard(cardUpdateDTO);
+        return cardFacade.updateCard(cardUpdateDTO);
     }
 
-    @DeleteMapping("{cardId}")
+    @PutMapping("/another-column")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteCard(@PathVariable Long cardId) {
-        cardCRUDService.deleteCard(cardId);
+    public CardResponseDTO moveCardToAnotherColumn(@RequestBody CardMovedDTO cardMovedDTO) {
+        return cardFacade.moveCardToAnotherColumn(cardMovedDTO);
+    }
+
+    @PutMapping("/same-column")
+    @ResponseStatus(HttpStatus.OK)
+    public CardResponseDTO moveCard(@RequestBody CardMovedDTO cardMovedDTO) {
+        throw new NotYetImplementedException();
     }
 
 }
