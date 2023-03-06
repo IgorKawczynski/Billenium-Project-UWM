@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.column.Column;
+import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.services.PositionableList;
 
 import java.util.ArrayList;
@@ -32,4 +33,17 @@ public class CardMoverService {
         cardNewColumn.add(card);
     }
 
+    public ArrayList<Card> moveCard(Card card, Integer newPosition) {
+        var cardsToChange = new PositionableList<>(card.getColumn().getCards());
+        if (newPosition < card.getPosition().value()) {
+            cardsToChange.withPositionInRange(new Position(newPosition), card.getPosition());
+            cardsToChange.moveRightAll();
+        }
+        if (newPosition > card.getPosition().value()) {
+            cardsToChange.withPositionInRange(card.getPosition(), new Position(newPosition));
+            cardsToChange.moveLeftAll();
+        }
+        card.getPosition().moveTo(newPosition);
+        return new ArrayList<>(cardsToChange.list());
+    }
 }

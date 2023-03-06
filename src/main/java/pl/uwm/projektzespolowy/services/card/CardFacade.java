@@ -32,11 +32,19 @@ public class CardFacade {
         return cardCRUDService.getAllCardsByColumnId(columnId);
     }
 
-    public CardResponseDTO moveCardToAnotherColumn(CardMovedDTO cardMovedDTO) {
-        var card = cardCRUDService.getCardById(Long.parseLong(cardMovedDTO.cardId()));
+    public CardResponseDTO moveCard(CardMoveDTO cardMoveDTO) {
+        var card = cardCRUDService.getCardById(Long.parseLong(cardMoveDTO.cardId()));
+        var changedCards = cardMoverService.moveCard(card, cardMoveDTO.newPosition());
+        cardCRUDService.saveChangedCard(card);
+        cardCRUDService.saveChangedCards(changedCards);
+        return card.toDto();
+    }
+
+    public CardResponseDTO moveCardToAnotherColumn(CardMoveToAnotherColumnDTO cardMoveToAnotherColumnDTO) {
+        var card = cardCRUDService.getCardById(Long.parseLong(cardMoveToAnotherColumnDTO.cardId()));
         var cardOldColumn = card.getColumn();
-        var cardNewColumn = columnCRUDService.getColumnById(Long.parseLong(cardMovedDTO.newColumnId()));
-        var changedCards = cardMoverService.moveCardToAnotherColumn(card, cardOldColumn, cardNewColumn, cardMovedDTO.newPosition());
+        var cardNewColumn = columnCRUDService.getColumnById(Long.parseLong(cardMoveToAnotherColumnDTO.newColumnId()));
+        var changedCards = cardMoverService.moveCardToAnotherColumn(card, cardOldColumn, cardNewColumn, cardMoveToAnotherColumnDTO.newPosition());
         cardCRUDService.saveChangedCard(card);
         cardCRUDService.saveChangedCards(changedCards);
         return card.toDto();

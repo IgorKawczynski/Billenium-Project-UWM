@@ -1,13 +1,9 @@
 package pl.uwm.projektzespolowy.services.card;
 
 import lombok.RequiredArgsConstructor;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.projektzespolowy.models.card.CardCreateDTO;
-import pl.uwm.projektzespolowy.models.card.CardMovedDTO;
-import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
-import pl.uwm.projektzespolowy.models.card.CardUpdateDTO;
+import pl.uwm.projektzespolowy.models.card.*;
 
 import java.util.List;
 
@@ -42,14 +38,14 @@ public class CardController {
 
     @PutMapping("/another-column")
     @ResponseStatus(HttpStatus.OK)
-    public CardResponseDTO moveCardToAnotherColumn(@RequestBody CardMovedDTO cardMovedDTO) {
-        return cardFacade.moveCardToAnotherColumn(cardMovedDTO);
+    public CardResponseDTO moveCardToAnotherColumn(@RequestBody CardMoveToAnotherColumnDTO cardMoveToAnotherColumnDTO) {
+        return cardFacade.moveCardToAnotherColumn(cardMoveToAnotherColumnDTO);
     }
 
     @PutMapping("/same-column")
     @ResponseStatus(HttpStatus.OK)
-    public CardResponseDTO moveCard(@RequestBody CardMovedDTO cardMovedDTO) {
-        throw new NotYetImplementedException();
+    public CardResponseDTO moveCard(@RequestBody CardMoveDTO cardMoveDTO) {
+        return cardFacade.moveCard(cardMoveDTO);
     }
 
     @DeleteMapping("/{cardId}")

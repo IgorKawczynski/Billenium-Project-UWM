@@ -6,17 +6,14 @@ import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
 import pl.uwm.projektzespolowy.services.card.CardRepository;
 import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
-import pl.uwm.projektzespolowy.services.column.ColumnRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class CardReader {
 
     private final CardRepository cardRepository;
-    private final ColumnRepository columnRepository;
 
     public List<CardResponseDTO> getAllCards() {
         return cardRepository
@@ -41,6 +38,5 @@ public class CardReader {
                 .map(Card::toDto)
                 .toList();
     }
-
 
 }
