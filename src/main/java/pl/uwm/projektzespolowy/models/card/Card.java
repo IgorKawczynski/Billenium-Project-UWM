@@ -13,7 +13,6 @@ import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -35,11 +34,11 @@ public class Card extends BasicEntity implements Positionable {
     @ManyToMany(mappedBy = "cards")
     Set<User> assignedUsers;
 
-    public Card(Title title, String description, Column column, int position) {
+    public Card(Title title, String description, Column column, Position position) {
         this.title = title;
         this.description = description;
         this.column = column;
-        this.position = new Position(position);
+        this.position = position;
         this.assignedUsers = new HashSet<>();
     }
 

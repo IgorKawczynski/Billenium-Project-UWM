@@ -56,8 +56,10 @@ public class Column extends BasicEntity implements Positionable {
                 .build();
     }
 
-    public int getPositionForNewCard() {
-        return this.getCards().size() + 1;
+    public Position getPositionForNewCard() {
+        int cardsNumber = this.getCards().size();
+        if (cardsNumber == 0 ) return new Position(cardsNumber);
+        return new Position(cardsNumber + 1);
     }
 
     public void add(Card card) {
