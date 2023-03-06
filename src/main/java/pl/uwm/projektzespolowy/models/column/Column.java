@@ -63,6 +63,7 @@ public class Column extends BasicEntity implements Positionable {
 
     public void add(Card card) {
         this.cards.add(card);
+        card.setColumn(this);
     }
 
     public void remove(Card card) {

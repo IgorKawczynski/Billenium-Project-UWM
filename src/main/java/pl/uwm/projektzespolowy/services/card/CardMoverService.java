@@ -17,19 +17,21 @@ public class CardMoverService {
         var cardsFromOldColumn = new PositionableList<>(cardOldColumn.getCards());
         cardsFromOldColumn.withHigherOrEqualPositionThanGiven(card);
         cardsFromOldColumn.moveLeftAll();
-        changeCardColumn(card, cardNewColumn, newPosition);
+        changeCardColumn(card, cardOldColumn, cardNewColumn, newPosition);
         var cardsFromNewColumn = new PositionableList<>(cardNewColumn.getCards());
         cardsFromNewColumn.withHigherOrEqualPositionThanGiven(card);
         cardsFromNewColumn.moveRightAll();
         var changedCards = new ArrayList<Card>();
+        changedCards.add(card);
         changedCards.addAll(cardsFromNewColumn.list());
         changedCards.addAll(cardsFromOldColumn.list());
         return changedCards;
     }
 
-    private void changeCardColumn(Card card, Column cardNewColumn, Integer newPosition) {
+    private void changeCardColumn(Card card, Column cardOldColumn, Column cardNewColumn, Integer newPosition) {
         card.getPosition().moveTo(newPosition);
-        card.setColumn(cardNewColumn);
+        cardOldColumn.remove(card);
+        cardNewColumn.add(card);
     }
 
 }

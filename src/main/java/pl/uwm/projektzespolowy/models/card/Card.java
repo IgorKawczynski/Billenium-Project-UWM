@@ -13,6 +13,7 @@ import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -69,5 +70,17 @@ public class Card extends BasicEntity implements Positionable {
 
     public Set<User> getAssignedUsers() {
         return assignedUsers;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Card card)) return false;
+        return this.id != null && this.id.equals(((Card) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
