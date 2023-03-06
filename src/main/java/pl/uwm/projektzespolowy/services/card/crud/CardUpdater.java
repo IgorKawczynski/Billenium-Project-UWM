@@ -6,6 +6,8 @@ import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 import pl.uwm.projektzespolowy.services.card.CardRepository;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class CardUpdater {
@@ -20,6 +22,10 @@ public class CardUpdater {
             cardToChange.setDescription(descrption);
         }
         return cardRepository.saveAndFlush(cardToChange);
+    }
+
+    public void saveChanges(List<Card> card) {
+        cardRepository.saveAll(card);
     }
 
 }

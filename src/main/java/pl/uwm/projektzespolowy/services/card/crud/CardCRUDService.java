@@ -4,8 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.card.CardCreateDTO;
+import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
 import pl.uwm.projektzespolowy.models.card.CardUpdateDTO;
 import pl.uwm.projektzespolowy.services.column.crud.ColumnReader;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -22,13 +25,19 @@ public class CardCRUDService {
     }
 
     public Card addCardToColumn(CardCreateDTO cardCreateDTO) {
-        var column = columnReader.getColumnById(cardCreateDTO.columnId());
+        var columnId = Long.parseLong(cardCreateDTO.columnId());
+        var column = columnReader.getColumnById(columnId);
         return cardCreator.create(cardCreateDTO.title(), cardCreateDTO.description(), column);
     }
 
     public Card updateCard(CardUpdateDTO cardUpdateDTO) {
-        var cardToChange = cardReader.getCardById(cardUpdateDTO.cardId());
+        var cardId = Long.parseLong(cardUpdateDTO.cardId());
+        var cardToChange = cardReader.getCardById(cardId);
         return cardUpdater.editCard(cardToChange, cardUpdateDTO.title(), cardUpdateDTO.description());
+    }
+
+    public void saveChanges(List<Card> card) {
+        cardUpdater.saveChanges(card);
     }
 
 }
