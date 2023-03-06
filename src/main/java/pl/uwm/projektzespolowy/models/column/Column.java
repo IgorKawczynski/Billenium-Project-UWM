@@ -9,10 +9,12 @@ import pl.uwm.projektzespolowy.models.Positionable;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.card.Card;
+import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -52,6 +54,7 @@ public class Column extends BasicEntity implements Positionable {
                 .position(this.position.value())
                 .cards(this.cards.stream()
                         .map(Card::toDto)
+                        .sorted(Comparator.comparingInt(CardResponseDTO::position))
                         .toList())
                 .build();
     }
