@@ -46,4 +46,5 @@ public class CardMoverService {
         card.getPosition().moveTo(newPosition);
         return new ArrayList<>(cardsToChange.list());
     }
+
 }

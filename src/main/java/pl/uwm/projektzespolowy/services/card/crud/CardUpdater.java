@@ -28,8 +28,8 @@ public class CardUpdater {
         return cardRepository.saveAndFlush(cardToChange);
     }
 
-    public void saveChangedCards(List<Card> card) {
-        cardRepository.saveAll(card);
+    public void saveChangedCards(List<Card> cards) {
+        cardRepository.saveAll(cards);
     }
 
     public void saveChangedCard(Card card) {

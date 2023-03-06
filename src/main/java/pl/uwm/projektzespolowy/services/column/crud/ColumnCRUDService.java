@@ -50,8 +50,12 @@ public class ColumnCRUDService {
                 .toDto();
     }
 
-    public void saveChanges(Column column) {
-        updater.saveChanges(column);
+    public void saveChangedColumn(Column column) {
+        updater.saveChangedColumn(column);
+    }
+
+    public void saveChangedColumns(List<Column> columns) {
+        updater.saveChangedColumns(columns);
     }
 
     public void deleteColumn(Long id) {

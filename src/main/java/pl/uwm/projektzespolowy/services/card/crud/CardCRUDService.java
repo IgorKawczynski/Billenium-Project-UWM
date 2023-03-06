@@ -62,8 +62,8 @@ public class CardCRUDService {
         cardDeleter.deleteCard(card);
     }
 
-    public void saveChangedCards(List<Card> card) {
-        cardUpdater.saveChangedCards(card);
+    public void saveChangedCards(List<Card> cards) {
+        cardUpdater.saveChangedCards(cards);
     }
 
     public void saveChangedCard(Card card) {

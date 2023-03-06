@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.services.column.ColumnRepository;
+
+import java.util.List;
+
 import static pl.uwm.projektzespolowy.models.column.Column.UNLIMITED_SIZE;
 
 @Component
@@ -26,7 +29,11 @@ public class ColumnUpdater {
         return columnRepository.saveAndFlush(columnToChange);
     }
 
-    public void saveChanges(Column column) {
-        columnRepository.save(column);
+    public void saveChangedColumns(List<Column> columns) {
+        columnRepository.saveAll(columns);
+    }
+
+    public void saveChangedColumn(Column column) {
+        columnRepository.saveAndFlush(column);
     }
 }
