@@ -6,6 +6,8 @@ import pl.uwm.projektzespolowy.models.card.*;
 import pl.uwm.projektzespolowy.services.card.crud.CardCRUDService;
 import pl.uwm.projektzespolowy.services.column.crud.ColumnCRUDService;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class CardFacade {
@@ -19,11 +21,15 @@ public class CardFacade {
     }
 
     public CardResponseDTO addCardToColumn(CardCreateDTO cardCreateDTO) {
-        return cardCRUDService.addCardToColumn(cardCreateDTO).toDto();
+        return cardCRUDService.addCardToColumn(cardCreateDTO);
     }
 
     public CardResponseDTO updateCard(CardUpdateDTO cardUpdateDTO) {
-        return cardCRUDService.updateCard(cardUpdateDTO).toDto();
+        return cardCRUDService.updateCard(cardUpdateDTO);
+    }
+
+    public List<CardResponseDTO> getAllCardsByColumnId(Long columnId) {
+        return cardCRUDService.getAllCardsByColumnId(columnId);
     }
 
     public CardResponseDTO moveCardToAnotherColumn(CardMovedDTO cardMovedDTO) {

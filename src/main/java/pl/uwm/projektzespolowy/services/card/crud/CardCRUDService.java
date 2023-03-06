@@ -24,8 +24,8 @@ public class CardCRUDService {
         return cardReader.getAllCards();
     }
 
-    public CardResponseDTO getCardById(Long id) {
-        return cardReader.getCardById(id).toDto();
+    public Card getCardById(Long id) {
+        return cardReader.getCardById(id);
     }
 
     public List<CardResponseDTO> getAllCardsByColumnId(Long columnId) {

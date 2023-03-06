@@ -1,11 +1,15 @@
 package pl.uwm.projektzespolowy.services.card;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.projektzespolowy.models.card.CardCreateDTO;
+import pl.uwm.projektzespolowy.models.card.CardMovedDTO;
 import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
 import pl.uwm.projektzespolowy.models.card.CardUpdateDTO;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/cards")
@@ -14,25 +18,20 @@ public class CardController {
 
     private final CardFacade cardFacade;
 
-    @GetMapping("/")
-    public List<CardResponseDTO> getAllCards() {
-        return cardCRUDService.getAllCards();
-    }
-
     @RequestMapping(method = RequestMethod.GET, params = {"cardId"})
     public CardResponseDTO getCardById(@RequestParam Long cardId) {
-        return cardCRUDService.getCardById(cardId);
+        return cardFacade.getCardById(cardId).toDto();
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"columnId"})
     public List<CardResponseDTO> getAllCardsByColumnId(@RequestParam Long columnId) {
-        return cardCRUDService.getAllCardsByColumnId(columnId);
+        return cardFacade.getAllCardsByColumnId(columnId);
     }
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public CardResponseDTO addCardToColumn(@RequestBody CardCreateDTO cardCreateDTO) {
-        return cardCRUDService.addCardToColumn(cardCreateDTO).toDto();
+        return cardFacade.addCardToColumn(cardCreateDTO);
     }
 
     @PutMapping("")
