@@ -19,12 +19,12 @@ public class ColumnController {
 
     @PostMapping("")
     public ColumnResponseDTO createColumn(@RequestBody ColumnCreateDTO columnCreateDTO) {
-        return service.createColumn(columnCreateDTO).toDto();
+        return service.createColumn(columnCreateDTO);
     }
 
     @GetMapping("/{columnId}")
     public ColumnResponseDTO getColumnById(@PathVariable Long columnId) {
-        return service.getColumnById(columnId).toDto();
+        return service.getColumnResponseDTOById(columnId);
     }
 
     @GetMapping("/{boardId}/all")
@@ -35,7 +35,7 @@ public class ColumnController {
     @PutMapping("")
     @ResponseStatus(HttpStatus.OK)
     public ColumnResponseDTO updateColumn(@RequestBody ColumnUpdateDTO columnUpdateDTO) {
-        return service.updateColumn(columnUpdateDTO).toDto();
+        return service.updateColumn(columnUpdateDTO);
     }
 
     @DeleteMapping("/{columnId}")

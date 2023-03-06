@@ -25,8 +25,7 @@ public class UserController {
     @GetMapping("/{userId}")
     public UserResponseDTO getUserById(@PathVariable Long userId) {
         return userCRUDService
-                .getUserById(userId)
-                .toUserResponseDTO();
+                .getUserById(userId);
     }
 
     @DeleteMapping("/{userId}")

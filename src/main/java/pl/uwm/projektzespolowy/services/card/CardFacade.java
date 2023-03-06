@@ -16,8 +16,8 @@ public class CardFacade {
     private final ColumnCRUDService columnCRUDService;
     private final CardMoverService cardMoverService;
 
-    public Card getCardById(Long id) {
-        return cardCRUDService.getCardById(id);
+    public CardResponseDTO getCardById(Long id) {
+        return cardCRUDService.getCardById(id).toDto();
     }
 
     public CardResponseDTO addCardToColumn(CardCreateDTO cardCreateDTO) {

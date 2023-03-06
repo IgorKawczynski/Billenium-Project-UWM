@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.basic.UpdateDTO;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
+import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
 
 @Component
 @RequiredArgsConstructor
@@ -16,12 +17,16 @@ public class BoardCRUDService {
     private final BoardUpdater updater;
     private final BoardDeleter deleter;
 
-    public Board createBoard(BoardCreateDTO boardCreateDTO) {
-        return creator.createBoard(boardCreateDTO.title(), boardCreateDTO.userId());
+    public BoardResponseDTO createBoard(BoardCreateDTO boardCreateDTO) {
+        return creator
+                .createBoard(boardCreateDTO.title(), boardCreateDTO.userId())
+                .toDto();
     }
 
-    public Board getBoardById(Long id) {
-        return reader.getBoardById(id);
+    public BoardResponseDTO getBoardById(Long id) {
+        return reader
+                .getBoardById(id)
+                .toDto();
     }
 
     public void updateBoard(UpdateDTO updateDTO) {

@@ -24,8 +24,10 @@ public class UserCRUDService {
     }
 
 
-    public User getUserById(Long id) {
-        return userReader.getUserById(id);
+    public UserResponseDTO getUserById(Long id) {
+        return userReader
+                .getUserById(id)
+                .toUserResponseDTO();
     }
 
     public void deleteUser(Long id) {

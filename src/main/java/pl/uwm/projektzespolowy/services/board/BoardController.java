@@ -16,12 +16,12 @@ public class BoardController {
 
     @PostMapping("")
     public BoardResponseDTO createBoard(@RequestBody BoardCreateDTO boardCreateDTO) {
-        return service.createBoard(boardCreateDTO).toDto();
+        return service.createBoard(boardCreateDTO);
     }
 
     @GetMapping("/{boardId}")
     public BoardResponseDTO getBoardById(@PathVariable Long boardId) {
-        return service.getBoardById(boardId).toDto();
+        return service.getBoardById(boardId);
     }
 
     @PatchMapping("")

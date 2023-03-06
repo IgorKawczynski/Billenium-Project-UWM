@@ -20,7 +20,7 @@ public class CardController {
 
     @RequestMapping(method = RequestMethod.GET, params = {"cardId"})
     public CardResponseDTO getCardById(@RequestParam Long cardId) {
-        return cardFacade.getCardById(cardId).toDto();
+        return cardFacade.getCardById(cardId);
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"columnId"})

@@ -18,22 +18,35 @@ public class ColumnCRUDService {
     private final ColumnUpdater updater;
     private final ColumnDeleter deleter;
 
-    public Column createColumn(ColumnCreateDTO columnCreateDTO) {
-        return creator.createColumnInPenultimatePosition(columnCreateDTO);
+    public ColumnResponseDTO createColumn(ColumnCreateDTO columnCreateDTO) {
+        return creator
+                .createColumnInPenultimatePosition(columnCreateDTO)
+                .toDto();
     }
 
     public Column getColumnById(Long id) {
         return reader.getColumnById(id);
     }
 
+    public ColumnResponseDTO getColumnResponseDTOById(Long id) {
+        return reader.getColumnById(id).toDto();
+    }
+
     public List<ColumnResponseDTO> getColumnsByBoardId(Long boardId) {
         return reader.getAllColumnsByBoardId(boardId);
     }
 
-    public Column updateColumn(ColumnUpdateDTO columnUpdateDTO) {
+    public ColumnResponseDTO updateColumn(ColumnUpdateDTO columnUpdateDTO) {
         var columnId = Long.parseLong(columnUpdateDTO.columnId());
         var columnToChange = reader.getColumnById(columnId);
-        return updater.editColumn(columnToChange, columnUpdateDTO.title(), columnUpdateDTO.cardsLimit(), columnUpdateDTO.isUnlimited());
+        return updater
+                .editColumn(
+                        columnToChange,
+                        columnUpdateDTO.title(),
+                        columnUpdateDTO.cardsLimit(),
+                        columnUpdateDTO.isUnlimited()
+                )
+                .toDto();
     }
 
     public void saveChanges(Column column) {
