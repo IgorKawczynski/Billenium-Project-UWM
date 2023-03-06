@@ -72,6 +72,12 @@ public class Board extends BasicEntity {
                 .build();
     }
 
+    public Position getPositionForNewColumn() {
+        int columnsNumber = this.getColumns().size();
+        if (columnsNumber > 0 ) columnsNumber -= 1;
+        return new Position(columnsNumber);
+    }
+
     public void assign(Column column) {
         this.columns.add(column);
     }
