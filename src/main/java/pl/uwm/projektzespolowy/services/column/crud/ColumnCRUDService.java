@@ -34,6 +34,10 @@ public class ColumnCRUDService {
         updater.updateColumn(updateDTO);
     }
 
+    public void saveChanges(Column column) {
+        updater.saveChanges(column);
+    }
+
     public void deleteColumn(Long id) {
         var columnToDelete = reader.getColumnById(id);
         deleter.deleteColumn(columnToDelete);

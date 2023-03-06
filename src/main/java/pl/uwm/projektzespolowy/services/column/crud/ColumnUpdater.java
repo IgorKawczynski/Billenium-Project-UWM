@@ -38,4 +38,7 @@ public class ColumnUpdater {
         updateColumnField(column, updateDTO.fieldName(), updateDTO.value());
     }
 
+    public void saveChanges(Column column) {
+        columnRepository.save(column);
+    }
 }

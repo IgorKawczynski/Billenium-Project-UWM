@@ -61,8 +61,13 @@ public class Column extends BasicEntity implements Positionable {
         return this.getCards().size() + 1;
     }
 
-    public void assign(Card card) {
+    public void add(Card card) {
         this.cards.add(card);
+    }
+
+    public void remove(Card card) {
+        this.cards.remove(card);
+        card.setColumn(null);
     }
 
     public Title getTitle() {
