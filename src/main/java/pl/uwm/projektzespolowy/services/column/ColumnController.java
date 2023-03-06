@@ -19,7 +19,7 @@ public class ColumnController {
 
     @PostMapping("")
     public ColumnResponseDTO createColumn(@RequestBody ColumnCreateDTO columnCreateDTO) {
-        return service.createColumn(columnCreateDTO);
+        return service.addColumnToBoard(columnCreateDTO);
     }
 
     @GetMapping("/{columnId}")

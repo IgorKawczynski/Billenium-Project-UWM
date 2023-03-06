@@ -13,14 +13,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ColumnCRUDService {
 
-    private final ColumnCreatorLogic creator;
+    private final ColumnCreator creator;
     private final ColumnReader reader;
     private final ColumnUpdater updater;
     private final ColumnDeleter deleter;
 
-    public ColumnResponseDTO createColumn(ColumnCreateDTO columnCreateDTO) {
+    public ColumnResponseDTO addColumnToBoard(ColumnCreateDTO columnCreateDTO) {
+        var boardId = Long.parseLong(columnCreateDTO.boardId());
         return creator
-                .createColumnInPenultimatePosition(columnCreateDTO)
+                .createColumn(boardId, columnCreateDTO.title())
                 .toDto();
     }
 
