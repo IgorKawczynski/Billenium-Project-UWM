@@ -30,7 +30,6 @@ public class Column extends BasicEntity implements Positionable {
     Board board;
 
     @OneToMany(mappedBy = "column",
-               cascade = CascadeType.ALL,
                orphanRemoval = true)
     List<Card> cards;
 

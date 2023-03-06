@@ -37,7 +37,8 @@ public class CardFacade {
         var cardOldColumn = card.getColumn();
         var cardNewColumn = columnCRUDService.getColumnById(Long.parseLong(cardMovedDTO.newColumnId()));
         var changedCards = cardMoverService.moveCardToAnotherColumn(card, cardOldColumn, cardNewColumn, cardMovedDTO.newPosition());
-        cardCRUDService.saveChanges(changedCards);
+        cardCRUDService.saveChangedCard(card);
+        cardCRUDService.saveChangedCards(changedCards);
         return card.toDto();
     }
 

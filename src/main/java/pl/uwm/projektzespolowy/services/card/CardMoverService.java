@@ -1,7 +1,6 @@
 package pl.uwm.projektzespolowy.services.card;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.column.Column;
@@ -22,7 +21,6 @@ public class CardMoverService {
         cardsFromNewColumn.withHigherOrEqualPositionThanGiven(card);
         cardsFromNewColumn.moveRightAll();
         var changedCards = new ArrayList<Card>();
-        changedCards.add(card);
         changedCards.addAll(cardsFromNewColumn.list());
         changedCards.addAll(cardsFromOldColumn.list());
         return changedCards;
