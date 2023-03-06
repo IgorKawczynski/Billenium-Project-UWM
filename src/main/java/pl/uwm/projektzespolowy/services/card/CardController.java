@@ -52,4 +52,9 @@ public class CardController {
         throw new NotYetImplementedException();
     }
 
+    @DeleteMapping("/{cardId}")
+    public void deleteCardById(@PathVariable Long cardId) {
+        cardFacade.deleteCard(cardId);
+    }
+
 }
