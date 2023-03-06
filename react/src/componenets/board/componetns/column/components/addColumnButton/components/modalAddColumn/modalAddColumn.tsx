@@ -11,17 +11,7 @@ import {v4 as uuidv4} from "uuid";
 import ModalAddColumnProps from "./interface/ModalAddColumn";
 import {addColumnToBackend, getColumnFromBackend} from "../../../../../../../../services/columnService";
 import {_Data} from "../../../../../../../../interfaces/DataBoard";
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 300,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+import {modalStyle} from '../../../../../../../../assets/themes/modalStyle'
 
 export default function ModalAddColumn(props:ModalAddColumnProps) {
     const [columnName, setColumnName] = useState("");
@@ -77,8 +67,8 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
                 }}
             >
                 <Fade in={props.open}>
-                    <Stack sx={style} spacing={2}>
-                        <Typography id="transition-modal-title" variant="h6" component="h2">
+                    <Stack sx={modalStyle} spacing={2}>
+                        <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
                             Add new column
                         </Typography>
                         <TextField

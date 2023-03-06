@@ -1,12 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 import Column from './componetns/column/column'
-import BoardProps from "./interface/Board"
+import Typography from "@mui/material/Typography";
 import AddColumnButton from "./componetns/column/components/addColumnButton/addColumnButton";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import {_Data} from "../../interfaces/DataBoard";
 import {loadBoardFromBackend, loadDefaultData} from "../../services/boardService";
+import {useTheme} from "@mui/material";
+import Button from "@mui/material/Button";
+import {ColorModeContext} from "../../App";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
 const onDragEnd = (result: any, columns:any, setData:any, data:any) => {
     if(!result.destination) return
     const {source, destination} = result;
@@ -50,6 +54,14 @@ const onDragEnd = (result: any, columns:any, setData:any, data:any) => {
 }
 const Board = () => {
     const [data, setData] = useState<_Data['data']> (loadDefaultData);
+    const theme = useTheme();
+    const colorMode = React.useContext(ColorModeContext);
+    const bodyStyle = { backgroundColor: theme.palette.background.default };
+
+    React.useEffect(() => {
+        // Pobieranie elementu body i ustawienie stylu tła
+        document.body.style.backgroundColor = theme.palette.background.default;
+    }, [theme]);
     async function fetchData() {
         const result = await loadBoardFromBackend("1001");
         if (result) {
@@ -74,8 +86,8 @@ const Board = () => {
 
 
     return (
-        <Stack spacing={2} display={"flex"} alignItems={"center"} >
-            <h2 style={{textAlign:"center"}}>{data.title}</h2>
+        <Stack spacing={2} display={"flex"} alignItems={"center"}>
+            <Typography variant={'h3'} color={'textPrimary'} style={{textAlign:"center"}}>{data.title}</Typography>
             <AddColumnButton
                 data={data}
                 handleDataChange={setData}
@@ -119,6 +131,10 @@ const Board = () => {
                     </Droppable>
                 </DragDropContext>
             </Box>
+            <Button sx={{position:'absolute', bottom:'0', left:'0'}} onClick={colorMode.toggleColorMode}>
+                {theme.palette.mode == 'light' && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>Dark Mode <Brightness4Icon/></Typography>)}
+                {!(theme.palette.mode == 'light') && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>Light Mode <Brightness4Icon/></Typography>)}
+            </Button>
         </Stack>
     );
 }

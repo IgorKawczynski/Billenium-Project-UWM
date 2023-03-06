@@ -8,18 +8,8 @@ import Box from "@mui/material/Box";
 import ModalRemoveColumnProps from "./interface/ModalRemoveColumn";
 import {getColumnFromBackend, removeColumnToBackend} from "../../../../../../services/columnService";
 import {_Data} from "../../../../../../interfaces/DataBoard";
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-    fontFamily: 'Open Sans',
-}
+import {modalStyle} from "../../../../../../assets/themes/modalStyle";
+import Typography from "@mui/material/Typography";
 
 const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
     const removeColumn = (id:string) => {
@@ -53,9 +43,11 @@ const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
                 }}
             >
                 <Fade in={props.modalDelete}>
-                    <Stack sx={style} spacing={3}>
-                        <Box style={{display:"flex", flexDirection:"column", justifyContent:"center",fontSize:"18px"}}>
-                                Are you sure you want to delete column {props.title}?
+                    <Stack sx={modalStyle} spacing={3}>
+                        <Box style={{display:"flex", textAlign:'center', justifyContent:"center"}}>
+                        <Typography color={'textPrimary'} variant={'body1'}>
+                                Are you sure you want to delete column: {props.title}?
+                        </Typography>
                         </Box>
                             <Box style={{ display:"flex", justifyContent:"space-between", width:"100%"}}>
                                 <Button
