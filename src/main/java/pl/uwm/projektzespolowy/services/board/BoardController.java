@@ -36,4 +36,9 @@ public class BoardController {
         service.deleteBoard(boardId);
     }
 
+    @RequestMapping(method = RequestMethod.GET, params = {"boardId"})
+    public String getBoardTitleById(@RequestParam String boardId) {
+        return service.getBoardTitleById(boardId);
+    }
+
 }

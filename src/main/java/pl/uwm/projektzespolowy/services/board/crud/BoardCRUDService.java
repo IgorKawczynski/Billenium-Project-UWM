@@ -28,6 +28,11 @@ public class BoardCRUDService {
                 .toDto();
     }
 
+    public String getBoardTitleById(String boardId) {
+        var id = Long.parseLong(boardId);
+        return reader.getBoardById(id).getTitle().toString();
+    }
+
     public BoardResponseDTO updateBoard(BoardUpdateDTO boardUpdateDTO) {
         var boardId = Long.parseLong(boardUpdateDTO.boardId());
         var boardToChange = reader.getBoardById(boardId);
