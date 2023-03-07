@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
-import {v4 as uuidv4} from "uuid";
+import {Grid} from "@mui/material";
 import ModalAddColumnProps from "./interface/ModalAddColumn";
 import {addColumnToBackend, getColumnFromBackend} from "../../../../../../../../services/columnService";
 import {_Data} from "../../../../../../../../interfaces/DataBoard";
@@ -52,7 +52,7 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
 
 
     return (
-        <Box>
+        <Grid>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -90,6 +90,6 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
                     </Stack>
                 </Fade>
             </Modal>
-        </Box>
+        </Grid>
     );
 }

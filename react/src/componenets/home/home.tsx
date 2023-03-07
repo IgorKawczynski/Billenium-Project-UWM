@@ -5,6 +5,7 @@ import '../../App.css'
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Student from '../../resources/imgs/student.png'
+import StudentDark from '../../resources/imgs/darkmode_lern.png'
 import Gif from '../../resources/gifs/gifTwo.gif'
 import FirmwareGif from '../../resources/gifs/Firmware.gif'
 import ServerGif from '../../resources/gifs/Server.gif'
@@ -48,7 +49,8 @@ const Home = () => {
                     </Box>
                 </Box>
                 <Box sx={{display:'flex', flexDirection:'column' , justifyContent:'center', alignItems:'center'}}>
-                    <img src={Student} width={'400px'}/>
+                    {theme.palette.mode == 'light' && (<img src={Student} width={'400px'}/>)}
+                    {!(theme.palette.mode == 'light') && (<img src={StudentDark} width={'400px'}/>)}
                 </Box>
             </Box>
             <Box sx={{display:'flex', justifyContent:'space-around', color:'white', width:'100%'}}>

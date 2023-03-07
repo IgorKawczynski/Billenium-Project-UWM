@@ -3,6 +3,7 @@ import {Draggable} from 'react-beautiful-dnd'
 import Card from "@mui/material/Card"
 import Avatar from './componetnts/Avatar/avatar'
 import {CardActionArea, useTheme} from "@mui/material"
+import {Grid} from "@mui/material";
 import CardProps from './interface/Card'
 import EditCardButton from './componetnts/editCardButton/editCardButton'
 import Box from "@mui/material/Box";
@@ -30,11 +31,11 @@ const Task = (props:CardProps) => {
 
                         }}
                     >
-                        <Box style={{
+                        <Grid style={{
                             display:"flex",
                             justifyContent:"space-between"
                         }}>
-                            <Box>
+                            <Grid>
                                 <Typography color={'textPrimary'} variant={'h6'}>
                                     {props.title}
                                 </Typography>
@@ -42,15 +43,15 @@ const Task = (props:CardProps) => {
                                     {props.desc}
                                 </Typography>
 
-                            </Box>
-                            <Box>
+                            </Grid>
+                            <Grid>
                                 <Box style={{display:"flex", flexDirection:"column",alignItems:"center", minWidth:'50px'}}>
                                 {/*<Avatar name={"Maciek"} lastName={"Janek"}/>*/}
                                 {/*<Avatar name={"Maciek"} lastName={"Makowski"}/>*/}
                                 {/*<Avatar name={"Kuba"} lastName={"laczek"}/>*/}
                                 </Box>
-                            </Box>
-                        </Box>
+                            </Grid>
+                        </Grid>
                         <EditCardButton id={props.id} columnId={props.columnId} title={props.title} desc={props.desc} data={props.data} handleDataChange={props.handleDataChange}/>
                     </Card>
                 )

@@ -6,11 +6,11 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Checkbox from '@mui/material/Checkbox';
-import Box from '@mui/material/Box';
+import {Grid} from "@mui/material";
 import ModalEditColumnProps from "./interface/ModalEditColumn";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Stack from "@mui/material/Stack";
-import {getColumnFromBackend, updateColumnToBackend} from "../../../../../../services/columnService";
+import {getColumnById, getColumnFromBackend, updateColumnToBackend} from "../../../../../../services/columnService";
 import {_Data} from "../../../../../../interfaces/DataBoard";
 import {modalStyle} from "../../../../../../assets/themes/modalStyle";
 
@@ -32,13 +32,15 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
     const editColumn = (newTitle: string, limit: number, id:string) => {
         updateColumnToBackend(id, newTitle, limit, checkLimit)
             .then(res => {
-                getColumnFromBackend(props.data.id)
+                getColumnById(props.id)
                     .then( res => {
                             if(res) {
-                                const columns:_Data["data"]['columnList'] = res
                                 props.handleDataChange({
                                     ...props.data,
-                                    columnList: columns
+                                    columnList: {
+                                        ...props.data.columnList,
+                                        [props.id]: res
+                                    }
 
                                 })
                                 props.modalEditClose();
@@ -92,14 +94,14 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
                                     value={limit}
                                     onChange={handleLimitChange}
                                 />
-                                <Box sx={{display:'flex', width:'100%', justifyContent:'center', flexDirection:'column', textAlign:'center'}}>
+                                <Grid sx={{display:'flex', width:'100%', justifyContent:'center', flexDirection:'column', textAlign:'center'}}>
                                     <Typography color={'textPrimary'}>
                                         Unlimited
                                     </Typography>
                                     <div>
                                     <Checkbox checked={checkLimit} onChange={handleCheckLimitChange}/>
                                     </div>
-                                </Box>
+                                </Grid>
                         <Button
                             sx={{maxHeight:'50px'}}
                             onClick={() => editColumn(name,limit, props.id)}

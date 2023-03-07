@@ -12,6 +12,7 @@ import {addColumnToBackend, getColumnFromBackend} from "../../../../../../../../
 import {_Data} from "../../../../../../../../../../interfaces/DataBoard";
 import {addCardToBackend} from "../../../../../../../../../../services/cardService";
 import {modalStyle} from "../../../../../../../../../../assets/themes/modalStyle";
+import {getColumnById} from "../../../../../../../../../../services/columnService";
 
 export default function ModalAddCard(props:ModalAddCardProps) {
     const [name, setName] = useState("");
@@ -30,13 +31,15 @@ export default function ModalAddCard(props:ModalAddCardProps) {
     const addCard = (name: string, desc: string) => {
         addCardToBackend(props.columnId, name, desc)
             .then(res => {
-                getColumnFromBackend(props.data.id)
+                getColumnById(props.columnId)
                     .then( res => {
                             if(res) {
-                                const columns:_Data["data"]['columnList'] = res
                                 props.handleDataChange({
                                     ...props.data,
-                                    columnList: columns
+                                    columnList: {
+                                        ...props.data.columnList,
+                                        [props.columnId]: res
+                                    }
 
                                 })
                                 props.handleClose();
@@ -95,7 +98,7 @@ export default function ModalAddCard(props:ModalAddCardProps) {
                                 onClick={() => addCard(name,desc)}
                                 variant="contained"
                             >
-                                Dodaj
+                                ADD
                             </Button>
                         </Box>
                     </Box>

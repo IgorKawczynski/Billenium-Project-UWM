@@ -1,6 +1,5 @@
 import axios from "axios";
-import {transformColumns} from "./transromData";
-
+import {transformColumns, transformColumn} from "./transromData";
 export async function addColumnToBackend(boardId:string, title:string){
     try{
         const response = await axios.post('http://localhost:8080/api/columns', {boardId, title})
@@ -39,5 +38,16 @@ export async function updateColumnToBackend(columnId:string,title:string, cardsL
         return alert(error.response.data.fieldName)
     }
 
+}
+
+export async function getColumnById(columnId:string){
+    const apiUrl = `http://localhost:8080/api/columns/${columnId}`;
+    try {
+        const response = await axios.get(apiUrl);
+        console.log(response.data)
+        return transformColumn(response.data);
+    } catch (error) {
+        console.error(error);
+    }
 }
 

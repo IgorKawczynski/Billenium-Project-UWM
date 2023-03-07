@@ -8,7 +8,7 @@ import Modal from "@mui/material/Modal";
 import ModalEditCardProps from "./interface/ModalEditCard";
 import Stack from "@mui/material/Stack";
 import {updateCardToBackend} from "../../../../../../../../../../services/cardService";
-import {getColumnFromBackend} from "../../../../../../../../../../services/columnService";
+import {getColumnById, getColumnFromBackend} from "../../../../../../../../../../services/columnService";
 import {_Data} from "../../../../../../../../../../interfaces/DataBoard";
 import {modalStyle} from "../../../../../../../../../../assets/themes/modalStyle";
 
@@ -41,19 +41,17 @@ export default function ModalEditCard(props:ModalEditCardProps) {
     const updateCard = (title: string, desc: string) => {
         updateCardToBackend(props.id, title, desc)
             .then(res => {
-                if(res == Array){
-                    alert(res[0] + res[1])
-                }
-                getColumnFromBackend(props.data.id)
+                getColumnById(props.columnId)
                     .then( res => {
                             if(res) {
-                                const columns:_Data["data"]['columnList'] = res
                                 props.handleDataChange({
                                     ...props.data,
-                                    columnList: columns
+                                    columnList: {
+                                        ...props.data.columnList,
+                                        [props.columnId]: res
+                                    }
 
                                 })
-                                props.modalEditClose();
                                 setTitle("")
                                 setDesc("")
                             }

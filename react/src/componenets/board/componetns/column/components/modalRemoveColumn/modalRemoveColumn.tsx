@@ -4,7 +4,7 @@ import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import {Grid} from "@mui/material";
 import ModalRemoveColumnProps from "./interface/ModalRemoveColumn";
 import {getColumnFromBackend, removeColumnToBackend} from "../../../../../../services/columnService";
 import {_Data} from "../../../../../../interfaces/DataBoard";
@@ -44,12 +44,12 @@ const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
             >
                 <Fade in={props.modalDelete}>
                     <Stack sx={modalStyle} spacing={3}>
-                        <Box style={{display:"flex", textAlign:'center', justifyContent:"center"}}>
+                        <Grid style={{display:"flex", textAlign:'center', justifyContent:"center"}}>
                         <Typography color={'textPrimary'} variant={'body1'}>
                                 Are you sure you want to delete column: {props.title}?
                         </Typography>
-                        </Box>
-                            <Box style={{ display:"flex", justifyContent:"space-between", width:"100%"}}>
+                        </Grid>
+                            <Grid style={{ display:"flex", justifyContent:"space-between", width:"100%"}}>
                                 <Button
                                     sx={{maxHeight:'50px'}}
                                     onClick={() => props.modalDeleteClose()}
@@ -64,7 +64,7 @@ const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
                                 >
                                     Delete
                                 </Button>
-                            </Box>
+                            </Grid>
                     </Stack>
                 </Fade>
             </Modal>

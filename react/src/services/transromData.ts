@@ -1,5 +1,5 @@
-import DataFromBackend from "../interfaces/DataFromBackend";
-import {_Data} from "../interfaces/DataBoard";
+import DataFromBackend, {columnFromBackend} from "../interfaces/DataFromBackend";
+import {_Data,Column} from "../interfaces/DataBoard";
 import { v4 as uuidv4 } from 'uuid';
 
 export default function transformData(inputData: DataFromBackend): _Data["data"] {
@@ -57,5 +57,19 @@ export function transformColumns(inputColumns: DataFromBackend['columnList']):  
             },
         ])
     );
+}
+export function transformColumn(inputColumn: columnFromBackend){
+    return {
+                id:inputColumn.id,
+                title: inputColumn.title,
+                cardsLimit: inputColumn.cardsLimit,
+                position: inputColumn.position,
+                cards: inputColumn.cards.map((card:any) => ({
+                    id: card.id,
+                    title: card.title,
+                    description: card.description,
+                    position: card.position,
+                })),
+    }
 }
 

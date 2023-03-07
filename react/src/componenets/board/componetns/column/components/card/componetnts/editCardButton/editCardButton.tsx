@@ -5,7 +5,7 @@ import Menu, { MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import EditIcon from '@mui/icons-material/Edit';
 import ArchiveIcon from '@mui/icons-material/Archive';
-import Box from "@mui/material/Box";
+import {Grid} from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import EditCardButtonProps from "./interface/EditCardButton";
 import ModalEditCard from "./components/modalEditCard/modalEditCard";
@@ -74,7 +74,7 @@ export default function EditCardButton(props:EditCardButtonProps) {
 
 
     return (
-        <Box style={{display:"flex",justifyContent:"flex-end", marginTop:10}}>
+        <Grid style={{display:"flex",justifyContent:"flex-end", marginTop:10}}>
 
             <Button
                 sx={{width:100, fontSize:12}}
@@ -128,6 +128,6 @@ export default function EditCardButton(props:EditCardButtonProps) {
                 handleDataChange={props.handleDataChange}
             />
 
-        </Box>
+        </Grid>
     );
 }

@@ -2,26 +2,42 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
-import Box from "@mui/material/Box";
+import {Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import ModalRemoveCardProps from "./interface/ModalRemoveCard";
 import Stack from "@mui/material/Stack";
 import {modalStyle} from "../../../../../../../../../../assets/themes/modalStyle";
+import {
+    getColumnById,
+    getColumnFromBackend,
+    removeColumnToBackend
+} from "../../../../../../../../../../services/columnService";
+import {_Data} from "../../../../../../../../../../interfaces/DataBoard";
+import {removeCardToBackend} from "../../../../../../../../../../services/cardService";
 
 export default function ModalRemoveCard(props:ModalRemoveCardProps) {
     const removeCard = () => {
-        const column = props.data.columnList[props.columnId];
-        const updatedItems = column.cards.filter((card:any) => card.id != props.id);
-        const updatedColumn = { ...column, cards: updatedItems };
-        props.handleDataChange({
-            ...props.data,
-            columnList: {
-                ...props.data.columnList,
-                [props.columnId]: updatedColumn
-            },
-        })
-    }
+            removeCardToBackend(props.id)
+                .then(res => {
+                    getColumnById(props.columnId)
+                        .then( res => {
+                                if(res) {
+                                    props.handleDataChange({
+                                        ...props.data,
+                                        columnList: {
+                                            ...props.data.columnList,
+                                            [props.columnId]: res
+                                        }
+
+                                    })
+                                }
+                            }
+                        )
+                    // tutaj możesz wykonywać operacje na otrzymanym id
+                })
+        };
+
 
     return (
         <Modal
@@ -39,12 +55,12 @@ export default function ModalRemoveCard(props:ModalRemoveCardProps) {
         >
             <Fade in={props.modalDelete}>
                 <Stack sx={modalStyle} spacing={3}>
-                    <Box>
+                    <Grid>
                     <Typography color={'textPrimary'} id="transition-modal-title" variant="body1" component="h2" sx={{textAlign:"center"}}>
                         Are you sure you want to delete card: {props.title}?
                     </Typography>
-                    </Box>
-                    <Box style={{display:"flex", justifyContent:"space-between", width:"100%"}}>
+                    </Grid>
+                    <Grid style={{display:"flex", justifyContent:"space-between", width:"100%"}}>
                         <Button
                             sx={{maxHeight:'50px'}}
                             onClick={() => props.modalDeleteClose()}
@@ -59,7 +75,7 @@ export default function ModalRemoveCard(props:ModalRemoveCardProps) {
                         >
                             Delete
                         </Button>
-                    </Box>
+                    </Grid>
                 </Stack>
             </Fade>
         </Modal>

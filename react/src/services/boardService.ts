@@ -48,3 +48,23 @@ export async function loadBoardFromBackend(id: string): Promise<_Data["data"]> {
     }
     return loadDefaultData();
 }
+
+export async function moveColumnToBackend(columnId:string, newPosition:number){
+    const apiUrl = `http://localhost:8080/api/columns/move`;
+    try {
+        const response = await axios.put(apiUrl, {columnId, newPosition});
+        console.log(response.data)
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function editBoardToBackend(boardId:string, newTitle:string){
+    const apiUrl = `http://localhost:8080/api/board`;
+    try {
+        const response = await axios.put(apiUrl, {boardId, newTitle});
+        console.log(response.data)
+    } catch (error) {
+        console.error(error);
+    }
+}

@@ -17,3 +17,16 @@ export default interface DataFromBackend {
             }[];
         }[];
 }
+
+export interface columnFromBackend{
+    id: string;
+    title: string;
+    cardsLimit: number;
+    position: number;
+    cards: {
+        id: string;
+        title: string;
+        description: string;
+        position:number;
+    }[]
+}
