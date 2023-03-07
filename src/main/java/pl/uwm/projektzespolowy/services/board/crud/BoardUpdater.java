@@ -2,35 +2,20 @@ package pl.uwm.projektzespolowy.services.board.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.uwm.projektzespolowy.models.basic.UpdateDTO;
-import pl.uwm.projektzespolowy.models.valueobjects.Title;
-import pl.uwm.projektzespolowy.services.validation.ValidatorService;
 import pl.uwm.projektzespolowy.models.board.Board;
+import pl.uwm.projektzespolowy.models.valueobjects.Title;
 import pl.uwm.projektzespolowy.services.board.BoardRepository;
 
 @Component
 @RequiredArgsConstructor
 public class BoardUpdater {
-
     private final BoardRepository boardRepository;
-    private final ValidatorService validatorService;
-    private final BoardReader boardReader;
 
-    public void updateBoardField(Board board, String fieldName, Object value) {
-        validatorService.isNull(fieldName, value);
-        switch (fieldName) {
-            case "title" -> {
-                String title = (String) value;
-                board.setTitle(new Title(title));
-            }
+    public Board editBoard(Board boardToChange, String givenTitle) {
+        if (givenTitle != null) {
+            boardToChange.setTitle(new Title(givenTitle));
         }
-        boardRepository.saveAndFlush(board);
-    }
-
-    // TODO: Error handling
-    public void updateBoard(UpdateDTO updateDTO) {
-        var board = boardReader.getBoardById(updateDTO.id());
-        updateBoardField(board, updateDTO.fieldName(), updateDTO.value());
+        return boardRepository.saveAndFlush(boardToChange);
     }
 
 }

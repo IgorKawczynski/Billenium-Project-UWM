@@ -3,10 +3,9 @@ package pl.uwm.projektzespolowy.services.board.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.uwm.projektzespolowy.models.basic.UpdateDTO;
-import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
 import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
+import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
 
 @Component
 @RequiredArgsConstructor
@@ -29,8 +28,10 @@ public class BoardCRUDService {
                 .toDto();
     }
 
-    public void updateBoard(UpdateDTO updateDTO) {
-        updater.updateBoard(updateDTO);
+    public BoardResponseDTO updateBoard(BoardUpdateDTO boardUpdateDTO) {
+        var boardId = Long.parseLong(boardUpdateDTO.boardId());
+        var boardToChange = reader.getBoardById(boardId);
+        return updater.editBoard(boardToChange, boardUpdateDTO.newTitle()).toDto();
     }
 
     public void deleteBoard(Long id) {

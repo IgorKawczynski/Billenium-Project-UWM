@@ -1,8 +1,9 @@
 package pl.uwm.projektzespolowy.services.board;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.projektzespolowy.models.basic.UpdateDTO;
+import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
 import pl.uwm.projektzespolowy.services.board.crud.BoardCRUDService;
 import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
 import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
@@ -24,9 +25,10 @@ public class BoardController {
         return service.getBoardById(boardId);
     }
 
-    @PatchMapping("")
-    public void updateBoard(@RequestBody UpdateDTO updateDTO) {
-        service.updateBoard(updateDTO);
+    @PutMapping("")
+    @ResponseStatus(HttpStatus.OK)
+    public BoardResponseDTO updateBoard(@RequestBody BoardUpdateDTO boardUpdateDTO) {
+        return service.updateBoard(boardUpdateDTO);
     }
 
     @DeleteMapping("/{boardId}")
