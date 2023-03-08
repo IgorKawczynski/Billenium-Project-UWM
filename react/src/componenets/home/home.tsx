@@ -43,7 +43,7 @@ const Home = () => {
                         alignItems:'center',
                         flexDirection:'column'
                     }}>
-                        <Typography color={'textPrimary'} variant={'h2'} >Kanban Table</Typography>
+                        <Typography color={'textPrimary'} variant={'h2'} >Kanban Board</Typography>
                         <Typography color={'textHard'} variant={'h4'} >by MAGI</Typography>
                         {theme.palette.mode == 'light' && (<img src={Gif} width={'500px'}/>)}
                         {!(theme.palette.mode == 'light') && (<img src={TwoPerson} width={'500px'}/>)}

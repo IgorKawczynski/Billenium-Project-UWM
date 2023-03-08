@@ -229,7 +229,7 @@ const Board = () => {
                     {!(theme.palette.mode == 'light') && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>Light Mode <Brightness4Icon/></Typography>)}
                 </Button>
                 <Grid sx={{textAlign:'center'}}>
-                    <Typography color={'textPrimary'} variant={'h4'} >Kanban Table</Typography>
+                    <Typography color={'textPrimary'} variant={'h4'} >Kanban Board</Typography>
                     <Typography color={theme.palette.primary.main} variant={'h5'} >by MAGI</Typography>
                 </Grid>
             </Grid>
