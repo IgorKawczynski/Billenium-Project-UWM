@@ -4,7 +4,6 @@ import Column from './componetns/column/column'
 import Typography from "@mui/material/Typography";
 import AddColumnButton from "./componetns/column/components/addColumnButton/addColumnButton";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
 import {_Data} from "../../interfaces/DataBoard";
 import {loadBoardFromBackend, loadDefaultData} from "../../services/boardService";
 import {Grid, useTheme} from "@mui/material";
@@ -12,15 +11,45 @@ import Button from "@mui/material/Button";
 import {ColorModeContext} from "../../App";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import {moveColumnToBackend} from "../../services/boardService";
-import {getColumnFromBackend, removeColumnToBackend} from "../../services/columnService";
+import {getColumnById, getColumnFromBackend, removeColumnToBackend} from "../../services/columnService";
 import {moveCardToAnotherColumn, moveCardInColumn} from "../../services/cardService";
 import SettingsIcon from "@mui/icons-material/Settings";
 import IconButton from "@mui/material/IconButton";
 import {editBoardToBackend} from "../../services/boardService";
-const onDragEnd = (result: any, columns:any, setData:any, data:any) => {
+import DataFromBackend from "../../interfaces/DataFromBackend";
+import '../../assets/styles/board.css'
+
+function withPositionInRange(lowerBound: number, upperBound: number, columns:_Data["data"]['columnList']){
+    const x = Object.values(columns).filter((column) => {
+        return column.position >= lowerBound && column.position <= upperBound;
+    });
+    return x;
+}
+
+function changePositionToRight(columns:DataFromBackend['columnList']){
+    return Object.values(columns).map((column) => {
+        column.position = column.position + 1
+    });
+}
+function changePositionToLeft(columns:DataFromBackend['columnList']){
+    return Object.values(columns).map((column) => {
+        column.position = column.position - 1
+    });
+}
+
+const onDragEnd = (result: any, columns:_Data["data"]['columnList'], setData:_Data["setData"], data:_Data["data"]) => {
     if (!result.destination) return
     const {source, destination} = result;
-    if(result.type == 'column') {
+    if(result.type === 'column') {
+        if(destination.index < columns[result.draggableId].position){
+            const columnsToChange = withPositionInRange(destination.index, source.index, columns);
+            console.log(columnsToChange)
+            const changedColumns = changePositionToRight(columnsToChange)
+        }if(destination.index > columns[result.draggableId].position){
+            const columnsToChange = withPositionInRange(source.index, destination.index, columns);
+            const changedColumns = changePositionToLeft(columnsToChange)
+        }
+        columns[result.draggableId].position = destination.index
         moveColumnToBackend(result.draggableId, destination.index)
             .then(res => {
                 getColumnFromBackend(data.id)
@@ -36,34 +65,80 @@ const onDragEnd = (result: any, columns:any, setData:any, data:any) => {
                     })
             })
     }
-    if(result.type == 'task') {
+    if(result.type === 'task') {
         if (source.droppableId !== destination.droppableId){
+            const sourceColumn = columns[source.droppableId];
+            const destColumn = columns[destination.droppableId];
+            const sourceItems = [...sourceColumn.cards];
+            const destItems = [...destColumn.cards];
+            const [removed] = sourceItems.splice(source.index, 1);
+            destItems.splice(destination.index, 0, removed);
+            setData({
+                ...data,
+                columnList: {
+                    ...columns,
+                    [source.droppableId]: {
+                        ...sourceColumn,
+                        cards: sourceItems
+                    },
+                    [destination.droppableId]:{
+                        ...destColumn,
+                        cards: destItems
+                    }
+                }
+            })
             moveCardToAnotherColumn(result.draggableId, destination.droppableId, destination.index)
                 .then(res => {
                     getColumnFromBackend(data.id)
                         .then(res => {
                             if (res) {
-                                const columns: _Data["data"]['columnList'] = res
                                 setData({
                                     ...data,
-                                    columnList: columns
+                                    columnList: {
+                                        ...res,
+                                        [source.droppableId]: {
+                                            ...res[source.droppableId],
+                                            cards: res[source.droppableId].cards
+                                        },
+                                        [destination.droppableId]:{
+                                            ...res[destination.droppableId],
+                                            cards: res[destination.droppableId].cards
+                                        }
+                                    }
 
                                 })
                             }
                         })
                 })
             }else{
+            const column = columns[source.droppableId];
+            const copiedItems = [...column.cards];
+            const [removed] = copiedItems.splice(source.index, 1);
+            copiedItems.splice(destination.index, 0, removed);
+            setData({
+                ...data,
+                columnList: {
+                    ...columns,
+                    [source.droppableId]: {
+                        ...column,
+                        cards: copiedItems
+                    }
+                }})
+
             moveCardInColumn(result.draggableId, destination.index)
                 .then(res => {
-                    getColumnFromBackend(data.id)
+                    getColumnById(result.draggableId)
                         .then(res => {
                             if (res) {
-                                const columns: _Data["data"]['columnList'] = res
                                 setData({
                                     ...data,
-                                    columnList: columns
-
-                                })
+                                    columnList: {
+                                        ...columns,
+                                        [res.id]: {
+                                            ...column,
+                                            cards: copiedItems
+                                        }
+                                    }})
                             }
                         })
                 })
@@ -76,6 +151,14 @@ const Board = () => {
     const theme = useTheme();
     const colorMode = React.useContext(ColorModeContext);
     const bodyStyle = { backgroundColor: theme.palette.background.default };
+    useEffect(() => {
+        document.body.style.backgroundImage = 'none';
+        document.body.style.overflow = 'scroll';
+        return () => {
+            document.body.style.backgroundImage = '';
+            document.body.style.overflow = '';// Resetuj styl tła body przy usuwaniu komponentu
+        };
+    }, []);
 
     React.useEffect(() => {
         // Pobieranie elementu body i ustawienie stylu tła
@@ -118,6 +201,11 @@ const Board = () => {
 
     return (
         <Stack spacing={2} display={"flex"} alignItems={"center"}>
+            <Grid sx={{display:'flex', justifyContent:'space-between', width:'100%'}}>
+                <Grid sx={{width:'200px'}}>
+
+                </Grid>
+                <Grid>
             <Typography variant={'h3'} color={'textPrimary'} style={{textAlign:"center"}}>
                 {data.title}<IconButton
                 aria-label="settingsColumn"
@@ -128,6 +216,18 @@ const Board = () => {
                 data={data}
                 handleDataChange={setData}
             />
+                </Grid>
+                <Grid>
+                <Button onClick={colorMode.toggleColorMode}>
+                    {theme.palette.mode == 'light' && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>Dark Mode <Brightness4Icon/></Typography>)}
+                    {!(theme.palette.mode == 'light') && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>Light Mode <Brightness4Icon/></Typography>)}
+                </Button>
+                <Grid sx={{textAlign:'center'}}>
+                    <Typography color={'textPrimary'} variant={'h4'} >Kanban Table</Typography>
+                    <Typography color={theme.palette.primary.main} variant={'h5'} >by MAGI</Typography>
+                </Grid>
+            </Grid>
+            </Grid>
             <Grid container spacing={{xs: 2, md:3}} columns={{ xs: 4, sm: 8, md: 12 }}>
                 <DragDropContext
                     onDragEnd={(result) =>
@@ -166,14 +266,6 @@ const Board = () => {
                         )}
                     </Droppable>
                 </DragDropContext>
-            </Grid>
-            <Button sx={{position:'absolute', bottom:'0', left:'0'}} onClick={colorMode.toggleColorMode}>
-                {theme.palette.mode == 'light' && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>Dark Mode <Brightness4Icon/></Typography>)}
-                {!(theme.palette.mode == 'light') && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>Light Mode <Brightness4Icon/></Typography>)}
-            </Button>
-            <Grid sx={{position:'absolute', bottom:'0', right:'0', textAlign:'center'}} >
-            <Typography color={theme.palette.background.default} variant={'h4'} >Kanban Table</Typography>
-            <Typography color={theme.palette.background.default} variant={'h5'} >by MAGI</Typography>
             </Grid>
         </Stack>
     );

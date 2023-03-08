@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react'
 import Box from '@mui/material/Box'
 import Typography from "@mui/material/Typography";
-import '../../App.css'
+import '../../assets/styles/home.css'
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Student from '../../resources/imgs/student.png'
@@ -16,6 +16,7 @@ import {Link} from "react-router-dom";
 import {useTheme, makeStyles} from "@mui/material/styles";
 import { ColorModeContext } from '../../App';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
+import '../../assets/styles/home.css'
 const Home = () => {
     const theme = useTheme();
     const colorMode = React.useContext(ColorModeContext);
@@ -28,7 +29,7 @@ const Home = () => {
     }, [theme]);
 
     return (
-        <Stack  spacing={2}>
+        <Stack  spacing={1} sx={{overflow:'hidden'}}>
             <Box sx={{width:'100%', display:'flex', justifyContent:'end'}}>
                 <Link to={'/board'}><Button variant={"contained"}>Login</Button></Link>
             </Box>
@@ -74,7 +75,7 @@ const Home = () => {
                 </Box>
             </Box>
             <Box>
-                <Typography variant={"caption"} sx={{display:'flex', justifyContent:'end'}}>
+                <Typography variant={"caption"} sx={{position:'absolute', bottom:'0', right:'0',display:'flex', justifyContent:'end'}}>
                     <a href="https://storyset.com/work">Work illustrations by Storyset</a>
                 </Typography>
             </Box>

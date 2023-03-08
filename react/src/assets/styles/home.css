@@ -1,9 +1,10 @@
 body{
-  background: url("./resources/imgs/Frame 1.png");
+  background: url("../../resources/imgs/Frame 1.png");
   background-size: cover;
   background-attachment: fixed ;
   min-height: 80vh;
   height: auto;
+  overflow: hidden;
 }
 #root {
   font-family: 'Open Sans','Shantell Sans', Helvetica sans-serif;

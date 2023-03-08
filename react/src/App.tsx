@@ -1,7 +1,6 @@
 import React, {useMemo} from 'react'
 import Board from "./componenets/board/board"
 import Home from "./componenets/home/home";
-import './App.css'
 import {Route, Routes} from "react-router-dom";
 import {createTheme, makeStyles, ThemeOptions, ThemeProvider, useTheme} from '@mui/material/styles';
 import {lightOptions, darkOptions} from './assets/themes/BasicTheme'

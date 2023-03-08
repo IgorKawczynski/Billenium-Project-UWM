@@ -1,5 +1,5 @@
 import DataFromBackend, {columnFromBackend} from "../interfaces/DataFromBackend";
-import {_Data,Column} from "../interfaces/DataBoard";
+import {_Data} from "../interfaces/DataBoard";
 import { v4 as uuidv4 } from 'uuid';
 
 export default function transformData(inputData: DataFromBackend): _Data["data"] {
@@ -39,7 +39,7 @@ export default function transformData(inputData: DataFromBackend): _Data["data"]
     };
 }
 
-export function transformColumns(inputColumns: DataFromBackend['columnList']):  _Data["data"]["columnList"]{
+export async function transformColumns(inputColumns: DataFromBackend['columnList']){
     return Object.fromEntries(
         Object.entries(inputColumns).map(([id, column]) => [
             [column.id],
@@ -58,7 +58,7 @@ export function transformColumns(inputColumns: DataFromBackend['columnList']):  
         ])
     );
 }
-export function transformColumn(inputColumn: columnFromBackend){
+export async function transformColumn(inputColumn: columnFromBackend){
     return {
                 id:inputColumn.id,
                 title: inputColumn.title,

@@ -1,0 +1,9 @@
+body{
+  background: transparent;
+  min-height: 80vh;
+  height: auto;
+}
+#root {
+  font-family: 'Open Sans','Shantell Sans', Helvetica sans-serif;
+}
+

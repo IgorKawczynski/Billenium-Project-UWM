@@ -25,7 +25,6 @@ export async function moveCardToAnotherColumn(cardId:string, newColumnId:string,
     const apiUrl = `http://localhost:8080/api/cards/another-column`;
     try {
         const response = await axios.put(apiUrl, {cardId, newColumnId,newPosition});
-        console.log(response.data)
     } catch (error) {
         console.error(error);
     }
@@ -34,7 +33,6 @@ export async function moveCardInColumn(cardId:string, newPosition:number){
     const apiUrl = `http://localhost:8080/api/cards/same-column`;
     try {
         const response = await axios.put(apiUrl, {cardId, newPosition});
-        console.log(response.data)
     } catch (error) {
         console.error(error);
     }
@@ -43,7 +41,6 @@ export async function removeCardToBackend(cardId:string){
     const apiUrl = `http://localhost:8080/api/cards/${cardId}`;
     try {
         const response = await axios.delete(apiUrl);
-        console.log(response.data)
     } catch (error) {
         console.error(error);
     }

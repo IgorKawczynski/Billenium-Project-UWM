@@ -19,6 +19,7 @@ const Task = (props:CardProps) => {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
+                        
                         style={{
                             boder:'Primary',
                             userSelect: 'none',

@@ -52,8 +52,7 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                     }
 
                                 })
-                                setTitle("")
-                                setDesc("")
+                                props.modalEditClose()
                             }
                         }
                     )
