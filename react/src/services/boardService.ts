@@ -60,10 +60,20 @@ export async function moveColumnToBackend(columnId:string, newPosition:number){
 }
 
 export async function editBoardToBackend(boardId:string, newTitle:string){
-    const apiUrl = `http://localhost:8080/api/board`;
+    const apiUrl = `http://localhost:8080/api/boards`;
     try {
         const response = await axios.put(apiUrl, {boardId, newTitle});
         console.log(response.data)
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function getBoardTitleFromBackend(boardId:string){
+    const apiUrl = `http://localhost:8080/api/boards`;
+    try {
+        const response = await axios.get(apiUrl, {params:{boardId:boardId}});
+        return response.data
     } catch (error) {
         console.error(error);
     }
