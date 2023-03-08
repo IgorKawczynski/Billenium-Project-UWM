@@ -18,6 +18,7 @@ import IconButton from "@mui/material/IconButton";
 import {editBoardToBackend} from "../../services/boardService";
 import DataFromBackend from "../../interfaces/DataFromBackend";
 import '../../assets/styles/board.css'
+import ModalEditBoard from "./componetns/modalEditTitle/modalEditBoard";
 
 function withPositionInRange(lowerBound: number, upperBound: number, columns:_Data["data"]['columnList']){
     const x = Object.values(columns).filter((column) => {
@@ -148,6 +149,9 @@ const onDragEnd = (result: any, columns:_Data["data"]['columnList'], setData:_Da
 
 const Board = () => {
     const [data, setData] = useState<_Data['data']> (loadDefaultData);
+    const [modalEdit, setModalEdit] = React.useState(false);
+    const modalEditOpen = () => setModalEdit(true);
+    const modalEditClose = () => setModalEdit(false);
     const theme = useTheme();
     const colorMode = React.useContext(ColorModeContext);
     const bodyStyle = { backgroundColor: theme.palette.background.default };
@@ -207,8 +211,10 @@ const Board = () => {
                 </Grid>
                 <Grid>
             <Typography variant={'h3'} color={'textPrimary'} style={{textAlign:"center"}}>
-                {data.title}<IconButton
+                {data.title}
+                <IconButton
                 aria-label="settingsColumn"
+                onClick={modalEditOpen}
             >
                 <SettingsIcon />
             </IconButton></Typography>
@@ -223,7 +229,7 @@ const Board = () => {
                     {!(theme.palette.mode == 'light') && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>Light Mode <Brightness4Icon/></Typography>)}
                 </Button>
                 <Grid sx={{textAlign:'center'}}>
-                    <Typography color={'textPrimary'} variant={'h4'} >Kanban Table</Typography>
+                    <Typography color={'textPrimary'} variant={'h4'} >Kanban Board</Typography>
                     <Typography color={theme.palette.primary.main} variant={'h5'} >by MAGI</Typography>
                 </Grid>
             </Grid>
@@ -267,6 +273,7 @@ const Board = () => {
                     </Droppable>
                 </DragDropContext>
             </Grid>
+            <ModalEditBoard id={data.id} title={data.title} modalEdit={modalEdit} modalEditClose={modalEditClose} data={data} handleDataChange={setData}/>
         </Stack>
     );
 }
