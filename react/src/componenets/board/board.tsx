@@ -19,148 +19,22 @@ import {editBoardToBackend} from "../../services/boardService";
 import DataFromBackend from "../../interfaces/DataFromBackend";
 import '../../assets/styles/board.css'
 import ModalEditBoard from "./componetns/modalEditTitle/modalEditBoard";
-
-function withPositionInRange(lowerBound: number, upperBound: number, columns:_Data["data"]['columnList']){
-    const x = Object.values(columns).filter((column) => {
-        return column.position >= lowerBound && column.position <= upperBound;
-    });
-    return x;
-}
-
-function changePositionToRight(columns:DataFromBackend['columnList']){
-    return Object.values(columns).map((column) => {
-        column.position = column.position + 1
-    });
-}
-function changePositionToLeft(columns:DataFromBackend['columnList']){
-    return Object.values(columns).map((column) => {
-        column.position = column.position - 1
-    });
-}
-
-const onDragEnd = (result: any, columns:_Data["data"]['columnList'], setData:_Data["setData"], data:_Data["data"]) => {
-    if (!result.destination) return
-    const {source, destination} = result;
-    if(result.type === 'column') {
-        if(destination.index < columns[result.draggableId].position){
-            const columnsToChange = withPositionInRange(destination.index, source.index, columns);
-            console.log(columnsToChange)
-            const changedColumns = changePositionToRight(columnsToChange)
-        }if(destination.index > columns[result.draggableId].position){
-            const columnsToChange = withPositionInRange(source.index, destination.index, columns);
-            const changedColumns = changePositionToLeft(columnsToChange)
-        }
-        columns[result.draggableId].position = destination.index
-        moveColumnToBackend(result.draggableId, destination.index)
-            .then(res => {
-                getColumnFromBackend(data.id)
-                    .then(res => {
-                        if (res) {
-                            const columns: _Data["data"]['columnList'] = res
-                            setData({
-                                ...data,
-                                columnList: columns
-
-                            })
-                        }
-                    })
-            })
-    }
-    if(result.type === 'task') {
-        if (source.droppableId !== destination.droppableId){
-            const sourceColumn = columns[source.droppableId];
-            const destColumn = columns[destination.droppableId];
-            const sourceItems = [...sourceColumn.cards];
-            const destItems = [...destColumn.cards];
-            const [removed] = sourceItems.splice(source.index, 1);
-            destItems.splice(destination.index, 0, removed);
-            setData({
-                ...data,
-                columnList: {
-                    ...columns,
-                    [source.droppableId]: {
-                        ...sourceColumn,
-                        cards: sourceItems
-                    },
-                    [destination.droppableId]:{
-                        ...destColumn,
-                        cards: destItems
-                    }
-                }
-            })
-            moveCardToAnotherColumn(result.draggableId, destination.droppableId, destination.index)
-                .then(res => {
-                    getColumnFromBackend(data.id)
-                        .then(res => {
-                            if (res) {
-                                setData({
-                                    ...data,
-                                    columnList: {
-                                        ...res,
-                                        [source.droppableId]: {
-                                            ...res[source.droppableId],
-                                            cards: res[source.droppableId].cards
-                                        },
-                                        [destination.droppableId]:{
-                                            ...res[destination.droppableId],
-                                            cards: res[destination.droppableId].cards
-                                        }
-                                    }
-
-                                })
-                            }
-                        })
-                })
-            }else{
-            const column = columns[source.droppableId];
-            const copiedItems = [...column.cards];
-            const [removed] = copiedItems.splice(source.index, 1);
-            copiedItems.splice(destination.index, 0, removed);
-            setData({
-                ...data,
-                columnList: {
-                    ...columns,
-                    [source.droppableId]: {
-                        ...column,
-                        cards: copiedItems
-                    }
-                }})
-
-            moveCardInColumn(result.draggableId, destination.index)
-                .then(res => {
-                    getColumnById(result.draggableId)
-                        .then(res => {
-                            if (res) {
-                                setData({
-                                    ...data,
-                                    columnList: {
-                                        ...columns,
-                                        [res.id]: {
-                                            ...column,
-                                            cards: copiedItems
-                                        }
-                                    }})
-                            }
-                        })
-                })
-        }
-    }
-    }
-
+import {onDragEnd, usersData} from "../../services/boardService";
 const Board = () => {
     const [data, setData] = useState<_Data['data']> (loadDefaultData);
     const [modalEdit, setModalEdit] = React.useState(false);
+    const [isFirst, setIsFirst] = useState(true)
     const modalEditOpen = () => setModalEdit(true);
     const modalEditClose = () => setModalEdit(false);
     const theme = useTheme();
     const colorMode = React.useContext(ColorModeContext);
     const bodyStyle = { backgroundColor: theme.palette.background.default };
-    useEffect(() => {
+    useEffect(() =>{
         document.body.style.backgroundImage = 'none';
-        document.body.style.overflow = 'scroll';
+        document.body.style.overflowY = 'scroll';
         return () => {
             document.body.style.backgroundImage = '';
-            document.body.style.overflow = '';// Resetuj styl tła body przy usuwaniu komponentu
+            document.body.style.overflowY = '';
         };
     }, []);
 
@@ -234,7 +108,7 @@ const Board = () => {
                 </Grid>
             </Grid>
             </Grid>
-            <Grid container spacing={{xs: 2, md:3}} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid container spacing={{xs: 2, md:3}} columns={{ xs: 4, sm: 8, md: 12 }} sx={{overflowX:'scroll'}}>
                 <DragDropContext
                     onDragEnd={(result) =>
                         onDragEnd(result, data.columnList, setData, data)
@@ -245,30 +119,35 @@ const Board = () => {
                         direction="horizontal"
                         type="column">
                         {(provided, snapshot) => (
-                            <Stack
-                                spacing={2}
-                                direction={"row"}
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                            >
-                                {Object.values(data.columnList)
-                                    .sort((a, b) => a.position - b.position) // sortowanie po pozycji
-                                    .map((column) => (
-                                        <Column
-                                            key={column.id}
-                                            id={column.id}
-                                            title={column.title}
-                                            cardsLimit={column.cardsLimit}
-                                            position={column.position}
-                                            cards={column.cards}
-                                            data={data}
-                                            handleDataChange={setData}
-                                            isDragging={snapshot.isDraggingOver}
-                                        />
-                                    ))}
-                                {provided.placeholder}
+                            <Grid>
+                                <Grid sx={{display:"flex", flexDirection:'column'}}>
+                                            <Stack
+                                                spacing={2}
+                                                direction={"row"}
+                                                {...provided.droppableProps}
+                                                ref={provided.innerRef}
+                                            >
+                                                {Object.values(data.columnList)
+                                                    .sort((a, b) => a.position - b.position) // sortowanie po pozycji
+                                                    .map((column) => (
+                                                        <Column
+                                                            key={column.id}
+                                                            id={column.id}
+                                                            title={column.title}
+                                                            cardsLimit={column.cardsLimit}
+                                                            position={column.position}
+                                                            cards={column.cards}
+                                                            data={data}
+                                                            handleDataChange={setData}
+                                                            isDragging={snapshot.isDraggingOver}
+                                                            isFirst={isFirst}
+                                                        />
+                                                    ))}
+                                                {provided.placeholder}
 
-                            </Stack>
+                                            </Stack>
+                                        </Grid>
+                            </Grid>
                         )}
                     </Droppable>
                 </DragDropContext>

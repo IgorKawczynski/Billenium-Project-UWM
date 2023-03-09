@@ -21,7 +21,10 @@ const Column = (props:ColumnProps) => {
     const modalEditClose = () => setModalEdit(false);
 
     return(
-        <Grid style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+        <Grid style={{display:'flex', flexDirection:'column', alignItems:'center', background: props.cards.length > props.cardsLimit
+            && props.cardsLimit != 0
+            && props.position != 0 && props.position != Object.keys(props.data.columnList).length-1 ? 'rgba(253,0,8,0.35)' : 'transparent'}}
+        >
             <Draggable draggableId={props.id} index={props.position}>
                 {provided => (
                     <Grid
@@ -78,7 +81,6 @@ const Column = (props:ColumnProps) => {
                                         && props.cards.length > props.cardsLimit
                                         && props.cardsLimit != 0
                                         && props.position != 0
-                                        && props.position != Object.keys(props.data.columnList).length-1 ? '#f24e53' : 'transparent'
                                         && props.isDragging ? 'rgba(154,154,154,0.11)': 'transparent',
                                     padding: 4,
                                     width: 250,
@@ -112,6 +114,7 @@ const Column = (props:ColumnProps) => {
                 id={props.id}
                 title={props.title}
                 cardsLimit={props.cardsLimit}
+                position={props.position}
                 modalEdit={modalEdit}
                 modalEditClose={modalEditClose}
                 data={props.data}

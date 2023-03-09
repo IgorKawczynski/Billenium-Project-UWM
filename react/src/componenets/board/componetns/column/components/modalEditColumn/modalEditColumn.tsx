@@ -26,6 +26,12 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
         setLimit(value);
     };
 
+    useEffect(() => {
+        if(props.position == 0 || props.position == Object.keys(props.data.columnList).length-1){
+            setCheckLimit(true)
+        }
+    })
+
     const handleCheckLimitChange = () => {
         setCheckLimit((prevState) => !prevState);
     };

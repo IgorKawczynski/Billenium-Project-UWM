@@ -15,6 +15,8 @@ interface ColumnProps {
     handleDataChange:_Data["setData"]
 
     isDragging:boolean
+
+    isFirst:boolean
 }
 
 export default ColumnProps

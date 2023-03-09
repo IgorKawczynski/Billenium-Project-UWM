@@ -5,6 +5,7 @@ interface ModalEditColumnProps {
     id:string
     title:string
     cardsLimit:number
+    position:number
     modalEdit:boolean
     modalEditClose:() => void
     data:_Data["data"]
