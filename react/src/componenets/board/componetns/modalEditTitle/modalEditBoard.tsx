@@ -9,7 +9,7 @@ import {Grid} from "@mui/material";
 import Stack from "@mui/material/Stack";
 import ModalEditBoardProps from "./interface/ModalEditBoard";
 import {modalStyle} from "../../../../assets/themes/modalStyle";
-import {editBoardToBackend, getBoardTitleFromBackend} from "../../../../../../../../Inżynierka/Do prezentacji/core1/src/services/boardService";
+import {editBoardToBackend, getBoardTitleFromBackend} from "../../../../services/boardService";
 
 const ModalEditBoard = (props:ModalEditBoardProps) => {
     const [name, setName] = useState(props.title);

@@ -1,10 +1,10 @@
 import axios from "axios";
-import transformData from "../../../../../Projekt-Grupowy/Billenium-Project-UWM/react/src/services/transromData";
+import transformData from "./transromData";
 import {v4 as uuidv4} from "uuid";
 import {_Data} from "../interfaces/DataBoard";
 import {getColumnById, getColumnFromBackend} from "./columnService";
 import {moveCardInColumn, moveCardToAnotherColumn} from "./cardService";
-import DataFromBackend from "../../../../../Projekt-Grupowy/Billenium-Project-UWM/react/src/interfaces/DataFromBackend";
+import DataFromBackend from "../interfaces/DataFromBackend";
 
 export const domainUrl = 'http://localhost:8080'
 export const usersData = [

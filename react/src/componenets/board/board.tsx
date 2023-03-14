@@ -5,21 +5,17 @@ import Typography from "@mui/material/Typography";
 import AddColumnButton from "./componetns/column/components/addColumnButton/addColumnButton";
 import Stack from "@mui/material/Stack";
 import {_Data} from "../../interfaces/DataBoard";
-import {loadBoardFromBackend, loadDefaultData} from "../../../../../../Inżynierka/Do prezentacji/core1/src/services/boardService";
+import {loadBoardFromBackend, loadDefaultData} from "../../services/boardService";
 import {Grid, useTheme} from "@mui/material";
 import Button from "@mui/material/Button";
 import {ColorModeContext} from "../../App";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
-import {moveColumnToBackend} from "../../../../../../Inżynierka/Do prezentacji/core1/src/services/boardService";
-import {getColumnById, getColumnFromBackend, removeColumnToBackend} from "../../services/columnService";
-import {moveCardToAnotherColumn, moveCardInColumn} from "../../services/cardService";
 import SettingsIcon from "@mui/icons-material/Settings";
 import IconButton from "@mui/material/IconButton";
-import {editBoardToBackend} from "../../../../../../Inżynierka/Do prezentacji/core1/src/services/boardService";
-import DataFromBackend from "../../interfaces/DataFromBackend";
+import {editBoardToBackend} from "../../services/boardService";
 import '../../assets/styles/board.css'
 import ModalEditBoard from "./componetns/modalEditTitle/modalEditBoard";
-import {onDragEnd, usersData} from "../../../../../../Inżynierka/Do prezentacji/core1/src/services/boardService";
+import {onDragEnd} from "../../services/boardService";
 const Board = () => {
     const [data, setData] = useState<_Data['data']> (loadDefaultData);
     const [modalEdit, setModalEdit] = React.useState(false);
