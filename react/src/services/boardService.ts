@@ -1,10 +1,10 @@
 import axios from "axios";
-import transformData from "./transromData";
+import transformData from "../../../../../Projekt-Grupowy/Billenium-Project-UWM/react/src/services/transromData";
 import {v4 as uuidv4} from "uuid";
-import {_Data} from "../interfaces/DataBoard";
-import {getColumnById, getColumnFromBackend} from "./columnService";
-import {moveCardInColumn, moveCardToAnotherColumn} from "./cardService";
-import DataFromBackend from "../interfaces/DataFromBackend";
+import {_Data} from "../../../../../Projekt-Grupowy/Billenium-Project-UWM/react/src/interfaces/DataBoard";
+import {getColumnById, getColumnFromBackend} from "../../../../../Projekt-Grupowy/Billenium-Project-UWM/react/src/services/columnService";
+import {moveCardInColumn, moveCardToAnotherColumn} from "../../../../../Projekt-Grupowy/Billenium-Project-UWM/react/src/services/cardService";
+import DataFromBackend from "../../../../../Projekt-Grupowy/Billenium-Project-UWM/react/src/interfaces/DataFromBackend";
 
 export const usersData = [
     {
