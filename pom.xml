@@ -67,13 +67,13 @@
 				<version>8.0.0</version>
 				<configuration>
 					<user>postgres</user>
-					<password>qwerty</password>
+					<password>irjOdqujT3Jm4ieyZF2l</password>
 					<sqlMigrationSeparator>__</sqlMigrationSeparator>
 					<locations>
 						<location>filesystem:src/main/resources/flyway_scripts</location>
 					</locations>
 					<mixed>true</mixed> <!--> needed to create sequence <!-->
-					<url>jdbc:postgresql://localhost:5432/kanban</url>
+					<url>jdbc:postgresql://postgres:irjOdqujT3Jm4ieyZF2l@containers-us-west-137.railway.app:5592/railway</url>
 					<schemas>
 						<schema>public</schema>
 					</schemas>
