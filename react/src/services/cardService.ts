@@ -1,9 +1,9 @@
 import axios from "axios";
-
+import {domainUrl} from './boardService'
 export async function addCardToBackend(columnId:string, title:string, description:string){
 
     try{
-        const response = await axios.post('http://localhost:8080/api/cards', {columnId, title, description})
+        const response = await axios.post(domainUrl+`/api/cards`, {columnId, title, description})
         console.log(response.data)
         return response.data
     }catch(error){
@@ -14,7 +14,7 @@ export async function addCardToBackend(columnId:string, title:string, descriptio
 }
 export async function updateCardToBackend(cardId:string, title:string, description:string){
     try{
-        const response = await axios.put(`http://localhost:8080/api/cards`, {cardId, title, description})
+        const response = await axios.put(domainUrl+`/api/cards`, {cardId, title, description})
         return response.data
     }catch(error:any){
         return alert(error.response.data.fieldName)
@@ -22,7 +22,7 @@ export async function updateCardToBackend(cardId:string, title:string, descripti
 
 }
 export async function moveCardToAnotherColumn(cardId:string, newColumnId:string, newPosition:number){
-    const apiUrl = `http://localhost:8080/api/cards/another-column`;
+    const apiUrl = domainUrl+`/api/cards/another-column`;
     try {
         const response = await axios.put(apiUrl, {cardId, newColumnId,newPosition});
     } catch (error) {
@@ -30,7 +30,7 @@ export async function moveCardToAnotherColumn(cardId:string, newColumnId:string,
     }
 }
 export async function moveCardInColumn(cardId:string, newPosition:number){
-    const apiUrl = `http://localhost:8080/api/cards/same-column`;
+    const apiUrl = domainUrl+`/api/cards/same-column`;
     try {
         const response = await axios.put(apiUrl, {cardId, newPosition});
     } catch (error) {
@@ -38,7 +38,7 @@ export async function moveCardInColumn(cardId:string, newPosition:number){
     }
 }
 export async function removeCardToBackend(cardId:string){
-    const apiUrl = `http://localhost:8080/api/cards/${cardId}`;
+    const apiUrl = domainUrl+`/api/cards/${cardId}`;
     try {
         const response = await axios.delete(apiUrl);
     } catch (error) {

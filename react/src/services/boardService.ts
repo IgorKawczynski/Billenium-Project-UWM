@@ -1,11 +1,12 @@
 import axios from "axios";
 import transformData from "../../../../../Projekt-Grupowy/Billenium-Project-UWM/react/src/services/transromData";
 import {v4 as uuidv4} from "uuid";
-import {_Data} from "../../../../../Projekt-Grupowy/Billenium-Project-UWM/react/src/interfaces/DataBoard";
-import {getColumnById, getColumnFromBackend} from "../../../../../Projekt-Grupowy/Billenium-Project-UWM/react/src/services/columnService";
-import {moveCardInColumn, moveCardToAnotherColumn} from "../../../../../Projekt-Grupowy/Billenium-Project-UWM/react/src/services/cardService";
+import {_Data} from "../interfaces/DataBoard";
+import {getColumnById, getColumnFromBackend} from "./columnService";
+import {moveCardInColumn, moveCardToAnotherColumn} from "./cardService";
 import DataFromBackend from "../../../../../Projekt-Grupowy/Billenium-Project-UWM/react/src/interfaces/DataFromBackend";
 
+export const domainUrl = 'http://localhost:8080'
 export const usersData = [
     {
         id:'123',
@@ -183,7 +184,7 @@ export function loadDefaultData(){
 }
 
 export async function loadBoardFromBackend(id: string): Promise<_Data["data"]> {
-    const apiUrl = `http://localhost:8080/api/boards/${id}`;
+    const apiUrl = domainUrl+`/api/boards/${id}`;
     try {
         const response = await axios.get(apiUrl);
         if(response.data != null){
@@ -197,7 +198,7 @@ export async function loadBoardFromBackend(id: string): Promise<_Data["data"]> {
 }
 
 export async function moveColumnToBackend(columnId:string, newPosition:number){
-    const apiUrl = `http://localhost:8080/api/columns/move`;
+    const apiUrl = domainUrl+`/api/columns/move`;
     try {
         const response = await axios.put(apiUrl, {columnId, newPosition});
         console.log(response.data)
