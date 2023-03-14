@@ -6,7 +6,7 @@ import {getColumnById, getColumnFromBackend} from "./columnService";
 import {moveCardInColumn, moveCardToAnotherColumn} from "./cardService";
 import DataFromBackend from "../interfaces/DataFromBackend";
 
-export const domainUrl = 'https://billenium-project-uwm-production-b520.up.railway.app/'
+export const domainUrl = 'https://billenium-project-uwm-production-b520.up.railway.app'
 export const usersData = [
     {
         id:'123',
