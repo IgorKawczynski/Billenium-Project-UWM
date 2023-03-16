@@ -2,6 +2,7 @@ package pl.uwm.projektzespolowy.models.board;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
@@ -20,11 +21,13 @@ import static pl.uwm.projektzespolowy.models.column.Column.UNLIMITED_SIZE;
 @Entity
 @Table(name = "boards")
 @Setter
+@Getter
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Board extends BasicEntity {
 
     Title title;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id", referencedColumnName = "id")
     User creator;
@@ -78,7 +81,7 @@ public class Board extends BasicEntity {
         return new Position(columnsNumber);
     }
 
-    public void assign(Column column) {
+    public void assignColum(Column column) {
         this.columns.add(column);
     }
 
@@ -87,23 +90,8 @@ public class Board extends BasicEntity {
         column.setBoard(null);
     }
 
-    public void assign(User user) {
+    public void assignUser(User user) {
         this.assignedUsers.add(user);
     }
 
-    public Title getTitle() {
-        return title;
-    }
-
-    public User getCreator() {
-        return creator;
-    }
-
-    public Set<User> getAssignedUsers() {
-        return assignedUsers;
-    }
-
-    public List<Column> getColumns() {
-        return columns;
-    }
 }

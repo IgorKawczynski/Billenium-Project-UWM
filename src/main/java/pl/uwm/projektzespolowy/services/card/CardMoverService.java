@@ -17,10 +17,13 @@ public class CardMoverService {
         var cardsFromOldColumn = new PositionableList<>(cardOldColumn.getCards());
         cardsFromOldColumn.withHigherOrEqualPositionThanGiven(card);
         cardsFromOldColumn.moveLeftAll();
+
         changeCardColumn(card, cardOldColumn, cardNewColumn, newPosition);
+
         var cardsFromNewColumn = new PositionableList<>(cardNewColumn.getCards());
         cardsFromNewColumn.withHigherOrEqualPositionThanGiven(card);
         cardsFromNewColumn.moveRightAll();
+
         var changedCards = new ArrayList<Card>();
         changedCards.addAll(cardsFromNewColumn.list());
         changedCards.addAll(cardsFromOldColumn.list());
@@ -35,14 +38,17 @@ public class CardMoverService {
 
     public ArrayList<Card> moveCard(Card card, Integer newPosition) {
         var cardsToChange = new PositionableList<>(card.getColumn().getCards());
+
         if (newPosition < card.getPosition().value()) {
             cardsToChange.withPositionInRange(new Position(newPosition), card.getPosition());
             cardsToChange.moveRightAll();
         }
+
         if (newPosition > card.getPosition().value()) {
             cardsToChange.withPositionInRange(card.getPosition(), new Position(newPosition));
             cardsToChange.moveLeftAll();
         }
+
         card.getPosition().moveTo(newPosition);
         return new ArrayList<>(cardsToChange.list());
     }

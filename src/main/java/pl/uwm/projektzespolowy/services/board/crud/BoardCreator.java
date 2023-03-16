@@ -19,4 +19,5 @@ public class BoardCreator {
         var title = new Title(givenTitle);
         return boardRepository.saveAndFlush(new Board(title, boardOwner));
     }
+
 }

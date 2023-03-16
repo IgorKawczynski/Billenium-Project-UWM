@@ -12,7 +12,6 @@ public class UserCRUDService {
 
     private final UserCreator userCreator;
     private final UserReader userReader;
-    private final UserUpdater userUpdater;
     private final UserDeleter userDeleter;
 
     public User createUser(User user) {
@@ -22,7 +21,6 @@ public class UserCRUDService {
     public List<UserResponseDTO> getAllUsers() {
         return userReader.getAllUsersResponseDTO();
     }
-
 
     public UserResponseDTO getUserById(Long id) {
         return userReader

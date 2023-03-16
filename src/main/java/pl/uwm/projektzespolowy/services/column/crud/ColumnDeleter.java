@@ -17,9 +17,11 @@ public class ColumnDeleter {
     public void deleteColumn(Column columnToDelete) {
         var board = boardReader.getBoardById(columnToDelete.getBoard().getId());
         var boardColumns = new PositionableList<>(board.getColumns());
+
         boardColumns.withHigherOrEqualPositionThanGiven(columnToDelete);
         boardColumns.moveLeftAll();
         board.deleteColumn(columnToDelete);
+
         columnRepository.delete(columnToDelete);
         columnRepository.saveAll(boardColumns.list());
     }

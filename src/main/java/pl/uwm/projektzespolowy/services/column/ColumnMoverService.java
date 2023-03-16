@@ -19,14 +19,17 @@ public class ColumnMoverService {
 
     private ArrayList<Column> moveColumnLogic(Column column, Integer newPosition) {
         var columnsToChange = new PositionableList<>(column.getBoard().getColumns());
+
         if (newPosition < column.getPosition().value()) {
             columnsToChange.withPositionInRange(new Position(newPosition), column.getPosition());
             columnsToChange.moveRightAll();
         }
+
         if (newPosition > column.getPosition().value()) {
             columnsToChange.withPositionInRange(column.getPosition(), new Position(newPosition));
             columnsToChange.moveLeftAll();
         }
+
         column.getPosition().moveTo(newPosition);
         return new ArrayList<>(columnsToChange.list());
     }

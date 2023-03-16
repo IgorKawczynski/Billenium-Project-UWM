@@ -7,7 +7,7 @@ import pl.uwm.projektzespolowy.exceptions.VOExceptions.StringValidatorException;
 @Component
 public class ValidatorService {
 
-    // TODO - Validation for VOs
+    // TODO: Validation for VOs
 //    public static final String NAME_REGEX = "[\\p{Alpha}\\p{Space}-.']++";
 //    public static final String EMAIL_REGEX = "[\\p{Alpha}\\p{Digit}]++@[\\p{Alpha}\\p{Digit}]++.[\\p{Alpha}\\p{Digit}]++";
 //    public static final String PASSWORD_REGEX = "[\\p{Alnum}\\p{Punct}]++";
@@ -35,4 +35,5 @@ public class ValidatorService {
             throw new IntegerValidatorException(String.format("%d must be lesser than %d", integerToValidate, biggerThanValue));
         }
     }
+
 }

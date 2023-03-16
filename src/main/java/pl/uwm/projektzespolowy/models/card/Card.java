@@ -2,6 +2,7 @@ package pl.uwm.projektzespolowy.models.card;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
@@ -18,13 +19,13 @@ import java.util.Set;
 @Entity
 @Table(name = "cards")
 @Setter
+@Getter
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Card extends BasicEntity implements Positionable {
 
     Title title;
     String description;
-
     Position position;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -51,30 +52,10 @@ public class Card extends BasicEntity implements Positionable {
                 .build();
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public Title getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Column getColumn() {
-        return column;
-    }
-
-    public Set<User> getAssignedUsers() {
-        return assignedUsers;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Card card)) return false;
+        if (!(o instanceof Card)) return false;
         return this.id != null && this.id.equals(((Card) o).getId());
     }
 
@@ -82,4 +63,5 @@ public class Card extends BasicEntity implements Positionable {
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }
