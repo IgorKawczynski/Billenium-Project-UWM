@@ -5,7 +5,12 @@ import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
 
 import java.util.List;
 
-public record ColumnResponseDTO(String id, String title, Integer cardsLimit, Integer position, List<CardResponseDTO> cards) {
+public record ColumnResponseDTO(String id,
+                                String title,
+                                Integer cardsLimit,
+                                Integer position,
+                                List<CardResponseDTO> cards) {
 
     @Builder public ColumnResponseDTO {}
+
 }

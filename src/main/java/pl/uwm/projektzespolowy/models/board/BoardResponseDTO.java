@@ -13,4 +13,5 @@ public record BoardResponseDTO(String id,
                                List<ColumnResponseDTO> columnList) {
 
     @Builder public BoardResponseDTO {}
+
 }

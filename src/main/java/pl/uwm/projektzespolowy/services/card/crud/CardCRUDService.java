@@ -20,10 +20,6 @@ public class CardCRUDService {
     private final CardDeleter cardDeleter;
     private final ColumnReader columnReader;
 
-    public List<CardResponseDTO> getAllCards() {
-        return cardReader.getAllCards();
-    }
-
     public Card getCardById(Long id) {
         return cardReader.getCardById(id);
     }

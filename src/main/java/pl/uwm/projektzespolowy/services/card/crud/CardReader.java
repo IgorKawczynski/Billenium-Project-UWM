@@ -15,14 +15,6 @@ public class CardReader {
 
     private final CardRepository cardRepository;
 
-    public List<CardResponseDTO> getAllCards() {
-        return cardRepository
-                .findAll()
-                .stream()
-                .map(Card::toDto)
-                .toList();
-    }
-
     public Card getCardById(Long id) {
         return cardRepository
                 .findById(id)

@@ -21,9 +21,11 @@ public class ColumnCreator {
         var boardColumns = new PositionableList<>(board.getColumns());
         var position = board.getPositionForNewColumn();
         var column = new Column(new Title(givenTitle), DEFAULT_SIZE, position, board);
+
         boardColumns.withHigherOrEqualPositionThanGiven(column);
         boardColumns.moveRightAll();
         column.setPosition(position);
+
         columnRepository.saveAll(boardColumns.list());
         return columnRepository.saveAndFlush(column);
     }

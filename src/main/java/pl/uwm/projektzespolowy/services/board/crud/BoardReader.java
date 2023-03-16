@@ -10,10 +10,10 @@ import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
 @RequiredArgsConstructor
 public class BoardReader {
 
-    private final BoardRepository repository;
+    private final BoardRepository boardRepository;
 
     public Board getBoardById(Long id) {
-        return repository.findById(id)
+        return boardRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("board", "Board with id: " + id + " does not exist!"));
     }
 

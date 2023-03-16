@@ -20,16 +20,19 @@ public class ColumnController {
     private final ColumnMoverService columnMoverService;
 
     @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
     public ColumnResponseDTO createColumn(@RequestBody ColumnCreateDTO columnCreateDTO) {
         return columnCRUDService.addColumnToBoard(columnCreateDTO);
     }
 
     @GetMapping("/{columnId}")
+    @ResponseStatus(HttpStatus.OK)
     public ColumnResponseDTO getColumnById(@PathVariable Long columnId) {
         return columnCRUDService.getColumnResponseDTOById(columnId);
     }
 
     @GetMapping("/{boardId}/all")
+    @ResponseStatus(HttpStatus.OK)
     public List<ColumnResponseDTO> getAllColumnsByBoardId(@PathVariable Long boardId) {
         return columnCRUDService.getColumnsByBoardId(boardId);
     }
@@ -40,15 +43,16 @@ public class ColumnController {
         return columnCRUDService.updateColumn(columnUpdateDTO);
     }
 
-    @DeleteMapping("/{columnId}")
-    public void deleteColumnById(@PathVariable Long columnId) {
-        columnCRUDService.deleteColumn(columnId);
-    }
-
     @PutMapping("/move")
     @ResponseStatus(HttpStatus.OK)
     public ColumnResponseDTO moveColumn(@RequestBody ColumnMoveDTO columnMoveDTO) {
         return columnMoverService.moveColumn(columnMoveDTO);
+    }
+
+    @DeleteMapping("/{columnId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteColumnById(@PathVariable Long columnId) {
+        columnCRUDService.deleteColumn(columnId);
     }
 
 }

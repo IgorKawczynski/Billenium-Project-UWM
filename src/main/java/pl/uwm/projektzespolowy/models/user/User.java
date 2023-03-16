@@ -2,6 +2,7 @@ package pl.uwm.projektzespolowy.models.user;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
@@ -15,6 +16,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @Setter
+@Getter
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class User extends BasicEntity {
@@ -59,19 +61,4 @@ public class User extends BasicEntity {
         return firstName + " " + lastName;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public Set<Board> getBoards() {
-        return boards;
-    }
-
-    public Set<Card> getCards() {
-        return cards;
-    }
 }

@@ -13,32 +13,36 @@ import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
 @RequestMapping("/api/boards")
 public class BoardController {
 
-    private final BoardCRUDService service;
+    private final BoardCRUDService boardCRUDService;
 
     @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
     public BoardResponseDTO createBoard(@RequestBody BoardCreateDTO boardCreateDTO) {
-        return service.createBoard(boardCreateDTO);
+        return boardCRUDService.createBoard(boardCreateDTO);
     }
 
     @GetMapping("/{boardId}")
+    @ResponseStatus(HttpStatus.OK)
     public BoardResponseDTO getBoardById(@PathVariable Long boardId) {
-        return service.getBoardById(boardId);
+        return boardCRUDService.getBoardById(boardId);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, params = {"boardId"})
+    @ResponseStatus(HttpStatus.OK)
+    public String getBoardTitleById(@RequestParam String boardId) {
+        return boardCRUDService.getBoardTitleById(boardId);
     }
 
     @PutMapping("")
     @ResponseStatus(HttpStatus.OK)
     public BoardResponseDTO updateBoard(@RequestBody BoardUpdateDTO boardUpdateDTO) {
-        return service.updateBoard(boardUpdateDTO);
+        return boardCRUDService.updateBoard(boardUpdateDTO);
     }
 
     @DeleteMapping("/{boardId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBoardById(@PathVariable Long boardId) {
-        service.deleteBoard(boardId);
-    }
-
-    @RequestMapping(method = RequestMethod.GET, params = {"boardId"})
-    public String getBoardTitleById(@RequestParam String boardId) {
-        return service.getBoardTitleById(boardId);
+        boardCRUDService.deleteBoard(boardId);
     }
 
 }

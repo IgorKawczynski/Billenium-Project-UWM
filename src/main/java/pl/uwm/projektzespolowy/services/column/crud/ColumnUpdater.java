@@ -36,4 +36,5 @@ public class ColumnUpdater {
     public void saveChangedColumn(Column column) {
         columnRepository.saveAndFlush(column);
     }
+
 }

@@ -14,20 +14,22 @@ public class CardController {
 
     private final CardFacade cardFacade;
 
+    @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
+    public CardResponseDTO addCardToColumn(@RequestBody CardCreateDTO cardCreateDTO) {
+        return cardFacade.addCardToColumn(cardCreateDTO);
+    }
+
     @RequestMapping(method = RequestMethod.GET, params = {"cardId"})
+    @ResponseStatus(HttpStatus.OK)
     public CardResponseDTO getCardById(@RequestParam Long cardId) {
         return cardFacade.getCardById(cardId);
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"columnId"})
+    @ResponseStatus(HttpStatus.OK)
     public List<CardResponseDTO> getAllCardsByColumnId(@RequestParam Long columnId) {
         return cardFacade.getAllCardsByColumnId(columnId);
-    }
-
-    @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public CardResponseDTO addCardToColumn(@RequestBody CardCreateDTO cardCreateDTO) {
-        return cardFacade.addCardToColumn(cardCreateDTO);
     }
 
     @PutMapping("")
@@ -49,6 +51,7 @@ public class CardController {
     }
 
     @DeleteMapping("/{cardId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCardById(@PathVariable Long cardId) {
         cardFacade.deleteCard(cardId);
     }

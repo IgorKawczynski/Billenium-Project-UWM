@@ -2,6 +2,7 @@ package pl.uwm.projektzespolowy.models.column;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
@@ -20,6 +21,7 @@ import java.util.List;
 @Entity
 @Table(name = "columns")
 @Setter
+@Getter
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Column extends BasicEntity implements Positionable {
@@ -27,6 +29,7 @@ public class Column extends BasicEntity implements Positionable {
     Title title;
     Integer cardsLimit;
     Position position;
+
     @ManyToOne
     @JoinColumn(name = "board_id", referencedColumnName = "id")
     Board board;
@@ -74,23 +77,4 @@ public class Column extends BasicEntity implements Positionable {
         card.setColumn(null);
     }
 
-    public Title getTitle() {
-        return title;
-    }
-
-    public Integer getCardsLimit() {
-        return cardsLimit;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public Board getBoard() {
-        return board;
-    }
-
-    public List<Card> getCards() {
-        return cards;
-    }
 }
