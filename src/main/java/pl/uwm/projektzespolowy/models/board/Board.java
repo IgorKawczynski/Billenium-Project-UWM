@@ -81,17 +81,9 @@ public class Board extends BasicEntity {
         return new Position(columnsNumber);
     }
 
-    public void assignColum(Column column) {
-        this.columns.add(column);
-    }
-
     public void deleteColumn(Column column) {
         this.columns.remove(column);
         column.setBoard(null);
-    }
-
-    public void assignUser(User user) {
-        this.assignedUsers.add(user);
     }
 
 }

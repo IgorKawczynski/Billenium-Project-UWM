@@ -20,8 +20,8 @@ public class ColumnDeleter {
 
         boardColumns.withHigherOrEqualPositionThanGiven(columnToDelete);
         boardColumns.moveLeftAll();
-        board.deleteColumn(columnToDelete);
 
+        board.deleteColumn(columnToDelete);
         columnRepository.delete(columnToDelete);
         columnRepository.saveAll(boardColumns.list());
     }

@@ -6,7 +6,6 @@ import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 import pl.uwm.projektzespolowy.services.card.CardRepository;
-import pl.uwm.projektzespolowy.services.column.crud.ColumnReader;
 
 @Component
 @RequiredArgsConstructor

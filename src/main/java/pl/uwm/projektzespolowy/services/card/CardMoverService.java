@@ -38,16 +38,7 @@ public class CardMoverService {
 
     public ArrayList<Card> moveCard(Card card, Integer newPosition) {
         var cardsToChange = new PositionableList<>(card.getColumn().getCards());
-
-        if (newPosition < card.getPosition().value()) {
-            cardsToChange.withPositionInRange(new Position(newPosition), card.getPosition());
-            cardsToChange.moveRightAll();
-        }
-
-        if (newPosition > card.getPosition().value()) {
-            cardsToChange.withPositionInRange(card.getPosition(), new Position(newPosition));
-            cardsToChange.moveLeftAll();
-        }
+        cardsToChange.moveInRange(card.getPosition(), new Position(newPosition));
 
         card.getPosition().moveTo(newPosition);
         return new ArrayList<>(cardsToChange.list());

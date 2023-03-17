@@ -50,4 +50,15 @@ public class PositionableList<T extends Positionable> {
         return this.positionables;
     }
 
+    public void moveInRange(Position currentPosition, Position newPosition) {
+        if (newPosition.value() < currentPosition.value()) {
+            this.withPositionInRange(newPosition, currentPosition);
+            this.moveRightAll();
+        }
+        if (newPosition.value() > currentPosition.value()) {
+            this.withPositionInRange(currentPosition, newPosition);
+            this.moveLeftAll();
+        }
+    }
+
 }
