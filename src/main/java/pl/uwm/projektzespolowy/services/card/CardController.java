@@ -3,6 +3,7 @@ package pl.uwm.projektzespolowy.services.card;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import pl.uwm.projektzespolowy.models.basic.dto.MoveDTO;
 import pl.uwm.projektzespolowy.models.card.*;
 
 import java.util.List;
@@ -46,7 +47,7 @@ public class CardController {
 
     @PutMapping("/same-column")
     @ResponseStatus(HttpStatus.OK)
-    public CardResponseDTO moveCard(@RequestBody CardMoveDTO cardMoveDTO) {
+    public CardResponseDTO moveCard(@RequestBody MoveDTO cardMoveDTO) {
         return cardFacade.moveCard(cardMoveDTO);
     }
 

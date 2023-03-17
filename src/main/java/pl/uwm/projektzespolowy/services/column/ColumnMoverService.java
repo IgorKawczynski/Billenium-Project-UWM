@@ -2,8 +2,8 @@ package pl.uwm.projektzespolowy.services.column;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.uwm.projektzespolowy.models.basic.dto.MoveDTO;
 import pl.uwm.projektzespolowy.models.column.Column;
-import pl.uwm.projektzespolowy.models.column.ColumnMoveDTO;
 import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.services.PositionableList;
@@ -25,8 +25,8 @@ public class ColumnMoverService {
         return new ArrayList<>(columnsToChange.list());
     }
 
-    public ColumnResponseDTO moveColumn(ColumnMoveDTO columnMoveDTO) {
-        var column = columnCRUDService.getColumnById(Long.parseLong(columnMoveDTO.columnId()));
+    public ColumnResponseDTO moveColumn(MoveDTO columnMoveDTO) {
+        var column = columnCRUDService.getColumnById(Long.parseLong(columnMoveDTO.movedObjectId()));
         var changedColumns = moveColumnLogic(column, columnMoveDTO.newPosition());
         columnCRUDService.saveChangedColumn(column);
         columnCRUDService.saveChangedColumns(changedColumns);

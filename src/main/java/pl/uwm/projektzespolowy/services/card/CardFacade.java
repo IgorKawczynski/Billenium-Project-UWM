@@ -2,6 +2,7 @@ package pl.uwm.projektzespolowy.services.card;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.uwm.projektzespolowy.models.basic.dto.MoveDTO;
 import pl.uwm.projektzespolowy.models.card.*;
 import pl.uwm.projektzespolowy.services.card.crud.CardCRUDService;
 import pl.uwm.projektzespolowy.services.column.crud.ColumnCRUDService;
@@ -32,8 +33,8 @@ public class CardFacade {
         return cardCRUDService.getAllCardsByColumnId(columnId);
     }
 
-    public CardResponseDTO moveCard(CardMoveDTO cardMoveDTO) {
-        var card = cardCRUDService.getCardById(Long.parseLong(cardMoveDTO.cardId()));
+    public CardResponseDTO moveCard(MoveDTO cardMoveDTO) {
+        var card = cardCRUDService.getCardById(Long.parseLong(cardMoveDTO.movedObjectId()));
         var changedCards = cardMoverService.moveCard(card, cardMoveDTO.newPosition());
         cardCRUDService.saveChangedCard(card);
         cardCRUDService.saveChangedCards(changedCards);

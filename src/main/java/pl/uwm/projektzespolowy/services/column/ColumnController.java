@@ -3,8 +3,8 @@ package pl.uwm.projektzespolowy.services.column;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import pl.uwm.projektzespolowy.models.basic.dto.MoveDTO;
 import pl.uwm.projektzespolowy.models.column.ColumnCreateDTO;
-import pl.uwm.projektzespolowy.models.column.ColumnMoveDTO;
 import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
 import pl.uwm.projektzespolowy.models.column.ColumnUpdateDTO;
 import pl.uwm.projektzespolowy.services.column.crud.ColumnCRUDService;
@@ -45,7 +45,7 @@ public class ColumnController {
 
     @PutMapping("/move")
     @ResponseStatus(HttpStatus.OK)
-    public ColumnResponseDTO moveColumn(@RequestBody ColumnMoveDTO columnMoveDTO) {
+    public ColumnResponseDTO moveColumn(@RequestBody MoveDTO columnMoveDTO) {
         return columnMoverService.moveColumn(columnMoveDTO);
     }
 
