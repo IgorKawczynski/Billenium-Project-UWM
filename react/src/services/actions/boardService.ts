@@ -64,11 +64,13 @@ export async function moveColumnToBackend(columnId:string, newPosition:number){
 
 export async function editBoardToBackend(boardId:string, newTitle:string){
     const apiUrl = urlDomain+`/api/boards`;
+    let response;
     try {
-        const response = await axios.put(apiUrl, {boardId, newTitle});
-        console.log(response.data)
-    } catch (error) {
-        console.error(error);
+        return response = await axios.put(apiUrl, {boardId, newTitle});
+    } catch (error: any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
     }
 }
 
@@ -77,8 +79,10 @@ export async function getBoardTitleFromBackend(boardId:string){
     try {
         const response = await axios.get(apiUrl, {params:{boardId:boardId}});
         return response.data
-    } catch (error) {
-        console.error(error);
+    } catch (error:any) {
+        if(error.data.error){
+            return error.data.error
+        }
     }
 }
 

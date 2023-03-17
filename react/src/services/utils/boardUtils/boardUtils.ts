@@ -5,6 +5,8 @@ import {moveCardInColumn, moveCardToAnotherColumn} from "@/services/actions/card
 import {editBoardToBackend, loadBoardFromBackend, moveColumnToBackend} from "@/services/actions/boardService";
 import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
+import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
+import {enqueueSnackbar} from "notistack";
 
 function withPositionInRange(lowerBound: number, upperBound: number, columns:_Data["data"]['columnList']){
     const x = Object.values(columns).filter((column) => {
@@ -140,11 +142,16 @@ export const editBoard = (id:string,
                           setModalEdit:React.Dispatch<SetStateAction<boolean>>) =>{
     editBoardToBackend(id, newTitle)
         .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else{
             loadBoardFromBackend(data.id)
                 .then( data => {
                     if(data) {
                         setData(data)
-                    }})
-        })
+                        handleClickVariant(enqueueSnackbar)('Success board title edited' ,'success')
+                    }
+                })
+        }})
     closeModal(setModalEdit)
 };

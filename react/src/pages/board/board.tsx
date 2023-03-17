@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
 import {loadDefaultData} from "@/services/actions/boardService";
-import {useTheme, Stack} from "@mui/material";
+import {useTheme, Stack, Snackbar} from "@mui/material";
 import {ColorModeContext} from "@/App";
 import '@/assets/styles/board.css'
 import ModalEditBoard from "@/componenets/modalEditBoard/modalEditBoard";

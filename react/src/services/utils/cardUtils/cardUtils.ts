@@ -3,6 +3,8 @@ import {getColumnById} from "@/services/actions/columnService";
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
 import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
+import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
+import {enqueueSnackbar} from "notistack";
 
 export const removeCard = (id:string, columnId:string, setData:_Data['setData'], data:_Data['data']) => {
     removeCardToBackend(id)
@@ -18,6 +20,7 @@ export const removeCard = (id:string, columnId:string, setData:_Data['setData'],
                                 }
 
                             })
+                            handleClickVariant(enqueueSnackbar)('Success card removed' ,'success')
                         }
                     }
                 )
@@ -35,6 +38,9 @@ export const addCard = (name: string,
 ) => {
     addCardToBackend(columnId, name, desc)
         .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else{
             getColumnById(columnId)
                 .then( res => {
                         if(res) {
@@ -46,6 +52,7 @@ export const addCard = (name: string,
                                 }
 
                             })
+                            handleClickVariant(enqueueSnackbar)('Success card added' ,'success')
                             closeModal(setOpen)
                             setName("")
                             setDesc("")
@@ -53,10 +60,9 @@ export const addCard = (name: string,
                     }
                 )
             // tutaj możesz wykonywać operacje na otrzymanym id
-        })
+        }})
         .catch(error => {
             console.error(error);
-            // obsługa błędów
         });
 };
 
@@ -69,6 +75,9 @@ export const updateCard = (id:string,
                     setModalEdit:React.Dispatch<SetStateAction<boolean>>) => {
     updateCardToBackend(id, title, desc)
         .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else{
             getColumnById(columnId)
                 .then( res => {
                         if(res) {
@@ -81,11 +90,12 @@ export const updateCard = (id:string,
 
                             })
                             closeModal(setModalEdit)
+                            handleClickVariant(enqueueSnackbar)('Success card edited' ,'success')
                         }
                     }
                 )
             // tutaj możesz wykonywać operacje na otrzymanym id
-        })
+        }})
         .catch(error => {
             // console.log(error.response.fieldName);
             // obsługa błędów

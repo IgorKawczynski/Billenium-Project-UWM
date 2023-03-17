@@ -12,8 +12,11 @@ import ModalAddColumnProps from "@/interfaces/modalAddColumnInterface/ModalAddCo
 import {modalStyle} from '@/assets/themes/modalStyle'
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {addColumn} from "@/services/utils/columnUtils/columnUtils";
+import {useSnackbar} from "notistack";
+import {Snackbar} from "@mui/material";
 export default function ModalAddColumn(props:ModalAddColumnProps) {
     const [columnName, setColumnName] = useState("");
+    const {enqueueSnackbar} = useSnackbar();
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setColumnName(event.target.value);
     };
@@ -26,7 +29,7 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
 
 
     return (
-        <Grid>
+        <Box>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -59,7 +62,8 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
                                                     props.data,
                                                     props.setData,
                                                     setColumnName ,
-                                                    props.setOpen
+                                                    props.setOpen,
+                                                    enqueueSnackbar
                                                     )}
                             variant="contained"
                         >
@@ -69,6 +73,6 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
                     </Stack>
                 </Fade>
             </Modal>
-        </Grid>
+        </Box>
     );
 }

@@ -3,15 +3,8 @@ import {transformColumns, transformColumn} from "@/services/utils/transfromData/
 import {urlDomain} from "@/services/actions/boardService";
 
 export async function addColumnToBackend(boardId:string, title:string){
-    try{
         const response = await axios.post(urlDomain+'/api/columns', {boardId, title})
-        console.log(response.data)
         return response.data
-    }catch(error){
-        console.error(error)
-        return ""
-    }
-
 }
 
 export async function removeColumnToBackend(id:string){
@@ -24,20 +17,23 @@ export async function removeColumnToBackend(id:string){
 }
 
 export async function getColumnFromBackend(boardId:string){
-    try{
         const response = await axios.get(urlDomain+`/api/columns/${boardId}/all`)
-        return transformColumns(response.data)
-    }catch(error){
-        console.error(error)
-    }
+        if(response.data.error)
+        {
+            return response.data.error
+        }else{
+            return transformColumns(response.data)
+        }
 }
 
 export async function updateColumnToBackend(columnId:string,title:string, cardsLimit:number, isUnlimited:boolean){
     try{
         const response = await axios.put(urlDomain+`/api/columns`, {columnId,title, cardsLimit, isUnlimited})
         return response.data
-    }catch(error:any){
-        return alert(error.response.data.fieldName)
+    }catch(error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
     }
 
 }
