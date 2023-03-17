@@ -7,25 +7,101 @@ import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import {columnHeaderProps} from "@/interfaces/columnHeaderInterface/ColumnHeader";
-
+import AllInclusiveOutlinedIcon from '@mui/icons-material/AllInclusiveOutlined';
 const ColumnHeader = (props:columnHeaderProps) =>{
     const theme = useTheme();
 
     return(
-        <Grid
-            style={{
+        <Box
+            sx={{
                 width:'100%',
+                minHeight:'50px',
                 display:"flex",
-                justifyContent:"space-around"
+                justifyContent:"space-between",
+                flexDirection:'column',
+                borderRadius:'8px',
+                overflow:"hidden",
+                boxShadow:`0px 4px 4px ${theme.palette.text.shadow}`,
+                bgcolor:theme.palette.background.cell
             }}
         >
-            <Grid
-                {...props.provided.dragHandleProps}
-                style={{
+            <Box
+            sx={{bgcolor:theme.palette.primary.main}}
+            width={'100%'}
+            height={'4px'}
+            >
+
+            </Box>
+            <Box sx={{
+                    alignItems:'center',
+                    height:'46px',
+                    width:'100%',
                     display:"flex",
-                    alignItems:"center"
+                    justifyContent:"space-between"
+            }}
+            >
+            <Box
+                {...props.provided.dragHandleProps}
+                sx={{
+                    display:"flex",
+                    justifyContent:'space-between',
+                    alignItems:"center",
+                    marginLeft:'8px'
                 }}
             >
+                { props.cardsLimit != 0
+                    && props.position != 0
+                    && props.position !== Object.keys(props.data.columnList).length-1 &&
+                    (<Box
+                        border={`1px ${theme.palette.text.primary} solid`}
+                        width={20}
+                        height={20}
+                        borderRadius={100}
+                        textAlign={"center"}
+                        marginRight={'8px'}
+                    >
+                        <Typography color={'textSecondary'}
+                                    variant={'body2'}
+                        >
+                        {props.cardsLimit}
+                    </Typography></Box>)}
+                {   props.position == 0 &&
+                    (<Box
+                        border={`1px ${theme.palette.text.primary} solid`}
+                        width={20}
+                        height={20}
+                        borderRadius={100}
+                        textAlign={"center"}
+                        marginRight={'8px'}
+                    >
+                        <AllInclusiveOutlinedIcon sx={{color:theme.palette.text.primary}} fontSize={"inherit"}/>
+                    </Box>)}
+
+                { props.cardsLimit == 0 &&
+                    props.position != 0&&
+                    props.position != Object.keys(props.data.columnList).length-1 &&
+                    (<Box
+                        border={`1px ${theme.palette.text.primary} solid`}
+                        width={20}
+                        height={20}
+                        borderRadius={100}
+                        textAlign={"center"}
+                        marginRight={'8px'}
+                    >
+                        <AllInclusiveOutlinedIcon sx={{color:theme.palette.text.primary}} fontSize={"inherit"}/>
+                    </Box>)}
+
+                { props.position == Object.keys(props.data.columnList).length-1 &&
+                    (<Box
+                        border={`1px ${theme.palette.text.primary} solid`}
+                        width={20}
+                        height={20}
+                        borderRadius={100}
+                        textAlign={"center"}
+                        marginRight={'8px'}
+                    >
+                        <AllInclusiveOutlinedIcon sx={{color:theme.palette.text.primary}} fontSize={"inherit"}/>
+                    </Box>)}
 
                 <Typography
                     color={'textPrimary'}
@@ -34,23 +110,13 @@ const ColumnHeader = (props:columnHeaderProps) =>{
                     {props.title}
                 </Typography>
 
-                { props.cardsLimit != 0
-                    && props.position != 0
-                    && props.position !== Object.keys(props.data.columnList).length-1 &&
-                    (<Typography color={'textSecondary'} sx={{
-                        marginLeft:'8px',
-                        height:'80%',
-                        display:'flex',
-                        flexDirection:'column',
-                        justifyContent:'end'}}
-                                 variant={'caption'}>
-                        <Box></Box>
-                        Limit: {props.cardsLimit}
-                    </Typography>)}
-            </Grid>
-            <Grid>
+            </Box>
+            <Box
+            marginRight={'8px'}
+            >
                 <IconButton
                     aria-label="settingsColumn"
+                    size={"small"}
                     onClick={() => openModal(props.setModalEdit)}
                 >
                     <BorderColorOutlinedIcon />
@@ -58,6 +124,7 @@ const ColumnHeader = (props:columnHeaderProps) =>{
                 {props.position !== 0 && props.position !== Object.keys(props.data.columnList).length-1 && (
                     <IconButton
                         aria-label="delete"
+                        size={"small"}
                         onClick={() => openModal(props.setModalDelete)}
                         sx={{color:theme.palette.primary.main}}
                     >
@@ -65,8 +132,9 @@ const ColumnHeader = (props:columnHeaderProps) =>{
                     </IconButton>
 
                 )}
-            </Grid>
-        </Grid>
+            </Box>
+            </Box>
+        </Box>
     )
 }
 

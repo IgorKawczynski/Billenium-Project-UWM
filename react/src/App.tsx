@@ -29,7 +29,7 @@ function KabanTable() {
     );
 
     return (
-        <ColorModeContext.Provider value={colorMode}>
+        <ColorModeContext.Provider value={colorMode} >
             <ThemeProvider theme={theme}>
                 <Routes>
                     <Route path="/" element={<Home/>}/>

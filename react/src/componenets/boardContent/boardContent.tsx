@@ -10,7 +10,7 @@ const BoardContent = (props:boardContentProps) =>{
 
 
     return(
-        <Box sx={{overflowX:'scroll'}}>
+        <Box sx={{overflowX:'auto'}}>
             <DragDropContext
                 onDragEnd={(result) =>
                     onDragEnd(result, props.data.columnList, props.setData, props.data)

@@ -32,7 +32,7 @@ const Board = () => {
 
 
     return (
-        <Stack spacing={2}>
+        <Stack spacing={2} >
             <BoardHeader data={data} setModalEdit={setModalEdit} setData={setData}/>
             <BoardContent data={data} setData={setData}/>
             <ModalEditBoard

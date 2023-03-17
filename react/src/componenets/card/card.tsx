@@ -23,12 +23,14 @@ const Task = (props:CardProps) => {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         
-                        style={{
+                        sx={{
                             boder:'Primary',
                             userSelect: 'none',
-                            padding: 16,
+                            paddingX: '16px',
+                            paddingY:'8px',
                             margin: '0 0 8px 0',
                             minHeight: '50px',
+                            minWidth:200,
                             background: snapshot.isDragging ? theme.palette.background.drag : theme.palette.background.default,
                             color: 'black',
                             ...provided.draggableProps.style
@@ -49,7 +51,7 @@ const Task = (props:CardProps) => {
                                 >
                                     <Typography
                                         color={'textPrimary'}
-                                        variant={'h6'}
+                                        variant={'subtitle1'}
                                     >
                                         {props.title}
                                     </Typography>
@@ -64,7 +66,7 @@ const Task = (props:CardProps) => {
                                 </Box>
                                 <Typography
                                     color={'textPrimary'}
-                                    variant={'body2'}
+                                    variant={'caption'}
                                 >
                                     {props.desc}
                                 </Typography>

@@ -5,6 +5,7 @@ import AddCardButtonProps from "@/interfaces/addCardButtonInterface/AddCardButto
 import ModalAddCard from "@/componenets/modalAddCard/modalAddCard";
 import Typography from "@mui/material/Typography";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -24,22 +25,21 @@ export default function AddCardButton(props:AddCardButtonProps) {
             <Box
                 style={{
                     display:"flex",
-                    flexDirection:"column",
-                    justifyContent:"center",
+                    width:'100%',
+                    flexDirection:"row",
+                    justifyContent:"flex-end",
                     alignItems:"center"
                 }}
             >
                 <Button
                     onClick={() => openModal(setOpen)}
                     sx={{
-                        width:"100%",
                         maxHeight:"50px",
-                        border:'1px solid'
                     }}
-                    variant="outlined"
+                    variant="text"
                 >
-                    <Typography variant={'h6'}> + </Typography>
                     <Typography variant={"button"}> Add CARD </Typography>
+                    <AddCircleOutlineOutlinedIcon/>
                 </Button>
             </Box>
             <ModalAddCard

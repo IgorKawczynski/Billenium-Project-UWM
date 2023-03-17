@@ -4,7 +4,8 @@ body{
   background-attachment: fixed ;
   min-height: 80vh;
   height: auto;
-  overflow: hidden;
+  overflow-y: visible;
+  overflow-x: visible;
 }
 #root {
   font-family: 'Open Sans','Shantell Sans', Helvetica sans-serif;
