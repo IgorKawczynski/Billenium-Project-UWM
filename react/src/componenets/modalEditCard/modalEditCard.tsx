@@ -45,7 +45,7 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                 <Fade in={props.modalEdit}>
                     <Stack sx={modalBigStyle} spacing={2}>
                         <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
-                            Editing card: {props.title}
+                            {props.title}
                         </Typography>
                         <Box
                             display={'flex'}
