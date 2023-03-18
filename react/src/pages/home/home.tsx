@@ -17,7 +17,12 @@ import {useTheme} from "@mui/material/styles";
 import { ColorModeContext } from '@/App';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import '@/assets/styles/home.css'
+import {openModal} from "@/services/utils/modalUtils/modalUtils";
+import LoginForm from "@/componenets/loginForm/loginForm";
+import RegisterForm from "@/componenets/registerForm/registerForm";
 const Home = () => {
+    const [modalLogin, setModalLogin] = useState(false);
+    const [modalRegister, setModalRegister] = useState(false);
     const theme = useTheme();
     const colorMode = React.useContext(ColorModeContext);
     const bodyStyle = { backgroundColor: theme.palette.background.default };
@@ -31,7 +36,9 @@ const Home = () => {
     return (
         <Stack  spacing={1} sx={{overflow:'hidden'}}>
             <Box sx={{width:'100%', display:'flex', justifyContent:'end'}}>
-                <Link to={'/board'}><Button variant={"contained"}>Login</Button></Link>
+                <Button
+                    onClick={() => openModal(setModalLogin)}
+                    variant={"contained"}>Login</Button>
             </Box>
             <Box sx={{display:'flex', justifyContent:'space-around'}}>
                 <Box sx={{display:'flex', flexDirection:'column' , justifyContent:'center', alignItems:'center'}}>
@@ -83,7 +90,16 @@ const Home = () => {
                 {theme.palette.mode == 'light' && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>Dark Mode <Brightness4Icon/></Typography>)}
                 {!(theme.palette.mode == 'light') && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>Light Mode <Brightness4Icon/></Typography>)}
             </Button>
-
+            <LoginForm
+                modalLogin={modalLogin}
+                setModalLogin={setModalLogin}
+                modalRegister={modalRegister}
+                setModalRegister={setModalRegister}
+            />
+            <RegisterForm
+                modalRegister={modalRegister}
+                setModalRegister={setModalRegister}
+            />
         </Stack>
     );
 }
