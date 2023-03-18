@@ -36,28 +36,10 @@ export default function EditCardButton(props:EditCardButtonProps) {
                 aria-controls={open ? 'demo-customized-menu' : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
+                onClick={() => openModal(setModalEdit)}
             >
                 <MoreVertIcon />
             </IconButton>
-            <StyledMenu
-                id="demo-customized-menu"
-                MenuListProps={{
-                    'aria-labelledby': 'demo-customized-button',
-                }}
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-            >
-                <MenuItem onClick={() => openModal(setModalEdit)} disableRipple>
-                    <EditIcon />
-                    Edit
-                </MenuItem>
-                <MenuItem onClick={() => openModal(setModalDelete)} disableRipple>
-                    <DeleteOutlinedIcon />
-                    Delete
-                </MenuItem>
-            </StyledMenu>
             
             <ModalEditCard
                 id={props.id}
@@ -68,6 +50,8 @@ export default function EditCardButton(props:EditCardButtonProps) {
                 modalEdit={modalEdit}
                 data={props.data}
                 setData={props.setData}
+                setModalDelete={setModalDelete}
+                modalDelete={modalDelete}
             />
             <ModalRemoveCard
                 id={props.id}

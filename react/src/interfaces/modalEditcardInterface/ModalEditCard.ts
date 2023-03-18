@@ -8,8 +8,11 @@ interface ModalEditCardProps {
     desc:string;
     setModalEdit: React.Dispatch<SetStateAction<boolean>>
     modalEdit:boolean
+    setModalDelete:React.Dispatch<SetStateAction<boolean>>
+    modalDelete:boolean
     data:_Data["data"]
     setData:_Data["setData"]
+
 }
 
 export default ModalEditCardProps

@@ -63,34 +63,6 @@ const Column = (props:ColumnProps) => {
                     setData={props.setData}
                     isDragging={props.isDragging}
                 />
-                {props.position==0 && (
-                    <Box
-                        marginTop={1}
-                        borderBottom={`2px ${theme.palette.text.primary} solid`}
-                        height={'25px'}
-
-                    >
-                        <Typography variant={'body1'} color={theme.palette.text.primary}>
-                            Bartosz
-                        </Typography>
-                    </Box>
-                )}
-                {props.position!=0 && (
-                    <Box
-                        marginTop={1}
-                        height={'25px'}
-                    >
-                    </Box>
-                )}
-                <ColumnCell
-                    id={props.id}
-                    cards={props.cards}
-                    cardsLimit={props.cardsLimit}
-                    position={props.position}
-                    data={props.data}
-                    setData={props.setData}
-                    isDragging={props.isDragging}
-                />
 
             </Box>
         </Box>

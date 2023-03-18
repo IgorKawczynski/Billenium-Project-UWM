@@ -24,25 +24,34 @@ const Task = (props:CardProps) => {
                         {...provided.dragHandleProps}
                         
                         sx={{
-                            boder:'Primary',
+                            border:'Primary',
                             userSelect: 'none',
-                            paddingX: '16px',
-                            paddingY:'8px',
                             margin: '0 0 8px 0',
                             minHeight: '50px',
-                            minWidth:200,
+                            width:230,
+                            flexWrap:'wrap',
                             background: snapshot.isDragging ? theme.palette.background.drag : theme.palette.background.default,
                             color: 'black',
-                            ...provided.draggableProps.style
+                            ...provided.draggableProps.style,
+                            display:'flex',
 
                         }}
                     >
                         <Box style={{
+                            maxWidth:'300px',
+                            width:'100%',
                             display:"flex",
                             justifyContent:"space-between"
                         }}>
                             <Box
+                                height={'100%'}
+                                width={'10px'}
+                                bgcolor={theme.palette.text.secondary}
+                            />
+                            <Box
                                 width={'100%'}
+                                paddingY={'8px'}
+                                paddingX={'16px'}
                             >
                                 <Box
                                     display={"flex"}
@@ -53,7 +62,8 @@ const Task = (props:CardProps) => {
                                         color={'textPrimary'}
                                         variant={'subtitle1'}
                                     >
-                                        {props.title}
+                                        {props.title.length > 20 && (props.title.slice(0,17) + "...")}
+                                        {props.title.length < 20 && (props.title)}
                                     </Typography>
                                     <EditCardButton
                                         id={props.id}
@@ -67,8 +77,10 @@ const Task = (props:CardProps) => {
                                 <Typography
                                     color={'textPrimary'}
                                     variant={'caption'}
+                                    overflow={'hidden'}
                                 >
-                                    {props.desc}
+                                    {props.desc.length > 20 && (props.desc.slice(0,22) + "...")}
+                                    {props.desc.length < 20 && (props.desc)}
                                 </Typography>
 
                             </Box>

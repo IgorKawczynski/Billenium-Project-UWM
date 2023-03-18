@@ -71,7 +71,7 @@ const ColumnCell = (props:ColumnCellProps) =>{
                                 && props.position != Object.keys(props.data.columnList).length-1 ? 'rgba(255,0,8,0.51)' : '#F3F3F3'
                                 && props.isDragging ? theme.palette.background.drag: theme.palette.background.cell,
                             paddingTop: '10px',
-                            minWidth: 250,
+                            width: 250,
                             height:300,
                             boxShadow:"0px 4px 4px rgba(0, 0, 0, 0.25)",
                             display:'flex',
@@ -98,8 +98,8 @@ const ColumnCell = (props:ColumnCellProps) =>{
                                 )
                             }
                         )}
+                            {provided.placeholder}
                         </CustomScrollbar>
-                        {provided.placeholder}
                         <AddCardButton
                             columnId={props.id}
                             data={props.data}

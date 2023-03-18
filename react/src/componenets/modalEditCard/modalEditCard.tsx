@@ -1,15 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import Button from '@mui/material/Button';
-import Backdrop from "@mui/material/Backdrop";
-import Fade from "@mui/material/Fade";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Modal from "@mui/material/Modal";
+import {Modal, Stack, Typography, Fade, Backdrop, Button, TextField, Box} from "@mui/material";
 import ModalEditCardProps from "@/interfaces/modalEditcardInterface/ModalEditCard";
-import Stack from "@mui/material/Stack";
-import {modalStyle} from "@/assets/themes/modalStyle";
+import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {updateCard} from "@/services/utils/cardUtils/cardUtils";
+import IconMenu from "@/componenets/modalEditCardMenu/modalEditCardMenu";
 export default function ModalEditCard(props:ModalEditCardProps) {
     const [title, setTitle] = useState(props.title);
     const [desc, setDesc] = useState(props.desc);
@@ -34,6 +29,7 @@ export default function ModalEditCard(props:ModalEditCardProps) {
 
     return (
             <Modal
+                style={{zIndex:'5'}}
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
                 open={props.modalEdit}
@@ -47,42 +43,77 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                 }}
             >
                 <Fade in={props.modalEdit}>
-                    <Stack sx={modalStyle} spacing={2}>
+                    <Stack sx={modalBigStyle} spacing={2}>
                         <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
                             Editing card: {props.title}
                         </Typography>
-                                <TextField
-                                    sx={{margin:'0 0 8px 0'}}
-                                    id="outlined-basic"
-                                    label="Title"
-                                    variant="outlined"
-                                    value={title}
-                                    onChange={handleNameChange}
-                                />
-                                <TextField
-                                    sx={{margin:'0 0 8px 0'}}
-                                    id="outlined-basic"
-                                    label="Desc"
-                                    variant="outlined"
-                                    multiline={true}
-                                    maxRows={5}
-                                    value={desc}
-                                    onChange={handleDescChange}
-                                />
-                        <Button
-                            sx={{maxHeight:'50px'}}
-                            onClick={() => updateCard(props.id,
-                                                    title,
-                                                    desc,
-                                                    props.columnId,
-                                                    props.setData,
-                                                    props.data,
-                                                    props.setModalEdit
-                                                    )}
-                            variant="contained"
+                        <Box
+                            display={'flex'}
                         >
-                            Edit
-                        </Button>
+                            <Box
+                            display={'flex'}
+                            flexDirection={'column'}
+                            width={'50%'}
+                            paddingX={1}
+                            >
+                                    <TextField
+                                        sx={{margin:'0 0 8px 0'}}
+                                        id="outlined-basic"
+                                        label="Title"
+                                        variant="outlined"
+                                        value={title}
+                                        onChange={handleNameChange}
+                                    />
+                                    <TextField
+                                        sx={{margin:'0 0 8px 0'}}
+                                        id="outlined-basic"
+                                        label="Desc"
+                                        variant="outlined"
+                                        multiline={true}
+                                        maxRows={5}
+                                        value={desc}
+                                        onChange={handleDescChange}
+                                    />
+                            </Box>
+                            <Box
+                                width={'50%'}
+                                paddingX={1}
+                                display={"flex"}
+                                justifyContent={'end'}
+                            >
+                                <Box>
+                                    <IconMenu
+                                        id={props.id}
+                                        title={props.title}
+                                        columnId={props.columnId}
+                                        setModalDelete={props.setModalDelete}
+                                        modalDelete={props.modalDelete}
+                                        data={props.data}
+                                        setData={props.setData}
+                                    />
+                                </Box>
+                            </Box>
+                        </Box>
+                        <Box
+                            width={'100%'}
+                            display={'flex'}
+                            justifyContent={'center'}
+                        >
+                            <Button
+                                sx={{maxHeight:'50px', width:'100px'}}
+                                onClick={() => updateCard(props.id,
+                                                        title,
+                                                        desc,
+                                                        props.columnId,
+                                                        props.setData,
+                                                        props.data,
+                                                        props.setModalEdit
+                                                        )}
+                                variant="contained"
+                            >
+                                Edit
+                            </Button>
+                        </Box>
                     </Stack>
                 </Fade>
             </Modal>
