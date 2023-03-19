@@ -52,10 +52,10 @@ export async function loadBoardFromBackend(id: string): Promise<_Data["data"]> {
     return loadDefaultData();
 }
 
-export async function moveColumnToBackend(columnId:string, newPosition:number){
+export async function moveColumnToBackend(movedObjectId:string, newPosition:number){
     const apiUrl = urlDomain+`/api/columns/move`;
     try {
-        const response = await axios.put(apiUrl, {columnId, newPosition});
+        const response = await axios.put(apiUrl, {movedObjectId, newPosition});
         console.log(response.data);
     } catch (error) {
         console.error(error);

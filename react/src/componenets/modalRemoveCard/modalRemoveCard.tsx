@@ -11,7 +11,6 @@ import {modalStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {removeCard} from "@/services/utils/cardUtils/cardUtils";
 export default function ModalRemoveCard(props:ModalRemoveCardProps) {
-    console.log("działam")
 
     return (
         <Modal
