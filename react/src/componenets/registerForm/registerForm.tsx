@@ -130,8 +130,16 @@ const RegisterForm = (props:RegisterFormProps) => {
                     <Box
                         width={'100%'}
                         display={'flex'}
-                        justifyContent={'center'}
+                        justifyContent={'space-between'}
+
                     >
+                        <Button
+                            sx={{maxHeight:'50px', width:'100px'}}
+                            variant="outlined"
+                            onClick={() => closeModal(props.setModalRegister)}
+                        >
+                            Back
+                        </Button>
                         <Button
                             sx={{maxHeight:'50px', width:'100px'}}
                             variant="contained"

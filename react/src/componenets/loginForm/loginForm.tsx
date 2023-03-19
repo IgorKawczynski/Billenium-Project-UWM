@@ -5,6 +5,8 @@ import {modalStyle} from "@/assets/themes/modalStyle";
 import {Link} from "react-router-dom";
 import {LoginFormProps} from "@/interfaces/loginFormInterface/LoginForm";
 import IconButton from '@mui/material/IconButton';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
@@ -47,7 +49,12 @@ const LoginForm = (props:LoginFormProps) => {
         >
             <Fade in={props.modalLogin}>
                 <Stack sx={modalStyle} spacing={2}>
-                    <Typography color={theme.palette.text.secondary} id="transition-modal-title" variant="h6" component="h2">
+                    <Typography
+                        color={theme.palette.text.secondary}
+                        id="transition-modal-title"
+                        variant="h6"
+                        component="h2"
+                    >
                         Login
                     </Typography>
                             <TextField
@@ -57,12 +64,24 @@ const LoginForm = (props:LoginFormProps) => {
                                 variant="outlined"
                                 value={mail}
                                 onChange={handleMailChange}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <MailOutlineIcon />
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
                     <FormControl variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <LockOutlinedIcon />
+                                </InputAdornment>
+                            }
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -82,18 +101,21 @@ const LoginForm = (props:LoginFormProps) => {
                         display={"flex"}
                         justifyContent={"flex-end"}
                     >
-                    <Button onClick={() => openModal(props.setModalRegister)}>
-                        Register
-                    </Button>
                     </Box>
                     <Box
                         width={'100%'}
                         display={'flex'}
-                        justifyContent={'center'}
+                        justifyContent={"space-around"}
                     >
-                        <Link to={'/board'}>
+                        <Button
+                            sx={{width:'50%'}}
+                            onClick={() => openModal(props.setModalRegister)}
+                        >
+                            Register
+                        </Button>
+                        <Link style={{width:'50%'}} to={'/board'}>
                             <Button
-                            sx={{maxHeight:'50px', width:'100px'}}
+                            sx={{maxHeight:'50px', width:'100%'}}
                             variant="contained"
                             >
                                 Log In
