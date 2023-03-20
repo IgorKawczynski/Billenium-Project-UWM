@@ -3,10 +3,9 @@ package pl.uwm.projektzespolowy.services.card.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.card.Card;
-import pl.uwm.projektzespolowy.models.card.CardCreateDTO;
 import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
 import pl.uwm.projektzespolowy.models.card.CardUpdateDTO;
-import pl.uwm.projektzespolowy.services.column.crud.ColumnReader;
+import pl.uwm.projektzespolowy.models.column.Column;
 
 import java.util.List;
 
@@ -18,26 +17,17 @@ public class CardCRUDService {
     private final CardReader cardReader;
     private final CardUpdater cardUpdater;
     private final CardDeleter cardDeleter;
-    private final ColumnReader columnReader;
 
     public Card getCardById(Long id) {
         return cardReader.getCardById(id);
     }
 
-    public List<CardResponseDTO> getAllCardsByColumnId(Long columnId) {
+    public List<Card> getAllCardsByColumnId(Long columnId) {
         return cardReader.getAllCardsByColumnId(columnId);
     }
 
-    public CardResponseDTO addCardToColumn(CardCreateDTO cardCreateDTO) {
-        var columnId = Long.parseLong(cardCreateDTO.columnId());
-        var column = columnReader.getColumnById(columnId);
-        return cardCreator
-                .create(
-                        cardCreateDTO.title(),
-                        cardCreateDTO.description(),
-                        column
-                )
-                .toDto();
+    public CardResponseDTO createCard(Column column, String title, String description) {
+        return cardCreator.createCard(column, title, description).toDto();
     }
 
     public CardResponseDTO updateCard(CardUpdateDTO cardUpdateDTO) {
@@ -53,9 +43,9 @@ public class CardCRUDService {
                 .toDto();
     }
 
-    public void deleteCard(Long cardId) {
-        var card = cardReader.getCardById(cardId);
-        cardDeleter.deleteCard(card);
+    public void deleteCard(Column column, Long cardId) {
+        var cardToDelete = cardReader.getCardById(cardId);
+        cardDeleter.deleteCard(column, cardToDelete);
     }
 
     public void saveChangedCards(List<Card> cards) {

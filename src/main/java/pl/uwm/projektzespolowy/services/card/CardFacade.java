@@ -7,6 +7,7 @@ import pl.uwm.projektzespolowy.models.card.*;
 import pl.uwm.projektzespolowy.services.card.crud.CardCRUDService;
 import pl.uwm.projektzespolowy.services.column.crud.ColumnCRUDService;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Component
@@ -17,20 +18,29 @@ public class CardFacade {
     private final ColumnCRUDService columnCRUDService;
     private final CardMoverService cardMoverService;
 
-    public CardResponseDTO getCardById(Long id) {
-        return cardCRUDService.getCardById(id).toDto();
+    public CardResponseDTO createCard(CardCreateDTO cardCreateDTO) {
+        var column = columnCRUDService.getColumnById(Long.parseLong(cardCreateDTO.columnId()));
+        return cardCRUDService.createCard(column, cardCreateDTO.title(), cardCreateDTO.description());
     }
 
-    public CardResponseDTO addCardToColumn(CardCreateDTO cardCreateDTO) {
-        return cardCRUDService.addCardToColumn(cardCreateDTO);
+    public CardResponseDTO getCardById(Long cardId) {
+        return cardCRUDService.getCardById(cardId).toDto();
+    }
+
+    public List<CardResponseDTO> getAllCardsByColumnId(Long columnId) {
+        return cardCRUDService.getAllCardsByColumnId(columnId)
+                .stream().map(Card::toDto)
+                .sorted(Comparator.comparingInt(CardResponseDTO::position))
+                .toList();
     }
 
     public CardResponseDTO updateCard(CardUpdateDTO cardUpdateDTO) {
         return cardCRUDService.updateCard(cardUpdateDTO);
     }
 
-    public List<CardResponseDTO> getAllCardsByColumnId(Long columnId) {
-        return cardCRUDService.getAllCardsByColumnId(columnId);
+    public void deleteCard(Long cardId) {
+        var column = cardCRUDService.getCardById(cardId).getColumn();
+        cardCRUDService.deleteCard(column, cardId);
     }
 
     public CardResponseDTO moveCard(MoveDTO cardMoveDTO) {
@@ -49,10 +59,6 @@ public class CardFacade {
         cardCRUDService.saveChangedCard(card);
         cardCRUDService.saveChangedCards(changedCards);
         return card.toDto();
-    }
-
-    public void deleteCard(Long cardId) {
-        cardCRUDService.deleteCard(cardId);
     }
 
 }

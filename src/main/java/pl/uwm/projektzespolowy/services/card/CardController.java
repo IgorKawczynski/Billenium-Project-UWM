@@ -17,8 +17,8 @@ public class CardController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public CardResponseDTO addCardToColumn(@RequestBody CardCreateDTO cardCreateDTO) {
-        return cardFacade.addCardToColumn(cardCreateDTO);
+    public CardResponseDTO createCard(@RequestBody CardCreateDTO cardCreateDTO) {
+        return cardFacade.createCard(cardCreateDTO);
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"cardId"})
