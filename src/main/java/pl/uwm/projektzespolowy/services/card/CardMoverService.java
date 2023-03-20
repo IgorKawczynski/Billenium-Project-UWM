@@ -3,6 +3,7 @@ package pl.uwm.projektzespolowy.services.card;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uwm.projektzespolowy.models.card.Card;
+import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.services.PositionableList;
@@ -13,31 +14,31 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 class CardMoverService {
 
-    public ArrayList<Card> moveCardToAnotherColumn(Card card, Column cardOldColumn, Column cardNewColumn, Integer newPosition) {
-        var cardsFromOldColumn = new PositionableList<>(cardOldColumn.getCards());
-        cardsFromOldColumn.withHigherOrEqualPositionThanGiven(card);
-        cardsFromOldColumn.moveLeftAll();
+    public ArrayList<Card> moveCardToAnotherCell(Card card, Cell cardOldCell, Cell cardNewCell, Integer newPosition) {
+        var cardsFromOldCell = new PositionableList<>(cardOldCell.getCards());
+        cardsFromOldCell.withHigherOrEqualPositionThanGiven(card);
+        cardsFromOldCell.moveLeftAll();
 
-        changeCardColumn(card, cardOldColumn, cardNewColumn, newPosition);
+        changeCardCell(card, cardOldCell, cardNewCell, newPosition);
 
-        var cardsFromNewColumn = new PositionableList<>(cardNewColumn.getCards());
-        cardsFromNewColumn.withHigherOrEqualPositionThanGiven(card);
-        cardsFromNewColumn.moveRightAll();
+        var cardsFromNewCell = new PositionableList<>(cardNewCell.getCards());
+        cardsFromNewCell.withHigherOrEqualPositionThanGiven(card);
+        cardsFromNewCell.moveRightAll();
 
         var changedCards = new ArrayList<Card>();
-        changedCards.addAll(cardsFromNewColumn.list());
-        changedCards.addAll(cardsFromOldColumn.list());
+        changedCards.addAll(cardsFromNewCell.list());
+        changedCards.addAll(cardsFromOldCell.list());
         return changedCards;
     }
 
-    private void changeCardColumn(Card card, Column cardOldColumn, Column cardNewColumn, Integer newPosition) {
+    private void changeCardCell(Card card, Cell cardOldCell, Cell cardNewCell, Integer newPosition) {
         card.getPosition().moveTo(newPosition);
-        cardOldColumn.remove(card);
-        cardNewColumn.add(card);
+        cardOldCell.remove(card);
+        cardNewCell.add(card);
     }
 
     public ArrayList<Card> moveCard(Card card, Integer newPosition) {
-        var cardsToChange = new PositionableList<>(card.getColumn().getCards());
+        var cardsToChange = new PositionableList<>(card.getCell().getCards());
         cardsToChange.moveInRange(card.getPosition(), new Position(newPosition));
 
         card.getPosition().moveTo(newPosition);
