@@ -21,4 +21,10 @@ public class VOExceptions {
         return new ErrorMessage("title", exception.getMessage());
     }
 
+    @ExceptionHandler(value = InvalidColorValueException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage invalidColorValueHandler(InvalidColorValueException exception) {
+        return new ErrorMessage("color", exception.getMessage());
+    }
+
 }

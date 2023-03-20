@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
+import pl.uwm.projektzespolowy.models.color.Color;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
 import pl.uwm.projektzespolowy.models.user.User;
@@ -47,6 +48,11 @@ public class Board extends BasicEntity {
               cascade = CascadeType.ALL,
               orphanRemoval = true)
     List<Column> columns;
+
+    @OneToMany(mappedBy = "board",
+               cascade = CascadeType.ALL,
+               orphanRemoval = true)
+    List<Color> colors;
 
     public Board(Title title, User creator) {
         this.title = title;
