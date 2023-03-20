@@ -9,6 +9,8 @@ import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
+import pl.uwm.projektzespolowy.models.row.Row;
+import pl.uwm.projektzespolowy.models.row.RowResponseDTO;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
@@ -48,6 +50,11 @@ public class Board extends BasicEntity {
               orphanRemoval = true)
     List<Column> columns;
 
+    @OneToMany(mappedBy = "board",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    List<Row> rows;
+
     public Board(Title title, User creator) {
         this.title = title;
         this.creator = creator;
@@ -57,6 +64,9 @@ public class Board extends BasicEntity {
                 new Column(new Title("Todo"), UNLIMITED_SIZE, Position.first(), this),
                 new Column(new Title("In progress"), DEFAULT_SIZE, Position.second(), this),
                 new Column(new Title("Done"), UNLIMITED_SIZE, Position.third(), this)
+        );
+        this.rows = List.of(
+                new Row(new Title("Tasks"), Position.first(), this)
         );
     }
 
@@ -72,6 +82,10 @@ public class Board extends BasicEntity {
                         .map(Column::toDto)
                         .sorted(Comparator.comparingInt(ColumnResponseDTO::position))
                         .toList())
+                .rowList(this.rows.stream()
+                        .map(Row::toDto)
+                        .sorted(Comparator.comparingInt(RowResponseDTO::position))
+                        .toList())
                 .build();
     }
 
@@ -84,6 +98,17 @@ public class Board extends BasicEntity {
     public void deleteColumn(Column column) {
         this.columns.remove(column);
         column.setBoard(null);
+    }
+
+    public Position getPositionForNewRow() {
+        int rowsNumber = this.getRows().size();
+        if (rowsNumber > 0 ) rowsNumber -= 1;
+        return new Position(rowsNumber);
+    }
+
+    public void deleteRow(Row row) {
+        this.rows.remove(row);
+        row.setBoard(null);
     }
 
 }
