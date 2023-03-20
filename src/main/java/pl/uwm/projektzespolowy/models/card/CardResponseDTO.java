@@ -5,7 +5,8 @@ import lombok.Builder;
 public record CardResponseDTO(String id,
                               String title,
                               String description,
-                              Integer position) {
+                              Integer position,
+                              String color) {
 
     @Builder public CardResponseDTO {}
 

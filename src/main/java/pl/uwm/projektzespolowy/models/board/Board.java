@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.color.Color;
+import pl.uwm.projektzespolowy.models.color.ColorValue;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
 import pl.uwm.projektzespolowy.models.user.User;
@@ -63,6 +64,13 @@ public class Board extends BasicEntity {
                 new Column(new Title("Todo"), UNLIMITED_SIZE, Position.first(), this),
                 new Column(new Title("In progress"), DEFAULT_SIZE, Position.second(), this),
                 new Column(new Title("Done"), UNLIMITED_SIZE, Position.third(), this)
+        );
+        this.colors = List.of(
+                new Color(new Title("Color 1"), ColorValue.DEFAULT, this),
+                new Color(new Title("Color 2"), ColorValue.DEFAULT, this),
+                new Color(new Title("Color 3"), ColorValue.DEFAULT, this),
+                new Color(new Title("Color 4"), ColorValue.DEFAULT, this),
+                new Color(new Title("Color 5"), ColorValue.DEFAULT, this)
         );
     }
 
