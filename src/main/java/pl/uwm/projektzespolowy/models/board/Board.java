@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
+import pl.uwm.projektzespolowy.models.color.Color;
+import pl.uwm.projektzespolowy.models.color.ColorValue;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
 import pl.uwm.projektzespolowy.models.row.Row;
