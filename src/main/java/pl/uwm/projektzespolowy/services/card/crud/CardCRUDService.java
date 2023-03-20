@@ -18,8 +18,8 @@ public class CardCRUDService {
     private final CardUpdater cardUpdater;
     private final CardDeleter cardDeleter;
 
-    public Card getCardById(Long id) {
-        return cardReader.getCardById(id);
+    public Card getCardById(Long cardId) {
+        return cardReader.getCardById(cardId);
     }
 
     public List<Card> getAllCardsByColumnId(Long columnId) {

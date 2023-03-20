@@ -22,8 +22,8 @@ public class ColumnCRUDService {
         return columnCreator.createColumn(board, title).toDto();
     }
 
-    public Column getColumnById(Long id) {
-        return columnReader.getColumnById(id);
+    public Column getColumnById(Long columnId) {
+        return columnReader.getColumnById(columnId);
     }
 
     public List<Column> getAllColumnsByBoardId(Long boardId) {
