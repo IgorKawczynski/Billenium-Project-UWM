@@ -9,6 +9,9 @@ import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.Positionable;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.cell.Cell;
+import pl.uwm.projektzespolowy.models.color.Color;
+import pl.uwm.projektzespolowy.models.color.ColorValue;
+import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
@@ -31,11 +34,14 @@ public class Card extends BasicEntity implements Positionable {
     @ManyToMany(mappedBy = "cards")
     Set<User> assignedUsers;
 
+    @Enumerated(EnumType.STRING)
+    ColorValue color;
+
     @ManyToOne
     @JoinColumn(name = "cell_id", referencedColumnName = "id")
     Cell cell;
 
-    public Card(Title title, String description, Cell cell, Position position) {
+    public Card(Title title, String description, Cell cell, Position position, ColorValue color) {
         this.title = title;
         this.description = description;
         this.cell = cell;
@@ -49,6 +55,7 @@ public class Card extends BasicEntity implements Positionable {
                 .title(this.title.toString())
                 .description(this.description)
                 .position(this.position.value())
+                .color(this.color.getValue())
                 .build();
     }
 
