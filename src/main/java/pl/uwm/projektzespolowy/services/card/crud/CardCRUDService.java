@@ -37,8 +37,7 @@ public class CardCRUDService {
                 .editCard(
                         cardToChange,
                         cardUpdateDTO.title(),
-                        cardUpdateDTO.description(),
-                        cardUpdateDTO.position()
+                        cardUpdateDTO.description()
                 )
                 .toDto();
     }
