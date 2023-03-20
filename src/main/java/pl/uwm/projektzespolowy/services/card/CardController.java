@@ -27,10 +27,10 @@ public class CardController {
         return cardFacade.getCardById(cardId);
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = {"columnId"})
+    @RequestMapping(method = RequestMethod.GET, params = {"cellId"})
     @ResponseStatus(HttpStatus.OK)
-    public List<CardResponseDTO> getAllCardsByColumnId(@RequestParam Long columnId) {
-        return cardFacade.getAllCardsByColumnId(columnId);
+    public List<CardResponseDTO> getAllCardsByCellId(@RequestParam Long cellId) {
+        return cardFacade.getAllCardsByCellId(cellId);
     }
 
     @PutMapping("")
@@ -39,10 +39,10 @@ public class CardController {
         return cardFacade.updateCard(cardUpdateDTO);
     }
 
-    @PutMapping("/another-column")
+    @PutMapping("/another-cell")
     @ResponseStatus(HttpStatus.OK)
-    public CardResponseDTO moveCardToAnotherColumn(@RequestBody CardMoveToAnotherColumnDTO cardMoveToAnotherColumnDTO) {
-        return cardFacade.moveCardToAnotherColumn(cardMoveToAnotherColumnDTO);
+    public CardResponseDTO moveCardToAnotherCell(@RequestBody CardMoveToAnotherCellDTO cardMoveToAnotherCellDTO) {
+        return cardFacade.moveCardToAnotherCell(cardMoveToAnotherCellDTO);
     }
 
     @PutMapping("/same-column")

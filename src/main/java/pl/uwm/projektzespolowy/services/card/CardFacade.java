@@ -6,7 +6,6 @@ import pl.uwm.projektzespolowy.models.basic.dto.MoveDTO;
 import pl.uwm.projektzespolowy.models.card.*;
 import pl.uwm.projektzespolowy.services.card.crud.CardCRUDService;
 import pl.uwm.projektzespolowy.services.cell.crud.CellCRUDService;
-import pl.uwm.projektzespolowy.services.column.crud.ColumnCRUDService;
 
 import java.util.Comparator;
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.List;
 public class CardFacade {
 
     private final CardCRUDService cardCRUDService;
-    private final ColumnCRUDService columnCRUDService;
     private final CellCRUDService cellCRUDService;
     private final CardMoverService cardMoverService;
 
@@ -53,11 +51,11 @@ public class CardFacade {
         return card.toDto();
     }
 
-    public CardResponseDTO moveCardToAnotherCell(CardMoveToAnotherColumnDTO cardMoveToAnotherColumnDTO) {
-        var card = cardCRUDService.getCardById(Long.parseLong(cardMoveToAnotherColumnDTO.cardId()));
+    public CardResponseDTO moveCardToAnotherCell(CardMoveToAnotherCellDTO cardMoveToAnotherCellDTO) {
+        var card = cardCRUDService.getCardById(Long.parseLong(cardMoveToAnotherCellDTO.cardId()));
         var cardOldCell = card.getCell();
-        var cardNewCell = cellCRUDService.getCellById(Long.parseLong(cardMoveToAnotherColumnDTO.newColumnId()));
-        var changedCards = cardMoverService.moveCardToAnotherCell(card, cardOldCell, cardNewCell, cardMoveToAnotherColumnDTO.newPosition());
+        var cardNewCell = cellCRUDService.getCellById(Long.parseLong(cardMoveToAnotherCellDTO.newColumnId()));
+        var changedCards = cardMoverService.moveCardToAnotherCell(card, cardOldCell, cardNewCell, cardMoveToAnotherCellDTO.newPosition());
         cardCRUDService.saveChangedCard(card);
         cardCRUDService.saveChangedCards(changedCards);
         return card.toDto();
