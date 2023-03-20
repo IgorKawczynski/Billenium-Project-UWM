@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.Positionable;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
-import pl.uwm.projektzespolowy.models.column.Column;
+import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
@@ -28,17 +28,17 @@ public class Card extends BasicEntity implements Positionable {
     String description;
     Position position;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "column_id")
-    Column column;
-
     @ManyToMany(mappedBy = "cards")
     Set<User> assignedUsers;
 
-    public Card(Title title, String description, Column column, Position position) {
+    @ManyToOne
+    @JoinColumn(name = "cell_id", referencedColumnName = "id")
+    Cell cell;
+
+    public Card(Title title, String description, Cell cell, Position position) {
         this.title = title;
         this.description = description;
-        this.column = column;
+        this.cell = cell;
         this.position = position;
         this.assignedUsers = new HashSet<>();
     }
