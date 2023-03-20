@@ -1,7 +1,7 @@
 import React from "react";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import {onDragEnd} from "@/services/utils/boardUtils/boardUtils";
-import {Box, Stack} from "@mui/material";
+import {Box, Button, Stack} from "@mui/material";
 import Column from "@/componenets/column/column";
 import {boardContentProps} from "@/interfaces/boardContentInterface/BoardContent";
 

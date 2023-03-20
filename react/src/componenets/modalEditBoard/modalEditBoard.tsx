@@ -7,9 +7,15 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import ModalEditBoardProps from "@/interfaces/modalEditBoardInterface/ModalEditBoard";
-import {modalStyle} from "@/assets/themes/modalStyle";
+import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {editBoard} from "@/services/utils/boardUtils/boardUtils";
-import {closeModal} from "@/services/utils/modalUtils/modalUtils";
+import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
+import MenuItem from "@mui/material/MenuItem";
+import Box from "@mui/material/Box";
+import MenuList from "@mui/material/MenuList";
+import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
+import IconButton from "@mui/material/IconButton";
+import ColorSetter from "@/componenets/colorSetter/colorSetter";
 
 const ModalEditBoard = (props:ModalEditBoardProps) => {
     const [name, setName] = useState(props.title);
@@ -36,10 +42,12 @@ const ModalEditBoard = (props:ModalEditBoardProps) => {
                 }}
             >
                 <Fade in={props.modalEdit}>
-                    <Stack sx={modalStyle} spacing={2} direction={'column'}>
+                    <Stack sx={modalBigStyle} spacing={2} direction={'column'}>
                         <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
                             Editing Board: {props.title}
                         </Typography>
+                        <Box display={'flex'} width={'100%'}>
+                            <Box  display={'flex'} width={'50%'} sx={{justifyContent:'start'}}>
                                 <TextField
                                     sx={{margin:'0 0 8px 0'}}
                                     id="outlined-basic"
@@ -48,6 +56,9 @@ const ModalEditBoard = (props:ModalEditBoardProps) => {
                                     value={name}
                                     onChange={handleNameChange}
                                 />
+                            </Box>
+                            <ColorSetter/>
+                        </Box>
                         <Button
                             sx={{maxHeight:'50px'}}
                             onClick={() => editBoard(props.id,name, props.data, props.setData, props.setModalEdit)}

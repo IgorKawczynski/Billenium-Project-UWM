@@ -19,7 +19,7 @@ export const modalBigStyle ={
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 700,
-    height:350,
+    minHeight:300,
     bgcolor: 'background.paper',
     border: '2px solid #455A64',
     boxShadow: 24,

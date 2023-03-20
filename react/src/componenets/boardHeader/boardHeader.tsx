@@ -7,6 +7,8 @@ import AddColumnButton from "@/componenets/addColumnButton/addColumnButton";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import {ColorModeContext} from "@/App";
 import {boardHeaderProps} from "@/interfaces/boardHeaderInterface/BoardHeader";
+import CardColor from "@/assets/themes/colors";
+import ColorLegend from "@/componenets/colorLegend/colorLegend";
 
 
 const BoardHeader = (props:boardHeaderProps) => {
@@ -15,15 +17,36 @@ const BoardHeader = (props:boardHeaderProps) => {
 
 
     return(
-        <Box sx={{
-            display:'flex',
-            justifyContent:'space-between',
-            width:'100%'}}>
-            <Box sx={{width:'200px'}}
-            >
+        <Box>
+            <Box display={"flex"} justifyContent={"space-between"}>
+                <Box width={'250px'}>
+                    <Button onClick={colorMode.toggleColorMode}>
 
-            </Box>
-            <Box>
+                        {theme.palette.mode == 'light'
+                            && (<Typography sx={{display:'flex',
+                                justifyContent:'center',
+                                alignItems:"center"
+                            }}
+                            >
+
+                                Dark Mode
+
+                                <Brightness4Icon/>
+                            </Typography>)}
+
+                        {!(theme.palette.mode == 'light')
+                            && (<Typography sx={{display:'flex',
+                                justifyContent:'center',
+                                alignItems:"center"
+                            }}
+                            >
+
+                                Light Mode
+
+                                <Brightness4Icon/>
+                            </Typography>)}
+                    </Button>
+                </Box>
                 <Typography
                     variant={'h3'}
                     color={'textPrimary'}
@@ -35,40 +58,9 @@ const BoardHeader = (props:boardHeaderProps) => {
                         onClick={() => openModal(props.setModalEdit)}
                     >
                         <BorderColorOutlinedIcon/>
-                    </IconButton></Typography>
-                <AddColumnButton
-                    data={props.data}
-                    setData={props.setData}
-                />
-            </Box>
-            <Box>
-                <Button onClick={colorMode.toggleColorMode}>
-
-                    {theme.palette.mode == 'light'
-                        && (<Typography sx={{display:'flex',
-                                            justifyContent:'center',
-                                            alignItems:"center"
-                                        }}
-                        >
-
-                            Dark Mode
-
-                            <Brightness4Icon/>
-                        </Typography>)}
-
-                    {!(theme.palette.mode == 'light')
-                        && (<Typography sx={{display:'flex',
-                                            justifyContent:'center',
-                                            alignItems:"center"
-                                        }}
-                        >
-
-                            Light Mode
-
-                            <Brightness4Icon/>
-                        </Typography>)}
-                </Button>
-                <Box sx={{textAlign:'center'}}>
+                    </IconButton>
+                </Typography>
+                <Box sx={{textAlign:'center'}} width={'250px'}>
                     <Typography
                         color={'textPrimary'}
                         variant={'h4'}
@@ -82,6 +74,19 @@ const BoardHeader = (props:boardHeaderProps) => {
                         by MAGI
                     </Typography>
                 </Box>
+            </Box>
+            <Box sx={{
+                display:'flex',
+                justifyContent:'center',
+                flexDirection:'column',
+                width:'100%'
+            }}>
+                <AddColumnButton
+                    data={props.data}
+                    setData={props.setData}
+
+                />
+                <ColorLegend/>
             </Box>
         </Box>
     )

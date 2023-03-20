@@ -12,6 +12,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import ModalRemoveCard from "@/componenets/modalRemoveCard/modalRemoveCard";
 import {ModalEditCardMenuProps} from "@/interfaces/modalEditCardMenu/ModalEditCardMenu";
+import ColorPicker from "@/componenets/cardColorPicker/ColorPicker";
 
 export default function IconMenu(props:ModalEditCardMenuProps) {
     return (
@@ -23,12 +24,7 @@ export default function IconMenu(props:ModalEditCardMenuProps) {
                     </ListItemIcon>
                     <ListItemText>Users</ListItemText>
                 </MenuItem>
-                <MenuItem>
-                    <ListItemIcon>
-                        <ColorLensIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Color</ListItemText>
-                </MenuItem>
+                <ColorPicker/>
                 <Divider />
                 <MenuItem onClick={() => openModal(props.setModalDelete)}>
                     <ListItemIcon>
