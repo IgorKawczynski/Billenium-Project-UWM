@@ -3,6 +3,7 @@ package pl.uwm.projektzespolowy.services.card.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.card.Card;
+import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.services.PositionableList;
 
@@ -12,15 +13,15 @@ class CardDeleter {
 
     private final CardRepository cardRepository;
 
-    public void deleteCard(Column column, Card cardToDelete) {
-        var columnCards = new PositionableList<>(column.getCards());
+    public void deleteCard(Cell cell, Card cardToDelete) {
+        var cellCards = new PositionableList<>(cell.getCards());
 
-        columnCards.withHigherOrEqualPositionThanGiven(cardToDelete);
-        columnCards.moveLeftAll();
-        column.remove(cardToDelete);
+        cellCards.withHigherOrEqualPositionThanGiven(cardToDelete);
+        cellCards.moveLeftAll();
+        cell.remove(cardToDelete);
 
         cardRepository.delete(cardToDelete);
-        cardRepository.saveAll(columnCards.list());
+        cardRepository.saveAll(cellCards.list());
     }
 
 }

@@ -21,8 +21,8 @@ class CardReader {
                 );
     }
 
-    public List<Card> getAllCardsByColumnId(Long columnId) {
-        return cardRepository.findAllByColumnId(columnId);
+    public List<Card> getAllCardsByCellId(Long cellId) {
+        return cardRepository.findAllByCellId(cellId);
     }
 
 }
