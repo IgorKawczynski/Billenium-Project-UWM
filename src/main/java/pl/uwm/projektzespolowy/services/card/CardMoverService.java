@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
-public class CardMoverService {
+class CardMoverService {
 
     public ArrayList<Card> moveCardToAnotherColumn(Card card, Column cardOldColumn, Column cardNewColumn, Integer newPosition) {
         var cardsFromOldColumn = new PositionableList<>(cardOldColumn.getCards());
