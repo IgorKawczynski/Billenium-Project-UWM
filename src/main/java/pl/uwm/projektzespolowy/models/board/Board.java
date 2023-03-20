@@ -72,7 +72,7 @@ public class Board extends BasicEntity {
                 .title(this.title.toString())
                 .creatorName(this.creator.getFullName())
                 .assignedUsers(this.assignedUsers.stream()
-                        .map(User::toUserResponseDTO)
+                        .map(User::toDto)
                         .toList())
                 .columnList(this.columns.stream()
                         .map(Column::toDto)
