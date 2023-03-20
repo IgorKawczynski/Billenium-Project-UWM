@@ -3,12 +3,11 @@ package pl.uwm.projektzespolowy.services.board.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.board.Board;
-import pl.uwm.projektzespolowy.services.board.BoardRepository;
 import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
 
 @Component
 @RequiredArgsConstructor
-public class BoardReader {
+class BoardReader {
 
     private final BoardRepository boardRepository;
 

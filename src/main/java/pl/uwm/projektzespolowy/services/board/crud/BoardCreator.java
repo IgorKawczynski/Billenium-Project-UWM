@@ -3,21 +3,18 @@ package pl.uwm.projektzespolowy.services.board.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.board.Board;
+import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
-import pl.uwm.projektzespolowy.services.board.BoardRepository;
-import pl.uwm.projektzespolowy.services.user.crud.UserReader;
 
 @Component
 @RequiredArgsConstructor
-public class BoardCreator {
+class BoardCreator {
 
-    private final UserReader userReader;
     private final BoardRepository boardRepository;
 
-    public Board createBoard(String givenTitle, Long ownerId) {
-        var boardOwner = userReader.getUserById(ownerId);
+    public Board createBoard(User creator, String givenTitle) {
         var title = new Title(givenTitle);
-        return boardRepository.saveAndFlush(new Board(title, boardOwner));
+        return boardRepository.saveAndFlush(new Board(title, creator));
     }
 
 }

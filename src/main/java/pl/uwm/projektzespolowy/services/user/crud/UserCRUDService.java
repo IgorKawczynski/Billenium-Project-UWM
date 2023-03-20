@@ -22,10 +22,8 @@ public class UserCRUDService {
         return userReader.getAllUsersResponseDTO();
     }
 
-    public UserResponseDTO getUserById(Long id) {
-        return userReader
-                .getUserById(id)
-                .toUserResponseDTO();
+    public User getUserById(Long id) {
+        return userReader.getUserById(id);
     }
 
     public void deleteUser(Long id) {
