@@ -7,8 +7,8 @@ import pl.uwm.projektzespolowy.models.card.Card;
 import java.util.List;
 
 @Repository
-interface CardRepository  extends JpaRepository<Card, Long> {
+interface CardRepository extends JpaRepository<Card, Long> {
 
-    List<Card> findAllByColumnId(Long columnId);
+    List<Card> findAllByCellId(Long cellId);
 
 }

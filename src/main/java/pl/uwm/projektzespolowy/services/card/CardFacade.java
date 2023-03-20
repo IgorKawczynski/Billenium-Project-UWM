@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.basic.dto.MoveDTO;
 import pl.uwm.projektzespolowy.models.card.*;
 import pl.uwm.projektzespolowy.services.card.crud.CardCRUDService;
+import pl.uwm.projektzespolowy.services.cell.crud.CellCRUDService;
 import pl.uwm.projektzespolowy.services.column.crud.ColumnCRUDService;
 
 import java.util.Comparator;
@@ -16,19 +17,20 @@ public class CardFacade {
 
     private final CardCRUDService cardCRUDService;
     private final ColumnCRUDService columnCRUDService;
+    private final CellCRUDService cellCRUDService;
     private final CardMoverService cardMoverService;
 
     public CardResponseDTO createCard(CardCreateDTO cardCreateDTO) {
-        var column = columnCRUDService.getColumnById(Long.parseLong(cardCreateDTO.columnId()));
-        return cardCRUDService.createCard(column, cardCreateDTO.title(), cardCreateDTO.description());
+        var cell = cellCRUDService.getCellById(Long.parseLong(cardCreateDTO.cellId()));
+        return cardCRUDService.createCard(cell, cardCreateDTO.title(), cardCreateDTO.description());
     }
 
     public CardResponseDTO getCardById(Long cardId) {
         return cardCRUDService.getCardById(cardId).toDto();
     }
 
-    public List<CardResponseDTO> getAllCardsByColumnId(Long columnId) {
-        return cardCRUDService.getAllCardsByColumnId(columnId)
+    public List<CardResponseDTO> getAllCardsByCellId(Long cellId) {
+        return cardCRUDService.getAllCardsByCellId(cellId)
                 .stream().map(Card::toDto)
                 .sorted(Comparator.comparingInt(CardResponseDTO::position))
                 .toList();
@@ -39,8 +41,8 @@ public class CardFacade {
     }
 
     public void deleteCard(Long cardId) {
-        var column = cardCRUDService.getCardById(cardId).getColumn();
-        cardCRUDService.deleteCard(column, cardId);
+        var cell = cardCRUDService.getCardById(cardId).getCell();
+        cardCRUDService.deleteCard(cell, cardId);
     }
 
     public CardResponseDTO moveCard(MoveDTO cardMoveDTO) {
@@ -51,11 +53,11 @@ public class CardFacade {
         return card.toDto();
     }
 
-    public CardResponseDTO moveCardToAnotherColumn(CardMoveToAnotherColumnDTO cardMoveToAnotherColumnDTO) {
+    public CardResponseDTO moveCardToAnotherCell(CardMoveToAnotherColumnDTO cardMoveToAnotherColumnDTO) {
         var card = cardCRUDService.getCardById(Long.parseLong(cardMoveToAnotherColumnDTO.cardId()));
-        var cardOldColumn = card.getColumn();
-        var cardNewColumn = columnCRUDService.getColumnById(Long.parseLong(cardMoveToAnotherColumnDTO.newColumnId()));
-        var changedCards = cardMoverService.moveCardToAnotherColumn(card, cardOldColumn, cardNewColumn, cardMoveToAnotherColumnDTO.newPosition());
+        var cardOldCell = card.getCell();
+        var cardNewCell = cellCRUDService.getCellById(Long.parseLong(cardMoveToAnotherColumnDTO.newColumnId()));
+        var changedCards = cardMoverService.moveCardToAnotherCell(card, cardOldCell, cardNewCell, cardMoveToAnotherColumnDTO.newPosition());
         cardCRUDService.saveChangedCard(card);
         cardCRUDService.saveChangedCards(changedCards);
         return card.toDto();

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
 import pl.uwm.projektzespolowy.models.card.CardUpdateDTO;
+import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.column.Column;
 
 import java.util.List;
@@ -22,12 +23,12 @@ public class CardCRUDService {
         return cardReader.getCardById(cardId);
     }
 
-    public List<Card> getAllCardsByColumnId(Long columnId) {
-        return cardReader.getAllCardsByColumnId(columnId);
+    public List<Card> getAllCardsByCellId(Long cellId) {
+        return cardReader.getAllCardsByCellId(cellId);
     }
 
-    public CardResponseDTO createCard(Column column, String title, String description) {
-        return cardCreator.createCard(column, title, description).toDto();
+    public CardResponseDTO createCard(Cell cell, String title, String description) {
+        return cardCreator.createCard(cell, title, description).toDto();
     }
 
     public CardResponseDTO updateCard(CardUpdateDTO cardUpdateDTO) {
@@ -43,9 +44,9 @@ public class CardCRUDService {
                 .toDto();
     }
 
-    public void deleteCard(Column column, Long cardId) {
+    public void deleteCard(Cell cell, Long cardId) {
         var cardToDelete = cardReader.getCardById(cardId);
-        cardDeleter.deleteCard(column, cardToDelete);
+        cardDeleter.deleteCard(cell, cardToDelete);
     }
 
     public void saveChangedCards(List<Card> cards) {
