@@ -3,7 +3,7 @@ package pl.uwm.projektzespolowy.services.color;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.projektzespolowy.models.color.ColorRequestDTO;
+import pl.uwm.projektzespolowy.models.color.ColorUpdateDTO;
 import pl.uwm.projektzespolowy.models.color.ColorResponseDTO;
 
 @RestController
@@ -15,8 +15,8 @@ public class ColorController {
 
     @PutMapping("")
     @ResponseStatus(HttpStatus.OK)
-    public ColorResponseDTO changeColorTitle(@RequestBody ColorRequestDTO colorRequestDTO) {
-        return colorFacade.changeColorTitle(colorRequestDTO);
+    public ColorResponseDTO changeColorTitle(@RequestBody ColorUpdateDTO colorUpdateDTO) {
+        return colorFacade.changeColorTitle(colorUpdateDTO);
     }
 
 }
