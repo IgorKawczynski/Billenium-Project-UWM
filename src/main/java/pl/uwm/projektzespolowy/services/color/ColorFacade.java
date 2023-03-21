@@ -6,6 +6,8 @@ import pl.uwm.projektzespolowy.models.color.ColorUpdateDTO;
 import pl.uwm.projektzespolowy.models.color.ColorResponseDTO;
 import pl.uwm.projektzespolowy.services.color.crud.ColorCRUDService;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ColorFacade {
@@ -17,4 +19,7 @@ public class ColorFacade {
         return colorCRUDService.changeColorTitle(colorId, colorUpdateDTO.newTitle());
     }
 
+    public List<ColorResponseDTO> getColorsByBoardId(Long boardId) {
+        return colorCRUDService.getColorsByBoardId(boardId);
+    }
 }

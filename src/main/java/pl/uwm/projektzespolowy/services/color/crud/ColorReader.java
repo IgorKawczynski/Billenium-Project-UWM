@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
 import pl.uwm.projektzespolowy.models.color.Color;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class ColorReader {
@@ -19,4 +21,7 @@ class ColorReader {
                 );
     }
 
+    public List<Color> getColorsByBoardId(Long boardId) {
+        return colorRepository.getColorsByBoardId(boardId);
+    }
 }
