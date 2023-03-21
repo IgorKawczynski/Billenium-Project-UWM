@@ -123,7 +123,7 @@ public class Board extends BasicEntity {
 
     public Position getPositionForNewRow() {
         int rowsNumber = this.getRows().size();
-        if (rowsNumber > 0 ) rowsNumber -= 1;
+//        if (rowsNumber > 0 ) rowsNumber -= 1;
         return new Position(rowsNumber);
     }
 

@@ -8,7 +8,7 @@ import pl.uwm.projektzespolowy.services.PositionableList;
 
 @Component
 @RequiredArgsConstructor
-public class RowDeleter {
+class RowDeleter {
 
     private final RowRepository rowRepository;
 

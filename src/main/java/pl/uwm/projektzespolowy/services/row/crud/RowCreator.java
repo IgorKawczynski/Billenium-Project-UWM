@@ -7,34 +7,25 @@ import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.row.Row;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
-import pl.uwm.projektzespolowy.services.PositionableList;
 
 @Component
 @RequiredArgsConstructor
-public class RowCreator {
+class RowCreator {
 
     public final RowRepository rowRepository;
 
     public Row createRow(Board board, String givenTitle) {
-        var boardRows = new PositionableList<>(board.getRows());
         var position = board.getPositionForNewRow();
         var row = new Row(new Title(givenTitle), position, board);
-
-        boardRows.withHigherOrEqualPositionThanGiven(row);
-        boardRows.moveRightAll();
-        row.setPosition(position);
 
         for(int i=0; i<board.getColumns().size(); i++) {
             board
              .getColumns()
              .get(i)
              .getCells()
-             .add(new Cell(
-                     board.getColumns().get(i), new Position(board.getRows().size())
-             ));
+             .add(new Cell(board.getColumns().get(i), new Position(board.getRows().size())));
         }
 
-        rowRepository.saveAll(boardRows.list());
         return rowRepository.saveAndFlush(row);
     }
 }

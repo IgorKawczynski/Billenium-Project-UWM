@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.cell.Cell;
-import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.services.PositionableList;
 
 @Component

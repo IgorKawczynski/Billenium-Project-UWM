@@ -43,12 +43,4 @@ public class RowCRUDService {
         rowDeleter.deleteRow(board, rowToDelete);
     }
 
-    public void saveChangedRow(Row row) {
-        rowUpdater.saveChangedRow(row);
-    }
-
-    public void saveChangedRows(List<Row> rows) {
-        rowUpdater.saveChangedRows(rows);
-    }
-
 }

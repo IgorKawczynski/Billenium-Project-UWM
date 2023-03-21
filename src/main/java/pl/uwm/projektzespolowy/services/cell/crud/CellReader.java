@@ -7,7 +7,7 @@ import pl.uwm.projektzespolowy.models.cell.Cell;
 
 @Component
 @RequiredArgsConstructor
-public class CellReader {
+class CellReader {
 
     private final CellRepository cellRepository;
 

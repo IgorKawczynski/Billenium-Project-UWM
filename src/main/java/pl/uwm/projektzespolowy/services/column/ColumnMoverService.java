@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
-public class ColumnMoverService {
+class ColumnMoverService {
 
     public ArrayList<Column> moveColumn(Column column, Integer newPosition) {
         var columnsToChange = new PositionableList<>(column.getBoard().getColumns());

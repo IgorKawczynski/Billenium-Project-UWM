@@ -11,7 +11,6 @@ import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
 import pl.uwm.projektzespolowy.models.column.Column;
-import pl.uwm.projektzespolowy.models.row.Row;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 
 import java.util.Comparator;

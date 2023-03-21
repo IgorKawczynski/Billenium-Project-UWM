@@ -9,7 +9,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class RowReader {
+class RowReader {
 
     private final RowRepository rowRepository;
 

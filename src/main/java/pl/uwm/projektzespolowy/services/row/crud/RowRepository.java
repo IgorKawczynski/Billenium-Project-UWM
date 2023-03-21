@@ -7,7 +7,7 @@ import pl.uwm.projektzespolowy.models.row.Row;
 import java.util.List;
 
 @Repository
-public interface RowRepository extends JpaRepository<Row, Long> {
+interface RowRepository extends JpaRepository<Row, Long> {
 
     List<Row> findAllByBoardId(Long boardId);
 }
