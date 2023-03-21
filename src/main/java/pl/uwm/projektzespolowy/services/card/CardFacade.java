@@ -61,4 +61,8 @@ public class CardFacade {
         return card.toDto();
     }
 
+    public CardResponseDTO changeCardColor(CardColorChangeDTO cardColorChangeDTO) {
+        return cardCRUDService.changeCardColor(cardColorChangeDTO);
+    }
+
 }

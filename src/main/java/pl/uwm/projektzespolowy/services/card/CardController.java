@@ -51,6 +51,12 @@ public class CardController {
         return cardFacade.moveCard(cardMoveDTO);
     }
 
+    @PutMapping("/color")
+    @ResponseStatus(HttpStatus.OK)
+    public CardResponseDTO changeCardColor(@RequestBody CardColorChangeDTO cardColorChangeDTO) {
+        return cardFacade.changeCardColor(cardColorChangeDTO);
+    }
+
     @DeleteMapping("/{cardId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCardById(@PathVariable Long cardId) {

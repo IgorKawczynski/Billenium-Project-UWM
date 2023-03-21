@@ -3,6 +3,7 @@ package pl.uwm.projektzespolowy.services.card.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.card.Card;
+import pl.uwm.projektzespolowy.models.color.ColorValue;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import java.util.List;
@@ -31,4 +32,9 @@ class CardUpdater {
         cardRepository.saveAndFlush(card);
     }
 
+    public Card changeCardColor(Card cardToChange, String newColor) {
+        var colorValue = ColorValue.getColorValue(newColor);
+        cardToChange.setColor(colorValue);
+        return cardRepository.saveAndFlush(cardToChange);
+    }
 }
