@@ -7,11 +7,11 @@ import java.util.stream.Stream;
 public enum ColorValue {
 
     DEFAULT("default"),
-    PURPLE("purple"),
-    BLUE("blue"),
-    GREEN("green"),
-    YELLOW("yellow"),
-    RED("red");
+    PURPLE("#AC92EB"),
+    BLUE("#4FC1E8"),
+    GREEN("#A0D568"),
+    YELLOW("#FFCE54"),
+    RED("#ED5564");
 
     private final String value;
 
