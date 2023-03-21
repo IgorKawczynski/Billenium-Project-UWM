@@ -10,8 +10,8 @@ public class CellCRUDService {
 
     private final CellReader cellReader;
 
-    public Cell getCellById(Long id) {
-        return cellReader.getCellById(id);
+    public Cell getCellById(Long cellId) {
+        return cellReader.getCellById(cellId);
     }
 
 

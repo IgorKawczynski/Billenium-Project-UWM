@@ -54,7 +54,7 @@ public class CardFacade {
     public CardResponseDTO moveCardToAnotherCell(CardMoveToAnotherCellDTO cardMoveToAnotherCellDTO) {
         var card = cardCRUDService.getCardById(Long.parseLong(cardMoveToAnotherCellDTO.cardId()));
         var cardOldCell = card.getCell();
-        var cardNewCell = cellCRUDService.getCellById(Long.parseLong(cardMoveToAnotherCellDTO.newColumnId()));
+        var cardNewCell = cellCRUDService.getCellById(Long.parseLong(cardMoveToAnotherCellDTO.newCellId()));
         var changedCards = cardMoverService.moveCardToAnotherCell(card, cardOldCell, cardNewCell, cardMoveToAnotherCellDTO.newPosition());
         cardCRUDService.saveChangedCard(card);
         cardCRUDService.saveChangedCards(changedCards);

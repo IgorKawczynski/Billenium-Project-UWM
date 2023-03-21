@@ -45,7 +45,7 @@ public class CardController {
         return cardFacade.moveCardToAnotherCell(cardMoveToAnotherCellDTO);
     }
 
-    @PutMapping("/same-column")
+    @PutMapping("/same-cell")
     @ResponseStatus(HttpStatus.OK)
     public CardResponseDTO moveCard(@RequestBody MoveDTO cardMoveDTO) {
         return cardFacade.moveCard(cardMoveDTO);
