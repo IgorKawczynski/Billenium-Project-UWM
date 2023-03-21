@@ -64,17 +64,18 @@ public class Board extends BasicEntity {
 
 
     public Board(Title title, User creator) {
+
         this.title = title;
         this.creator = creator;
         this.assignedUsers = new HashSet<>();
         this.assignedUsers.add(creator);
+        this.rows = List.of(
+                new Row(new Title("Tasks"), Position.first(), this)
+        );
         this.columns = List.of(
                 new Column(new Title("Todo"), UNLIMITED_SIZE, Position.first(), this),
                 new Column(new Title("In progress"), DEFAULT_SIZE, Position.second(), this),
                 new Column(new Title("Done"), UNLIMITED_SIZE, Position.third(), this)
-        );
-        this.rows = List.of(
-                new Row(new Title("Tasks"), Position.first(), this)
         );
         this.colors = List.of(
                 new Color(new Title("Color 1"), ColorValue.DEFAULT, this),
