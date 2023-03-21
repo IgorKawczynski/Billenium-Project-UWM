@@ -39,11 +39,17 @@ public class Column extends BasicEntity implements Positionable {
     public final static int DEFAULT_SIZE = 3;
 
     public Column(Title title, Integer cardsLimit, Position position, Board board) {
+
         this.title = title;
         this.cardsLimit = cardsLimit;
         this.position = position;
         this.board = board;
-        this.cells = new ArrayList<>();
+
+        ArrayList<Cell> cells = new ArrayList<>();
+        for(int i=0; i<board.getRows().size(); i++) {
+            cells.add(new Cell(this, new Position(i)));
+        }
+        this.cells = cells;
     }
 
     public ColumnResponseDTO toDto() {
