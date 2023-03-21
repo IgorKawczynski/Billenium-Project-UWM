@@ -16,7 +16,7 @@ public class Color extends BasicEntity {
 
     Title title;
     @Enumerated(EnumType.STRING)
-    private ColorValue value;
+    ColorValue value;
 
     @ManyToOne
     @JoinColumn(name = "board_id", referencedColumnName = "id")
