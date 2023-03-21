@@ -77,11 +77,12 @@ public class Board extends BasicEntity {
                 new Row(new Title("Tasks"), Position.first(), this)
         );
         this.colors = List.of(
-                new Color(new Title("Color 1"), ColorValue.DEFAULT, this),
-                new Color(new Title("Color 2"), ColorValue.DEFAULT, this),
-                new Color(new Title("Color 3"), ColorValue.DEFAULT, this),
-                new Color(new Title("Color 4"), ColorValue.DEFAULT, this),
-                new Color(new Title("Color 5"), ColorValue.DEFAULT, this)
+                new Color(new Title("Default"), ColorValue.DEFAULT, this),
+                new Color(new Title("Color 2"), ColorValue.PURPLE, this),
+                new Color(new Title("Color 3"), ColorValue.BLUE, this),
+                new Color(new Title("Color 4"), ColorValue.GREEN, this),
+                new Color(new Title("Color 5"), ColorValue.YELLOW, this),
+                new Color(new Title("Color 6"), ColorValue.RED, this)
         );
     }
 
