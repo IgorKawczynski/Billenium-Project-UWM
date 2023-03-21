@@ -53,14 +53,15 @@ public class Board extends BasicEntity {
     List<Column> columns;
 
     @OneToMany(mappedBy = "board",
+              cascade = CascadeType.ALL,
+              orphanRemoval = true)
+    List<Row> rows;
+
+    @OneToMany(mappedBy = "board",
                cascade = CascadeType.ALL,
                orphanRemoval = true)
     List<Color> colors;
 
-    @OneToMany(mappedBy = "board",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    List<Row> rows;
 
     public Board(Title title, User creator) {
         this.title = title;
@@ -72,15 +73,15 @@ public class Board extends BasicEntity {
                 new Column(new Title("In progress"), DEFAULT_SIZE, Position.second(), this),
                 new Column(new Title("Done"), UNLIMITED_SIZE, Position.third(), this)
         );
+        this.rows = List.of(
+                new Row(new Title("Tasks"), Position.first(), this)
+        );
         this.colors = List.of(
                 new Color(new Title("Color 1"), ColorValue.DEFAULT, this),
                 new Color(new Title("Color 2"), ColorValue.DEFAULT, this),
                 new Color(new Title("Color 3"), ColorValue.DEFAULT, this),
                 new Color(new Title("Color 4"), ColorValue.DEFAULT, this),
                 new Color(new Title("Color 5"), ColorValue.DEFAULT, this)
-        );
-        this.rows = List.of(
-                new Row(new Title("Tasks"), Position.first(), this)
         );
     }
 
