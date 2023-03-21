@@ -9,10 +9,12 @@ import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.Positionable;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.card.Card;
+import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.row.Row;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -40,7 +42,10 @@ public class Cell extends BasicEntity implements Positionable {
         return CellResponseDTO.builder()
                 .id(this.id.toString())
                 .position(this.position.value())
-                .cards(this.cards.stream().map(Card::toDto).toList())
+                .cards(this.cards.stream()
+                        .map(Card::toDto)
+                        .sorted(Comparator.comparingInt(CardResponseDTO::position))
+                        .toList())
                 .build();
     }
 
