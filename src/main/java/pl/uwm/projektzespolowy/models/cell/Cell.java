@@ -29,24 +29,27 @@ public class Cell extends BasicEntity implements Positionable {
     @JoinColumn(name = "column_id", referencedColumnName = "id")
     Column column;
 
-    @ManyToOne
-    @JoinColumn(name = "row_id", referencedColumnName = "id")
-    Row row;
-
     @OneToMany(mappedBy = "cell", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Card> cards;
 
     Position position;
+
+    public Cell(Column column, Position position){
+        this.column = column;
+        this.position = position;
+    }
 
     public CellResponseDTO toDto() {
         return CellResponseDTO
                 .builder()
                 .id(this.id.toString())
                 .position(this.position.value())
-                .cards(this.cards.stream()
-                        .map(Card::toDto)
-                        .sorted(Comparator.comparingInt(CardResponseDTO::position))
-                        .toList())
+                .cards(this.cards != null
+                        ? this.cards.stream()
+                           .map(Card::toDto)
+                           .sorted(Comparator.comparingInt(CardResponseDTO::position))
+                           .toList()
+                        : null)
                 .build();
     }
 
