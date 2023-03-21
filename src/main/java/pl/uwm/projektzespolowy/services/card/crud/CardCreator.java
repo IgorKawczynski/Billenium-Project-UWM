@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.cell.Cell;
-import pl.uwm.projektzespolowy.models.color.ColorValue;
-import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 @Component
@@ -17,7 +15,7 @@ class CardCreator {
     public Card createCard(Cell cell, String givenTitle, String description) {
         var title = new Title(givenTitle);
         return cardRepository
-                .saveAndFlush(new Card(title, description, cell, cell.getPositionForNewCard(), ColorValue.DEFAULT));
+                .saveAndFlush(new Card(title, description, cell, cell.getPositionForNewCard()));
     }
 
 }

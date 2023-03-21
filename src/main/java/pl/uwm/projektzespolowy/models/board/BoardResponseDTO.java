@@ -1,6 +1,7 @@
 package pl.uwm.projektzespolowy.models.board;
 
 import lombok.Builder;
+import pl.uwm.projektzespolowy.models.color.ColorResponseDTO;
 import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
 import pl.uwm.projektzespolowy.models.row.RowResponseDTO;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
@@ -12,7 +13,8 @@ public record BoardResponseDTO(String id,
                                String creatorName,
                                List<UserResponseDTO> assignedUsers,
                                List<ColumnResponseDTO> columnList,
-                               List<RowResponseDTO> rowList) {
+                               List<RowResponseDTO> rowList,
+                               List<ColorResponseDTO> colorList) {
 
     @Builder public BoardResponseDTO {}
 

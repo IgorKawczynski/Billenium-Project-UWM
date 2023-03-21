@@ -100,6 +100,9 @@ public class Board extends BasicEntity {
                         .map(Row::toDto)
                         .sorted(Comparator.comparingInt(RowResponseDTO::position))
                         .toList())
+                .colorList(this.colors.stream()
+                        .map(Color::toDto)
+                        .toList())
                 .build();
     }
 
