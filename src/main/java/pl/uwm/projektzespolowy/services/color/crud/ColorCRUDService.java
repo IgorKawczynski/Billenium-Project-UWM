@@ -19,11 +19,12 @@ public class ColorCRUDService {
         return colorUpdater.changeColorTitle(color, newTitle).toDto();
     }
 
-    public List<ColorResponseDTO> getColorsByBoardId(Long boardId) {
-        return colorReader.getColorsByBoardId(boardId)
-                .stream()
-                .map(Color::toDto)
-                .toList();
+    public Color getColorById(Long colorId) {
+        return colorReader.getColorById(colorId);
+    }
+
+    public List<Color> getAllColorsByBoardId(Long boardId) {
+        return colorReader.getAllColorsByBoardId(boardId);
     }
 
 }

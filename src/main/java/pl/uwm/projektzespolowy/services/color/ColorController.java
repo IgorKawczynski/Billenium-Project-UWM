@@ -15,10 +15,16 @@ public class ColorController {
 
     private final ColorFacade colorFacade;
 
-    @GetMapping("/{boardId}")
+    @GetMapping("/{colorId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<ColorResponseDTO> getBoardColors(@PathVariable Long boardId) {
-        return colorFacade.getColorsByBoardId(boardId);
+    public ColorResponseDTO getColorById(@PathVariable Long colorId) {
+        return colorFacade.getColorById(colorId);
+    }
+
+    @GetMapping("/{boardId}/all")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ColorResponseDTO> getAllColorsByBoardId(@PathVariable Long boardId) {
+        return colorFacade.getAllColorsByBoardId(boardId);
     }
 
     @PutMapping("")

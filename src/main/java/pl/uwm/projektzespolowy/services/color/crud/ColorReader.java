@@ -21,7 +21,8 @@ class ColorReader {
                 );
     }
 
-    public List<Color> getColorsByBoardId(Long boardId) {
-        return colorRepository.getColorsByBoardId(boardId);
+    public List<Color> getAllColorsByBoardId(Long boardId) {
+        return colorRepository.findAllByBoardId(boardId);
     }
+
 }

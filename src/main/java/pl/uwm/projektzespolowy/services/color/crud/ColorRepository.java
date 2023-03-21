@@ -6,5 +6,7 @@ import pl.uwm.projektzespolowy.models.color.Color;
 import java.util.List;
 
 interface ColorRepository extends JpaRepository<Color, Long> {
-    List<Color> getColorsByBoardId(Long boardId);
+
+    List<Color> findAllByBoardId(Long boardId);
+
 }

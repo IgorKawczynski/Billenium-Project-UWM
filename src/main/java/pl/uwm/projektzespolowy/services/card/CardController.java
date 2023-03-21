@@ -39,6 +39,12 @@ public class CardController {
         return cardFacade.updateCard(cardUpdateDTO);
     }
 
+    @PutMapping("/color")
+    @ResponseStatus(HttpStatus.OK)
+    public CardResponseDTO changeCardColor(@RequestBody CardColorChangeDTO cardColorChangeDTO) {
+        return cardFacade.changeCardColor(cardColorChangeDTO);
+    }
+
     @PutMapping("/another-cell")
     @ResponseStatus(HttpStatus.OK)
     public CardResponseDTO moveCardToAnotherCell(@RequestBody CardMoveToAnotherCellDTO cardMoveToAnotherCellDTO) {
@@ -49,12 +55,6 @@ public class CardController {
     @ResponseStatus(HttpStatus.OK)
     public CardResponseDTO moveCard(@RequestBody MoveDTO cardMoveDTO) {
         return cardFacade.moveCard(cardMoveDTO);
-    }
-
-    @PutMapping("/color")
-    @ResponseStatus(HttpStatus.OK)
-    public CardResponseDTO changeCardColor(@RequestBody CardColorChangeDTO cardColorChangeDTO) {
-        return cardFacade.changeCardColor(cardColorChangeDTO);
     }
 
     @DeleteMapping("/{cardId}")
