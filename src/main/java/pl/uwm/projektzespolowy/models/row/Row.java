@@ -9,12 +9,9 @@ import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.Positionable;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.board.Board;
-import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "rows")
@@ -31,14 +28,10 @@ public class Row extends BasicEntity implements Positionable {
     @JoinColumn(name = "board_id", referencedColumnName = "id")
     Board board;
 
-    @OneToMany(mappedBy = "row", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Cell> cells;
-
     public Row(Title title, Position position, Board board) {
         this.title = title;
         this.position = position;
         this.board = board;
-        this.cells = new ArrayList<>();
     }
 
     public RowResponseDTO toDto() {
