@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.uwm.projektzespolowy.models.cell.Cell;
 
 @Repository
-interface CellRepository extends JpaRepository<Cell, Long> {
+public interface CellRepository extends JpaRepository<Cell, Long> {
 }
