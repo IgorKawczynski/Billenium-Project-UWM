@@ -39,7 +39,8 @@ public class Cell extends BasicEntity implements Positionable {
     Position position;
 
     public CellResponseDTO toDto() {
-        return CellResponseDTO.builder()
+        return CellResponseDTO
+                .builder()
                 .id(this.id.toString())
                 .position(this.position.value())
                 .cards(this.cards.stream()

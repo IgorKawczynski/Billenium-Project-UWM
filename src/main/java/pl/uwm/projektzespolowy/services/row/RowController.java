@@ -14,7 +14,6 @@ import java.util.List;
 @RequestMapping("/api/rows")
 public class RowController {
 
-
     private final RowFacade rowFacade;
 
     @PostMapping("")

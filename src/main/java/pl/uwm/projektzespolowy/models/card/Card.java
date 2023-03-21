@@ -49,7 +49,8 @@ public class Card extends BasicEntity implements Positionable {
     }
 
     public CardResponseDTO toDto() {
-        return CardResponseDTO.builder()
+        return CardResponseDTO
+                .builder()
                 .id(this.id.toString())
                 .title(this.title.toString())
                 .description(this.description)

@@ -42,7 +42,8 @@ public class Row extends BasicEntity implements Positionable {
     }
 
     public RowResponseDTO toDto() {
-        return RowResponseDTO.builder()
+        return RowResponseDTO
+                .builder()
                 .id(this.id.toString())
                 .title(this.title.toString())
                 .position(this.position.value())
