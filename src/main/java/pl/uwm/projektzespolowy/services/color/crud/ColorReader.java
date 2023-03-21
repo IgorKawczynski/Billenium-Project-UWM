@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
 import pl.uwm.projektzespolowy.models.color.Color;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class ColorReader {
@@ -17,6 +19,10 @@ class ColorReader {
                 .orElseThrow(
                     () -> new EntityNotFoundException("color", "Color with id: " + colorId + " does not exist!")
                 );
+    }
+
+    public List<Color> getAllColorsByBoardId(Long boardId) {
+        return colorRepository.findAllByBoardId(boardId);
     }
 
 }

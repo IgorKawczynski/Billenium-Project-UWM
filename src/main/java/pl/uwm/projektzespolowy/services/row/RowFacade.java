@@ -25,9 +25,7 @@ public class RowFacade {
     }
 
     public RowResponseDTO getRowById(Long rowId) {
-        return rowCRUDService
-                .getRowById(rowId)
-                .toDto();
+        return rowCRUDService.getRowById(rowId).toDto();
     }
 
     public List<RowResponseDTO> getAllRowsByBoardId(Long boardId) {

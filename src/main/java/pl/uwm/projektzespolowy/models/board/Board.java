@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.color.Color;
+import pl.uwm.projektzespolowy.models.color.ColorResponseDTO;
 import pl.uwm.projektzespolowy.models.color.ColorValue;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
@@ -106,6 +107,7 @@ public class Board extends BasicEntity {
                         .toList())
                 .colorList(this.colors.stream()
                         .map(Color::toDto)
+                        .sorted(Comparator.comparing(ColorResponseDTO::id))
                         .toList())
                 .build();
     }
@@ -123,7 +125,6 @@ public class Board extends BasicEntity {
 
     public Position getPositionForNewRow() {
         int rowsNumber = this.getRows().size();
-//        if (rowsNumber > 0 ) rowsNumber -= 1;
         return new Position(rowsNumber);
     }
 

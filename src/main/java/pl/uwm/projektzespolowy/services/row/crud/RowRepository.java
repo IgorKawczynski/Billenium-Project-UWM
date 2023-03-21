@@ -10,4 +10,5 @@ import java.util.List;
 interface RowRepository extends JpaRepository<Row, Long> {
 
     List<Row> findAllByBoardId(Long boardId);
+
 }
