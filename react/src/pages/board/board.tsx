@@ -9,6 +9,7 @@ import {fetchData} from "@/services/actions/boardService";
 import BoardHeader from "@/componenets/boardHeader/boardHeader";
 import BoardContent from "@/componenets/boardContent/boardContent";
 import AddRowButton from "@/componenets/addRowButton/addRowButton";
+import ModalAddRow from "@/componenets/modalAddRow/modalAddRow";
 
 const Board = () => {
     const [data, setData] = useState<_Data['data']> (loadDefaultData);
@@ -36,14 +37,15 @@ const Board = () => {
         <Stack spacing={2} >
             <BoardHeader data={data} setModalEdit={setModalEdit} setData={setData}/>
             <BoardContent data={data} setData={setData}/>
-            <AddRowButton/>
+            <AddRowButton data={data} setData={setData}/>
             <ModalEditBoard
                 id={data.id}
                 title={data.title}
                 modalEdit={modalEdit}
                 setModalEdit={setModalEdit}
                 data={data}
-                setData={setData}/>
+                setData={setData}
+            />
         </Stack>
     );
 }

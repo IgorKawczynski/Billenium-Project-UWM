@@ -16,13 +16,13 @@ export async function removeColumnToBackend(id:string){
     }
 }
 
-export async function getColumnFromBackend(boardId:string){
+export async function getColumnsFromBackend(boardId:string){
         const response = await axios.get(urlDomain+`/api/columns/${boardId}/all`)
         if(response.data.error)
         {
             return response.data.error
         }else{
-            return transformColumns(response.data)
+            return response.data
         }
 }
 
@@ -43,7 +43,7 @@ export async function getColumnById(columnId:string){
     try {
         const response = await axios.get(apiUrl);
         console.log(response.data)
-        return transformColumn(response.data);
+        return response.data;
     } catch (error) {
         console.error(error);
     }

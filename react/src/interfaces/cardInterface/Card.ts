@@ -4,7 +4,8 @@ interface CardProps {
     title: string
     desc: string
     index: number
-    columnId:string
+    color:string
+    cellId:string
     setData:_Data["setData"]
     data:_Data["data"]
 }

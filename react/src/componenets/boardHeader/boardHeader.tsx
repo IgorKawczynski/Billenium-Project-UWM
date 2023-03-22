@@ -86,7 +86,7 @@ const BoardHeader = (props:boardHeaderProps) => {
                     setData={props.setData}
 
                 />
-                <ColorLegend/>
+                <ColorLegend colors={props.data.colorList} data={props.data} setData={props.setData}/>
             </Box>
         </Box>
     )

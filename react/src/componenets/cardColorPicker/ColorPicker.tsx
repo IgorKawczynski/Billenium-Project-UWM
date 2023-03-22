@@ -8,8 +8,9 @@ import ListItemText from "@mui/material/ListItemText";
 import CardColor from "@/assets/themes/colors";
 import CardColorPickerItem from "@/componenets/cardColorPickerItem/cardColorPickerItem";
 import {useTheme} from "@mui/material";
+import {ColorPickerProps} from "@/interfaces/ColorPicker/colorPicker";
 
-const ColorPicker = () => {
+const ColorPicker = (props:ColorPickerProps) => {
     const theme = useTheme()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -21,7 +22,7 @@ const ColorPicker = () => {
     };
 
     return (
-        <>
+        <Box>
         <MenuItem
             id="demo-customized-button"
             aria-controls={open ? 'demo-customized-menu' : undefined}
@@ -43,15 +44,36 @@ const ColorPicker = () => {
                 open={open}
                 onClose={handleClose}
             >
-                <CardColorPickerItem color={theme.palette.text.secondary} title={"Default"} handleClose={handleClose}/>
-                <CardColorPickerItem color={CardColor.purple} title={"Color 1"} handleClose={handleClose}/>
-                <CardColorPickerItem color={CardColor.blue} title={"Color 2"} handleClose={handleClose}/>
-                <CardColorPickerItem color={CardColor.green} title={"Color 3"} handleClose={handleClose}/>
-                <CardColorPickerItem color={CardColor.yellow} title={"Color 4"} handleClose={handleClose}/>
-                <CardColorPickerItem color={CardColor.red} title={"Color 5"} handleClose={handleClose}/>
+                {props.colors.map((color) => (
+                    <Box key={color.id}>
+                    {color.value == "default" && (
+                    <CardColorPickerItem
+                        id={props.id}
+                        colorId={color.id}
+                        color={theme.palette.text.secondary}
+                        title={"Default"}
+                        setAnchorEl={setAnchorEl}
+                        data={props.data}
+                        setData={props.setData}
+                    />
+                    )}
+                    {color.value != 'default' &&(
+                    <CardColorPickerItem
+                        id={props.id}
+                        colorId={color.id}
+                        color={color.value}
+                        title={color.title}
+                        setAnchorEl={setAnchorEl}
+                        data={props.data}
+                        setData={props.setData}
+                    />
+                    )}
+                    </Box>
+                ))}
+
 
             </StyledMenu>
-        </>
+        </Box>
     );
 }
 

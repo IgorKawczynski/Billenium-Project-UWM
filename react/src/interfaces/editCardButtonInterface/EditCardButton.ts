@@ -2,7 +2,7 @@ import {_Data} from "@/services/utils/boardUtils/DataBoard";
 interface EditCardButtonProps {
 
     id: string;
-    columnId:string;
+    cellId:string;
     title:string;
     desc:string;
     data:_Data["data"]

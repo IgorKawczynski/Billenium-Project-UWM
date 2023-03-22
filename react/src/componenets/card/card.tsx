@@ -43,11 +43,20 @@ const Task = (props:CardProps) => {
                             display:"flex",
                             justifyContent:"space-between"
                         }}>
-                            <Box
-                                height={'100%'}
-                                width={'10px'}
-                                bgcolor={theme.palette.text.secondary}
-                            />
+                            {props.color == 'default' && (
+                                <Box
+                                    height={'100%'}
+                                    width={'10px'}
+                                    bgcolor={theme.palette.text.secondary}
+                                />
+                            )}
+                            {props.color != 'default' && (
+                                <Box
+                                    height={'100%'}
+                                    width={'10px'}
+                                    bgcolor={props.color}
+                                />
+                            )}
                             <Box
                                 width={'100%'}
                                 paddingY={'8px'}
@@ -67,11 +76,12 @@ const Task = (props:CardProps) => {
                                     </Typography>
                                     <EditCardButton
                                         id={props.id}
-                                        columnId={props.columnId}
+                                        cellId={props.cellId}
                                         title={props.title}
                                         desc={props.desc}
                                         data={props.data}
                                         setData={props.setData}
+
                                     />
                                 </Box>
                                 <Typography

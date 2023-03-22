@@ -1,6 +1,6 @@
-import {_Data} from "@/services/utils/boardUtils/DataBoard";
+import {_Data, Column} from "@/services/utils/boardUtils/DataBoard";
 import DataFromBackend from "@/services/utils/boardUtils/DataFromBackend";
-import {getColumnById, getColumnFromBackend} from "@/services/actions/columnService";
+import {getColumnById, getColumnsFromBackend} from "@/services/actions/columnService";
 import {moveCardInColumn, moveCardToAnotherColumn} from "@/services/actions/cardService";
 import {editBoardToBackend, loadBoardFromBackend, moveColumnToBackend} from "@/services/actions/boardService";
 import React, {SetStateAction} from "react";
@@ -9,57 +9,63 @@ import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
 
 function withPositionInRange(lowerBound: number, upperBound: number, columns:_Data["data"]['columnList']){
-    const x = Object.values(columns).filter((column) => {
+    const newColumns = Object.values(columns).filter((column) => {
         return column.position >= lowerBound && column.position <= upperBound;
     });
-    return x;
+    return newColumns;
 }
 
-function changePositionToRight(columns:DataFromBackend['columnList']){
+function changePositionToRight(columns:_Data["data"]['columnList']){
     return Object.values(columns).map((column) => {
         column.position = column.position + 1
     });
 }
-function changePositionToLeft(columns:DataFromBackend['columnList']){
+function changePositionToLeft(columns:_Data["data"]['columnList']){
     return Object.values(columns).map((column) => {
         column.position = column.position - 1
     });
 }
 
-export const onDragEnd = (result: any, columns:_Data["data"]['columnList'], setData:_Data["setData"], data:_Data["data"]) => {
+export const onDragEnd = (result: any, columns:Column[], setData:_Data["setData"], data:_Data["data"]) => {
     if (!result.destination) return
     const {source, destination} = result;
     if(result.type === 'column') {
-        if(destination.index < columns[result.draggableId].position){
-            const columnsToChange = withPositionInRange(destination.index, source.index, columns);
-            console.log(columnsToChange)
-            const changedColumns = changePositionToRight(columnsToChange)
-        }if(destination.index > columns[result.draggableId].position){
-            const columnsToChange = withPositionInRange(source.index, destination.index, columns);
-            const changedColumns = changePositionToLeft(columnsToChange)
-        }
-        columns[result.draggableId].position = destination.index
-        moveColumnToBackend(result.draggableId, destination.index)
-            .then(res => {
-                getColumnFromBackend(data.id)
+        if(columns != null){
+                const movedColumn = columns.find(column => column.id === result.draggableId)
+            if(movedColumn) {
+                if (destination.index < movedColumn.position) {
+                    const columnsToChange = withPositionInRange(destination.index, source.index, columns);
+                    changePositionToRight(columnsToChange)
+                }
+                if (destination.index > movedColumn.position) {
+                    const columnsToChange = withPositionInRange(source.index, destination.index, columns);
+                    changePositionToLeft(columnsToChange)
+                }
+                movedColumn.position = destination.index
+                moveColumnToBackend(result.draggableId, destination.index)
                     .then(res => {
-                        if (res) {
-                            const columns: _Data["data"]['columnList'] = res
-                            setData({
-                                ...data,
-                                columnList: columns
+                        getColumnsFromBackend(data.id)
+                            .then(res => {
+                                if (res) {
+                                    const columns: _Data["data"]['columnList'] = res
+                                    setData({
+                                        ...data,
+                                        columnList: columns
 
+                                    })
+                                }
                             })
-                        }
                     })
-            })
+            }
+        }
     }
+
     if(result.type === 'task') {
         if (source.droppableId !== destination.droppableId){
             const sourceColumn = columns[source.droppableId];
             const destColumn = columns[destination.droppableId];
-            const sourceItems = [...sourceColumn.cards];
-            const destItems = [...destColumn.cards];
+            const sourceItems = [...sourceColumn.cells];
+            const destItems = [...destColumn.cells];
             const [removed] = sourceItems.splice(source.index, 1);
             destItems.splice(destination.index, 0, removed);
             setData({
@@ -78,7 +84,7 @@ export const onDragEnd = (result: any, columns:_Data["data"]['columnList'], setD
             })
             moveCardToAnotherColumn(result.draggableId, destination.droppableId, destination.index)
                 .then(res => {
-                    getColumnFromBackend(data.id)
+                    getColumnsFromBackend(data.id)
                         .then(res => {
                             if (res) {
                                 setData({

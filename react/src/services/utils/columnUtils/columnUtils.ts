@@ -1,7 +1,7 @@
 import {
     addColumnToBackend,
     getColumnById,
-    getColumnFromBackend,
+    getColumnsFromBackend,
     removeColumnToBackend,
     updateColumnToBackend
 } from "@/services/actions/columnService";
@@ -23,15 +23,12 @@ export const editColumn = (newTitle: string,
             if(typeof res === 'string') {
                 handleClickVariant(enqueueSnackbar)(res ,'error')
             }else{
-            getColumnById(id)
-                .then( res => {
-                        if(res) {
+            getColumnsFromBackend(data.id)
+                .then( resCol => {
+                        if(resCol) {
                             setData({
                                 ...data,
-                                columnList: {
-                                    ...data.columnList,
-                                    [id]: res
-                                }
+                                columnList:resCol
 
                             })
                             closeModal(setModalEdit)
@@ -47,7 +44,7 @@ export const editColumn = (newTitle: string,
 export const removeColumn = (id:string, data:_Data["data"], setData:_Data["setData"]) => {
     removeColumnToBackend(id)
         .then(res => {
-            getColumnFromBackend(data.id)
+            getColumnsFromBackend(data.id)
                 .then( res => {
                     if(res) {
                         const columns:_Data["data"]['columnList'] = res
@@ -70,7 +67,7 @@ export function addColumn(name:string,
     addColumnToBackend(data.id, name)
         .then(res => {
             if(res != 0){
-            getColumnFromBackend(data.id)
+            getColumnsFromBackend(data.id)
                 .then( res => {
                         if(res) {
                             const columns:_Data["data"]['columnList'] = res

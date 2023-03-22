@@ -35,36 +35,43 @@ const Column = (props:ColumnProps) => {
                             setModalEdit={setModalEdit}
                             setModalDelete={setModalDelete}
                         />
-            <Box>
-                {props.position==0 && (
-                    <Box
-                        marginTop={1}
-                        borderBottom={`2px ${theme.palette.text.primary} solid`}
-                        height={'25px'}
-                    >
-                        <Typography variant={'body1'} color={theme.palette.text.primary}>
-                            Piotr
-                        </Typography>
+                {Object.values(props.data.rowList).map((row) => (
+                    <Box key={row.id}>
+                        {props.position==0 && (
+                        <Box
+                            marginTop={1}
+                            borderBottom={`2px ${theme.palette.text.primary} solid`}
+                            height={'25px'}
+                        >
+                            <Typography variant={'body1'} color={theme.palette.text.primary}>
+                                {row.title}
+                            </Typography>
+                        </Box>
+                    )}
+                        {props.position!=0 && (
+                        <Box
+                            marginTop={1}
+                            height={'25px'}
+                        >
+                        </Box>
+                    )}
+                        {Object.values(props.cells).map((cell) => (
+                                    cell.position == row.position && (
+                                    <ColumnCell
+                                        key={cell.id}
+                                        id={cell.id}
+                                        cardsLimit={props.cardsLimit}
+                                        position={cell.position}
+                                        cards={cell.cards}
+                                        data={props.data}
+                                        setData={props.setData}
+                                        isDragging={props.isDragging}
+                                    />
+                                    )
+                                ))}
                     </Box>
-                )}
-                {props.position!=0 && (
-                    <Box
-                        marginTop={1}
-                        height={'25px'}
-                    >
-                    </Box>
-                )}
-                <ColumnCell
-                    id={props.id}
-                    cards={props.cards}
-                    cardsLimit={props.cardsLimit}
-                    position={props.position}
-                    data={props.data}
-                    setData={props.setData}
-                    isDragging={props.isDragging}
-                />
+                ))}
 
-            </Box>
         </Box>
       )}
             </Draggable>
@@ -73,6 +80,7 @@ const Column = (props:ColumnProps) => {
                 id={props.id}
                 title={props.title}
                 cardsLimit={props.cardsLimit}
+                position={props.position}
                 modalEdit={modalEdit}
                 setModalEdit={setModalEdit}
                 data={props.data}

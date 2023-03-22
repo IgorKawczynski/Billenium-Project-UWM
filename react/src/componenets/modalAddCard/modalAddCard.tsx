@@ -66,7 +66,8 @@ export default function ModalAddCard(props:ModalAddCardProps) {
                                 />
                             <Button
                                 onClick={() => addCard(name,
-                                                        desc,props.columnId,
+                                                        desc,
+                                                        props.cellId,
                                                         props.data,
                                                         props.setData,
                                                         setName,

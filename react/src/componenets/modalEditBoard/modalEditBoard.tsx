@@ -57,7 +57,7 @@ const ModalEditBoard = (props:ModalEditBoardProps) => {
                                     onChange={handleNameChange}
                                 />
                             </Box>
-                            <ColorSetter/>
+                            <ColorSetter colors={props.data.colorList} data={props.data} setData={props.setData}/>
                         </Box>
                         <Button
                             sx={{maxHeight:'50px'}}

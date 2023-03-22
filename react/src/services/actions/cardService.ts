@@ -1,9 +1,9 @@
 import axios from "axios";
 import {urlDomain} from '@/services/actions/boardService'
-export async function addCardToBackend(columnId:string, title:string, description:string){
+export async function addCardToBackend(cellId:string, title:string, description:string){
 
     try{
-        const response = await axios.post(urlDomain+'/api/cards', {columnId, title, description})
+        const response = await axios.post(urlDomain+'/api/cards', {cellId, title, description})
         return response.data
     }catch(error:any){
         return error.response.data.error

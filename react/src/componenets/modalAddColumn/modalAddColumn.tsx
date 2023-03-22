@@ -63,7 +63,6 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
                                                     props.setData,
                                                     setColumnName ,
                                                     props.setOpen,
-                                                    enqueueSnackbar
                                                     )}
                             variant="contained"
                         >

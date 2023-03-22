@@ -3,7 +3,7 @@ import React, {SetStateAction} from "react";
 interface ModalEditCardProps {
 
     id: string;
-    columnId:string;
+    cellId:string;
     title:string;
     desc:string;
     setModalEdit: React.Dispatch<SetStateAction<boolean>>

@@ -4,6 +4,7 @@ interface ModalEditColumnProps {
     id:string
     title:string
     cardsLimit:number
+    position:number
     modalEdit:boolean
     setModalEdit:React.Dispatch<SetStateAction<boolean>>
     data:_Data["data"]

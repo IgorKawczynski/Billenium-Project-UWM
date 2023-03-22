@@ -36,7 +36,7 @@ const BoardContent = (props:boardContentProps) =>{
                                         title={column.title}
                                         cardsLimit={column.cardsLimit}
                                         position={column.position}
-                                        cards={column.cards}
+                                        cells={column.cells}
                                         data={props.data}
                                         setData={props.setData}
                                         isDragging={snapshot.isDraggingOver}

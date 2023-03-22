@@ -7,18 +7,20 @@ import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import {useTheme} from "@mui/material";
 import CardColor from "@/assets/themes/colors";
 import ColorSetterRow from "@/componenets/colorSetterRow/colorSetterRow";
+import {ColorListProps} from "@/interfaces/colorListInterface/colorList";
+import ColorLegendItem from "@/componenets/colorLegendItem/colorLegendItem";
 
-const ColorSetter = () =>{
+const ColorSetter = (props:ColorListProps) =>{
     const theme = useTheme()
 
     return(
         <Box width={'50%'}>
 
-            <ColorSetterRow color={CardColor.purple} title={"Card 1"}/>
-            <ColorSetterRow color={CardColor.blue} title={"Card 2"}/>
-            <ColorSetterRow color={CardColor.green} title={"Card 3"}/>
-            <ColorSetterRow color={CardColor.yellow} title={"Card 4"}/>
-            <ColorSetterRow color={CardColor.red} title={"Card 5"}/>
+            {props.colors.map((color) =>(
+                color.value != 'default' && (
+                        <ColorSetterRow key={color.id} color={color.value} title={color.title} id={color.id} data={props.data} setData={props.setData}/>
+                    )
+            ))}
 
         </Box>
     )

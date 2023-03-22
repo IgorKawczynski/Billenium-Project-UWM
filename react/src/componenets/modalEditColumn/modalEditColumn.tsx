@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Modal from "@mui/material/Modal";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
@@ -28,6 +28,12 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
     const handleCheckLimitChange = () => {
         setCheckLimit((prevState) => !prevState);
     };
+
+    useEffect(() => {
+        if(props.position == 0 || props.position == Object.keys(props.data.columnList).length-1){
+            setCheckLimit(true)
+        }
+    })
 
     return(
             <Modal

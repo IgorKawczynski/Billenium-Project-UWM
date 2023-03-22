@@ -1,7 +1,7 @@
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
 import React, {SetStateAction} from "react";
 interface ModalAddCardProps {
-    columnId:string
+    cellId:string
     open:boolean
     setOpen:React.Dispatch<SetStateAction<boolean>>
     data:_Data["data"]

@@ -6,12 +6,14 @@ import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import CloseIcon from '@mui/icons-material/Close';
 import ColorLegendItem from "@/componenets/colorLegendItem/colorLegendItem";
 import {ColorProps} from "@/interfaces/colorInterface/Color";
+import {ColorListProps} from "@/interfaces/colorListInterface/colorList";
+import CardColorPickerItem from "@/componenets/cardColorPickerItem/cardColorPickerItem";
 
-const ColorLegend = (props:ColorProps) => {
+const ColorLegend = (props:ColorListProps) => {
     const [show, setShow] = useState(false)
     const theme = useTheme()
     return(
-        <>
+        <Box>
         {!show &&
         (
             <Box
@@ -41,15 +43,19 @@ const ColorLegend = (props:ColorProps) => {
                 <IconButton onClick={() => closeModal(setShow)}>
                     <CloseIcon fontSize="small" />
                 </IconButton>
-                <ColorLegendItem color={theme.palette.text.secondary} title={"Default"}/>
-                <ColorLegendItem color={CardColor.purple} title={"Color 1"}/>
-                <ColorLegendItem color={CardColor.blue} title={"Color 2"}/>
-                <ColorLegendItem color={CardColor.green} title={"Color 3"}/>
-                <ColorLegendItem color={CardColor.yellow} title={"Color 4"}/>
-                <ColorLegendItem color={CardColor.red} title={"Color 5"}/>
+                {props.colors.map((color) => (
+                    <Box key={color.id}>
+                        {color.value == "default" && (
+                            <ColorLegendItem id={color.id} color={theme.palette.text.secondary} title={"Default"}/>
+                        )}
+                        {color.value != 'default' &&(
+                            <ColorLegendItem id={color.id} color={color.value} title={color.title}/>
+                        )}
+                    </Box>
+                ))}
         </Box>)
         }
-        </>
+        </Box>
     )
 }
 export default ColorLegend

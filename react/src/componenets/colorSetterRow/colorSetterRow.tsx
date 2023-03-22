@@ -5,13 +5,19 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import {useTheme, TextField} from "@mui/material";
-import {ColorProps} from "@/interfaces/colorInterface/Color";
+import {setColorProps} from "@/interfaces/colorInterface/Color";
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import CloseIcon from "@mui/icons-material/Close";
+import {updateColor} from "@/services/utils/colorUtils/colorUtils";
 
-const ColorSetterRow = (props:ColorProps) =>{
+const ColorSetterRow = (props:setColorProps) =>{
     const [edit, setEdit] = useState(false)
+    const [title, setTitle] = useState("")
     const theme = useTheme()
+
+    const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setTitle(event.target.value);
+    };
 
     return(
 
@@ -50,8 +56,10 @@ const ColorSetterRow = (props:ColorProps) =>{
                     variant={"standard"}
                     id="outlined-multiline-flexible"
                     label={props.title}
+                    value={title}
+                    onChange={handleTitleChange}
                 />
-                    <IconButton onClick={() => closeModal(setEdit)}>
+                    <IconButton onClick={() => updateColor(props.id, title, props.setData, props.data, setEdit)}>
                         <CheckIcon fontSize="small" />
                     </IconButton>
                     <IconButton onClick={() => closeModal(setEdit)}>

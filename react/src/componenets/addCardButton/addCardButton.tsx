@@ -45,7 +45,7 @@ export default function AddCardButton(props:AddCardButtonProps) {
             <ModalAddCard
                 open={open}
                 setOpen={setOpen}
-                columnId={props.columnId}
+                cellId={props.cellId}
                 data={props.data}
                 setData={props.setData}
             />

@@ -6,52 +6,11 @@ import {Droppable} from "react-beautiful-dnd";
 import {useTheme} from "@mui/material";
 import AddCardButton from "@/componenets/addCardButton/addCardButton";
 import {styled} from "@mui/material/styles";
-
+import StyledScrollbar from "@/assets/styles/styledScrollbar";
 
 const ColumnCell = (props:ColumnCellProps) =>{
     const theme = useTheme()
-    const CustomScrollbar = styled('div')({
-        height:'100%',
-        overflowX:'hidden',
-        overflowY: 'auto',
-        paddingRight:'8px',
-        paddingLeft:'8px',
-        '&::-webkit-scrollbar': {
-            width: '4px',
-            height: '2px',
-        },
-        '&::-webkit-scrollbar-thumb': {
-            backgroundColor: theme.palette.text.primary,
-            borderRadius: '3px',
-        },
-        '&::-webkit-scrollbar-track': {
-            backgroundColor: 'transparent',
-        },
-        '&::-moz-scrollbar': {
-            width: '4px',
-            height: '2px',
-        },
-        '&::-moz-scrollbar-thumb': {
-            backgroundColor: theme.palette.text.primary,
-            borderRadius: '3px',
-        },
-        '&::-moz-scrollbar-track': {
-            backgroundColor: 'transparent',
-        },
-        '&::-ms-scrollbar': {
-            width: '4px',
-            height: '2px',
-        },
-        '&::-ms-scrollbar-thumb': {
-            backgroundColor: theme.palette.text.primary,
-            borderRadius: '3px',
-        },
-        '&::-ms-scrollbar-track': {
-            backgroundColor: 'transparent',
-        },
-        'scrollbar-color': `${theme.palette.text.primary} transparent`,
-        'scrollbar-width': 'thin',
-    });
+    const CustomScrollbar = StyledScrollbar()
     return(
         <Droppable
             droppableId={props.id}
@@ -90,8 +49,9 @@ const ColumnCell = (props:ColumnCellProps) =>{
                                         id={item.id}
                                         title={item.title}
                                         desc={item.description}
+                                        color={item.color}
                                         index={index}
-                                        columnId={props.id}
+                                        cellId={props.id}
                                         setData={props.setData}
                                         data={props.data}
                                     />
@@ -101,7 +61,7 @@ const ColumnCell = (props:ColumnCellProps) =>{
                             {provided.placeholder}
                         </CustomScrollbar>
                         <AddCardButton
-                            columnId={props.id}
+                            cellId={props.id}
                             data={props.data}
                             setData={props.setData}
                         />

@@ -3,10 +3,15 @@ import Box from "@mui/material/Box";
 import CardColor from "@/assets/themes/colors";
 import MenuItem from "@mui/material/MenuItem";
 import {cardColorPickerItemProps} from "@/interfaces/cardColorPickerItemInterface/cardColorPickerItem";
+import {changeCardColor} from "@/services/utils/colorUtils/colorUtils";
 const CardColorPickerItem = (props:cardColorPickerItemProps) =>{
+    const Change = () => {
+        changeCardColor(props.id, props.color, props.setData, props.data)
+        props.setAnchorEl(null);
+    };
 
     return(
-        <MenuItem onClick={props.handleClose} disableRipple>
+        <MenuItem key={props.colorId} onClick={Change} disableRipple>
             <Box
                 width={'20px'}
                 height={'20px'}

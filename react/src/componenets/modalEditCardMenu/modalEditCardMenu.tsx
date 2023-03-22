@@ -24,7 +24,7 @@ export default function IconMenu(props:ModalEditCardMenuProps) {
                     </ListItemIcon>
                     <ListItemText>Users</ListItemText>
                 </MenuItem>
-                <ColorPicker/>
+                <ColorPicker colors={props.data.colorList} data={props.data} setData={props.setData} id={props.id}/>
                 <Divider />
                 <MenuItem onClick={() => openModal(props.setModalDelete)}>
                     <ListItemIcon>

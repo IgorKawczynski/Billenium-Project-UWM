@@ -43,7 +43,7 @@ export default function EditCardButton(props:EditCardButtonProps) {
             
             <ModalEditCard
                 id={props.id}
-                columnId={props.columnId}
+                cellId={props.cellId}
                 title={props.title}
                 desc={props.desc}
                 setModalEdit={setModalEdit}
@@ -56,7 +56,7 @@ export default function EditCardButton(props:EditCardButtonProps) {
             <ModalRemoveCard
                 id={props.id}
                 title={props.title}
-                columnId={props.columnId}
+                cellId={props.cellId}
                 setModalDelete={setModalDelete}
                 modalDelete={modalDelete}
                 data={props.data}
