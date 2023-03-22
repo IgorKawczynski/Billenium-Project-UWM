@@ -6,6 +6,7 @@ import ModalAddCard from "@/components/card/modalAddCard/modalAddCard";
 import Typography from "@mui/material/Typography";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',

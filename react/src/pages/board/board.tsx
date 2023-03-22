@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
-import {loadDefaultData} from "@/services/actions/boardService";
-import {useTheme, Stack, Snackbar, Button} from "@mui/material";
+import {fetchData, loadDefaultData} from "@/services/actions/boardService";
+import {Stack, useTheme} from "@mui/material";
 import {ColorModeContext} from "@/App";
 import '@/assets/styles/board.css'
 import ModalEditBoard from "@/components/board/modalEditBoard/modalEditBoard";
-import {fetchData} from "@/services/actions/boardService";
 import BoardHeader from "@/components/board/boardHeader/boardHeader";
 import BoardContent from "@/components/board/boardContent/boardContent";
 import AddRowButton from "@/components/row/addRowButton/addRowButton";
-import ModalAddRow from "@/components/row/modalAddRow/modalAddRow";
 
 const Board = () => {
     const [data, setData] = useState<_Data['data']> (loadDefaultData);

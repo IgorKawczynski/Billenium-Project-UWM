@@ -1,12 +1,10 @@
 import {addCardToBackend, removeCardToBackend, updateCardToBackend} from "@/services/actions/cardService";
-import {getColumnById, getColumnsFromBackend} from "@/services/actions/columnService";
+import {getColumnsFromBackend} from "@/services/actions/columnService";
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
 import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
-import {findCell} from "@/services/utils/cellUtils/cellUtils";
-import {getCellFromBackendById} from "@/services/actions/cellService";
 
 export const removeCard = (id:string, columnId:string, setData:_Data['setData'], data:_Data['data']) => {
     removeCardToBackend(id)

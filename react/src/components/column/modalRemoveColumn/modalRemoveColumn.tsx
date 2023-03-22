@@ -10,6 +10,7 @@ import {modalStyle} from "@/assets/themes/modalStyle";
 import Typography from "@mui/material/Typography";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {removeColumn} from "@/services/utils/columnUtils/columnUtils";
+
 const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
 
     return(

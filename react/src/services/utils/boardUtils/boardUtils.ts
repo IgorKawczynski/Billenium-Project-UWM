@@ -1,13 +1,12 @@
 import {_Data, Column} from "@/services/utils/boardUtils/DataBoard";
-import DataFromBackend from "@/services/utils/boardUtils/DataFromBackend";
-import {getColumnById, getColumnsFromBackend} from "@/services/actions/columnService";
+import {getColumnsFromBackend} from "@/services/actions/columnService";
 import {moveCardInCell, moveCardToAnotherCell} from "@/services/actions/cardService";
 import {editBoardToBackend, loadBoardFromBackend, moveColumnToBackend} from "@/services/actions/boardService";
 import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
-import {findCellById, findCellByIndex} from "@/services/utils/cellUtils/cellUtils";
+import {findCellById} from "@/services/utils/cellUtils/cellUtils";
 
 function withPositionInRange(lowerBound: number, upperBound: number, columns:_Data["data"]['columnList']){
     const newColumns = Object.values(columns).filter((column) => {

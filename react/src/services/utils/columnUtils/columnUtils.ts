@@ -1,6 +1,5 @@
 import {
     addColumnToBackend,
-    getColumnById,
     getColumnsFromBackend,
     removeColumnToBackend,
     updateColumnToBackend
@@ -9,7 +8,8 @@ import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
 import React, {SetStateAction} from "react";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
-import {enqueueSnackbar, EnqueueSnackbar} from "notistack";
+import {enqueueSnackbar} from "notistack";
+
 export const editColumn = (newTitle: string,
                            limit: number,
                            id:string,

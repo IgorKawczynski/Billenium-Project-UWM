@@ -1,5 +1,5 @@
 import React from "react";
-import {Grid, useTheme} from "@mui/material";
+import {useTheme} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -8,6 +8,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import {columnHeaderProps} from "@/components/column/interfaces/columnHeaderInterface/ColumnHeader";
 import AllInclusiveOutlinedIcon from '@mui/icons-material/AllInclusiveOutlined';
+
 const ColumnHeader = (props:columnHeaderProps) =>{
     const theme = useTheme();
 

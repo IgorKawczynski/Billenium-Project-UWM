@@ -10,6 +10,7 @@ import Stack from "@mui/material/Stack";
 import {modalStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {removeCard} from "@/services/utils/cardUtils/cardUtils";
+
 export default function ModalRemoveCard(props:ModalRemoveCardProps) {
 
     return (

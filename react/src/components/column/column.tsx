@@ -3,15 +3,9 @@ import {Draggable} from 'react-beautiful-dnd';
 import ColumnProps from '@/components/column/interfaces/columnInterface/Column'
 import ModalEditColumn from "@/components/column/modalEditColumn/modalEditColumn";
 import ModalRemoveColumn from "@/components/column/modalRemoveColumn/modalRemoveColumn";
-import {Box, Stack, Typography, useTheme} from "@mui/material";
+import {Box, Stack, useTheme} from "@mui/material";
 import ColumnHeader from "@/components/column/columnHeader/columnHeader";
 import ColumnCell from "@/components/column/columnCell/columnCell";
-import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
-import {openModal} from "@/services/utils/modalUtils/modalUtils";
-import IconButton from "@mui/material/IconButton";
-import ModalEditRow from "@/components/row/modalEditRow/modalEditRow";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import ModalRemoveRow from "@/components/row/modalRemoveRow/modalRemoveRow";
 
 const Column = (props:ColumnProps) => {
     const theme = useTheme()
