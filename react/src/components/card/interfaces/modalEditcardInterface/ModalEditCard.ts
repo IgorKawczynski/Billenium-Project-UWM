@@ -2,7 +2,6 @@ import {_Data} from "@/services/utils/boardUtils/DataBoard";
 import React, {SetStateAction} from "react";
 
 interface ModalEditCardProps {
-
     id: string;
     cellId:string;
     title:string;
