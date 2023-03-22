@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Typography, useTheme} from "@mui/material";
 import {modalStyle} from "@/assets/themes/modalStyle";

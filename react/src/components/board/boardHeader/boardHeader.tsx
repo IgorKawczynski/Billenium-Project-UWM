@@ -7,7 +7,6 @@ import AddColumnButton from "@/components/column/addColumnButton/addColumnButton
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import {ColorModeContext} from "@/App";
 import {boardHeaderProps} from "@/components/board/interfaces/boardHeaderInterface/BoardHeader";
-import CardColor from "@/assets/themes/colors";
 import ColorLegend from "@/components/color/colorLegend/colorLegend";
 
 

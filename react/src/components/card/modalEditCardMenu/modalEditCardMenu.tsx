@@ -5,12 +5,9 @@ import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Typography from '@mui/material/Typography';
 import GroupIcon from '@mui/icons-material/Group';
-import ColorLensIcon from '@mui/icons-material/ColorLens';
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
-import ModalRemoveCard from "@/components/card/modalRemoveCard/modalRemoveCard";
 import {ModalEditCardMenuProps} from "@/components/card/interfaces/modalEditCardMenu/ModalEditCardMenu";
 import ColorPicker from "@/components/card/cardColorPicker/ColorPicker";
 

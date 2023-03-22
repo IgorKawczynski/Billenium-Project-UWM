@@ -1,13 +1,10 @@
 import React, {useState} from "react";
 import {Box, IconButton, Typography, Button, useTheme} from "@mui/material";
-import CardColor from "@/assets/themes/colors";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import CloseIcon from '@mui/icons-material/Close';
 import ColorLegendItem from "@/components/color/colorLegendItem/colorLegendItem";
-import {ColorProps} from "@/components/color/interfaces/colorInterface/Color";
 import {ColorListProps} from "@/components/color/interfaces/colorListInterface/colorList";
-import CardColorPickerItem from "@/components/card/cardColorPickerItem/cardColorPickerItem";
 
 const ColorLegend = (props:ColorListProps) => {
     const [show, setShow] = useState(false)

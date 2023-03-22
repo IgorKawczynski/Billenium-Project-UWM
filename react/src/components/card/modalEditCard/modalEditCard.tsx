@@ -85,7 +85,6 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                     <IconMenu
                                         id={props.id}
                                         title={props.title}
-                                        columnId={props.columnId}
                                         setModalDelete={props.setModalDelete}
                                         modalDelete={props.modalDelete}
                                         data={props.data}

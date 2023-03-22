@@ -1,15 +1,10 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import {Box, useTheme} from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditCardButtonProps from "@/components/card/interfaces/editCardButtonInterface/EditCardButton";
 import ModalEditCard from "@/components/card/modalEditCard/modalEditCard";
 import ModalRemoveCard from "@/components/card/modalRemoveCard/modalRemoveCard";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
-import {StyledMenu} from "@/assets/styles/styledMenu";
 import IconButton from "@mui/material/IconButton";
 
 export default function EditCardButton(props:EditCardButtonProps) {

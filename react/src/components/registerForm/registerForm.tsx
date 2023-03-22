@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Typography, useTheme} from "@mui/material";
 import {modalStyle} from "@/assets/themes/modalStyle";
-import {Link} from "react-router-dom";
-import {LoginFormProps} from "@/components/loginForm/interfaces/loginFormInterface/LoginForm";
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -17,6 +15,7 @@ const RegisterForm = (props:RegisterFormProps) => {
     const [lastName, setLastName] = useState("");
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordAgain, setPasswordAgain] = useState("");
     const [showPassword, setShowPassword] = React.useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -63,7 +62,7 @@ const RegisterForm = (props:RegisterFormProps) => {
                         id="outlined-basic"
                         label="Name"
                         variant="outlined"
-                        value={mail}
+                        value={name}
                         onChange={handleMailChange}
                     />
                     <TextField
@@ -71,7 +70,7 @@ const RegisterForm = (props:RegisterFormProps) => {
                         id="outlined-basic"
                         label="Last Name"
                         variant="outlined"
-                        value={mail}
+                        value={lastName}
                         onChange={handleMailChange}
                     />
                             <TextField
@@ -87,6 +86,7 @@ const RegisterForm = (props:RegisterFormProps) => {
                         <OutlinedInput
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
+                            value={password}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -107,6 +107,7 @@ const RegisterForm = (props:RegisterFormProps) => {
                         <OutlinedInput
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
+                            value={passwordAgain}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
