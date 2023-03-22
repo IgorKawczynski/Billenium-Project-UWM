@@ -51,7 +51,7 @@ const Column = (props:ColumnProps) => {
                         {props.position!=0 && (
                         <Box
                             marginTop={1}
-                            height={'25px'}
+                            height={'27px'}
                         >
                         </Box>
                     )}
