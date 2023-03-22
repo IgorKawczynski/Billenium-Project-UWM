@@ -1,6 +1,7 @@
 import {DraggableProvided} from "react-beautiful-dnd";
 import React, {SetStateAction} from "react";
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
+
 export interface columnHeaderProps{
     title:string
     cardsLimit:number

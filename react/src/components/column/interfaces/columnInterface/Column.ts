@@ -1,4 +1,5 @@
 import {_Data, Cell} from "@/services/utils/boardUtils/DataBoard";
+
 interface ColumnProps {
     key:string
     id: string;

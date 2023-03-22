@@ -5,7 +5,6 @@ import Task from "@/components/card/card";
 import {Droppable} from "react-beautiful-dnd";
 import {Typography, useTheme} from "@mui/material";
 import AddCardButton from "@/components/card/addCardButton/addCardButton";
-import {styled} from "@mui/material/styles";
 import StyledScrollbar from "@/assets/styles/styledScrollbar";
 import ModalRemoveRow from "@/components/row/modalRemoveRow/modalRemoveRow";
 import ModalEditRow from "@/components/row/modalEditRow/modalEditRow";

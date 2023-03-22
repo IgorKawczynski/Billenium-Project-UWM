@@ -1,12 +1,12 @@
 import React from "react";
 import {Draggable} from 'react-beautiful-dnd'
 import Card from "@mui/material/Card"
-import Avatar from '@/components/card/avatar/avatar'
 import {useTheme} from "@mui/material"
 import CardProps from '@/components/card/interfaces/cardInterface/Card'
 import EditCardButton from '@/components/card/editCardButton/editCardButton'
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+
 const Task = (props:CardProps) => {
     const theme = useTheme()
     return(

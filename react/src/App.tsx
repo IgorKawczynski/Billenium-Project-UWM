@@ -1,10 +1,11 @@
-import React, {useMemo} from 'react'
+import React from 'react'
 import Board from "./pages/board/board"
 import Home from "./pages/home/home";
 import {Route, Routes} from "react-router-dom";
-import {createTheme, makeStyles, ThemeOptions, ThemeProvider, useTheme} from '@mui/material/styles';
-import {lightOptions, darkOptions} from './assets/themes/BasicTheme'
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {darkOptions, lightOptions} from './assets/themes/BasicTheme'
 import {SnackbarProvider} from 'notistack'
+
 export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 const customThemes = {

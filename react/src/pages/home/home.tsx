@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react'
+import React, {useState} from 'react'
 import Box from '@mui/material/Box'
 import Typography from "@mui/material/Typography";
 import '@/assets/styles/home.css'
@@ -12,14 +12,13 @@ import ServerGif from '@/assets/gifs/Server.gif'
 import TwoPerson from '@/assets/imgs/org_2pers.png'
 import ServerPng from '@/assets/imgs/Server.png'
 import FirmwarePng from '@/assets/imgs/Firmware.png'
-import {Link} from "react-router-dom";
 import {useTheme} from "@mui/material/styles";
-import { ColorModeContext } from '@/App';
+import {ColorModeContext} from '@/App';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
-import '@/assets/styles/home.css'
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import LoginForm from "@/components/loginForm/loginForm";
 import RegisterForm from "@/components/registerForm/registerForm";
+
 const Home = () => {
     const [modalLogin, setModalLogin] = useState(false);
     const [modalRegister, setModalRegister] = useState(false);

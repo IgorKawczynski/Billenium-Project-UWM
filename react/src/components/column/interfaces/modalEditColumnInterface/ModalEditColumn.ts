@@ -1,5 +1,6 @@
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
 import React, {SetStateAction} from "react";
+
 interface ModalEditColumnProps {
     id:string
     title:string
