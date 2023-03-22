@@ -49,8 +49,9 @@ public class User extends BasicEntity {
         this.cards = new HashSet<>();
     }
 
-    public UserResponseDTO toUserResponseDTO() {
-        return UserResponseDTO.builder()
+    public UserResponseDTO toDto() {
+        return UserResponseDTO
+                .builder()
                 .id(this.id.toString())
                 .firstName(this.firstName)
                 .lastName(this.lastName)

@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 import pl.uwm.projektzespolowy.models.column.Column;
-import pl.uwm.projektzespolowy.services.column.ColumnRepository;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ import static pl.uwm.projektzespolowy.models.column.Column.UNLIMITED_SIZE;
 
 @Component
 @RequiredArgsConstructor
-public class ColumnUpdater {
+class ColumnUpdater {
 
     private final ColumnRepository columnRepository;
 

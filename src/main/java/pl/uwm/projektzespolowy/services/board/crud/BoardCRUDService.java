@@ -2,9 +2,11 @@ package pl.uwm.projektzespolowy.services.board.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
+import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
 import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
+import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 @Component
 @RequiredArgsConstructor
@@ -15,21 +17,16 @@ public class BoardCRUDService {
     private final BoardUpdater boardUpdater;
     private final BoardDeleter boardDeleter;
 
-    public BoardResponseDTO createBoard(BoardCreateDTO boardCreateDTO) {
-        return boardCreator
-                .createBoard(boardCreateDTO.title(), boardCreateDTO.userId())
-                .toDto();
+    public BoardResponseDTO createBoard(User creator, String title) {
+        return boardCreator.createBoard(creator, title).toDto();
     }
 
-    public BoardResponseDTO getBoardById(Long id) {
-        return boardReader
-                .getBoardById(id)
-                .toDto();
+    public Board getBoardById(Long boardId) {
+        return boardReader.getBoardById(boardId);
     }
 
-    public String getBoardTitleById(String boardId) {
-        var id = Long.parseLong(boardId);
-        return boardReader.getBoardById(id).getTitle().toString();
+    public Title getBoardTitleById(Long boardId) {
+        return boardReader.getBoardById(boardId).getTitle();
     }
 
     public BoardResponseDTO updateBoard(BoardUpdateDTO boardUpdateDTO) {
@@ -38,8 +35,8 @@ public class BoardCRUDService {
         return boardUpdater.editBoard(boardToChange, boardUpdateDTO.newTitle()).toDto();
     }
 
-    public void deleteBoard(Long id) {
-        boardDeleter.deleteBoardById(id);
+    public void deleteBoard(Long boardId) {
+        boardDeleter.deleteBoardById(boardId);
     }
 
 }

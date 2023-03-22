@@ -3,6 +3,7 @@ package pl.uwm.projektzespolowy.services.card;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import pl.uwm.projektzespolowy.models.basic.dto.MoveDTO;
 import pl.uwm.projektzespolowy.models.card.*;
 
 import java.util.List;
@@ -16,8 +17,8 @@ public class CardController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public CardResponseDTO addCardToColumn(@RequestBody CardCreateDTO cardCreateDTO) {
-        return cardFacade.addCardToColumn(cardCreateDTO);
+    public CardResponseDTO createCard(@RequestBody CardCreateDTO cardCreateDTO) {
+        return cardFacade.createCard(cardCreateDTO);
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"cardId"})
@@ -26,10 +27,10 @@ public class CardController {
         return cardFacade.getCardById(cardId);
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = {"columnId"})
+    @RequestMapping(method = RequestMethod.GET, params = {"cellId"})
     @ResponseStatus(HttpStatus.OK)
-    public List<CardResponseDTO> getAllCardsByColumnId(@RequestParam Long columnId) {
-        return cardFacade.getAllCardsByColumnId(columnId);
+    public List<CardResponseDTO> getAllCardsByCellId(@RequestParam Long cellId) {
+        return cardFacade.getAllCardsByCellId(cellId);
     }
 
     @PutMapping("")
@@ -38,15 +39,21 @@ public class CardController {
         return cardFacade.updateCard(cardUpdateDTO);
     }
 
-    @PutMapping("/another-column")
+    @PutMapping("/color")
     @ResponseStatus(HttpStatus.OK)
-    public CardResponseDTO moveCardToAnotherColumn(@RequestBody CardMoveToAnotherColumnDTO cardMoveToAnotherColumnDTO) {
-        return cardFacade.moveCardToAnotherColumn(cardMoveToAnotherColumnDTO);
+    public CardResponseDTO changeCardColor(@RequestBody CardColorChangeDTO cardColorChangeDTO) {
+        return cardFacade.changeCardColor(cardColorChangeDTO);
     }
 
-    @PutMapping("/same-column")
+    @PutMapping("/another-cell")
     @ResponseStatus(HttpStatus.OK)
-    public CardResponseDTO moveCard(@RequestBody CardMoveDTO cardMoveDTO) {
+    public CardResponseDTO moveCardToAnotherCell(@RequestBody CardMoveToAnotherCellDTO cardMoveToAnotherCellDTO) {
+        return cardFacade.moveCardToAnotherCell(cardMoveToAnotherCellDTO);
+    }
+
+    @PutMapping("/same-cell")
+    @ResponseStatus(HttpStatus.OK)
+    public CardResponseDTO moveCard(@RequestBody MoveDTO cardMoveDTO) {
         return cardFacade.moveCard(cardMoveDTO);
     }
 
