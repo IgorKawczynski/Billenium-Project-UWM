@@ -157,7 +157,7 @@ export async function getBoardTitleFromBackend(boardId:string){
 }
 
 export async function fetchData(setData:_Data['setData']) {
-    const result = await loadBoardFromBackend("1201");
+    const result = await loadBoardFromBackend("1029");
     if (result) {
         try {
             setData(result);
