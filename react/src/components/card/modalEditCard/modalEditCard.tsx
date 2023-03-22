@@ -104,7 +104,6 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                 onClick={() => updateCard(props.id,
                                                         title,
                                                         desc,
-                                                        props.columnId,
                                                         props.setData,
                                                         props.data,
                                                         props.setModalEdit

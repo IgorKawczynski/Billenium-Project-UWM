@@ -61,7 +61,6 @@ export const addCard = (name: string,
 export const updateCard = (id:string,
                     title: string,
                     desc: string,
-                    columnId:string,
                     setData:_Data['setData'],
                     data:_Data['data'],
                     setModalEdit:React.Dispatch<SetStateAction<boolean>>) => {
