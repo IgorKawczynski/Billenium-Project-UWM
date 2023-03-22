@@ -3,7 +3,12 @@ import {_Data} from "@/services/utils/boardUtils/DataBoard";
 import React, {SetStateAction} from "react";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar, EnqueueSnackbar} from "notistack";
-import {addRowToBackend, getAllRowsFromBackend} from "@/services/actions/rowService";
+import {
+    addRowToBackend,
+    editRowToBackend,
+    getAllRowsFromBackend,
+    removeRowToBackend
+} from "@/services/actions/rowService";
 import {getColumnsFromBackend} from "@/services/actions/columnService";
 // export const editRow = (newTitle: string,
 //                            limit: number,
@@ -89,4 +94,77 @@ export function addRow(name:string,
             console.error(res);
             // obsługa błędów
         });
+}
+
+export function editRow(
+    id:string,
+    title:string,
+    data:_Data["data"],
+    setData:_Data["setData"],
+    setModalEdit:React.Dispatch<SetStateAction<boolean>>
+){
+    editRowToBackend(id, title)
+        .then(res => {
+            if(typeof res === 'string') {
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else{
+            getAllRowsFromBackend(data.id)
+                .then( resRow => {
+                        if(resRow) {
+                            getColumnsFromBackend(data.id)
+                                .then( resCol => {
+                                    setData({
+                                        ...data,
+                                        rowList: resRow,
+                                        columnList:resCol
+
+                                    })
+                                    closeModal(setModalEdit)
+                                    handleClickVariant(enqueueSnackbar)('Success row removed' ,'success')
+                                })
+                        }
+                    }
+                )
+            // tutaj możesz wykonywać operacje na otrzymanym id
+        }})
+        .catch(res => {
+            handleClickVariant(enqueueSnackbar)('Column title is required', 'error')
+            console.error(res);
+            // obsługa błędów
+        });
+}
+
+export function removeRow(
+    id:string,
+    data:_Data["data"],
+    setData:_Data["setData"],
+    setModalRemove:React.Dispatch<SetStateAction<boolean>>
+){
+    removeRowToBackend(id)
+        .then(res => {
+                getAllRowsFromBackend(data.id)
+                    .then( resRow => {
+                            if(resRow) {
+                                getColumnsFromBackend(data.id)
+                                    .then( resCol => {
+                                        setData({
+                                            ...data,
+                                            rowList: resRow,
+                                            columnList:resCol
+
+                                        })
+                                        closeModal(setModalRemove)
+                                        handleClickVariant(enqueueSnackbar)('Success row removed' ,'success')
+                                    })
+                            }
+                        }
+                    )
+                // tutaj możesz wykonywać operacje na otrzymanym id
+        })
+        .catch(res => {
+            handleClickVariant(enqueueSnackbar)('Column title is required', 'error')
+            console.error(res);
+            // obsługa błędów
+        });
+
 }

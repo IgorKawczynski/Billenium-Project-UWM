@@ -4,12 +4,12 @@ import {loadDefaultData} from "@/services/actions/boardService";
 import {useTheme, Stack, Snackbar, Button} from "@mui/material";
 import {ColorModeContext} from "@/App";
 import '@/assets/styles/board.css'
-import ModalEditBoard from "@/componenets/modalEditBoard/modalEditBoard";
+import ModalEditBoard from "@/componenets/board/modalEditBoard/modalEditBoard";
 import {fetchData} from "@/services/actions/boardService";
-import BoardHeader from "@/componenets/boardHeader/boardHeader";
-import BoardContent from "@/componenets/boardContent/boardContent";
-import AddRowButton from "@/componenets/addRowButton/addRowButton";
-import ModalAddRow from "@/componenets/modalAddRow/modalAddRow";
+import BoardHeader from "@/componenets/board/boardHeader/boardHeader";
+import BoardContent from "@/componenets/board/boardContent/boardContent";
+import AddRowButton from "@/componenets/row/addRowButton/addRowButton";
+import ModalAddRow from "@/componenets/row/modalAddRow/modalAddRow";
 
 const Board = () => {
     const [data, setData] = useState<_Data['data']> (loadDefaultData);

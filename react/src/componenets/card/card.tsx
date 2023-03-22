@@ -1,10 +1,10 @@
 import React from "react";
 import {Draggable} from 'react-beautiful-dnd'
 import Card from "@mui/material/Card"
-import Avatar from '@/componenets/avatar/avatar'
+import Avatar from '@/componenets/card/avatar/avatar'
 import {useTheme} from "@mui/material"
-import CardProps from '@/interfaces/cardInterface/Card'
-import EditCardButton from '@/componenets/editCardButton/editCardButton'
+import CardProps from '@/componenets/card/interfaces/cardInterface/Card'
+import EditCardButton from '@/componenets/card/editCardButton/editCardButton'
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 const Task = (props:CardProps) => {
@@ -71,8 +71,8 @@ const Task = (props:CardProps) => {
                                         color={'textPrimary'}
                                         variant={'subtitle1'}
                                     >
-                                        {props.title.length > 20 && (props.title.slice(0,17) + "...")}
-                                        {props.title.length < 20 && (props.title)}
+                                        {props.title.length >= 13 && (props.title.slice(0,13) + "...")}
+                                        {props.title.length <= 13 && (props.title)}
                                     </Typography>
                                     <EditCardButton
                                         id={props.id}

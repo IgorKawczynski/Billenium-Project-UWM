@@ -1,11 +1,17 @@
 import React, {useState} from 'react'
 import {Draggable} from 'react-beautiful-dnd';
-import ColumnProps from '@/interfaces/columnInterface/Column'
-import ModalEditColumn from "@/componenets/modalEditColumn/modalEditColumn";
-import ModalRemoveColumn from "@/componenets/modalRemoveColumn/modalRemoveColumn";
+import ColumnProps from '@/componenets/column/interfaces/columnInterface/Column'
+import ModalEditColumn from "@/componenets/column/modalEditColumn/modalEditColumn";
+import ModalRemoveColumn from "@/componenets/column/modalRemoveColumn/modalRemoveColumn";
 import {Box, Stack, Typography, useTheme} from "@mui/material";
-import ColumnHeader from "@/componenets/columnHeader/columnHeader";
-import ColumnCell from "@/componenets/columnCell/columnCell";
+import ColumnHeader from "@/componenets/column/columnHeader/columnHeader";
+import ColumnCell from "@/componenets/column/columnCell/columnCell";
+import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
+import {openModal} from "@/services/utils/modalUtils/modalUtils";
+import IconButton from "@mui/material/IconButton";
+import ModalEditRow from "@/componenets/row/modalEditRow/modalEditRow";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import ModalRemoveRow from "@/componenets/row/modalRemoveRow/modalRemoveRow";
 
 const Column = (props:ColumnProps) => {
     const theme = useTheme()
@@ -37,21 +43,10 @@ const Column = (props:ColumnProps) => {
                         />
                 {Object.values(props.data.rowList).map((row) => (
                     <Box key={row.id}>
-                        {props.position==0 && (
-                        <Box
-                            marginTop={1}
-                            borderBottom={`2px ${theme.palette.text.primary} solid`}
-                            height={'25px'}
-                        >
-                            <Typography variant={'body1'} color={theme.palette.text.primary}>
-                                {row.title}
-                            </Typography>
-                        </Box>
-                    )}
                         {props.position!=0 && (
                         <Box
                             marginTop={1}
-                            height={'27px'}
+                            height={'25px'}
                         >
                         </Box>
                     )}
@@ -60,6 +55,9 @@ const Column = (props:ColumnProps) => {
                                     <ColumnCell
                                         key={cell.id}
                                         id={cell.id}
+                                        rowId={row.id}
+                                        rowTitle={row.title}
+                                        columnPosition={props.position}
                                         cardsLimit={props.cardsLimit}
                                         position={cell.position}
                                         cards={cell.cards}

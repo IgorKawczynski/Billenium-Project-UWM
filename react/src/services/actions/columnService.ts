@@ -42,7 +42,6 @@ export async function getColumnById(columnId:string){
     const apiUrl = urlDomain+`/api/columns/${columnId}`;
     try {
         const response = await axios.get(apiUrl);
-        console.log(response.data)
         return response.data;
     } catch (error) {
         console.error(error);

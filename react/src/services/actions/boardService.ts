@@ -129,7 +129,6 @@ export async function moveColumnToBackend(movedObjectId:string, newPosition:numb
     const apiUrl = urlDomain+`/api/columns/move`;
     try {
         const response = await axios.put(apiUrl, {movedObjectId, newPosition});
-        console.log(response.data);
     } catch (error) {
         console.error(error);
     }

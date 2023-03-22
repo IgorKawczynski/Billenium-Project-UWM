@@ -19,17 +19,17 @@ export async function updateCardToBackend(cardId:string, title:string, descripti
     }
 
 }
-export async function moveCardToAnotherColumn(cardId:string, newColumnId:string, newPosition:number){
-    const apiUrl = urlDomain+`/api/cards/another-column`;
+export async function moveCardToAnotherCell(cardId:string, newCellId:string, newPosition:number){
+    const apiUrl = urlDomain+`/api/cards/another-cell`;
     try {
-        const response = await axios.put(apiUrl, {cardId, newColumnId,newPosition});
+        const response = await axios.put(apiUrl, {cardId, newCellId,newPosition});
     } catch (error) {
     }
 }
-export async function moveCardInColumn(cardId:string, newPosition:number){
-    const apiUrl = urlDomain+`/api/cards/same-column`;
+export async function moveCardInCell(movedObjectId:string, newPosition:number){
+    const apiUrl = urlDomain+`/api/cards/same-cell`;
     try {
-        const response = await axios.put(apiUrl, {cardId, newPosition});
+        const response = await axios.put(apiUrl, {movedObjectId, newPosition});
     } catch (error) {
     }
 }

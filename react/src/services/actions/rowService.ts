@@ -22,3 +22,23 @@ export async function getAllRowsFromBackend(boardId:string){
     }
 
 }
+
+export async function editRowToBackend(rowId:string, title:string){
+
+    try{
+        const response = await axios.put(urlDomain+`/api/rows`, {rowId, title})
+        console.log(response)
+        return response.data
+    }catch(error:any){
+        return error.response.data.error
+    }
+}
+export async function removeRowToBackend(rowId:string){
+
+    try{
+        const response = await axios.delete(urlDomain+`/api/rows/${rowId}`)
+        return response.data
+    }catch(error:any){
+        return error.response.data.error
+    }
+}

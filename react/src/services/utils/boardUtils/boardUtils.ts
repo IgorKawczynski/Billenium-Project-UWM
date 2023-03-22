@@ -1,12 +1,13 @@
 import {_Data, Column} from "@/services/utils/boardUtils/DataBoard";
 import DataFromBackend from "@/services/utils/boardUtils/DataFromBackend";
 import {getColumnById, getColumnsFromBackend} from "@/services/actions/columnService";
-import {moveCardInColumn, moveCardToAnotherColumn} from "@/services/actions/cardService";
+import {moveCardInCell, moveCardToAnotherCell} from "@/services/actions/cardService";
 import {editBoardToBackend, loadBoardFromBackend, moveColumnToBackend} from "@/services/actions/boardService";
 import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
+import {findCellById, findCellByIndex} from "@/services/utils/cellUtils/cellUtils";
 
 function withPositionInRange(lowerBound: number, upperBound: number, columns:_Data["data"]['columnList']){
     const newColumns = Object.values(columns).filter((column) => {
@@ -62,78 +63,67 @@ export const onDragEnd = (result: any, columns:Column[], setData:_Data["setData"
 
     if(result.type === 'task') {
         if (source.droppableId !== destination.droppableId){
-            const sourceColumn = columns[source.droppableId];
-            const destColumn = columns[destination.droppableId];
-            const sourceItems = [...sourceColumn.cells];
-            const destItems = [...destColumn.cells];
-            const [removed] = sourceItems.splice(source.index, 1);
-            destItems.splice(destination.index, 0, removed);
-            setData({
-                ...data,
-                columnList: {
-                    ...columns,
-                    [source.droppableId]: {
-                        ...sourceColumn,
-                        cards: sourceItems
-                    },
-                    [destination.droppableId]:{
-                        ...destColumn,
-                        cards: destItems
-                    }
-                }
-            })
-            moveCardToAnotherColumn(result.draggableId, destination.droppableId, destination.index)
+            const sourceCellCordsId = findCellById(source.droppableId, data)
+            const destinationCellCordsId = findCellById(destination.droppableId, data)
+
+            const sourceColumn = columns.find(column => column.id == sourceCellCordsId.desiredColumnId)
+            const destinationColumn = columns.find(column => column.id == destinationCellCordsId.desiredColumnId)
+            if(!sourceColumn || !destinationColumn){
+                return;
+            }
+            const sourceCell = sourceColumn.cells.find(cell => cell.id == source.droppableId)
+            const destinationCell = destinationColumn.cells.find(cell => cell.id == destination.droppableId)
+            if(!sourceCell || !destinationCell){
+                return;
+            }
+            const cardToMove = sourceCell.cards.find(card => card.id == result.draggableId)
+            if(!cardToMove){
+                return;
+            }
+            const [removed] = sourceCell.cards.splice(cardToMove.position,1);
+            destinationCell.cards.splice(destination.index, 0, removed);
+            moveCardToAnotherCell(result.draggableId, destination.droppableId, destination.index)
                 .then(res => {
                     getColumnsFromBackend(data.id)
                         .then(res => {
                             if (res) {
                                 setData({
                                     ...data,
-                                    columnList: {
-                                        ...res,
-                                        [source.droppableId]: {
-                                            ...res[source.droppableId],
-                                            cards: res[source.droppableId].cards
-                                        },
-                                        [destination.droppableId]:{
-                                            ...res[destination.droppableId],
-                                            cards: res[destination.droppableId].cards
-                                        }
-                                    }
-
+                                    columnList: res
                                 })
                             }
                         })
                 })
         }else{
-            const column = columns[source.droppableId];
-            const copiedItems = [...column.cards];
-            const [removed] = copiedItems.splice(source.index, 1);
-            copiedItems.splice(destination.index, 0, removed);
-            setData({
-                ...data,
-                columnList: {
-                    ...columns,
-                    [source.droppableId]: {
-                        ...column,
-                        cards: copiedItems
-                    }
-                }})
+            const sourceCellCordsId = findCellById(source.droppableId, data)
+            const destinationCellCordsId = findCellById(destination.droppableId, data)
 
-            moveCardInColumn(result.draggableId, destination.index)
+            const sourceColumn = columns.find(column => column.id == sourceCellCordsId.desiredColumnId)
+            const destinationColumn = columns.find(column => column.id == destinationCellCordsId.desiredColumnId)
+            if(!sourceColumn || !destinationColumn){
+                return;
+            }
+            const sourceCell = sourceColumn.cells.find(cell => cell.id == source.droppableId)
+            const destinationCell = destinationColumn.cells.find(cell => cell.id == destination.droppableId)
+            if(!sourceCell || !destinationCell){
+                return;
+            }
+            const cardToMove = sourceCell.cards.find(card => card.id == result.draggableId)
+            if(!cardToMove){
+                return;
+            }
+            const [removed] = sourceCell.cards.splice(source.index, 1);
+            sourceCell.cards.splice(destination.index, 0, removed);
+
+            moveCardInCell(result.draggableId, destination.index)
                 .then(res => {
-                    getColumnById(result.draggableId)
+                    getColumnsFromBackend(data.id)
                         .then(res => {
                             if (res) {
                                 setData({
                                     ...data,
-                                    columnList: {
-                                        ...columns,
-                                        [res.id]: {
-                                            ...column,
-                                            cards: copiedItems
-                                        }
-                                    }})
+                                    columnList: res
+                                })
                             }
                         })
                 })
