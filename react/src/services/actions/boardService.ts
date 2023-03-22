@@ -2,7 +2,7 @@ import axios from "axios";
 import {_Data} from "../utils/boardUtils/DataBoard";
 
 
-export const urlDomain = 'http://localhost:8080'
+export const urlDomain = 'https://billenium-project-uwm-production-b520.up.railway.app'
 
 export function loadDefaultData(){
     return {
