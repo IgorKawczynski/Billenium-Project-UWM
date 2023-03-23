@@ -50,14 +50,17 @@ const ColumnCell = (props:ColumnCellProps) =>{
                                 >
                                     <BorderColorOutlinedIcon/>
                                 </IconButton>
-                                <IconButton
-                                    sx={{maxHeight:'25', maxWidth:'25px', color:theme.palette.primary.main}}
-                                    size={"small"}
-                                    aria-label="settingsColumn"
-                                    onClick={() => openModal(setModalDeleteRow)}
-                                >
+                                {props.position != Object.keys(props.data.rowList).length-1 &&
+                                    (
+                                        <IconButton
+                                            sx={{maxHeight:'25', maxWidth:'25px', color:theme.palette.primary.main}}
+                                            size={"small"}
+                                            aria-label="settingsColumn"
+                                            onClick={() => openModal(setModalDeleteRow)}
+                                        >
                                     <DeleteOutlinedIcon />
                                 </IconButton>
+                                    )}
                             </Box>
                         )}
                     <Box
