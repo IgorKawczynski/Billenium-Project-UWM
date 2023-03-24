@@ -17,4 +17,10 @@ class UserReader {
                 .orElseThrow( () -> new EntityNotFoundException("user", "User with id: " + userId + " does not exist!"));
     }
 
+    public User getUserByEmail(String email) {
+        return userRepository
+                .findUserByEmail(email)
+                .orElseThrow( () -> new EntityNotFoundException("user", "User with email: " + email + " does not exist!"));
+    }
+
 }

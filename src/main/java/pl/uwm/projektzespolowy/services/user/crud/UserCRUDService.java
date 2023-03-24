@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uwm.projektzespolowy.models.user.User;
 
+
 @Service
 @RequiredArgsConstructor
 public class UserCRUDService {
@@ -13,8 +14,12 @@ public class UserCRUDService {
     private final UserUpdater userUpdater;
     private final UserDeleter userDeleter;
 
-    public User getUserById(Long id) {
-        return userReader.getUserById(id);
+    public User getUserById(Long userId) {
+        return userReader.getUserById(userId);
+    }
+
+    public User getUserByEmail(String email) {
+        return userReader.getUserByEmail(email);
     }
 
     public void deleteUser(Long userId) {
