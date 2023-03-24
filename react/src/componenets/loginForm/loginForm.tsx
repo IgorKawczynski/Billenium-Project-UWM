@@ -113,7 +113,7 @@ const LoginForm = (props:LoginFormProps) => {
                         >
                             Register
                         </Button>
-                        <Link style={{width:'50%'}} to={'/board'}>
+                        <Link style={{width:'50%'}} to={'/userMain'}>
                             <Button
                             sx={{maxHeight:'50px', width:'100%'}}
                             variant="contained"

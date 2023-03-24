@@ -13,39 +13,12 @@ import ColorLegend from "@/componenets/color/colorLegend/colorLegend";
 
 const BoardHeader = (props:boardHeaderProps) => {
     const theme = useTheme();
-    const colorMode = React.useContext(ColorModeContext);
 
 
     return(
         <Box>
             <Box display={"flex"} justifyContent={"space-between"}>
                 <Box width={'250px'}>
-                    <Button onClick={colorMode.toggleColorMode}>
-
-                        {theme.palette.mode == 'light'
-                            && (<Typography sx={{display:'flex',
-                                justifyContent:'center',
-                                alignItems:"center"
-                            }}
-                            >
-
-                                Dark Mode
-
-                                <Brightness4Icon/>
-                            </Typography>)}
-
-                        {!(theme.palette.mode == 'light')
-                            && (<Typography sx={{display:'flex',
-                                justifyContent:'center',
-                                alignItems:"center"
-                            }}
-                            >
-
-                                Light Mode
-
-                                <Brightness4Icon/>
-                            </Typography>)}
-                    </Button>
                 </Box>
                 <Typography
                     variant={'h3'}

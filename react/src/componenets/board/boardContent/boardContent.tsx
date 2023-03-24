@@ -4,13 +4,12 @@ import {onDragEnd} from "@/services/utils/boardUtils/boardUtils";
 import {Box, Button, Stack} from "@mui/material";
 import Column from "@/componenets/column/column";
 import {boardContentProps} from "@/componenets/board/interfaces/boardContentInterface/BoardContent";
-
-
+import {StyledContentScrollbar} from "@/assets/styles/styledScrollbar";
 const BoardContent = (props:boardContentProps) =>{
 
 
     return(
-        <Box sx={{overflowX:'auto'}}>
+        <Box>
             <DragDropContext
                 onDragEnd={(result) =>
                     onDragEnd(result, props.data.columnList, props.setData, props.data)
@@ -43,7 +42,6 @@ const BoardContent = (props:boardContentProps) =>{
                                     />
                                 ))}
                             {provided.placeholder}
-
                         </Stack>
                     )}
                 </Droppable>

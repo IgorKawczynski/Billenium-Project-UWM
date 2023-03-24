@@ -5,8 +5,7 @@ import Task from "@/componenets/card/card";
 import {Droppable} from "react-beautiful-dnd";
 import {Typography, useTheme} from "@mui/material";
 import AddCardButton from "@/componenets/card/addCardButton/addCardButton";
-import {styled} from "@mui/material/styles";
-import StyledScrollbar from "@/assets/styles/styledScrollbar";
+import StyledCardScrollbar from "@/assets/styles/styledScrollbar";
 import ModalRemoveRow from "@/componenets/row/modalRemoveRow/modalRemoveRow";
 import ModalEditRow from "@/componenets/row/modalEditRow/modalEditRow";
 import IconButton from "@mui/material/IconButton";
@@ -18,7 +17,7 @@ const ColumnCell = (props:ColumnCellProps) =>{
     const [modalEditRow, setModalEditRow] = useState(false);
     const [modalDeleteRow, setModalDeleteRow] = React.useState(false);
     const theme = useTheme()
-    const CustomScrollbar = StyledScrollbar()
+    const CustomScrollbar = StyledCardScrollbar()
     return(
         <Droppable
             droppableId={props.id}
