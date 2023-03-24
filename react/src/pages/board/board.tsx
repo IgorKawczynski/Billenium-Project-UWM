@@ -9,7 +9,7 @@ import {fetchData} from "@/services/actions/boardService";
 import BoardHeader from "@/componenets/board/boardHeader/boardHeader";
 import BoardContent from "@/componenets/board/boardContent/boardContent";
 import AddRowButton from "@/componenets/row/addRowButton/addRowButton";
-import BoardMenu from "@/componenets/menu/menu";
+import BoardMenu from "@/componenets/Menus/boardMenu/menu";
 import {useLocation, useParams} from "react-router-dom";
 
 const Board = () => {

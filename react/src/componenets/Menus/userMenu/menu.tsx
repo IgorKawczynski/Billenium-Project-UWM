@@ -6,10 +6,13 @@ import {ColorModeContext} from "@/App";
 import LogoutIcon from '@mui/icons-material/Logout';
 import GroupIcon from '@mui/icons-material/Group';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import BackupTableIcon from '@mui/icons-material/BackupTable';
 import {Link} from "react-router-dom";
+import {UserMenuProps} from "@/componenets/Menus/interfaces/userMenu";
+import {openModal} from "@/services/utils/modalUtils/modalUtils";
 
 
-const BoardMenu = () => {
+const UserMenu = (props:UserMenuProps) => {
     const theme = useTheme()
     const colorMode = React.useContext(ColorModeContext);
     return(
@@ -34,17 +37,10 @@ const BoardMenu = () => {
                 >
                     <IconButton
                         sx={{color:theme.palette.text.theme}}
-                        onClick={colorMode.toggleColorMode}
                         size={"large"}
+                        onClick={() => openModal(props.setModalEdit)}
                     >
                         <AccountCircleIcon/>
-                    </IconButton>
-                    <IconButton
-                        sx={{color:theme.palette.text.theme}}
-                        onClick={colorMode.toggleColorMode}
-                        size={"large"}
-                    >
-                        <GroupIcon/>
                     </IconButton>
                 </Stack>
 
@@ -62,7 +58,6 @@ const BoardMenu = () => {
 
                     <Link to={'/'}><IconButton
                         sx={{color:theme.palette.text.theme}}
-                        onClick={colorMode.toggleColorMode}
                         size={"large"}
                     >
                         <LogoutIcon/>
@@ -75,4 +70,4 @@ const BoardMenu = () => {
 
 }
 
-export default BoardMenu
+export default UserMenu

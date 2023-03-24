@@ -25,7 +25,7 @@ const ColorPicker = (props:ColorPickerProps) => {
         <Box>
         <MenuItem
             id="demo-customized-button"
-            aria-controls={open ? 'demo-customized-menu' : undefined}
+            aria-controls={open ? 'demo-customized-boardMenu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}

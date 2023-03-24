@@ -33,7 +33,7 @@ export default function EditCardButton(props:EditCardButtonProps) {
 
             <IconButton
                 sx={{fontSize:12, color:theme.palette.primary.main, maxWidth:'30px', maxHeight:'30px'}}
-                aria-controls={open ? 'demo-customized-menu' : undefined}
+                aria-controls={open ? 'demo-customized-boardMenu' : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={() => openModal(setModalEdit)}

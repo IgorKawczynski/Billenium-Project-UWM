@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import {Box, Stack, Grid} from '@mui/material'
-import BoardMenu from "@/componenets/menu/menu";
+import UserMenu from "@/componenets/Menus/userMenu/menu";
 import BoardCard from "@/componenets/board/boardCard/boardCard";
+import ModalUserEditProfile from "@/componenets/userMain/modalUserEditProfile/modalUserEditProfile";
 
 const UserMain = () => {
-
+    const [modalEdit, setModalEdit] = useState(false);
 
     return(
         <Stack
@@ -12,7 +13,10 @@ const UserMain = () => {
             direction={'row'}
             width={'100%'}
         >
-                <BoardMenu/>
+                <UserMenu
+                    modalEdit={modalEdit}
+                    setModalEdit={setModalEdit}
+                />
             <Grid
                 xs={12}
                 container
@@ -27,7 +31,15 @@ const UserMain = () => {
 
 
             </Grid>
-
+            <ModalUserEditProfile
+                firstName={"Maciek"}
+                lastName={"Makowski"}
+                email={"maciek@wp.pl"}
+                phoneNumber={123456789}
+                password={"MaciekKosk"}
+                modalEdit={modalEdit}
+                setModalEdit={setModalEdit}
+            />
         </Stack>
 
     )

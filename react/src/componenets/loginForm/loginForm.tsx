@@ -77,6 +77,8 @@ const LoginForm = (props:LoginFormProps) => {
                         <OutlinedInput
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
+                            value={password}
+                            onChange={handlePasswordChange}
                             startAdornment={
                                 <InputAdornment position="start">
                                     <LockOutlinedIcon />
@@ -90,7 +92,7 @@ const LoginForm = (props:LoginFormProps) => {
                                         onMouseDown={handleMouseDownPassword}
                                         edge="end"
                                     >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        {showPassword ? <Visibility /> : <VisibilityOff />}
                                     </IconButton>
                                 </InputAdornment>
                             }

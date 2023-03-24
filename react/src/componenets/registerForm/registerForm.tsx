@@ -13,18 +13,20 @@ import {InputLabel,FormControl} from "@mui/material";
 import {RegisterFormProps} from "@/componenets/registerForm/interfaces/registerFormInterface/RegisterForm";
 const RegisterForm = (props:RegisterFormProps) => {
     const theme = useTheme()
-    const [name, setName] = useState("");
+    const [FirstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [mail, setMail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("")
     const [password, setPassword] = useState("");
+    const [repeatPassword, setRepeatPassword] = useState("");
     const [showPassword, setShowPassword] = React.useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
-    const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setName(event.target.value);
+    const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFirstName(event.target.value);
     };
     const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLastName(event.target.value);
@@ -33,9 +35,20 @@ const RegisterForm = (props:RegisterFormProps) => {
     const handleMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setMail(event.target.value);
     };
+    const handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const re = /^[0-9\b]+$/; // regexp dla liczb całkowitych dodatnich
+
+        // Sprawdzenie, czy wprowadzona wartość pasuje do regex i ustawienie stanu wartości pola.
+        if (event.target.value === '' || re.test(event.target.value)) {
+            setPhoneNumber(event.target.value);
+        }
+    };
 
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
+    };
+    const handleRepeatPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setRepeatPassword(event.target.value);
     };
 
     return(
@@ -58,34 +71,55 @@ const RegisterForm = (props:RegisterFormProps) => {
                     <Typography color={theme.palette.text.secondary} id="transition-modal-title" variant="h6" component="h2">
                         Registration
                     </Typography>
-                    <TextField
-                        sx={{margin:'0 0 8px 0'}}
-                        id="outlined-basic"
-                        label="Name"
-                        variant="outlined"
-                        value={mail}
-                        onChange={handleMailChange}
-                    />
-                    <TextField
-                        sx={{margin:'0 0 8px 0'}}
-                        id="outlined-basic"
-                        label="Last Name"
-                        variant="outlined"
-                        value={mail}
-                        onChange={handleMailChange}
-                    />
-                            <TextField
-                                sx={{margin:'0 0 8px 0'}}
-                                id="outlined-basic"
-                                label="E-mail"
-                                variant="outlined"
-                                value={mail}
-                                onChange={handleMailChange}
-                            />
+                    <FormControl variant="outlined">
+                        <InputLabel>First Name</InputLabel>
+                        <OutlinedInput
+                            sx={{margin:'0 0 8px 0'}}
+                            id="outlined-basic"
+                            label="First Name"
+                            inputMode={"text"}
+                            value={FirstName}
+                            onChange={handleFirstNameChange}
+                        />
+                    </FormControl>
+                    <FormControl variant="outlined">
+                        <InputLabel>Last Name</InputLabel>
+                        <OutlinedInput
+                            sx={{margin:'0 0 8px 0'}}
+                            id="outlined-basic"
+                            label="Last Name"
+                            inputMode={"text"}
+                            value={lastName}
+                            onChange={handleLastNameChange}
+                        />
+                    </FormControl>
+                    <FormControl variant="outlined">
+                        <InputLabel>E-mail</InputLabel>
+                        <OutlinedInput
+                            sx={{margin:'0 0 8px 0'}}
+                            id="outlined-basic"
+                            label="E-mail"
+                            inputMode={'email'}
+                            value={mail}
+                            onChange={handleMailChange}
+                        />
+                    </FormControl>
+                    <FormControl variant="outlined">
+                        <InputLabel>Phone Number</InputLabel>
+                        <OutlinedInput
+                            sx={{margin:'0 0 8px 0'}}
+                            id="outlined-basic"
+                            label="Phone number"
+                            value={phoneNumber}
+                            onChange={handlePhoneNumberChange}
+                        />
+                    </FormControl>
                     <FormControl variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password"
+                            value={password}
+                            onChange={handlePasswordChange}
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={
                                 <InputAdornment position="end">
@@ -106,6 +140,8 @@ const RegisterForm = (props:RegisterFormProps) => {
                         <InputLabel htmlFor="outlined-adornment-password">Repeat password</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password"
+                            value={repeatPassword}
+                            onChange={handleRepeatPasswordChange}
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={
                                 <InputAdornment position="end">
