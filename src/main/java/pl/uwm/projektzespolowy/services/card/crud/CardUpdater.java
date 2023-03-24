@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.color.ColorValue;
+import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import java.util.List;
@@ -20,6 +21,13 @@ class CardUpdater {
         }
         if (description != null) {
             cardToChange.setDescription(description);
+        }
+        return cardRepository.saveAndFlush(cardToChange);
+    }
+
+    public Card assignUserToCard(Card cardToChange, User userToAssign) {
+        if (userToAssign != null) {
+            cardToChange.getAssignedUsers().add(userToAssign);
         }
         return cardRepository.saveAndFlush(cardToChange);
     }

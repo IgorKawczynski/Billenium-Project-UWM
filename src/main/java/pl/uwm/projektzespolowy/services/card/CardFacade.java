@@ -4,11 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.basic.dto.MoveDTO;
 import pl.uwm.projektzespolowy.models.card.*;
+import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.services.card.crud.CardCRUDService;
 import pl.uwm.projektzespolowy.services.cell.crud.CellCRUDService;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -34,8 +38,20 @@ public class CardFacade {
                 .toList();
     }
 
+    public Set<UserResponseDTO> getAllAssignedUsersToCard(Long cardId) {
+        return cardCRUDService
+                .getAllAssignedUsersToCard(cardId)
+                .stream()
+                .map(User::toDto)
+                .collect(Collectors.toSet());
+    }
+
     public CardResponseDTO updateCard(CardUpdateDTO cardUpdateDTO) {
         return cardCRUDService.updateCard(cardUpdateDTO);
+    }
+
+    public CardResponseDTO assignUserToCard(CardUserUpdateDTO cardUserUpdateDTO) {
+        return cardCRUDService.assignUserToCard(cardUserUpdateDTO);
     }
 
     public void deleteCard(Long cardId) {

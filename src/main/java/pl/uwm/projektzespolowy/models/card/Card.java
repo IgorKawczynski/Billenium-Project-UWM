@@ -29,7 +29,15 @@ public class Card extends BasicEntity implements Positionable {
     String description;
     Position position;
 
-    @ManyToMany(mappedBy = "cards")
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    },
+            fetch = FetchType.LAZY)
+    @JoinTable(name = "users_cards",
+            joinColumns = @JoinColumn(name = "card_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     Set<User> assignedUsers;
 
     @Enumerated(EnumType.STRING)

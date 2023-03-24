@@ -5,8 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.projektzespolowy.models.basic.dto.MoveDTO;
 import pl.uwm.projektzespolowy.models.card.*;
+import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/cards")
@@ -33,10 +35,22 @@ public class CardController {
         return cardFacade.getAllCardsByCellId(cellId);
     }
 
+    @GetMapping("/users/{cardId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Set<UserResponseDTO> getAllAssignedUsersToCard(@PathVariable Long cardId) {
+        return cardFacade.getAllAssignedUsersToCard(cardId);
+    }
+
     @PutMapping("")
     @ResponseStatus(HttpStatus.OK)
     public CardResponseDTO updateCard(@RequestBody CardUpdateDTO cardUpdateDTO) {
         return cardFacade.updateCard(cardUpdateDTO);
+    }
+
+    @PutMapping("/users/")
+    @ResponseStatus(HttpStatus.OK)
+    public CardResponseDTO assignUserToCard(@RequestBody CardUserUpdateDTO cardUserUpdateDTO) {
+        return cardFacade.assignUserToCard(cardUserUpdateDTO);
     }
 
     @PutMapping("/color")
