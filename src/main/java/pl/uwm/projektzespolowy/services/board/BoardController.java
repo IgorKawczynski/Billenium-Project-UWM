@@ -3,9 +3,13 @@ package pl.uwm.projektzespolowy.services.board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
 import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
 import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
+import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
+import pl.uwm.projektzespolowy.models.board.BoardUserUpdateDTO;
+import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
+
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,10 +36,22 @@ public class BoardController {
         return boardFacade.getBoardTitleById(boardId);
     }
 
+    @GetMapping("/users/{boardId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Set<UserResponseDTO> getAllAssignedUsersToBoard(@PathVariable Long boardId) {
+        return boardFacade.getAllAssignedUsersToBoard(boardId);
+    }
+
     @PutMapping("")
     @ResponseStatus(HttpStatus.OK)
     public BoardResponseDTO updateBoard(@RequestBody BoardUpdateDTO boardUpdateDTO) {
         return boardFacade.updateBoard(boardUpdateDTO);
+    }
+
+    @PutMapping("/users/")
+    @ResponseStatus(HttpStatus.OK)
+    public BoardResponseDTO assignUserToBoard(@RequestBody BoardUserUpdateDTO boardUserUpdateDTO) {
+        return boardFacade.assignUserToBoard(boardUserUpdateDTO);
     }
 
     @DeleteMapping("/{boardId}")

@@ -18,7 +18,10 @@ import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static pl.uwm.projektzespolowy.models.column.Column.DEFAULT_SIZE;
 import static pl.uwm.projektzespolowy.models.column.Column.UNLIMITED_SIZE;

@@ -3,8 +3,8 @@ package pl.uwm.projektzespolowy.services.color;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.projektzespolowy.models.color.ColorUpdateDTO;
 import pl.uwm.projektzespolowy.models.color.ColorResponseDTO;
+import pl.uwm.projektzespolowy.models.color.ColorUpdateDTO;
 
 import java.util.List;
 

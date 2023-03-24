@@ -5,8 +5,14 @@ import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
 import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
 import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
+import pl.uwm.projektzespolowy.models.board.BoardUserUpdateDTO;
+import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.services.board.crud.BoardCRUDService;
 import pl.uwm.projektzespolowy.services.user.crud.UserCRUDService;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -28,8 +34,20 @@ public class BoardFacade {
         return boardCRUDService.getBoardTitleById(Long.parseLong(boardId)).toString();
     }
 
+    public Set<UserResponseDTO> getAllAssignedUsersToBoard(Long boardId) {
+        return boardCRUDService
+                .getAllAssignedUsersToBoard(boardId)
+                .stream()
+                .map(User::toDto)
+                .collect(Collectors.toSet());
+    }
+
     public BoardResponseDTO updateBoard(BoardUpdateDTO boardUpdateDTO) {
         return boardCRUDService.updateBoard(boardUpdateDTO);
+    }
+
+    public BoardResponseDTO assignUserToBoard(BoardUserUpdateDTO boardUserUpdateDTO) {
+        return boardCRUDService.assignUserToBoard(boardUserUpdateDTO);
     }
 
     public void deleteBoard(Long boardId) {
