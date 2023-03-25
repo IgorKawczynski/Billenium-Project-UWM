@@ -57,6 +57,13 @@ public class Cell extends BasicEntity implements Positionable {
         return new Position(cardsNumber);
     }
 
+    public void addAll(List<Card> cards) {
+        cards.forEach(card -> {
+            card.setPosition(this.getPositionForNewCard());
+            this.add(card);
+        });
+    }
+
     public void add(Card card) {
         this.cards.add(card);
         card.setCell(this);

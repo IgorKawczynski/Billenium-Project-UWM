@@ -43,9 +43,8 @@ public class ColumnCRUDService {
                 .toDto();
     }
 
-    public void deleteColumn(Board board, Long columnId) {
-        var columnToDelete = columnReader.getColumnById(columnId);
-        columnDeleter.deleteColumn(board, columnToDelete);
+    public void deleteColumn(Column columnToDelete, Board columnBoard) {
+        columnDeleter.deleteColumn(columnToDelete, columnBoard);
     }
 
     public void saveChangedColumn(Column column) {

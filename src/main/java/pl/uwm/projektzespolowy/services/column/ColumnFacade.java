@@ -42,8 +42,9 @@ public class ColumnFacade {
     }
 
     public void deleteColumn(Long columnId) {
-     var board = columnCRUDService.getColumnById(columnId).getBoard();
-     columnCRUDService.deleteColumn(board, columnId);
+     var column = columnCRUDService.getColumnById(columnId);
+     var board = column.getBoard();
+     columnCRUDService.deleteColumn(column, board);
     }
 
     public ColumnResponseDTO moveColumn(MoveDTO columnMoveDTO) {
