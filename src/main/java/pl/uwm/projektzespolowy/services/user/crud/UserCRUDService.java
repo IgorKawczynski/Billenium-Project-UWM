@@ -3,6 +3,9 @@ package pl.uwm.projektzespolowy.services.user.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.user.UserBoardsDTO;
+
+import java.util.List;
 
 
 @Service
@@ -16,6 +19,10 @@ public class UserCRUDService {
 
     public User getUserById(Long userId) {
         return userReader.getUserById(userId);
+    }
+
+    public List<UserBoardsDTO> getAllUserBoardsById(Long userId) {
+        return userReader.getAllUserBoardsById(userId);
     }
 
     public User getUserByEmail(String email) {
