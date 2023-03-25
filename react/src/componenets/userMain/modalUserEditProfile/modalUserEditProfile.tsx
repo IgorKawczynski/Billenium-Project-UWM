@@ -13,7 +13,6 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     const [firstName, setFirstName] = useState(props.firstName);
     const [lastName, setLastName] = useState(props.lastName);
     const [email, setEmail] = useState(props.email);
-    const [phoneNumber, setPhoneNumber] = useState(props.phoneNumber);
     const [password, setPassword] = useState(props.password);
     const [showPassword, setShowPassword] = React.useState(false);
 
@@ -31,10 +30,6 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
         setEmail(props.email);
     }, [props.email]);
 
-    useEffect(() => {
-        // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
-        setPhoneNumber(props.phoneNumber);
-    }, [props.phoneNumber]);
 
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
@@ -55,9 +50,6 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
         setLastName(event.target.value);
     };const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
-    };
-    const handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPhoneNumber(parseInt(event.target.value));
     };
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
@@ -108,6 +100,21 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                                 value={lastName}
                                 onChange={handleDescChange}
                             />
+                        </Box>
+                        <Box
+                            display={'flex'}
+                            flexDirection={'column'}
+                            width={'50%'}
+                            paddingX={1}
+                        >
+                            <TextField
+                                sx={{margin:'0 0 8px 0'}}
+                                id="outlined-basic"
+                                label="E-mail"
+                                variant="outlined"
+                                value={email}
+                                onChange={handleEmailChange}
+                            />
                             <FormControl variant="outlined">
                                 <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                                 <OutlinedInput
@@ -130,30 +137,6 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                                     label="Password"
                                 />
                             </FormControl>
-                        </Box>
-                        <Box
-                            display={'flex'}
-                            flexDirection={'column'}
-                            width={'50%'}
-                            paddingX={1}
-                        >
-                            <TextField
-                                sx={{margin:'0 0 8px 0'}}
-                                id="outlined-basic"
-                                label="E-mail"
-                                variant="outlined"
-                                value={email}
-                                onChange={handleEmailChange}
-                            />
-                            <TextField
-                                sx={{margin:'0 0 8px 0'}}
-                                id="outlined-basic"
-                                label="Phone number"
-                                variant="outlined"
-                                type={'number'}
-                                value={phoneNumber}
-                                onChange={handlePhoneNumberChange}
-                            />
                         </Box>
                     </Box>
                     <Box

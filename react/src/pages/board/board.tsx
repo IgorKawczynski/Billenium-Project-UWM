@@ -9,15 +9,18 @@ import {fetchData} from "@/services/actions/boardService";
 import BoardHeader from "@/componenets/board/boardHeader/boardHeader";
 import BoardContent from "@/componenets/board/boardContent/boardContent";
 import AddRowButton from "@/componenets/row/addRowButton/addRowButton";
-import BoardMenu from "@/componenets/Menus/boardMenu/menu";
+import BoardMenu from "@/componenets/menus/boardMenu/menu";
 import {useLocation, useParams} from "react-router-dom";
+import BoardUsers from "@/componenets/users/usersMenu/boardUsers";
 
 const Board = () => {
     const theme = useTheme();
     const {id} = useParams()
     const colorMode = React.useContext(ColorModeContext);
     const [data, setData] = useState<_Data['data']> (loadDefaultData);
-    const [modalEdit, setModalEdit] = React.useState(false);
+    const [modalEdit, setModalEdit] = useState(false);
+    const [users, setUsers] = useState(false)
+
     const calculatedWidth = `calc(100% - 80px)`;
     useEffect(() => {
         document.body.style.backgroundImage = 'none';
@@ -39,10 +42,10 @@ const Board = () => {
 
     return (
         <Stack spacing={2} direction={"row"} minHeight={'100%'}>
-            <BoardMenu/>
+            <BoardMenu setUsers={setUsers}/>
             <Stack spacing={2} width={calculatedWidth}>
                 <BoardHeader data={data} setModalEdit={setModalEdit} setData={setData}/>
-                <BoardContent data={data} setData={setData}/>
+                <BoardContent users={users} setUsers={setUsers} data={data} setData={setData}/>
                 <AddRowButton data={data} setData={setData}/>
                 <ModalEditBoard
                     id={data.id}

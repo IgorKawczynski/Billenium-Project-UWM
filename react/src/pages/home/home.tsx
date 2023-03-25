@@ -35,10 +35,22 @@ const Home = () => {
 
     return (
         <Stack  spacing={1} sx={{overflow:'hidden'}}>
-            <Box sx={{width:'100%', display:'flex', justifyContent:'end'}}>
+            <Box
+                sx={{
+                    width:'100%',
+                    display:'flex',
+                    justifyContent:'end'
+                }}
+            >
+                <Box
+                    padding={2}
+                >
                 <Button
                     onClick={() => openModal(setModalLogin)}
-                    variant={"contained"}>Login</Button>
+                    variant={"contained"}>
+                    Login
+                </Button>
+                </Box>
             </Box>
             <Box sx={{display:'flex', justifyContent:'space-around'}}>
                 <Box sx={{display:'flex', flexDirection:'column' , justifyContent:'center', alignItems:'center'}}>

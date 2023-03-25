@@ -1,13 +1,10 @@
 import React from "react";
-import {Box, Button, Typography, useTheme} from "@mui/material";
+import {Box, Tooltip, Typography, useTheme} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import AddColumnButton from "@/componenets/column/addColumnButton/addColumnButton";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import {ColorModeContext} from "@/App";
 import {boardHeaderProps} from "@/componenets/board/interfaces/boardHeaderInterface/BoardHeader";
-import CardColor from "@/assets/themes/colors";
 import ColorLegend from "@/componenets/color/colorLegend/colorLegend";
 
 
@@ -26,12 +23,14 @@ const BoardHeader = (props:boardHeaderProps) => {
                     style={{textAlign:"center"}}
                 >
                     {props.data.title}
-                    <IconButton
-                        aria-label="settingsColumn"
-                        onClick={() => openModal(props.setModalEdit)}
-                    >
-                        <BorderColorOutlinedIcon/>
-                    </IconButton>
+                    <Tooltip title={"Edit Board"} placement={"bottom"}>
+                        <IconButton
+                            aria-label="settingsColumn"
+                            onClick={() => openModal(props.setModalEdit)}
+                        >
+                            <BorderColorOutlinedIcon/>
+                        </IconButton>
+                    </Tooltip>
                 </Typography>
                 <Box sx={{textAlign:'center'}} width={'250px'}>
                     <Typography

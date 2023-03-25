@@ -1,5 +1,5 @@
 import React from "react";
-import {Draggable} from 'react-beautiful-dnd'
+import {Draggable, Droppable} from 'react-beautiful-dnd'
 import Card from "@mui/material/Card"
 import Avatar from '@/componenets/users/avatar/avatar'
 import {useTheme} from "@mui/material"
@@ -22,7 +22,7 @@ const Task = (props:CardProps) => {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        
+
                         sx={{
                             border:'Primary',
                             userSelect: 'none',
@@ -93,6 +93,20 @@ const Task = (props:CardProps) => {
                                     {props.desc.length < 20 && (props.desc)}
                                 </Typography>
 
+                                <Droppable droppableId={props.id} type={'user'}>
+                                    {(provided) => {
+                                        return(
+                                            <Box
+                                                marginTop={1}
+                                                height={'30px'}
+                                                {...provided.droppableProps}
+                                                ref={provided.innerRef}
+                                            >
+
+                                            </Box>
+                                        )
+                                    }}
+                                </Droppable>
                             </Box>
                         </Box>
                     </Card>

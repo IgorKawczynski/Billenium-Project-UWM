@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Box, Stack, Grid} from '@mui/material'
-import UserMenu from "@/componenets/Menus/userMenu/menu";
+import UserMenu from "@/componenets/menus/userMenu/menu";
 import BoardCard from "@/componenets/board/boardCard/boardCard";
 import ModalUserEditProfile from "@/componenets/userMain/modalUserEditProfile/modalUserEditProfile";
 
@@ -18,7 +18,6 @@ const UserMain = () => {
                     setModalEdit={setModalEdit}
                 />
             <Grid
-                xs={12}
                 container
             >
                 <BoardCard id={'1201'}/>

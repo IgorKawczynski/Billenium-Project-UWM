@@ -29,6 +29,7 @@ const BoardCard = (props:BoardCardProps) => {
                     justifyContent={"end"}
                     bgcolor={theme.palette.background.cell}
                     padding={1}
+                    borderRadius={'10px 0 0 10px'}
                 >
                     <Box height={'80%'}>
                         <Typography variant={"h5"} color={theme.palette.text.primary}>

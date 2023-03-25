@@ -1,15 +1,11 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import {Box, useTheme} from "@mui/material";
+
+import {Box, useTheme, Tooltip} from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditCardButtonProps from "@/componenets/card/interfaces/editCardButtonInterface/EditCardButton";
 import ModalEditCard from "@/componenets/card/modalEditCard/modalEditCard";
 import ModalRemoveCard from "@/componenets/card/modalRemoveCard/modalRemoveCard";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
-import {StyledMenu} from "@/assets/styles/styledMenu";
 import IconButton from "@mui/material/IconButton";
 
 export default function EditCardButton(props:EditCardButtonProps) {
@@ -30,16 +26,17 @@ export default function EditCardButton(props:EditCardButtonProps) {
 
     return (
         <Box style={{display:"flex",justifyContent:"flex-end"}}>
-
-            <IconButton
-                sx={{fontSize:12, color:theme.palette.primary.main, maxWidth:'30px', maxHeight:'30px'}}
-                aria-controls={open ? 'demo-customized-boardMenu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={() => openModal(setModalEdit)}
-            >
-                <MoreVertIcon />
-            </IconButton>
+            <Tooltip title={"Show more"} placement={"bottom"}>
+                <IconButton
+                    sx={{fontSize:12, color:theme.palette.primary.main, maxWidth:'30px', maxHeight:'30px'}}
+                    aria-controls={open ? 'demo-customized-boardMenu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={() => openModal(setModalEdit)}
+                >
+                    <MoreVertIcon />
+                </IconButton>
+            </Tooltip>
             
             <ModalEditCard
                 id={props.id}

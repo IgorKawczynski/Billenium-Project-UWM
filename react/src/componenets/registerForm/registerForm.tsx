@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Typography, useTheme} from "@mui/material";
 import {modalStyle} from "@/assets/themes/modalStyle";
-import {Link} from "react-router-dom";
-import {LoginFormProps} from "@/componenets/loginForm/interfaces/loginFormInterface/LoginForm";
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -16,7 +14,6 @@ const RegisterForm = (props:RegisterFormProps) => {
     const [FirstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [mail, setMail] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("")
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [showPassword, setShowPassword] = React.useState(false);
@@ -34,14 +31,6 @@ const RegisterForm = (props:RegisterFormProps) => {
 
     const handleMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setMail(event.target.value);
-    };
-    const handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const re = /^[0-9\b]+$/; // regexp dla liczb całkowitych dodatnich
-
-        // Sprawdzenie, czy wprowadzona wartość pasuje do regex i ustawienie stanu wartości pola.
-        if (event.target.value === '' || re.test(event.target.value)) {
-            setPhoneNumber(event.target.value);
-        }
     };
 
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,16 +91,6 @@ const RegisterForm = (props:RegisterFormProps) => {
                             inputMode={'email'}
                             value={mail}
                             onChange={handleMailChange}
-                        />
-                    </FormControl>
-                    <FormControl variant="outlined">
-                        <InputLabel>Phone Number</InputLabel>
-                        <OutlinedInput
-                            sx={{margin:'0 0 8px 0'}}
-                            id="outlined-basic"
-                            label="Phone number"
-                            value={phoneNumber}
-                            onChange={handlePhoneNumberChange}
                         />
                     </FormControl>
                     <FormControl variant="outlined">
