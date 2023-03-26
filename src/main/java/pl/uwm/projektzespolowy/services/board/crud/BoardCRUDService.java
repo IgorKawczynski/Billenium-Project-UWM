@@ -9,6 +9,7 @@ import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -49,6 +50,7 @@ public class BoardCRUDService {
         boardUpdater.assignUserToBoard(board, userToAssign);
         return board.getAssignedUsers().stream()
                 .map(User::toDto)
+                .sorted(Comparator.comparing(UserResponseDTO::firstName))
                 .toList();
     }
 
