@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.exceptions.BoardHasTooFewColumnsToDeleteException;
 import pl.uwm.projektzespolowy.exceptions.ColumnCantBeDeletedException;
+import pl.uwm.projektzespolowy.exceptions.VOExceptions.ColumnDoesNotExistsException;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.column.Column;
@@ -50,11 +51,21 @@ class ColumnDeleter {
     }
 
     private boolean columnToDeleteIsLastBoardColumn(Board board, Column columnToDelete) {
-        return board.getColumns().get(board.getColumns().size() - 1).getPosition().compareTo(columnToDelete.getPosition()) == 0;
+        var lastColumn = board.getColumns()
+                .stream()
+                .filter(column -> column.getPosition().value() == board.getColumns().size() - 1)
+                .findFirst()
+                .orElseThrow(() -> new ColumnDoesNotExistsException("Board doesn't have column with first position."));
+        return lastColumn.getPosition().compareTo(columnToDelete.getPosition()) == 0;
     }
 
     private boolean columnToDeleteIsFirstBoardColumn(Board board, Column columnToDelete) {
-        return board.getColumns().get(0).getPosition().compareTo(columnToDelete.getPosition()) == 0;
+        var firstColumn = board.getColumns()
+                .stream()
+                .filter(column -> column.getPosition().value() == 0)
+                .findFirst()
+                .orElseThrow(() -> new ColumnDoesNotExistsException("Board doesn't have column with last position."));
+        return firstColumn.getPosition().compareTo(columnToDelete.getPosition()) == 0;
     }
 
     private void moveCardsFromOneCellToAnother(Cell firstCell, Cell secondCell) {
