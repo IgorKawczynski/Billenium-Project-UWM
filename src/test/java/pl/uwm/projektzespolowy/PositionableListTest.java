@@ -41,4 +41,12 @@ public class PositionableListTest {
         assertThat(cardWithPositionEqualsFour.getPosition().value()).isEqualTo(4);
     }
 
+    @Test
+    void shouldReturnSecondCard() {
+        //when
+        var secondCard = positionables.get(1);
+        //then
+        assertThat(secondCard.getTitle().toString()).isEqualTo("second card");
+    }
+
 }
