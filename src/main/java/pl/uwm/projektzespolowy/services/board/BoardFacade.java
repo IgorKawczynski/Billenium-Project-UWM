@@ -11,6 +11,7 @@ import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.services.board.crud.BoardCRUDService;
 import pl.uwm.projektzespolowy.services.user.crud.UserCRUDService;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,7 @@ public class BoardFacade {
 
     private final BoardCRUDService boardCRUDService;
     private final UserCRUDService userCRUDService;
+
 
     public BoardResponseDTO createBoard(BoardCreateDTO boardCreateDTO) {
         var creator = userCRUDService.getUserById(Long.parseLong(boardCreateDTO.userId()));
@@ -46,8 +48,10 @@ public class BoardFacade {
         return boardCRUDService.updateBoard(boardUpdateDTO);
     }
 
-    public BoardResponseDTO assignUserToBoard(BoardUserUpdateDTO boardUserUpdateDTO) {
-        return boardCRUDService.assignUserToBoard(boardUserUpdateDTO);
+    public List<UserResponseDTO> assignUserToBoard(BoardUserUpdateDTO boardUserUpdateDTO) {
+        var userToAssign = userCRUDService.getUserByEmail(boardUserUpdateDTO.userEmail());
+        var board = boardCRUDService.getBoardById(Long.parseLong(boardUserUpdateDTO.boardId()));
+        return boardCRUDService.assignUserToBoard(board, userToAssign);
     }
 
     public void deleteBoard(Long boardId) {

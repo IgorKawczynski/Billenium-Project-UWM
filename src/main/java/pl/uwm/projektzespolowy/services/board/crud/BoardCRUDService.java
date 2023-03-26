@@ -5,11 +5,11 @@ import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
 import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
-import pl.uwm.projektzespolowy.models.board.BoardUserUpdateDTO;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
-import pl.uwm.projektzespolowy.services.user.crud.UserCRUDService;
 
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -20,7 +20,6 @@ public class BoardCRUDService {
     private final BoardCreator boardCreator;
     private final BoardUpdater boardUpdater;
     private final BoardDeleter boardDeleter;
-    private final UserCRUDService userCRUDService;
 
     public BoardResponseDTO createBoard(User creator, String title) {
         return boardCreator.createBoard(creator, title).toDto();
@@ -46,13 +45,11 @@ public class BoardCRUDService {
                 .toDto();
     }
 
-    public BoardResponseDTO assignUserToBoard(BoardUserUpdateDTO boardUserUpdateDTO) {
-        var boardId = Long.parseLong(boardUserUpdateDTO.boardId());
-        var boardToChange = boardReader.getBoardById(boardId);
-        var userToAssign = userCRUDService.getUserByEmail(boardUserUpdateDTO.userEmail());
-        return boardUpdater
-                .assignUserToBoard(boardToChange, userToAssign)
-                .toDto();
+    public List<UserResponseDTO> assignUserToBoard(Board board, User userToAssign) {
+        boardUpdater.assignUserToBoard(board, userToAssign);
+        return board.getAssignedUsers().stream()
+                .map(User::toDto)
+                .toList();
     }
 
     public void deleteBoard(Long boardId) {

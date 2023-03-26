@@ -9,6 +9,7 @@ import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
 import pl.uwm.projektzespolowy.models.board.BoardUserUpdateDTO;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -50,7 +51,7 @@ public class BoardController {
 
     @PutMapping("/users")
     @ResponseStatus(HttpStatus.OK)
-    public BoardResponseDTO assignUserToBoard(@RequestBody BoardUserUpdateDTO boardUserUpdateDTO) {
+    public List<UserResponseDTO> assignUserToBoard(@RequestBody BoardUserUpdateDTO boardUserUpdateDTO) {
         return boardFacade.assignUserToBoard(boardUserUpdateDTO);
     }
 
