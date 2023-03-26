@@ -1,9 +1,9 @@
 package pl.uwm.projektzespolowy.services;
 
+import pl.uwm.projektzespolowy.exceptions.ElementDoesNotExists;
 import pl.uwm.projektzespolowy.models.Positionable;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -63,15 +63,18 @@ public class PositionableList<T extends Positionable> {
     }
 
     public T getPreviousElement(T positionable) {
-        this.positionables.sort(new PositionableComparator()); // not sure if necessary
-        return this.positionables.get(positionable.getPosition().value() - 1);
+        var previousPosition = positionable.getPosition().value() - 1;
+        return this.positionables.stream()
+                .filter(element -> element.getPosition().value() == previousPosition)
+                .findFirst()
+                .orElseThrow(() -> new ElementDoesNotExists("Element with position " + previousPosition + "doesn't exists!"));
     }
 
-    private static class PositionableComparator implements Comparator<Positionable> {
-        @Override
-        public int compare(Positionable first, Positionable second) {
-            return first.getPosition().compareTo(second.getPosition());
-        }
+    public T get(int position) {
+        return this.positionables.stream()
+                .filter(positionable -> positionable.getPosition().value() == position)
+                .findFirst()
+                .orElseThrow(() -> new ElementDoesNotExists("Element with position " + position + "doesn't exists!"));
     }
 
 }
