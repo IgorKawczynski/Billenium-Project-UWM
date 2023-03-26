@@ -36,8 +36,8 @@ class CardDeleter {
                 .orElseThrow( () -> new EntityNotFoundException("card", "Card with id: " + cardId + " does not exist!"));;
         var userId = Long.parseLong(cardUserUpdateDTO.userId());
 
-        Predicate<User> isThisUser = user -> user.getId() == userId;
-        cardToChange.getAssignedUsers().removeIf(isThisUser);
+        Predicate<User> userToDelete = user -> user.getId() == userId;
+        cardToChange.getAssignedUsers().removeIf(userToDelete);
         cardRepository.saveAndFlush(cardToChange);
         return cardToChange;
     }
