@@ -64,6 +64,9 @@ public class Card extends BasicEntity implements Positionable {
                 .description(this.description)
                 .position(this.position.value())
                 .color(this.color.getValue())
+                .assignedUsers(this.assignedUsers.stream()
+                        .map(User::toDto)
+                        .toList())
                 .build();
     }
 
