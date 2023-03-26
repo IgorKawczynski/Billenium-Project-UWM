@@ -31,18 +31,16 @@ public class UserFacade {
     public UserLoginResponseDTO login(UserLoginRequestDTO userLoginRequestDTO) {
 
         var userToLoginInto = userLoginService.login(userLoginRequestDTO);
-        var userLoginResponseDTO = new UserLoginResponseDTO();
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userLoginRequestDTO.email(), userLoginRequestDTO.password()));
         final String sessionId = sessionRegistry.registerSession(userLoginRequestDTO.email());
 
-        userLoginResponseDTO.setId(userToLoginInto.getId());
-        userLoginResponseDTO.setSessionId(sessionId);
-        userLoginResponseDTO.setEmail(userToLoginInto.getEmail());
-        userLoginResponseDTO.setFirstName(userToLoginInto.getFirstName());
-        userLoginResponseDTO.setLastName(userToLoginInto.getLastName());
-
-        return userLoginResponseDTO;
+        return UserLoginResponseDTO.builder()
+                .userId(String.valueOf(userToLoginInto.getId()))
+                .sessionId(sessionId)
+                .email(userToLoginInto.getEmail())
+                .firstName(userToLoginInto.getFirstName())
+                .lastName(userToLoginInto.getLastName()).build();
     }
 
     public UserResponseDTO getUserById(Long userId) {
