@@ -15,6 +15,12 @@ interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findUserByEmail(String email);
 
+    User findRegisteredUserByEmail(String email);
+
+    Boolean existsByEmail(String email);
+
+    Boolean existsByPassword(String password);
+
     @Query(value = """
             SELECT new pl.uwm.projektzespolowy.models.user.UserBoardsDTO(CAST(b.id as string), b.title.title, CONCAT(b.creator.firstName," ", b.creator.lastName))
             FROM User u JOIN u.boards b

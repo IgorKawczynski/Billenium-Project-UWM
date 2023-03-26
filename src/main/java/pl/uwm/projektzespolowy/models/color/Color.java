@@ -1,6 +1,6 @@
 package pl.uwm.projektzespolowy.models.color;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;

@@ -1,6 +1,6 @@
 package pl.uwm.projektzespolowy.models.board;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
