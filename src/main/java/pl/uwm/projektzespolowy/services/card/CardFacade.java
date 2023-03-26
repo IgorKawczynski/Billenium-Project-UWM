@@ -81,4 +81,8 @@ public class CardFacade {
         return cardCRUDService.changeCardColor(cardColorChangeDTO);
     }
 
+    public CardResponseDTO deleteAssignedUserFromCard(CardUserUpdateDTO cardUserUpdateDTO) {
+        return cardCRUDService.deleteAssignedUserFromCard(cardUserUpdateDTO).toDto();
+    }
+
 }

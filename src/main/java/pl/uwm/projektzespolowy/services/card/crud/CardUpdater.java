@@ -26,9 +26,7 @@ class CardUpdater {
     }
 
     public Card assignUserToCard(Card cardToChange, User userToAssign) {
-        if (userToAssign != null) {
-            cardToChange.getAssignedUsers().add(userToAssign);
-        }
+        cardToChange.getAssignedUsers().add(userToAssign);
         return cardRepository.saveAndFlush(cardToChange);
     }
 

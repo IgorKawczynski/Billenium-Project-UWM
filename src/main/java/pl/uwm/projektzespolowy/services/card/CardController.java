@@ -77,4 +77,10 @@ public class CardController {
         cardFacade.deleteCard(cardId);
     }
 
+    @DeleteMapping("/users/")
+    @ResponseStatus(HttpStatus.OK)
+    public CardResponseDTO deleteAssignedUserFromCard(@RequestBody CardUserUpdateDTO cardUserUpdateDTO) {
+        return cardFacade.deleteAssignedUserFromCard(cardUserUpdateDTO);
+    }
+
 }

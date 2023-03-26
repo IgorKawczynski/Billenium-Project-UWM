@@ -63,6 +63,10 @@ public class CardCRUDService {
         cardDeleter.deleteCard(cell, cardToDelete);
     }
 
+    public Card deleteAssignedUserFromCard(CardUserUpdateDTO cardUserUpdateDTO) {
+        return cardDeleter.deleteAssignedUserFromCard(cardUserUpdateDTO);
+    }
+
     public void saveChangedCards(List<Card> cards) {
         cardUpdater.saveChangedCards(cards);
     }
