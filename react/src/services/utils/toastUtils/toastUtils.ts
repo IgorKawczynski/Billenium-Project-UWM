@@ -1,4 +1,3 @@
-import React from 'react'
 import {VariantType} from 'notistack';
 import {EnqueueSnackbar} from "notistack";
 export const handleClickVariant = (toast: EnqueueSnackbar) => (

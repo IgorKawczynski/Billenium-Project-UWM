@@ -40,6 +40,7 @@ export async function addBoardToBackend(userId:string, title:string){
 export async function deleteBoardFromBackend(boardId:string){
     try{
         const response = await axios.delete(urlDomain+`/api/boards/${boardId}`)
+        console.log(response)
         return response.data
     }catch(error:any){
         return error.response.data.error

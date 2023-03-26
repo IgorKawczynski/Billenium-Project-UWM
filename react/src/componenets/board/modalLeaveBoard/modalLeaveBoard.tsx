@@ -55,7 +55,7 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                         <Button
                             sx={{maxHeight:'50px'}}
                             variant="contained"
-                            onClick={() => deleteBoard(props.userId, props.id, props.setUserBoards, props.setModalDelete)}
+                            onClick={() => deleteBoard(props.userId, props.id, props.title, props.setUserBoards, props.setModalDelete)}
                         >
                             Leave
                         </Button>

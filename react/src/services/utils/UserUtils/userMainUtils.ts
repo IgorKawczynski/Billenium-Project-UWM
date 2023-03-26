@@ -26,10 +26,14 @@ export function addBoard (
 ) {
     addBoardToBackend(userId, title)
         .then( res => {
-                getUserBoards(userId, setUserBoards)
-                closeModal(setModalAddBoard)
-                handleClickVariant(enqueueSnackbar)(`Board ${title} Added` ,'success')
-                setBoardName("")
+                if (typeof res === 'string') {
+                    handleClickVariant(enqueueSnackbar)(res, 'error')
+                } else {
+                    getUserBoards(userId, setUserBoards)
+                    closeModal(setModalAddBoard)
+                    handleClickVariant(enqueueSnackbar)(`Board ${title} added` ,'success')
+                    setBoardName("")
+                }
             }
         )
 }
@@ -37,12 +41,15 @@ export function addBoard (
 export function deleteBoard(
     userId:string,
     boardId:string,
+    title:string,
     setUserBoards:userBoardsData["setUserBoards"],
     setModalDelete:React.Dispatch<SetStateAction<boolean>>
 ){
     deleteBoardFromBackend(boardId)
         .then(res => {
-            getUserBoards(userId, setUserBoards)
-            closeModal(setModalDelete)
+                getUserBoards(userId, setUserBoards)
+                closeModal(setModalDelete)
+                handleClickVariant(enqueueSnackbar)(`Board ${title} removed` ,'success')
+
         })
 }

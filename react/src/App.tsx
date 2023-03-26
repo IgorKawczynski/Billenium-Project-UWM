@@ -4,7 +4,7 @@ import Home from "./pages/home/home";
 import {Route, Routes} from "react-router-dom";
 import {createTheme, makeStyles, ThemeOptions, ThemeProvider, useTheme} from '@mui/material/styles';
 import {lightOptions, darkOptions} from './assets/themes/BasicTheme'
-import {SnackbarProvider} from 'notistack'
+import {SnackbarProvider, useSnackbar} from 'notistack'
 import UserMain from "@/pages/userMain/userMain";
 export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -15,6 +15,7 @@ const customThemes = {
 
 function KabanTable() {
     const [mode, setMode] = React.useState<'light' | 'dark'>('light');
+    const {enqueueSnackbar} = useSnackbar();
 
     React.useEffect(() => {
         const savedMode = localStorage.getItem('mode');
@@ -46,7 +47,7 @@ function KabanTable() {
             <ThemeProvider theme={theme}>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
-                    <Route path="/userMain" element={<UserMain/>}/>
+                    <Route path="/userMain" element={<SnackbarProvider maxSnack={3}><UserMain/> </SnackbarProvider>}/>
                     <Route path="/board/:id" element={<SnackbarProvider maxSnack={3}> <Board/> </SnackbarProvider>}/>
                 </Routes>
             </ThemeProvider>
