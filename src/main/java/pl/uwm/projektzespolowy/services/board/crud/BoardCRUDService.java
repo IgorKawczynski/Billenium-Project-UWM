@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
 import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
+import pl.uwm.projektzespolowy.models.board.BoardUserUpdateDTO;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
@@ -48,7 +49,9 @@ public class BoardCRUDService {
 
     public List<UserResponseDTO> assignUserToBoard(Board board, User userToAssign) {
         boardUpdater.assignUserToBoard(board, userToAssign);
-        return board.getAssignedUsers().stream()
+        return board
+                .getAssignedUsers()
+                .stream()
                 .map(User::toDto)
                 .sorted(Comparator.comparing(UserResponseDTO::firstName))
                 .toList();
@@ -56,6 +59,14 @@ public class BoardCRUDService {
 
     public void deleteBoard(Long boardId) {
         boardDeleter.deleteBoardById(boardId);
+    }
+
+    public List<UserResponseDTO> deleteAssignedUserFromBoard(BoardUserUpdateDTO boardUserUpdateDTO) {
+        return boardDeleter
+                .deleteAssignedUserFromBoard(boardUserUpdateDTO)
+                .stream()
+                .map(User::toDto)
+                .toList();
     }
 
 }
