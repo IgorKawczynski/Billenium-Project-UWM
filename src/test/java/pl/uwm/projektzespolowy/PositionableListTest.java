@@ -25,28 +25,44 @@ public class PositionableListTest {
 
     @Test
     void shouldThrowElementDoesNotExistsException() {
-        //when
+        // when
         int wrongPosition = 99999;
-        //then
+        // then
         assertThatThrownBy(() -> positionables.get(wrongPosition))
                 .isInstanceOf(ElementDoesNotExists.class)
                 .hasMessage("Element with position " + wrongPosition + "doesn't exists!");
     }
     @Test
     void shouldReturnPreviousCard() {
-        //when
+        // when
         var cardWithPositionEqualsFive = positionables.get(5);
         var cardWithPositionEqualsFour = positionables.getPreviousElement(cardWithPositionEqualsFive);
-        //then
+        // then
         assertThat(cardWithPositionEqualsFour.getPosition().value()).isEqualTo(4);
     }
 
     @Test
     void shouldReturnSecondCard() {
-        //when
+        // when
         var secondCard = positionables.get(1);
-        //then
+        // then
         assertThat(secondCard.getTitle().toString()).isEqualTo("second card");
+    }
+
+    @Test
+    void shouldReturnLastElement() {
+        // when
+        var lastElement = positionables.getLastElement();
+        // then
+        assertThat(lastElement.getPosition().value()).isEqualTo(7);
+    }
+
+    @Test
+    void shouldReturnFirstElement() {
+        // when
+        var firstElement = positionables.getFirstElement();
+        // then
+        assertThat(firstElement.getPosition().value()).isEqualTo(0);
     }
 
 }

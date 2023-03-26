@@ -26,4 +26,10 @@ public class EntityExceptions {
         return new ErrorMessage("column", exception.getMessage());
     }
 
+    @ExceptionHandler(value = RowCantBeDeletedException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage rowCantBeDeletedException(RowCantBeDeletedException exception) {
+        return new ErrorMessage("row", exception.getMessage());
+    }
+
 }
