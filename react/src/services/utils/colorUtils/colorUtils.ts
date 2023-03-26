@@ -15,31 +15,48 @@ export const updateColor = (
 ) => {
     changeColorTitle(id, newTitle)
         .then(res => {
-            getColors(data.id)
-                .then( res => {
-                        if(res) {
-                            setData({
-                                ...data,
-                                colorList:res
-                            })
-                            handleClickVariant(enqueueSnackbar)('Success color title changed' ,'success')
-                            closeModal(setEdit)
+            if(typeof res === 'string') {
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else {
+                getColors(data.id)
+                    .then(res => {
+                            if (res) {
+                                setData({
+                                    ...data,
+                                    colorList: res
+                                })
+                                handleClickVariant(enqueueSnackbar)(`Color title changed to ${newTitle}`, 'success')
+                                closeModal(setEdit)
+                            }
                         }
-                    }
-                )
+                    )
+            }
         })
 };
 
-export const changeCardColor = (cardId:string, newColor:string, setData:_Data['setData'], data:_Data['data']) => {
+export const changeCardColor = (
+    cardId:string,
+    cardTitle:string,
+    colorTitle:string,
+    newColor:string,
+    setData:_Data['setData'],
+    data:_Data['data'
+        ]) => {
     changeCardColorToBackend(cardId, newColor)
         .then(res => {
-            getColumnsFromBackend(data.id)
-                .then(resCol => {
-                    setData({
-                        ...data,
-                        columnList:resCol
+            if(typeof res === 'string') {
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else {
+                getColumnsFromBackend(data.id)
+                    .then(resCol => {
+                        setData({
+                            ...data,
+                            columnList: resCol
+                        })
+                        handleClickVariant(enqueueSnackbar)(`Assigned type ${colorTitle} to  card ${cardTitle}` ,'success')
                     })
-                })
+            }
         })
+
 };
 

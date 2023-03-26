@@ -3,18 +3,15 @@ import {Modal, Stack, Typography, Fade, Backdrop, Button, TextField, Box, InputL
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {ModalUserEditProfileProps} from "@/componenets/userMain/interfaces/modalUserEditProfile/modalUserEditProfile";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import IconButton from "@mui/material/IconButton";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Visibility from "@mui/icons-material/Visibility";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ChangePassword from "@/componenets/userMain/changePassword/changePassword";
 const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     const [firstName, setFirstName] = useState(props.firstName);
     const [lastName, setLastName] = useState(props.lastName);
     const [email, setEmail] = useState(props.email);
-    const [password, setPassword] = useState(props.password);
-    const [showPassword, setShowPassword] = React.useState(false);
+    const [password, setPassword] = useState("");
+    const [repeatPassword, setRepeatPassword] = useState("");
+    const [passwordToChange, setPasswordToChange] =useState(false);
 
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
@@ -30,16 +27,11 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
         setEmail(props.email);
     }, [props.email]);
 
-
-    useEffect(() => {
-        // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
-        setPassword(props.password);
-    }, [props.password]);
-
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
+    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword(event.target.value);
+    };
+    const handleRepeatPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setRepeatPassword(event.target.value);
     };
 
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,9 +42,6 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
         setLastName(event.target.value);
     };const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
-    };
-    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value);
     };
 
     return (
@@ -72,9 +61,20 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
         >
             <Fade in={props.modalEdit}>
                 <Stack sx={modalBigStyle} spacing={2}>
-                    <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
-                        Edit Profile
-                    </Typography>
+                    <Box
+                        display={"flex"}
+                        alignItems={"center"}
+                    >
+                        <AccountCircleIcon/>
+                        <Typography
+                            color={'textPrimary'}
+                            id="transition-modal-title"
+                            variant="h6"
+                            component="h2"
+                        >
+                            Edit Profile
+                        </Typography>
+                    </Box>
                     <Box
                         display={'flex'}
                     >
@@ -115,28 +115,16 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                                 value={email}
                                 onChange={handleEmailChange}
                             />
-                            <FormControl variant="outlined">
-                                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                                <OutlinedInput
-                                    value={password}
-                                    id="outlined-adornment-password"
-                                    type={showPassword ? 'text' : 'password'}
-                                    onChange={handlePasswordChange}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                            >
-                                                {showPassword ?  <Visibility /> :<VisibilityOff />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-                                    label="Password"
-                                />
-                            </FormControl>
+
+                            <ChangePassword
+                                password={password}
+                                repeatPassword={repeatPassword}
+                                handlePasswordChange={handlePasswordChange}
+                                handleRepeatPasswordChange={handleRepeatPasswordChange}
+                                passwordToChange={passwordToChange}
+                                setPasswordToChange={setPasswordToChange}
+                            />
+
                         </Box>
                     </Box>
                     <Box

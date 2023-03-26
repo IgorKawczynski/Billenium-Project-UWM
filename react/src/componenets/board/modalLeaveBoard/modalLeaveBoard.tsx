@@ -9,10 +9,12 @@ import {Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {removeColumn} from "@/services/utils/columnUtils/columnUtils";
-import ModalRemoveRowProps from "@/componenets/row/interfaces/modalRemoveRowInterface/modalRemoveRow";
-import {removeRow} from "@/services/utils/rowUtils/rowUtils";
+import {ModalLeaveBoardProps} from "@/componenets/board/interfaces/modalLeaveBoard/modalLeaveBoard";
+import {deleteBoard} from "@/services/utils/UserUtils/userMainUtils";
 
-const ModalRemoveRow = (props:ModalRemoveRowProps) =>{
+
+const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
+
     return(
         <Modal
             aria-labelledby="transition-modal-title"
@@ -35,7 +37,7 @@ const ModalRemoveRow = (props:ModalRemoveRowProps) =>{
                     }}
                     >
                         <Typography color={'textPrimary'} variant={'body1'}>
-                            Are you sure you want to delete row: {props.title}?
+                            Are you sure you want to leave board: {props.title}?
                         </Typography>
                     </Grid>
                     <Grid style={{ display:"flex",
@@ -49,24 +51,19 @@ const ModalRemoveRow = (props:ModalRemoveRowProps) =>{
                         >
                             Cancel
                         </Button>
+
                         <Button
                             sx={{maxHeight:'50px'}}
-                            onClick={() => removeRow(
-                                props.id,
-                                props.title,
-                                props.data,
-                                props.setData,
-                                props.setModalDelete
-                            )}
                             variant="contained"
+                            onClick={() => deleteBoard(props.userId, props.id, props.setUserBoards, props.setModalDelete)}
                         >
-                            Delete
+                            Leave
                         </Button>
                     </Grid>
                 </Stack>
             </Fade>
         </Modal>
     )
-}
 
-export default ModalRemoveRow
+}
+export default ModalLeaveBoard

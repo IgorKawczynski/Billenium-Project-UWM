@@ -3,8 +3,14 @@ import {transformColumns, transformColumn} from "@/services/utils/transfromData/
 import {urlDomain} from "@/services/actions/boardService";
 
 export async function addColumnToBackend(boardId:string, title:string){
+    try{
         const response = await axios.post(urlDomain+'/api/columns', {boardId, title})
         return response.data
+    }catch(error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
 }
 
 export async function removeColumnToBackend(id:string){

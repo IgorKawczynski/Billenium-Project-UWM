@@ -9,7 +9,7 @@ import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import BackupTableIcon from '@mui/icons-material/BackupTable';
 import {Link} from "react-router-dom";
 import {BoardMenuProps} from "@/componenets/menus/interfaces/boardMenu";
-
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 const BoardMenu = (props:BoardMenuProps) => {
     const theme = useTheme()
@@ -40,7 +40,7 @@ const BoardMenu = (props:BoardMenuProps) => {
                         sx={{color:theme.palette.text.theme}}
                         size={"large"}
                     >
-                        <BackupTableIcon/>
+                        <DashboardIcon/>
                     </IconButton>
                     </Tooltip>
                     </Link>

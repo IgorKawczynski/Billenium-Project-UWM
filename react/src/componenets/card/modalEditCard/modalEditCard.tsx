@@ -4,7 +4,7 @@ import ModalEditCardProps from "@/componenets/card/interfaces/modalEditcardInter
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {updateCard} from "@/services/utils/cardUtils/cardUtils";
-import IconMenu from "@/componenets/card/modalEditCardMenu/modalEditCardMenu";
+import CardMenu from "@/componenets/card/modalEditCardMenu/modalEditCardMenu";
 export default function ModalEditCard(props:ModalEditCardProps) {
     const [title, setTitle] = useState(props.title);
     const [desc, setDesc] = useState(props.desc);
@@ -82,9 +82,9 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                 justifyContent={'end'}
                             >
                                 <Box>
-                                    <IconMenu
-                                        id={props.id}
-                                        title={props.title}
+                                    <CardMenu
+                                        cardId={props.id}
+                                        cardTitle={props.title}
                                         setModalDelete={props.setModalDelete}
                                         modalDelete={props.modalDelete}
                                         data={props.data}

@@ -2,8 +2,8 @@ import React, {SetStateAction} from "react";
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
 
 export interface ModalEditCardMenuProps{
-    id:string
-    title:string
+    cardId:string
+    cardTitle:string
     setModalDelete:React.Dispatch<SetStateAction<boolean>>
     modalDelete:boolean
     data:_Data["data"]

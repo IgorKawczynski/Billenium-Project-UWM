@@ -51,6 +51,7 @@ const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
                                 <Button
                                     sx={{maxHeight:'50px'}}
                                     onClick={() => removeColumn(props.id,
+                                                                props.title,
                                                                 props.data,
                                                                 props.setData
                                                                 )}

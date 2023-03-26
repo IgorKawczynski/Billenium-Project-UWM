@@ -10,56 +10,6 @@ import {
     removeRowToBackend
 } from "@/services/actions/rowService";
 import {getColumnsFromBackend} from "@/services/actions/columnService";
-// export const editRow = (newTitle: string,
-//                            limit: number,
-//                            id:string,
-//                            checkLimit:boolean,
-//                            data:_Data["data"],
-//                            setModalEdit:React.Dispatch<SetStateAction<boolean>>,
-//                            setData:_Data["setData"],
-// ) => {
-//     updateColumnToBackend(id, newTitle, limit, checkLimit)
-//         .then(res => {
-//             if(typeof res === 'string') {
-//                 handleClickVariant(enqueueSnackbar)(res ,'error')
-//             }else{
-//                 getColumnById(id)
-//                     .then( res => {
-//                             if(res) {
-//                                 setData({
-//                                     ...data,
-//                                     rowList:[
-//                                         res
-//                                     ]
-//
-//                                 })
-//                                 closeModal(setModalEdit)
-//                                 handleClickVariant(enqueueSnackbar)('Success column edited' ,'success')
-//                             }
-//                         }
-//                     )
-//                 // tutaj możesz wykonywać operacje na otrzymanym id
-//             }})
-//     closeModal(setModalEdit)
-// }
-//
-// export const removeRow = (id:string, data:_Data["data"], setData:_Data["setData"]) => {
-//     removeColumnToBackend(id)
-//         .then(res => {
-//             getColumnFromBackend(data.id)
-//                 .then( res => {
-//                     if(res) {
-//                         const rowList:_Data["data"]['rowList'] = res
-//                         setData({
-//                             ...data,
-//                             rowList: rowList
-//
-//                         })
-//                         handleClickVariant(enqueueSnackbar)('Success column removed' ,'success')
-//                     }})
-//         })
-// };
-
 export function addRow(name:string,
                           data:_Data["data"],
                           setData:_Data["setData"],
@@ -68,7 +18,9 @@ export function addRow(name:string,
 ) {
     addRowToBackend(data.id, name)
         .then(res => {
-            if(res != 0){
+            if(typeof res === 'string') {
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else{
                 getAllRowsFromBackend(data.id)
                     .then( resRow => {
                             if(resRow) {
@@ -81,7 +33,7 @@ export function addRow(name:string,
 
                                 })
                                 closeModal(setOpen)
-                                handleClickVariant(enqueueSnackbar)('Success row added' ,'success')
+                                handleClickVariant(enqueueSnackbar)(`Row ${name} added` ,'success')
                                 setRowName("")
                             })
                         }
@@ -90,7 +42,7 @@ export function addRow(name:string,
                 // tutaj możesz wykonywać operacje na otrzymanym id
             }})
         .catch(res => {
-            handleClickVariant(enqueueSnackbar)('Column title is required', 'error')
+            handleClickVariant(enqueueSnackbar)('Row title is required', 'error')
             console.error(res);
             // obsługa błędów
         });
@@ -120,7 +72,7 @@ export function editRow(
 
                                     })
                                     closeModal(setModalEdit)
-                                    handleClickVariant(enqueueSnackbar)('Success row removed' ,'success')
+                                    handleClickVariant(enqueueSnackbar)(`Row ${title} edited` ,'success')
                                 })
                         }
                     }
@@ -128,7 +80,7 @@ export function editRow(
             // tutaj możesz wykonywać operacje na otrzymanym id
         }})
         .catch(res => {
-            handleClickVariant(enqueueSnackbar)('Column title is required', 'error')
+            handleClickVariant(enqueueSnackbar)('Row title is required', 'error')
             console.error(res);
             // obsługa błędów
         });
@@ -136,6 +88,7 @@ export function editRow(
 
 export function removeRow(
     id:string,
+    title:string,
     data:_Data["data"],
     setData:_Data["setData"],
     setModalRemove:React.Dispatch<SetStateAction<boolean>>
@@ -154,17 +107,12 @@ export function removeRow(
 
                                         })
                                         closeModal(setModalRemove)
-                                        handleClickVariant(enqueueSnackbar)('Success row removed' ,'success')
+                                        handleClickVariant(enqueueSnackbar)(`Row ${title} removed` ,'success')
                                     })
                             }
                         }
                     )
                 // tutaj możesz wykonywać operacje na otrzymanym id
         })
-        .catch(res => {
-            handleClickVariant(enqueueSnackbar)('Column title is required', 'error')
-            console.error(res);
-            // obsługa błędów
-        });
 
 }

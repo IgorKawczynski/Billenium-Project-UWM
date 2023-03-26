@@ -1,7 +1,8 @@
 import {_Data, Color} from "@/services/utils/boardUtils/DataBoard";
 
 export interface ColorPickerProps{
-    id:string
+    cardId:string
+    cardTitle:string
     colors:Color[]
 
     data:_Data['data']

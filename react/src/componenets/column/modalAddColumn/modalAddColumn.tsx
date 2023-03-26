@@ -16,7 +16,6 @@ import {useSnackbar} from "notistack";
 import {Snackbar} from "@mui/material";
 export default function ModalAddColumn(props:ModalAddColumnProps) {
     const [columnName, setColumnName] = useState("");
-    const {enqueueSnackbar} = useSnackbar();
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setColumnName(event.target.value);
     };

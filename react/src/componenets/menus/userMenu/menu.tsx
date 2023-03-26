@@ -1,5 +1,5 @@
-import React from "react";
-import {Box, useTheme, Stack, Tooltip} from "@mui/material";
+import React, {useState} from "react";
+import {Box, useTheme, Stack, Tooltip, Badge} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import {ColorModeContext} from "@/App";
@@ -8,7 +8,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {Link} from "react-router-dom";
 import {UserMenuProps} from "@/componenets/menus/interfaces/userMenu";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
-
+import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
+import MarkunreadIcon from '@mui/icons-material/Markunread';
 
 const UserMenu = (props:UserMenuProps) => {
     const theme = useTheme()
@@ -40,6 +41,25 @@ const UserMenu = (props:UserMenuProps) => {
                             onClick={() => openModal(props.setModalEdit)}
                         >
                             <AccountCircleIcon/>
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title={"Add board"} placement={"left"}>
+                        <IconButton
+                            sx={{color:theme.palette.text.theme}}
+                            size={"large"}
+                            onClick={() => openModal(props.setModalAddBoard)}
+                        >
+                            <DashboardCustomizeIcon/>
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title={"Your invitations"} placement={"left"}>
+                        <IconButton
+                            sx={{color:theme.palette.text.theme}}
+                            size={"large"}
+                        >
+                            <Badge badgeContent={3} color={"info"}>
+                                <MarkunreadIcon/>
+                            </Badge>
                         </IconButton>
                     </Tooltip>
                 </Stack>

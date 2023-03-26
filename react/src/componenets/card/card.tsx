@@ -1,8 +1,7 @@
 import React from "react";
 import {Draggable, Droppable} from 'react-beautiful-dnd'
 import Card from "@mui/material/Card"
-import Avatar from '@/componenets/users/avatar/avatar'
-import {useTheme} from "@mui/material"
+import {AvatarGroup, useTheme} from "@mui/material"
 import CardProps from '@/componenets/card/interfaces/cardInterface/Card'
 import EditCardButton from '@/componenets/card/editCardButton/editCardButton'
 import Box from "@mui/material/Box";
@@ -96,15 +95,14 @@ const Task = (props:CardProps) => {
                                 <Droppable droppableId={props.id} type={'user'}>
                                     {(provided) => {
                                         return(
-                                            <Box
-                                                marginTop={1}
-                                                height={'30px'}
+                                            <AvatarGroup
+                                                sx={{height:'35px'}}
                                                 {...provided.droppableProps}
                                                 ref={provided.innerRef}
+                                                max={4}
                                             >
-
-                                            </Box>
-                                        )
+                                            </AvatarGroup>
+                                            )
                                     }}
                                 </Droppable>
                             </Box>

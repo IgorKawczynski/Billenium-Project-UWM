@@ -1,11 +1,15 @@
-import React from "react";
-import {Grid, Box, useTheme, Typography} from "@mui/material";
+import React, {useState} from "react";
+import {Grid, Box, useTheme, Typography, IconButton, Tooltip} from "@mui/material";
 import {ColorModeContext} from "@/App";
 import {Link} from "react-router-dom";
 import {BoardCardProps} from "@/componenets/board/interfaces/boardCard/boardCard";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import ModalLeaveBoard from "@/componenets/board/modalLeaveBoard/modalLeaveBoard";
+import {openModal} from "@/services/utils/modalUtils/modalUtils";
 
 
 const BoardCard = (props:BoardCardProps) => {
+    const [modalLeaveBoard, setModalLeaveBoard] = useState(false);
     const theme = useTheme()
     const colorMode = React.useContext(ColorModeContext);
     React.useEffect(() => {
@@ -19,7 +23,6 @@ const BoardCard = (props:BoardCardProps) => {
                 padding={2}
                 minWidth={'250px'}
             >
-                <Link to={`/board/${props.id}`} style={{textDecoration:'none'}}>
                 <Box
                     borderLeft={`20px solid ${theme.palette.primary.main}`}
                     boxShadow={'0px 4px 4px rgba(0, 0, 0, 0.25)'}
@@ -31,20 +34,41 @@ const BoardCard = (props:BoardCardProps) => {
                     padding={1}
                     borderRadius={'10px 0 0 10px'}
                 >
-                    <Box height={'80%'}>
+                    <Box height={'75%'}>
+                        <Link to={`/board/${props.id}`} style={{textDecoration:'none'}}>
                         <Typography variant={"h5"} color={theme.palette.text.primary}>
-                            Kanban
+                            {props.title}
                         </Typography>
                         <Typography variant={"subtitle1"} color={theme.palette.text.primary}>
-                            Creator: Maciek Makowski
+                            Creator: {props.creator}
                         </Typography>
+                        </Link>
                     </Box>
-                    <Box height={'20%'}>
-
+                    <Box
+                        justifyContent={"end"}
+                        display={"flex"}
+                        height={'25%'}
+                    >
+                        <Tooltip title={'Leave board'} placement={"bottom"}>
+                            <IconButton
+                                sx={{color:'red'}}
+                                size={"small"}
+                                onClick={() => openModal(setModalLeaveBoard)}
+                            >
+                                <ExitToAppIcon/>
+                            </IconButton>
+                        </Tooltip>
                     </Box>
 
                 </Box>
-                </Link>
+                <ModalLeaveBoard
+                    id={props.id}
+                    userId={props.userId}
+                    title={props.title}
+                    modalDelete={modalLeaveBoard}
+                    setModalDelete={setModalLeaveBoard}
+                    setUserBoards={props.setUserBoards}
+                />
             </Grid>
 
     )

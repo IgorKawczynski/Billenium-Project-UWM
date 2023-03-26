@@ -14,7 +14,7 @@ import ModalRemoveCard from "@/componenets/card/modalRemoveCard/modalRemoveCard"
 import {ModalEditCardMenuProps} from "@/componenets/card/interfaces/modalEditCardMenu/ModalEditCardMenu";
 import ColorPicker from "@/componenets/card/cardColorPicker/ColorPicker";
 
-export default function IconMenu(props:ModalEditCardMenuProps) {
+const CardMenu = (props:ModalEditCardMenuProps) => {
     return (
         <Paper sx={{ width: 200, maxWidth: '100%'}}>
             <MenuList>
@@ -24,7 +24,7 @@ export default function IconMenu(props:ModalEditCardMenuProps) {
                     </ListItemIcon>
                     <ListItemText>Users</ListItemText>
                 </MenuItem>
-                <ColorPicker colors={props.data.colorList} data={props.data} setData={props.setData} id={props.id}/>
+                <ColorPicker colors={props.data.colorList} data={props.data} setData={props.setData} cardId={props.cardId} cardTitle={props.cardTitle}/>
                 <Divider />
                 <MenuItem onClick={() => openModal(props.setModalDelete)}>
                     <ListItemIcon>
@@ -38,3 +38,5 @@ export default function IconMenu(props:ModalEditCardMenuProps) {
         </Paper>
     );
 }
+
+export default CardMenu

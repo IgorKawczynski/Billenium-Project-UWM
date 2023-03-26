@@ -32,7 +32,7 @@ export const editColumn = (newTitle: string,
 
                             })
                             closeModal(setModalEdit)
-                            handleClickVariant(enqueueSnackbar)('Success column edited' ,'success')
+                            handleClickVariant(enqueueSnackbar)(`Column ${newTitle} edited` ,'success')
                         }
                     }
                 )
@@ -41,7 +41,12 @@ export const editColumn = (newTitle: string,
     closeModal(setModalEdit)
 }
 
-export const removeColumn = (id:string, data:_Data["data"], setData:_Data["setData"]) => {
+export const removeColumn = (
+    id:string,
+    title:string,
+    data:_Data["data"],
+    setData:_Data["setData"]
+) => {
     removeColumnToBackend(id)
         .then(res => {
             getColumnsFromBackend(data.id)
@@ -53,7 +58,7 @@ export const removeColumn = (id:string, data:_Data["data"], setData:_Data["setDa
                             columnList: columns
 
                         })
-                        handleClickVariant(enqueueSnackbar)('Success column removed' ,'success')
+                        handleClickVariant(enqueueSnackbar)(`Column ${title} removed` ,'success')
                     }})
         })
 };
@@ -66,7 +71,9 @@ export function addColumn(name:string,
                     ) {
     addColumnToBackend(data.id, name)
         .then(res => {
-            if(res != 0){
+            if(typeof res === 'string') {
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else{
             getColumnsFromBackend(data.id)
                 .then( res => {
                         if(res) {
@@ -77,7 +84,7 @@ export function addColumn(name:string,
 
                             })
                             closeModal(setOpen)
-                            handleClickVariant(enqueueSnackbar)('Success column added' ,'success')
+                            handleClickVariant(enqueueSnackbar)(`Column ${name} added` ,'success')
                             setColumnName("")
                         }
                     }

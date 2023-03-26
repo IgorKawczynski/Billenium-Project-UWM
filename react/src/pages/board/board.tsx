@@ -12,11 +12,13 @@ import AddRowButton from "@/componenets/row/addRowButton/addRowButton";
 import BoardMenu from "@/componenets/menus/boardMenu/menu";
 import {useLocation, useParams} from "react-router-dom";
 import BoardUsers from "@/componenets/users/usersMenu/boardUsers";
+import {useSnackbar} from "notistack";
 
 const Board = () => {
     const theme = useTheme();
     const {id} = useParams()
     const colorMode = React.useContext(ColorModeContext);
+    const {enqueueSnackbar} = useSnackbar();
     const [data, setData] = useState<_Data['data']> (loadDefaultData);
     const [modalEdit, setModalEdit] = useState(false);
     const [users, setUsers] = useState(false)

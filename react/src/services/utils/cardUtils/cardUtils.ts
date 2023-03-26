@@ -6,7 +6,13 @@ import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
 
-export const removeCard = (id:string, columnId:string, setData:_Data['setData'], data:_Data['data']) => {
+export const removeCard = (
+    id:string,
+    title:string,
+    columnId:string,
+    setData:_Data['setData'],
+    data:_Data['data']
+) => {
     removeCardToBackend(id)
         .then(res => {
             getColumnsFromBackend(data.id)
@@ -16,7 +22,7 @@ export const removeCard = (id:string, columnId:string, setData:_Data['setData'],
                                 ...data,
                                 columnList:resCol
                             })
-                            handleClickVariant(enqueueSnackbar)('Success card removed' ,'success')
+                            handleClickVariant(enqueueSnackbar)(`Card ${title} removed` ,'success')
                         }
                     }
                 )
@@ -44,7 +50,7 @@ export const addCard = (name: string,
                                 ...data,
                                 columnList:resCol
                             })
-                            handleClickVariant(enqueueSnackbar)('Success card added' ,'success')
+                            handleClickVariant(enqueueSnackbar)(`Card ${name} added` ,'success')
                             closeModal(setOpen)
                             setName("")
                             setDesc("")
@@ -78,7 +84,7 @@ export const updateCard = (id:string,
 
                             })
                             closeModal(setModalEdit)
-                            handleClickVariant(enqueueSnackbar)('Success card edited' ,'success')
+                            handleClickVariant(enqueueSnackbar)(`Card ${title} edited` ,'success')
                         }
                     }
                 )

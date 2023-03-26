@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
-import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Typography, useTheme} from "@mui/material";
+import {Backdrop, Box, Button, Fade, Icon, Modal, Stack, TextField, Typography, useTheme} from "@mui/material";
 import {modalStyle} from "@/assets/themes/modalStyle";
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -9,6 +9,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {InputLabel,FormControl} from "@mui/material";
 import {RegisterFormProps} from "@/componenets/registerForm/interfaces/registerFormInterface/RegisterForm";
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 const RegisterForm = (props:RegisterFormProps) => {
     const theme = useTheme()
     const [FirstName, setFirstName] = useState("");
@@ -57,9 +58,12 @@ const RegisterForm = (props:RegisterFormProps) => {
         >
             <Fade in={props.modalRegister}>
                 <Stack sx={modalStyle} spacing={2}>
-                    <Typography color={theme.palette.text.secondary} id="transition-modal-title" variant="h6" component="h2">
-                        Registration
-                    </Typography>
+                    <Box display={"flex"} alignItems={"center"} color={theme.palette.text.secondary}>
+                        <HowToRegIcon/>
+                        <Typography color={theme.palette.text.secondary} id="transition-modal-title" variant="h6" component="h2">
+                            Registration
+                        </Typography>
+                    </Box>
                     <FormControl variant="outlined">
                         <InputLabel>First Name</InputLabel>
                         <OutlinedInput

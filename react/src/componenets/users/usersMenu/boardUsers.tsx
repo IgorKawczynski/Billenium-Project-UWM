@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Drawer, Box, InputLabel, FormControl, Stack, useTheme, Typography, Container, Tooltip} from "@mui/material";
+import {Drawer, Box, Grid, InputLabel, FormControl, Stack, useTheme, Typography, Tooltip} from "@mui/material";
 import {BoardUsersProps} from "@/componenets/board/interfaces/boardUsers/boardUsers";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
@@ -7,12 +7,11 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from '@mui/icons-material/Close';
 import { Droppable} from "react-beautiful-dnd";
-import Avatar from "@/componenets/users/avatar/avatar";
+import UserAvatar from "@/componenets/users/avatar/userAvatar";
 import GroupIcon from "@mui/icons-material/Group";
 
 const BoardUsers = (props:BoardUsersProps) => {
     const [email, setEmail] = useState("")
-    const [drag, setDrag] = useState(false)
     const theme = useTheme()
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
@@ -36,7 +35,11 @@ const BoardUsers = (props:BoardUsersProps) => {
                 alignItems={"center"}
                 >
                     <GroupIcon/>
-                    <Typography variant={'h6'} color={theme.palette.text.primary} width={'100%'}>
+                    <Typography
+                        variant={'h6'}
+                        color={theme.palette.text.primary}
+                        width={'100%'}
+                    >
                         Users Management
                     </Typography>
                     <IconButton
@@ -63,7 +66,10 @@ const BoardUsers = (props:BoardUsersProps) => {
                             onChange={handleEmailChange}
                             endAdornment={
                                 <InputAdornment position="end">
-                                    <Tooltip title={"Add user"} placement={'top'}>
+                                    <Tooltip
+                                        title={"Add user"}
+                                        placement={'top'}
+                                    >
                                     <IconButton
                                         aria-label="toggle password visibility"
                                         edge="end"
@@ -78,6 +84,7 @@ const BoardUsers = (props:BoardUsersProps) => {
                 </Box>
                 <Droppable
                     droppableId={"AvatarBox"}
+                    direction={'horizontal'}
                     type={'user'}>
                     {(provided, snapshot) =>(
                         <Box
@@ -88,20 +95,33 @@ const BoardUsers = (props:BoardUsersProps) => {
                             <Typography variant={"caption"}>
                                 Drag your member to card
                             </Typography>
-                            <Box
+                            <Grid
+                                container
+                                marginTop={1}
                                 border={`1px dashed ${theme.palette.text.secondary} `}
                                 minHeight={'30px'}
                                 padding={1}
+                                spacing={1}
+                                flexWrap={'wrap'}
+                                direction={"row"}
                             >
-                                <Avatar key={'userID'}
-                                        isDragging={setDrag}
-                                        setUsers={props.setUsers}
-                                        name={"Maciek"}
-                                        lastName={"Makowski"}
+                                <UserAvatar key={'userID'}
+                                            userId={'123'}
+                                            setUsers={props.setUsers}
+                                            name={"Maciek"}
+                                            lastName={"Makowski"}
+                                />
+                                <UserAvatar key={'userID2'}
+                                            userId={'321'}
+                                            setUsers={props.setUsers}
+                                            name={"Grzegorz"}
+                                            lastName={"Koks"}
                                 />
 
+
+
                                 {provided.placeholder}
-                            </Box>
+                            </Grid>
                         </Box>
 
 

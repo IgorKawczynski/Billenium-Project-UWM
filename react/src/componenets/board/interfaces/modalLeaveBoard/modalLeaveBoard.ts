@@ -1,10 +1,11 @@
 import React, {SetStateAction} from "react";
 import {userBoardsData} from "@/services/utils/UserUtils/userBoardsData";
 
-export interface BoardCardProps{
-    id: string
+export interface ModalLeaveBoardProps {
+    id:string
     userId:string
     title:string
-    creator:string
+    modalDelete:boolean
+    setModalDelete:React.Dispatch<SetStateAction<boolean>>
     setUserBoards:userBoardsData["setUserBoards"]
 }
