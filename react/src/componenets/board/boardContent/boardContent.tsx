@@ -52,7 +52,7 @@ const BoardContent = (props:boardContentProps) =>{
                         </Stack>
                     )}
                 </Droppable>
-                <BoardUsers users={props.users} setUsers={props.setUsers}/>
+                <BoardUsers setData={props.setData} data={props.data} users={props.users} setUsers={props.setUsers}/>
             </DragDropContext>
         </Box>
     )

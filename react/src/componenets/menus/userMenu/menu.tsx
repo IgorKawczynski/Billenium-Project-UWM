@@ -10,6 +10,7 @@ import {UserMenuProps} from "@/componenets/menus/interfaces/userMenu";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import MarkunreadIcon from '@mui/icons-material/Markunread';
+import {logoutUser} from "@/services/utils/loginUtils/loginUtils";
 
 const UserMenu = (props:UserMenuProps) => {
     const theme = useTheme()
@@ -81,6 +82,7 @@ const UserMenu = (props:UserMenuProps) => {
                         <Link to={'/'}><IconButton
                             sx={{color:theme.palette.text.theme}}
                             size={"large"}
+                            onClick={() => logoutUser()}
                         >
                             <LogoutIcon/>
                         </IconButton>

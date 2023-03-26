@@ -33,6 +33,17 @@ export async function moveCardInCell(movedObjectId:string, newPosition:number){
     } catch (error) {
     }
 }
+
+export async function assignUserToCardToBackend(cardId:string, userId:string){
+    const apiUrl = urlDomain+`/api/cards/users/`;
+    try {
+        const response = await axios.put(apiUrl, {cardId, userId});
+        return response.data
+    } catch (error:any) {
+        return error.data.error
+    }
+}
+
 export async function removeCardToBackend(cardId:string){
     const apiUrl = urlDomain+`/api/cards/${cardId}`;
     try {

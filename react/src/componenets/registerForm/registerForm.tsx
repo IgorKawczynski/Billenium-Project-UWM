@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {closeModal} from "@/services/utils/modalUtils/modalUtils";
+import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import {Backdrop, Box, Button, Fade, Icon, Modal, Stack, TextField, Typography, useTheme} from "@mui/material";
 import {modalStyle} from "@/assets/themes/modalStyle";
 import IconButton from '@mui/material/IconButton';
@@ -10,14 +10,19 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {InputLabel,FormControl} from "@mui/material";
 import {RegisterFormProps} from "@/componenets/registerForm/interfaces/registerFormInterface/RegisterForm";
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import {registerUser} from "@/services/utils/registerUtils/registerUtils";
+import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
+import {enqueueSnackbar} from "notistack";
+import {useNavigate} from "react-router-dom";
 const RegisterForm = (props:RegisterFormProps) => {
     const theme = useTheme()
-    const [FirstName, setFirstName] = useState("");
+    const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [showPassword, setShowPassword] = React.useState(false);
+    const navigate = useNavigate();
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -40,6 +45,21 @@ const RegisterForm = (props:RegisterFormProps) => {
     const handleRepeatPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRepeatPassword(event.target.value);
     };
+
+    const handleSentForm = () =>{
+        if(password === repeatPassword){
+            registerUser(
+                mail,
+                firstName,
+                lastName,
+                password,
+                props.setModalLogin,
+                props.setModalRegister
+            )
+        }else{
+            handleClickVariant(enqueueSnackbar)(`Passwords must be the same` ,'error')
+        }
+    }
 
     return(
         <Modal
@@ -71,7 +91,7 @@ const RegisterForm = (props:RegisterFormProps) => {
                             id="outlined-basic"
                             label="First Name"
                             inputMode={"text"}
-                            value={FirstName}
+                            value={firstName}
                             onChange={handleFirstNameChange}
                         />
                     </FormControl>
@@ -162,6 +182,7 @@ const RegisterForm = (props:RegisterFormProps) => {
                         <Button
                             sx={{maxHeight:'50px', width:'100px'}}
                             variant="contained"
+                            onClick={() => handleSentForm()}
                         >
                                 Register
                         </Button>

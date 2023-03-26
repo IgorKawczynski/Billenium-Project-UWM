@@ -1,4 +1,9 @@
-import {addCardToBackend, removeCardToBackend, updateCardToBackend} from "@/services/actions/cardService";
+import {
+    addCardToBackend,
+    assignUserToCardToBackend,
+    removeCardToBackend,
+    updateCardToBackend
+} from "@/services/actions/cardService";
 import {getColumnsFromBackend} from "@/services/actions/columnService";
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
 import React, {SetStateAction} from "react";
@@ -95,3 +100,26 @@ export const updateCard = (id:string,
             // obsługa błędów
         });
 };
+
+export function assignUserToCard(
+    cardId:string,
+    userId:string,
+    data:_Data['data'],
+    setData:_Data['setData']
+){
+    assignUserToCardToBackend(cardId, userId)
+        .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else {
+                getColumnsFromBackend(data.id)
+                    .then(resCol => {
+                        setData({
+                            ...data,
+                            columnList:resCol
+                        })
+                        handleClickVariant(enqueueSnackbar)(`Added user to card` ,'success')
+                    })
+            }
+        })
+}

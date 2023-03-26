@@ -1,5 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import {Modal, Stack, Typography, Fade, Backdrop, Button, TextField, Box, InputLabel, FormControl} from "@mui/material";
+import {
+    Modal,
+    Stack,
+    Typography,
+    Fade,
+    Backdrop,
+    Button,
+    TextField,
+    Box,
+    InputLabel,
+    FormControl,
+    useTheme
+} from "@mui/material";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {ModalUserEditProfileProps} from "@/componenets/userMain/interfaces/modalUserEditProfile/modalUserEditProfile";
@@ -12,6 +24,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [passwordToChange, setPasswordToChange] =useState(false);
+    const theme = useTheme()
 
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
@@ -65,7 +78,9 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                         display={"flex"}
                         alignItems={"center"}
                     >
-                        <AccountCircleIcon/>
+                        <AccountCircleIcon
+                            sx={{color:theme.palette.text.primary}}
+                        />
                         <Typography
                             color={'textPrimary'}
                             id="transition-modal-title"

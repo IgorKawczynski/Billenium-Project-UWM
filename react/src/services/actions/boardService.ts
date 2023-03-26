@@ -2,6 +2,10 @@ import axios from "axios";
 import transformData from "../utils/transfromData/transromData";
 import {v4 as uuidv4} from "uuid";
 import {_Data} from "../utils/boardUtils/DataBoard";
+import React, {SetStateAction} from "react";
+import {NavigateFunction} from "react-router-dom";
+import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
+import {enqueueSnackbar} from "notistack";
 
 
 export const urlDomain = 'http://localhost:8080'
@@ -158,14 +162,42 @@ export async function getBoardTitleFromBackend(boardId:string){
     }
 }
 
-export async function fetchData(setData:_Data['setData'], boardId:string) {
+export async function assignUserToBoardToBackend(boardId:string,userEmail:string){
+    const apiUrl = urlDomain+`/api/boards/users`;
+    try {
+        const response = await axios.put(apiUrl, {boardId, userEmail});
+        return response.data
+    } catch (error:any) {
+        if(error.data.error){
+            return error.data.error
+        }
+    }
+}
+
+
+export async function fetchData(
+    setData:_Data['setData'],
+    boardId:string,
+    isAssigned:boolean,
+    setIsAssigned:React.Dispatch<SetStateAction<boolean>>,
+    navigate:NavigateFunction
+) {
     const result = await loadBoardFromBackend(boardId);
     if (result) {
         try {
-            setData(result);
+            result.assignedUsers.map(user => {
+                if(user.id == sessionStorage.getItem('userId')){
+                    setData(result);
+                    setIsAssigned(true);
+                    isAssigned = true
+                }
+            })
+            if(!isAssigned){
+                navigate('/')
+            }
         }
         catch{
-            setData(loadDefaultData())
+            handleClickVariant(enqueueSnackbar)(`Something gone wrong ;c` ,'error')
         }
     }
 }
