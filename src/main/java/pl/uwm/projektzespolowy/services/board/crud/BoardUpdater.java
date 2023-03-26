@@ -19,9 +19,7 @@ class BoardUpdater {
     }
 
     public Board assignUserToBoard(Board boardToChange, User userToAssign) {
-        if (userToAssign != null) {
-            boardToChange.getAssignedUsers().add(userToAssign);
-        }
+        boardToChange.getAssignedUsers().add(userToAssign);
         return boardRepository.saveAndFlush(boardToChange);
     }
 

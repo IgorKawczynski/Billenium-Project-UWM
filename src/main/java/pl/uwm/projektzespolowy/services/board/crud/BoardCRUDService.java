@@ -49,8 +49,7 @@ public class BoardCRUDService {
     public BoardResponseDTO assignUserToBoard(BoardUserUpdateDTO boardUserUpdateDTO) {
         var boardId = Long.parseLong(boardUserUpdateDTO.boardId());
         var boardToChange = boardReader.getBoardById(boardId);
-        var userId = Long.parseLong(boardUserUpdateDTO.userId());
-        var userToAssign = userCRUDService.getUserById(userId);
+        var userToAssign = userCRUDService.getUserByEmail(boardUserUpdateDTO.userEmail());
         return boardUpdater
                 .assignUserToBoard(boardToChange, userToAssign)
                 .toDto();

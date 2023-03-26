@@ -48,7 +48,7 @@ public class BoardController {
         return boardFacade.updateBoard(boardUpdateDTO);
     }
 
-    @PutMapping("/users/")
+    @PutMapping("/users")
     @ResponseStatus(HttpStatus.OK)
     public BoardResponseDTO assignUserToBoard(@RequestBody BoardUserUpdateDTO boardUserUpdateDTO) {
         return boardFacade.assignUserToBoard(boardUserUpdateDTO);
