@@ -1,5 +1,6 @@
 package pl.uwm.projektzespolowy.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,13 +10,9 @@ import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.services.user.crud.UserCRUDService;
 
 @Service
+@RequiredArgsConstructor
 public class CurrentUserService implements UserDetailsService {
     private final UserCRUDService userCRUDService;
-
-    @Autowired
-    public CurrentUserService(UserCRUDService userCRUDService) {
-        this.userCRUDService = userCRUDService;
-    }
 
     @Override
     public CurrentUser loadUserByUsername(String email) throws UsernameNotFoundException {
