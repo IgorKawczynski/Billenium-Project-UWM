@@ -44,8 +44,4 @@ public class Color extends BasicEntity {
         this.title = newTitle;
     }
 
-    public void changeColorValue(ColorValue colorValue) {
-        this.value = colorValue;
-    }
-
 }
