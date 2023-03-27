@@ -15,6 +15,7 @@ import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
 import pl.uwm.projektzespolowy.models.row.Row;
 import pl.uwm.projektzespolowy.models.row.RowResponseDTO;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
@@ -99,6 +100,8 @@ public class Board extends BasicEntity {
                 .creatorName(this.creator.getFullName())
                 .assignedUsers(this.assignedUsers.stream()
                         .map(User::toDto)
+                        .sorted(Comparator.comparing(UserResponseDTO::firstName)
+                                .thenComparing(UserResponseDTO::lastName))
                         .toList())
                 .columnList(this.columns.stream()
                         .map(Column::toDto)
@@ -135,6 +138,14 @@ public class Board extends BasicEntity {
     public void deleteRow(Row row) {
         this.rows.remove(row);
         row.setBoard(null);
+    }
+
+    public void assignUser(User user) {
+        this.assignedUsers.add(user);
+    }
+
+    public void removeUser(User user) {
+        this.assignedUsers.remove(user);
     }
 
 }
