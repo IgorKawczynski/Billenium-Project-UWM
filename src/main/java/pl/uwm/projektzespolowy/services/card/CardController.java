@@ -8,7 +8,6 @@ import pl.uwm.projektzespolowy.models.card.*;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/cards")
@@ -37,7 +36,7 @@ public class CardController {
 
     @GetMapping("/users/{cardId}")
     @ResponseStatus(HttpStatus.OK)
-    public Set<UserResponseDTO> getAllAssignedUsersToCard(@PathVariable Long cardId) {
+    public List<UserResponseDTO> getAllAssignedUsersToCard(@PathVariable Long cardId) {
         return cardFacade.getAllAssignedUsersToCard(cardId);
     }
 
@@ -47,7 +46,7 @@ public class CardController {
         return cardFacade.updateCard(cardUpdateDTO);
     }
 
-    @PutMapping("/users/")
+    @PutMapping("/users")
     @ResponseStatus(HttpStatus.OK)
     public CardResponseDTO assignUserToCard(@RequestBody CardUserUpdateDTO cardUserUpdateDTO) {
         return cardFacade.assignUserToCard(cardUserUpdateDTO);
@@ -77,7 +76,7 @@ public class CardController {
         cardFacade.deleteCard(cardId);
     }
 
-    @DeleteMapping("/users/")
+    @DeleteMapping("/users")
     @ResponseStatus(HttpStatus.OK)
     public CardResponseDTO deleteAssignedUserFromCard(@RequestBody CardUserUpdateDTO cardUserUpdateDTO) {
         return cardFacade.deleteAssignedUserFromCard(cardUserUpdateDTO);

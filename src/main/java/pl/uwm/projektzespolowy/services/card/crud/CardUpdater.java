@@ -25,9 +25,9 @@ class CardUpdater {
         return cardRepository.saveAndFlush(cardToChange);
     }
 
-    public Card assignUserToCard(Card cardToChange, User userToAssign) {
-        cardToChange.getAssignedUsers().add(userToAssign);
-        return cardRepository.saveAndFlush(cardToChange);
+    public Card assignUserToCard(Card card, User userToAssign) {
+        card.assignUser(userToAssign);
+        return cardRepository.saveAndFlush(card);
     }
 
     public void saveChangedCards(List<Card> cards) {
@@ -43,4 +43,5 @@ class CardUpdater {
         cardToChange.setColor(colorValue);
         return cardRepository.saveAndFlush(cardToChange);
     }
+
 }
