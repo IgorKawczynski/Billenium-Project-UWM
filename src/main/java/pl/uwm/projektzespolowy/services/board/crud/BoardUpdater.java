@@ -6,6 +6,8 @@ import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
+import java.util.Set;
+
 @Component
 @RequiredArgsConstructor
 class BoardUpdater {
@@ -18,9 +20,9 @@ class BoardUpdater {
         return boardRepository.saveAndFlush(boardToChange);
     }
 
-    public Board assignUserToBoard(Board boardToChange, User userToAssign) {
-        boardToChange.getAssignedUsers().add(userToAssign);
-        return boardRepository.saveAndFlush(boardToChange);
+    public Set<User> assignUserToBoard(Board boardToChange, User userToAssign) {
+        boardToChange.assignUser(userToAssign);
+        return boardRepository.saveAndFlush(boardToChange).getAssignedUsers();
     }
 
 }

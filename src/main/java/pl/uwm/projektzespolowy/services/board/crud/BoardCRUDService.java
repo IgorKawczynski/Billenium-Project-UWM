@@ -3,16 +3,10 @@ package pl.uwm.projektzespolowy.services.board.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.board.Board;
-import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
-import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
-import pl.uwm.projektzespolowy.models.board.BoardUserUpdateDTO;
 import pl.uwm.projektzespolowy.models.user.User;
-import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -23,8 +17,8 @@ public class BoardCRUDService {
     private final BoardUpdater boardUpdater;
     private final BoardDeleter boardDeleter;
 
-    public BoardResponseDTO createBoard(User creator, String title) {
-        return boardCreator.createBoard(creator, title).toDto();
+    public Board createBoard(User creator, String title) {
+        return boardCreator.createBoard(creator, title);
     }
 
     public Board getBoardById(Long boardId) {
@@ -35,38 +29,27 @@ public class BoardCRUDService {
         return boardReader.getBoardById(boardId).getTitle();
     }
 
-    public Set<User> getAllAssignedUsersToBoard(Long boardId) {
-        return boardReader.getAllAssignedUsersToBoard(boardId);
+    public List<User> getAllAssignedUsersToBoard(Long boardId) {
+        return boardReader.getBoardById(boardId).getAssignedUsers().stream().toList();
     }
 
-    public BoardResponseDTO updateBoard(BoardUpdateDTO boardUpdateDTO) {
-        var boardId = Long.parseLong(boardUpdateDTO.boardId());
+    public Board updateBoard(Long boardId, String newTitle) {
         var boardToChange = boardReader.getBoardById(boardId);
-        return boardUpdater
-                .editBoard(boardToChange, boardUpdateDTO.newTitle())
-                .toDto();
+        return boardUpdater.editBoard(boardToChange, newTitle);
     }
 
-    public List<UserResponseDTO> assignUserToBoard(Board board, User userToAssign) {
-        boardUpdater.assignUserToBoard(board, userToAssign);
-        return board
-                .getAssignedUsers()
-                .stream()
-                .map(User::toDto)
-                .sorted(Comparator.comparing(UserResponseDTO::firstName))
-                .toList();
+    public List<User> assignUserToBoard(Long boardId, User userToAssign) {
+        var board = boardReader.getBoardById(boardId);
+        return boardUpdater.assignUserToBoard(board, userToAssign).stream().toList();
     }
 
     public void deleteBoard(Long boardId) {
         boardDeleter.deleteBoardById(boardId);
     }
 
-    public List<UserResponseDTO> deleteAssignedUserFromBoard(BoardUserUpdateDTO boardUserUpdateDTO) {
-        return boardDeleter
-                .deleteAssignedUserFromBoard(boardUserUpdateDTO)
-                .stream()
-                .map(User::toDto)
-                .toList();
+    public List<User> deleteAssignedUserFromBoard(Long boardId, User userToDeleteFromBoard) {
+        var board = boardReader.getBoardById(boardId);
+        return boardDeleter.deleteAssignedUserFromBoard(board, userToDeleteFromBoard).stream().toList();
     }
 
 }

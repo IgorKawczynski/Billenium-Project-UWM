@@ -11,8 +11,8 @@ import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.services.board.crud.BoardCRUDService;
 import pl.uwm.projektzespolowy.services.user.crud.UserCRUDService;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -22,10 +22,10 @@ public class BoardFacade {
     private final BoardCRUDService boardCRUDService;
     private final UserCRUDService userCRUDService;
 
-
     public BoardResponseDTO createBoard(BoardCreateDTO boardCreateDTO) {
-        var creator = userCRUDService.getUserById(Long.parseLong(boardCreateDTO.userId()));
-        return boardCRUDService.createBoard(creator, boardCreateDTO.title());
+        var creatorId = Long.parseLong(boardCreateDTO.userId());
+        var creator = userCRUDService.getUserById(creatorId);
+        return boardCRUDService.createBoard(creator, boardCreateDTO.title()).toDto();
     }
 
     public BoardResponseDTO getBoardById(Long boardId) {
@@ -33,25 +33,36 @@ public class BoardFacade {
     }
 
     public String getBoardTitleById(String boardId) {
-        return boardCRUDService.getBoardTitleById(Long.parseLong(boardId)).toString();
+        var id = Long.parseLong(boardId);
+        return boardCRUDService.getBoardTitleById(id).toString();
     }
 
-    public Set<UserResponseDTO> getAllAssignedUsersToBoard(Long boardId) {
+    public List<UserResponseDTO> getAllAssignedUsersToBoard(Long boardId) {
         return boardCRUDService
                 .getAllAssignedUsersToBoard(boardId)
                 .stream()
                 .map(User::toDto)
-                .collect(Collectors.toSet());
+                .sorted(Comparator.comparing(UserResponseDTO::firstName)
+                        .thenComparing(UserResponseDTO::lastName))
+                .collect(Collectors.toList());
     }
 
     public BoardResponseDTO updateBoard(BoardUpdateDTO boardUpdateDTO) {
-        return boardCRUDService.updateBoard(boardUpdateDTO);
+        var boardId = Long.parseLong(boardUpdateDTO.boardId());
+        var newTitle = boardUpdateDTO.newTitle();
+        return boardCRUDService.updateBoard(boardId, newTitle).toDto();
     }
 
     public List<UserResponseDTO> assignUserToBoard(BoardUserUpdateDTO boardUserUpdateDTO) {
         var userToAssign = userCRUDService.getUserByEmail(boardUserUpdateDTO.userEmail());
-        var board = boardCRUDService.getBoardById(Long.parseLong(boardUserUpdateDTO.boardId()));
-        return boardCRUDService.assignUserToBoard(board, userToAssign);
+        var boardId = Long.parseLong(boardUserUpdateDTO.boardId());
+        return boardCRUDService
+                .assignUserToBoard(boardId, userToAssign)
+                .stream()
+                .map(User::toDto)
+                .sorted(Comparator.comparing(UserResponseDTO::firstName)
+                        .thenComparing(UserResponseDTO::lastName))
+                .collect(Collectors.toList());
     }
 
     public void deleteBoard(Long boardId) {
@@ -59,7 +70,15 @@ public class BoardFacade {
     }
 
     public List<UserResponseDTO> deleteAssignedUserFromBoard(BoardUserUpdateDTO boardUserUpdateDTO) {
-        return boardCRUDService.deleteAssignedUserFromBoard(boardUserUpdateDTO);
+        var boardId = Long.parseLong(boardUserUpdateDTO.boardId());
+        var userToDeleteFromBoard = userCRUDService.getUserByEmail(boardUserUpdateDTO.userEmail());
+        return boardCRUDService
+                .deleteAssignedUserFromBoard(boardId, userToDeleteFromBoard)
+                .stream()
+                .map(User::toDto)
+                .sorted(Comparator.comparing(UserResponseDTO::firstName)
+                        .thenComparing(UserResponseDTO::lastName))
+                .collect(Collectors.toList());
     }
 
 }

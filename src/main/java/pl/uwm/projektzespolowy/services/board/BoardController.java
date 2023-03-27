@@ -7,12 +7,9 @@ import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
 import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
 import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
 import pl.uwm.projektzespolowy.models.board.BoardUserUpdateDTO;
-import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
-import pl.uwm.projektzespolowy.models.card.CardUserUpdateDTO;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -41,7 +38,7 @@ public class BoardController {
 
     @GetMapping("/users/{boardId}")
     @ResponseStatus(HttpStatus.OK)
-    public Set<UserResponseDTO> getAllAssignedUsersToBoard(@PathVariable Long boardId) {
+    public List<UserResponseDTO> getAllAssignedUsersToBoard(@PathVariable Long boardId) {
         return boardFacade.getAllAssignedUsersToBoard(boardId);
     }
 
@@ -63,7 +60,7 @@ public class BoardController {
         boardFacade.deleteBoard(boardId);
     }
 
-    @DeleteMapping("/users/")
+    @DeleteMapping("/users")
     @ResponseStatus(HttpStatus.OK)
     public List<UserResponseDTO> deleteAssignedUserFromBoard(@RequestBody BoardUserUpdateDTO boardUserUpdateDTO) {
         return boardFacade.deleteAssignedUserFromBoard(boardUserUpdateDTO);
