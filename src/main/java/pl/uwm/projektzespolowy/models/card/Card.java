@@ -1,10 +1,8 @@
 package pl.uwm.projektzespolowy.models.card;
 
 import javax.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.Positionable;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
