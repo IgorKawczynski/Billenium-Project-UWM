@@ -9,11 +9,14 @@ import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.color.ColorValue;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "cards")
@@ -64,8 +67,18 @@ public class Card extends BasicEntity implements Positionable {
                 .color(this.color.getValue())
                 .assignedUsers(this.assignedUsers.stream()
                         .map(User::toDto)
-                        .toList())
+                        .sorted(Comparator.comparing(UserResponseDTO::firstName)
+                                .thenComparing(UserResponseDTO::lastName))
+                        .collect(Collectors.toList()))
                 .build();
+    }
+
+    public void assignUser(User user) {
+        this.assignedUsers.add(user);
+    }
+
+    public void removeUser(User user) {
+        this.assignedUsers.remove(user);
     }
 
     @Override
