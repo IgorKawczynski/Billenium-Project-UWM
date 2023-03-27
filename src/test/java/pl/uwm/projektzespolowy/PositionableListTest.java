@@ -11,15 +11,16 @@ import java.util.List;
 
 public class PositionableListTest {
 
-    List<Card> cards = List.of(
-            new Card(new Title("first card"), "abc", null, new Position(0)),
-            new Card(new Title("third card"), "abc", null, new Position(2)),
-            new Card(new Title("sixth card"), "abc", null, new Position(5)),
-            new Card(new Title("fifth card"), "abc", null, new Position(4)),
-            new Card(new Title("seventh card"), "abc", null, new Position(6)),
-            new Card(new Title("second card"), "abc", null, new Position(1)),
-            new Card(new Title("eighth card"), "abc", null, new Position(7)),
-            new Card(new Title("fourth card"), "abc", null, new Position(3)));
+    Card firstCard = new Card(new Title("first card"), "abc", null, new Position(0));
+    Card thirdCard = new Card(new Title("third card"), "abc", null, new Position(2));
+    Card sixthCard = new Card(new Title("sixth card"), "abc", null, new Position(5));
+    Card fifthCard = new Card(new Title("fifth card"), "abc", null, new Position(4));
+    Card seventhCard = new Card(new Title("seventh card"), "abc", null, new Position(6));
+    Card secondCard = new Card(new Title("second card"), "abc", null, new Position(1));
+    Card eighthCard = new Card(new Title("eighth card"), "abc", null, new Position(7));
+    Card fourthCard = new Card(new Title("fourth card"), "abc", null, new Position(3));
+
+    List<Card> cards = List.of(firstCard, thirdCard, sixthCard, fifthCard, seventhCard, secondCard, eighthCard, fourthCard);
 
     PositionableList<Card> positionables = new PositionableList<>(cards);
 
@@ -30,7 +31,7 @@ public class PositionableListTest {
         // then
         assertThatThrownBy(() -> positionables.get(wrongPosition))
                 .isInstanceOf(ElementDoesNotExists.class)
-                .hasMessage("Element with position " + wrongPosition + "doesn't exists!");
+                .hasMessage("Element with position " + wrongPosition + " doesn't exists!");
     }
     @Test
     void shouldReturnPreviousCard() {
@@ -63,6 +64,57 @@ public class PositionableListTest {
         var firstElement = positionables.getFirstElement();
         // then
         assertThat(firstElement.getPosition().value()).isEqualTo(0);
+    }
+
+    @Test
+    void shouldChangeAllPositionsToBeOneLess() {
+        // given
+        var firstCard = new Card(new Title("first card"),"abc", null, new Position(5));
+        var secondCard = new Card(new Title("second card"),"abc",null, new Position(6));
+        var thirdCard = new Card(new Title("third card"),"abc",null, new Position(7));
+        PositionableList<Card> cards = new PositionableList<>(List.of(firstCard, secondCard, thirdCard));
+        // when
+        cards.moveLeftAll();
+        //then
+        assertThat(firstCard.getPosition().value()).isEqualTo(4);
+        assertThat(secondCard.getPosition().value()).isEqualTo(5);
+        assertThat(thirdCard.getPosition().value()).isEqualTo(6);
+    }
+
+    @Test
+    void shouldChangeAllPositionsToBeOneBigger() {
+        // given
+        var firstCard = new Card(new Title("first card"), "abc", null, new Position(5));
+        var secondCard = new Card(new Title("second card"), "abc", null, new Position(6));
+        var thirdCard = new Card(new Title("third card"), "abc", null, new Position(7));
+        PositionableList<Card> cards = new PositionableList<>(List.of(firstCard, secondCard, thirdCard));
+        // when
+        cards.moveRightAll();
+        //then
+        assertThat(firstCard.getPosition().value()).isEqualTo(6);
+        assertThat(secondCard.getPosition().value()).isEqualTo(7);
+        assertThat(thirdCard.getPosition().value()).isEqualTo(8);
+    }
+
+    @Test
+    void shouldReturnAllPositionablesWithPositionHigherOrEqualThanFour() {
+        // given
+        var positionableWithPositionEqualsFour = fifthCard;
+        // when
+        positionables.withHigherOrEqualPositionThanGiven(positionableWithPositionEqualsFour);
+        // then
+        assertThat(positionables.list()).containsOnlyOnce(sixthCard, seventhCard, eighthCard);
+    }
+
+    @Test
+    void shouldReturnPositionablesWithPositionInRange() {
+        // given
+        var lowerBound = new Position(3);
+        var upperBound = new Position(7);
+        // when
+        positionables.withPositionInRange(lowerBound, upperBound);
+        // then
+        assertThat(positionables.list()).containsOnlyOnce(fourthCard, sixthCard, seventhCard, eighthCard);
     }
 
 }
