@@ -66,4 +66,10 @@ public class Column extends BasicEntity implements Positionable {
                 .build();
     }
 
+    public Position getPositionForNewCell() {
+        int cellsNumber = this.getCells().size();
+        if (cellsNumber > 0) cellsNumber -= 1;
+        return new Position(cellsNumber);
+    }
+
 }
