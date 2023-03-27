@@ -20,9 +20,9 @@ class BoardUpdater {
         return boardRepository.saveAndFlush(boardToChange);
     }
 
-    public Set<User> assignUserToBoard(Board boardToChange, User userToAssign) {
-        boardToChange.assignUser(userToAssign);
-        return boardRepository.saveAndFlush(boardToChange).getAssignedUsers();
+    public Set<User> assignUserToBoard(Board board, User userToAssign) {
+        board.assignUser(userToAssign);
+        return boardRepository.saveAndFlush(board).getAssignedUsers();
     }
 
 }
