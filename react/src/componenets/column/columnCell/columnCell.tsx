@@ -97,6 +97,7 @@ const ColumnCell = (props:ColumnCellProps) =>{
                                         title={item.title}
                                         desc={item.description}
                                         color={item.color}
+                                        assignedUsers={item.assignedUsers}
                                         index={index}
                                         cellId={props.id}
                                         setData={props.setData}

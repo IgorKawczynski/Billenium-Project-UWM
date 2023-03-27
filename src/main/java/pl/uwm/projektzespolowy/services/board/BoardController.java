@@ -7,6 +7,8 @@ import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
 import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
 import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
 import pl.uwm.projektzespolowy.models.board.BoardUserUpdateDTO;
+import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
+import pl.uwm.projektzespolowy.models.card.CardUserUpdateDTO;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 
 import java.util.List;
@@ -59,6 +61,12 @@ public class BoardController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBoardById(@PathVariable Long boardId) {
         boardFacade.deleteBoard(boardId);
+    }
+
+    @DeleteMapping("/users/")
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserResponseDTO> deleteAssignedUserFromBoard(@RequestBody BoardUserUpdateDTO boardUserUpdateDTO) {
+        return boardFacade.deleteAssignedUserFromBoard(boardUserUpdateDTO);
     }
 
 }

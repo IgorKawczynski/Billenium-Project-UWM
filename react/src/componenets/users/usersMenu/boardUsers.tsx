@@ -9,6 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Droppable} from "react-beautiful-dnd";
 import UserAvatar from "@/componenets/users/avatar/userAvatar";
 import GroupIcon from "@mui/icons-material/Group";
+import {assignUserToBoard} from "@/services/utils/boardUtils/boardUtils";
 
 const BoardUsers = (props:BoardUsersProps) => {
     const [email, setEmail] = useState("")
@@ -71,7 +72,7 @@ const BoardUsers = (props:BoardUsersProps) => {
                                         placement={'top'}
                                     >
                                     <IconButton
-                                        aria-label="toggle password visibility"
+                                        onClick={() => assignUserToBoard(props.data.id, email, props.data, props.setData)}
                                         edge="end"
                                     >
                                         <PersonAddAlt1Icon/>
@@ -82,47 +83,38 @@ const BoardUsers = (props:BoardUsersProps) => {
                         />
                     </FormControl>
                 </Box>
+                <Typography variant={"caption"}>
+                    Drag your member to card
+                </Typography>
                 <Droppable
                     droppableId={"AvatarBox"}
-                    direction={'horizontal'}
+                    direction={"horizontal"}
                     type={'user'}>
                     {(provided, snapshot) =>(
-                        <Box
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-
-                        >
-                            <Typography variant={"caption"}>
-                                Drag your member to card
-                            </Typography>
-                            <Grid
-                                container
+                            <Stack
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
                                 marginTop={1}
                                 border={`1px dashed ${theme.palette.text.secondary} `}
                                 minHeight={'30px'}
                                 padding={1}
                                 spacing={1}
+                                display={"flex"}
                                 flexWrap={'wrap'}
                                 direction={"row"}
                             >
-                                <UserAvatar key={'userID'}
-                                            userId={'123'}
-                                            setUsers={props.setUsers}
-                                            name={"Maciek"}
-                                            lastName={"Makowski"}
-                                />
-                                <UserAvatar key={'userID2'}
-                                            userId={'321'}
-                                            setUsers={props.setUsers}
-                                            name={"Grzegorz"}
-                                            lastName={"Koks"}
-                                />
-
-
-
+                                {props.data.assignedUsers.map(user => {
+                                    return(
+                                            <UserAvatar key={user.id}
+                                                        userId={user.id}
+                                                        setUsers={props.setUsers}
+                                                        name={user.firstName}
+                                                        lastName={user.lastName}
+                                            />
+                                        )
+                                })}
                                 {provided.placeholder}
-                            </Grid>
-                        </Box>
+                            </Stack>
 
 
                     )}

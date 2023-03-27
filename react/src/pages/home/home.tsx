@@ -12,7 +12,6 @@ import ServerGif from '@/assets/gifs/Server.gif'
 import TwoPerson from '@/assets/imgs/org_2pers.png'
 import ServerPng from '@/assets/imgs/Server.png'
 import FirmwarePng from '@/assets/imgs/Firmware.png'
-import {Link} from "react-router-dom";
 import {useTheme} from "@mui/material/styles";
 import { ColorModeContext } from '@/App';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -20,13 +19,14 @@ import '@/assets/styles/home.css'
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import LoginForm from "@/componenets/loginForm/loginForm";
 import RegisterForm from "@/componenets/registerForm/registerForm";
+import {useNavigate} from "react-router-dom";
 const Home = () => {
     const [modalLogin, setModalLogin] = useState(false);
     const [modalRegister, setModalRegister] = useState(false);
     const theme = useTheme();
     const colorMode = React.useContext(ColorModeContext);
     const bodyStyle = { backgroundColor: theme.palette.background.default };
-
+    const navigate = useNavigate();
 
     React.useEffect(() => {
         // Pobieranie elementu body i ustawienie stylu tła
@@ -45,11 +45,26 @@ const Home = () => {
                 <Box
                     padding={2}
                 >
-                <Button
-                    onClick={() => openModal(setModalLogin)}
-                    variant={"contained"}>
-                    Login
-                </Button>
+                    {sessionStorage.getItem('sessionId') &&
+                        sessionStorage.getItem('userId') &&
+                        (
+                        <Button
+                            variant={"outlined"}
+                            onClick={() => navigate(`/userMain/${sessionStorage.getItem('userId')}`)}
+                        >
+                            My Panel
+                        </Button>
+                    )}
+                    {!sessionStorage.getItem('sessionId') &&(
+                        <Typography variant={"body1"}>
+                            <Button
+                                onClick={() => openModal(setModalLogin)}
+                                variant={"contained"}>
+                                Login
+                            </Button>
+                        </Typography>
+                    )}
+
                 </Box>
             </Box>
             <Box sx={{display:'flex', justifyContent:'space-around'}}>
@@ -109,6 +124,7 @@ const Home = () => {
                 setModalRegister={setModalRegister}
             />
             <RegisterForm
+                setModalLogin={setModalLogin}
                 modalRegister={modalRegister}
                 setModalRegister={setModalRegister}
             />

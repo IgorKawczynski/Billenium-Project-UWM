@@ -10,14 +10,16 @@ import BoardHeader from "@/componenets/board/boardHeader/boardHeader";
 import BoardContent from "@/componenets/board/boardContent/boardContent";
 import AddRowButton from "@/componenets/row/addRowButton/addRowButton";
 import BoardMenu from "@/componenets/menus/boardMenu/menu";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 const Board = () => {
     const theme = useTheme();
-    const {id} = useParams()
+    const {boardId} = useParams()
     const colorMode = React.useContext(ColorModeContext);
     const [data, setData] = useState<_Data['data']> (loadDefaultData);
     const [modalEdit, setModalEdit] = useState(false);
     const [users, setUsers] = useState(false)
+    const [isAssigned, setIsAssigned] = useState(false)
+    const navigate = useNavigate()
 
     const calculatedWidth = `calc(100% - 80px)`;
     useEffect(() => {
@@ -32,13 +34,23 @@ const Board = () => {
         document.body.style.backgroundColor = theme.palette.background.default;
     }, [theme]);
     useEffect(() => {
-        if(id){
-            fetchData(setData, id);
+        if(boardId){
+            fetchData(
+                setData,
+                boardId,
+                isAssigned,
+                setIsAssigned,
+                navigate);
         }
     }, []);
 
 
+
+
     return (
+        <>
+            {sessionStorage.getItem('sessionId') &&
+                 isAssigned && (
         <Stack spacing={2} direction={"row"} minHeight={'100%'}>
             <BoardMenu setUsers={setUsers}/>
             <Stack spacing={2} width={calculatedWidth}>
@@ -55,6 +67,8 @@ const Board = () => {
                 />
             </Stack>
         </Stack>
+                )}
+        </>
     );
 }
 

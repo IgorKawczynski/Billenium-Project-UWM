@@ -10,17 +10,14 @@ const UserAvatar = (props:AvatarProps) => {
     const name = props.name + " " + props.lastName
     const theme = useTheme()
     return(
-        <Grid item
-            xs={3}
-        >
         <Draggable
-            key={'userId'}
+            key={props.userId+"d"}
             draggableId={props.userId}
             index={1}
         >
             {(provided, snapshot) => {
                 return(
-                    <Box display={"flex"} alignItems={"center"}>
+                    <Box>
                     <Tooltip title={name} placement={'top'}
                              sx={{
                                  width:35,
@@ -45,7 +42,6 @@ const UserAvatar = (props:AvatarProps) => {
                 )}
             }
         </Draggable>
-        </Grid>
     )
 }
 

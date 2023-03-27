@@ -58,4 +58,8 @@ public class BoardFacade {
         boardCRUDService.deleteBoard(boardId);
     }
 
+    public List<UserResponseDTO> deleteAssignedUserFromBoard(BoardUserUpdateDTO boardUserUpdateDTO) {
+        return boardCRUDService.deleteAssignedUserFromBoard(boardUserUpdateDTO);
+    }
+
 }

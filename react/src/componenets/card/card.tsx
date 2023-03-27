@@ -1,7 +1,7 @@
 import React from "react";
 import {Draggable, Droppable} from 'react-beautiful-dnd'
 import Card from "@mui/material/Card"
-import {AvatarGroup, useTheme} from "@mui/material"
+import {Avatar, AvatarGroup, useTheme} from "@mui/material"
 import CardProps from '@/componenets/card/interfaces/cardInterface/Card'
 import EditCardButton from '@/componenets/card/editCardButton/editCardButton'
 import Box from "@mui/material/Box";
@@ -96,11 +96,27 @@ const Task = (props:CardProps) => {
                                     {(provided) => {
                                         return(
                                             <AvatarGroup
-                                                sx={{height:'35px'}}
+                                                sx={{
+                                                    minHeight:'35px',
+                                                }}
                                                 {...provided.droppableProps}
                                                 ref={provided.innerRef}
                                                 max={4}
                                             >
+                                                {props.assignedUsers.map(user => {
+                                                    return(
+                                                        <Avatar
+                                                        sx={{
+                                                            width: 35,
+                                                            height: 35,
+                                                        }}
+                                                        >
+                                                            <Typography variant={"body1"}>
+                                                                {user.firstName[0].toUpperCase() + user.lastName[0].toUpperCase()}
+                                                            </Typography>
+                                                        </Avatar>
+                                                    )
+                                                })}
                                             </AvatarGroup>
                                             )
                                     }}
