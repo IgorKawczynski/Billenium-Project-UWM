@@ -23,7 +23,7 @@ public class ColumnFacade {
 
     public ColumnResponseDTO createColumn(ColumnCreateDTO columnCreateDTO) {
         var board = boardCRUDService.getBoardById(Long.parseLong(columnCreateDTO.boardId()));
-        return columnCRUDService.createColumn(board, columnCreateDTO.title());
+        return columnCRUDService.createColumn(board, columnCreateDTO.title()).toDto();
     }
 
     public ColumnResponseDTO getColumnById(Long columnId) {
@@ -38,13 +38,18 @@ public class ColumnFacade {
     }
 
     public ColumnResponseDTO updateColumn(ColumnUpdateDTO columnUpdateDTO) {
-        return columnCRUDService.updateColumn(columnUpdateDTO);
+        var columnId = Long.parseLong(columnUpdateDTO.columnId());
+        return columnCRUDService
+                .updateColumn(
+                        columnId,
+                        columnUpdateDTO.title(),
+                        columnUpdateDTO.cardsLimit(),
+                        columnUpdateDTO.isUnlimited()
+                ).toDto();
     }
 
     public void deleteColumn(Long columnId) {
-     var column = columnCRUDService.getColumnById(columnId);
-     var board = column.getBoard();
-     columnCRUDService.deleteColumn(column, board);
+     columnCRUDService.deleteColumn(columnId);
     }
 
     public ColumnResponseDTO moveColumn(MoveDTO columnMoveDTO) {

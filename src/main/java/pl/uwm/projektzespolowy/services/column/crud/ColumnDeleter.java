@@ -18,11 +18,14 @@ class ColumnDeleter {
     public void deleteColumn(Column columnToDelete, Board board) {
         var boardColumns = new PositionableList<>(board.getColumns());
         validateIfColumnCanBeDeleted(board, boardColumns, columnToDelete);
+
         var previousColumn = boardColumns.getPreviousElement(columnToDelete);
         cutCardsFromColumnToDeleteToPreviousColumn(previousColumn, columnToDelete);
+
         boardColumns.withHigherOrEqualPositionThanGiven(columnToDelete);
         boardColumns.moveLeftAll();
         board.deleteColumn(columnToDelete);
+
         columnRepository.delete(columnToDelete);
         columnRepository.saveAll(boardColumns.list());
     }
