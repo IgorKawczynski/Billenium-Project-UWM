@@ -12,7 +12,7 @@ const UserAvatar = (props:AvatarProps) => {
     return(
         <Draggable
             key={props.userId+"d"}
-            draggableId={props.userId}
+            draggableId={props.userId+"u"}
             index={1}
         >
             {(provided, snapshot) => {

@@ -38,14 +38,16 @@ export function loadDefaultData(){
                                 title: "9",
                                 description: "Jakis Opis",
                                 position: 0,
-                                color: "default"
+                                color: "default",
+                                assignedUsers:[]
                             },
                             {
                                 id: "10",
                                 title: "Kartka 2",
                                 description: "Jakis Opis",
                                 position: 1,
-                                color: "default"
+                                color: "default",
+                                assignedUsers:[]
                             }
                         ]
                     }
@@ -123,8 +125,6 @@ export async function loadBoardFromBackend(id: string): Promise<_Data["data"]> {
             return response.data;
         }
     } catch (error) {
-        console.error(error);
-        return loadDefaultData();
     }
     return loadDefaultData();
 }
@@ -134,7 +134,6 @@ export async function moveColumnToBackend(movedObjectId:string, newPosition:numb
     try {
         const response = await axios.put(apiUrl, {movedObjectId, newPosition});
     } catch (error) {
-        console.error(error);
     }
 }
 
@@ -142,7 +141,8 @@ export async function editBoardToBackend(boardId:string, newTitle:string){
     const apiUrl = urlDomain+`/api/boards`;
     let response;
     try {
-        return response = await axios.put(apiUrl, {boardId, newTitle});
+        const response = await axios.put(apiUrl, {boardId, newTitle});
+        return response.data
     } catch (error: any) {
         if (error.response && error.response.data && error.response.data.error) {
             return error.response.data.error;
@@ -157,7 +157,9 @@ export async function getBoardTitleFromBackend(boardId:string){
         return response.data
     } catch (error:any) {
         if(error.data.error){
-            return error.data.error
+            if (error.response && error.response.data && error.response.data.error) {
+                return error.response.data.error;
+            }
         }
     }
 }
@@ -168,8 +170,8 @@ export async function assignUserToBoardToBackend(boardId:string,userEmail:string
         const response = await axios.put(apiUrl, {boardId, userEmail});
         return response.data
     } catch (error:any) {
-        if(error.data.error){
-            return error.data.error
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
         }
     }
 }

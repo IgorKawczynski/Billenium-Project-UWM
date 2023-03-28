@@ -13,18 +13,24 @@ import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import ModalRemoveCard from "@/componenets/card/modalRemoveCard/modalRemoveCard";
 import {ModalEditCardMenuProps} from "@/componenets/card/interfaces/modalEditCardMenu/ModalEditCardMenu";
 import ColorPicker from "@/componenets/card/cardColorPicker/ColorPicker";
+import ModalEditCardUserList from "@/componenets/card/modalEditCardUserList/modalEditCardUserList";
 
 const CardMenu = (props:ModalEditCardMenuProps) => {
     return (
         <Paper sx={{ width: 200, maxWidth: '100%'}}>
             <MenuList>
-                <MenuItem>
-                    <ListItemIcon>
-                        <GroupIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Users</ListItemText>
-                </MenuItem>
-                <ColorPicker colors={props.data.colorList} data={props.data} setData={props.setData} cardId={props.cardId} cardTitle={props.cardTitle}/>
+                <ModalEditCardUserList
+                    cardId={props.cardId}
+                    cardTitle={props.cardTitle}
+                    assignedUsers={props.assignedUsers}
+                    data={props.data}
+                    setData={props.setData}/>
+                <ColorPicker
+                    colors={props.data.colorList}
+                    data={props.data}
+                    setData={props.setData}
+                    cardId={props.cardId}
+                    cardTitle={props.cardTitle}/>
                 <Divider />
                 <MenuItem onClick={() => openModal(props.setModalDelete)}>
                     <ListItemIcon>

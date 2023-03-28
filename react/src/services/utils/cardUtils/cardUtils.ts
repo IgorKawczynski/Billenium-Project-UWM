@@ -2,7 +2,8 @@ import {
     addCardToBackend,
     assignUserToCardToBackend,
     removeCardToBackend,
-    updateCardToBackend
+    updateCardToBackend,
+    removeUserFromCardToBackend
 } from "@/services/actions/cardService";
 import {getColumnsFromBackend} from "@/services/actions/columnService";
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
@@ -119,6 +120,31 @@ export function assignUserToCard(
                             columnList:resCol
                         })
                         handleClickVariant(enqueueSnackbar)(`Added user to card` ,'success')
+                    })
+            }
+        })
+}
+export function removeUserFromCard(
+    cardId:string,
+    userId:string,
+    userFirstName:string,
+    userLastName:string,
+    cardTitle:string,
+    data:_Data['data'],
+    setData:_Data['setData']
+){
+    removeUserFromCardToBackend(cardId, userId)
+        .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else {
+                getColumnsFromBackend(data.id)
+                    .then(resCol => {
+                        setData({
+                            ...data,
+                            columnList:resCol
+                        })
+                        handleClickVariant(enqueueSnackbar)(`Removed user ${userFirstName} ${userLastName} from card ${cardTitle}` ,'success')
                     })
             }
         })

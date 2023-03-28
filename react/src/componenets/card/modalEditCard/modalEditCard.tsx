@@ -85,6 +85,7 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                     <CardMenu
                                         cardId={props.id}
                                         cardTitle={props.title}
+                                        assignedUsers={props.assignedUsers}
                                         setModalDelete={props.setModalDelete}
                                         modalDelete={props.modalDelete}
                                         data={props.data}

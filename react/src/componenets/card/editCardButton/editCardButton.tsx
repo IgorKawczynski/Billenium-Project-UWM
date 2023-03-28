@@ -43,6 +43,7 @@ export default function EditCardButton(props:EditCardButtonProps) {
                 cellId={props.cellId}
                 title={props.title}
                 desc={props.desc}
+                assignedUsers={props.assignedUsers}
                 setModalEdit={setModalEdit}
                 modalEdit={modalEdit}
                 data={props.data}

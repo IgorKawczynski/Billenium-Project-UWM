@@ -20,6 +20,7 @@ const Column = (props:ColumnProps) => {
             <Draggable
                 draggableId={props.id}
                 index={props.position}
+                key={props.id}
             >
                 {provided => (
                     <Box

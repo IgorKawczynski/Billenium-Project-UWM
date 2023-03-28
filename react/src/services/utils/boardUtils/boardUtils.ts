@@ -139,7 +139,9 @@ export const onDragEnd = (result: any, columns:Column[], setData:_Data["setData"
     }
     if (result.type === 'user') {
         if (source.droppableId !== destination.droppableId) {
-            assignUserToCard(destination.droppableId,result.draggableId, data, setData)
+            const card = result.destination.droppableId.slice(0,-1)
+            const user = result.draggableId.slice(0,-1)
+            assignUserToCard(card,user, data, setData)
         }
     }
 }

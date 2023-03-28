@@ -6,7 +6,9 @@ export async function getCellFromBackendById(cellId:string){
         const response = await axios.get(urlDomain+`/api/cells/${cellId}`)
         return response.data
     }catch(error:any){
-        return error.response.data.error
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
     }
 
 }

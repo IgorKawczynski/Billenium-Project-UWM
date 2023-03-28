@@ -7,6 +7,7 @@ interface ModalRemoveCardProps {
     cellId:string
     setModalDelete: React.Dispatch<SetStateAction<boolean>>
     modalDelete:boolean
+    setAnchorEl:  React.Dispatch<SetStateAction<null | HTMLElement>>
     data:_Data["data"]
     setData:_Data["setData"]
 }
