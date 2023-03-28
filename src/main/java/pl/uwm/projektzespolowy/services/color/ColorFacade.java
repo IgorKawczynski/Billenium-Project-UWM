@@ -18,7 +18,7 @@ public class ColorFacade {
 
     public ColorResponseDTO changeColorTitle(ColorUpdateDTO colorUpdateDTO) {
         var colorId = Long.parseLong(colorUpdateDTO.colorId());
-        return colorCRUDService.changeColorTitle(colorId, colorUpdateDTO.newTitle());
+        return colorCRUDService.changeColorTitle(colorId, colorUpdateDTO.newTitle()).toDto();
     }
 
     public ColorResponseDTO getColorById(Long colorId) {

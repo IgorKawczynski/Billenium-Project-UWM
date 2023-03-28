@@ -11,9 +11,11 @@ class ColorUpdater {
 
     private final ColorRepository colorRepository;
 
-    public Color changeColorTitle(Color color, String newTitle) {
-        color.changeTitle(new Title(newTitle));
-        return colorRepository.save(color);
+    public Color changeColorTitle(Color colorToChange, String newTitle) {
+        if (newTitle != null) {
+            colorToChange.changeTitle(new Title(newTitle));
+        }
+        return colorRepository.save(colorToChange);
     }
 
 }
