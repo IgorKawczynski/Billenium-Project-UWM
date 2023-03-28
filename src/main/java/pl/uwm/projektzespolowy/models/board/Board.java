@@ -75,7 +75,7 @@ public class Board extends BasicEntity {
         this.assignedUsers = new HashSet<>();
         this.assignedUsers.add(creator);
         this.rows = List.of(
-                new Row(new Title("Tasks"), Position.first(), this)
+                new Row(new Title("Default"), Position.first(), this)
         );
         this.columns = List.of(
                 new Column(new Title("Todo"), UNLIMITED_SIZE, Position.first(), this),
