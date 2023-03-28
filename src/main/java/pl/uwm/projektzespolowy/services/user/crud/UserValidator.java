@@ -58,7 +58,6 @@ class UserValidator {
         if (!userRepository.existsByEmail(email)) {
             throw new BadCredentialsException("There is no such user with given email");
         }
-
     }
 
     public void checkIfUserAlreadyExists(String email) {

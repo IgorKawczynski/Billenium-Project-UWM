@@ -1,6 +1,7 @@
 package pl.uwm.projektzespolowy.exceptions.VOExceptions;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -56,6 +57,12 @@ public class VOExceptions {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ErrorMessage fieldLengthException(FieldLengthException exception) {
         return new ErrorMessage("", exception.getMessage());
+    }
+
+    @ExceptionHandler(value = BadCredentialsException.class)
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+    public ErrorMessage badCredentialsException() {
+        return new ErrorMessage("password", "You have written wrong email or password");
     }
 
 
