@@ -48,7 +48,7 @@ public class BoardController {
         return boardFacade.updateBoard(boardUpdateDTO);
     }
 
-    @PutMapping("/users")
+    @PatchMapping("/assign-user")
     @ResponseStatus(HttpStatus.OK)
     public List<UserResponseDTO> assignUserToBoard(@RequestBody BoardUserUpdateDTO boardUserUpdateDTO) {
         return boardFacade.assignUserToBoard(boardUserUpdateDTO);
@@ -60,7 +60,7 @@ public class BoardController {
         boardFacade.deleteBoard(boardId);
     }
 
-    @DeleteMapping("/users")
+    @PatchMapping("/users")
     @ResponseStatus(HttpStatus.OK)
     public List<UserResponseDTO> deleteAssignedUserFromBoard(@RequestBody BoardUserUpdateDTO boardUserUpdateDTO) {
         return boardFacade.deleteAssignedUserFromBoard(boardUserUpdateDTO);

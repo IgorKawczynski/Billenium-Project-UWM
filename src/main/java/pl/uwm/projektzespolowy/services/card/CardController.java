@@ -46,7 +46,7 @@ public class CardController {
         return cardFacade.updateCard(cardUpdateDTO);
     }
 
-    @PutMapping("/users")
+    @PatchMapping("/assign-user")
     @ResponseStatus(HttpStatus.OK)
     public CardResponseDTO assignUserToCard(@RequestBody CardUserUpdateDTO cardUserUpdateDTO) {
         return cardFacade.assignUserToCard(cardUserUpdateDTO);
