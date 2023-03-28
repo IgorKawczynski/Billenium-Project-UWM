@@ -58,7 +58,7 @@ public class CardFacade {
     }
 
     public CardResponseDTO assignUserToCard(CardUserUpdateDTO cardUserUpdateDTO) {
-        var userToAssign = userCRUDService.getUserByEmail(cardUserUpdateDTO.userEmail());
+        var userToAssign = userCRUDService.getUserById(Long.parseLong(cardUserUpdateDTO.userId()));
         var cardId = Long.parseLong(cardUserUpdateDTO.cardId());
         return cardCRUDService.assignUserToCard(cardId, userToAssign).toDto();
     }
@@ -93,7 +93,7 @@ public class CardFacade {
 
     public CardResponseDTO deleteAssignedUserFromCard(CardUserUpdateDTO cardUserUpdateDTO) {
         var cardId = Long.parseLong(cardUserUpdateDTO.cardId());
-        var userToDeleteFromCard = userCRUDService.getUserByEmail(cardUserUpdateDTO.userEmail());
+        var userToDeleteFromCard = userCRUDService.getUserById(Long.parseLong(cardUserUpdateDTO.userId()));
         return cardCRUDService.deleteAssignedUserFromCard(cardId, userToDeleteFromCard).toDto();
     }
 
