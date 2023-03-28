@@ -21,7 +21,7 @@ public class RowFacade {
 
     public RowResponseDTO createRow(RowCreateDTO rowCreateDTO) {
         var board = boardCRUDService.getBoardById(Long.parseLong(rowCreateDTO.boardId()));
-        return rowCRUDService.createRow(board, rowCreateDTO.title());
+        return rowCRUDService.createRow(board, rowCreateDTO.title()).toDto();
     }
 
     public RowResponseDTO getRowById(Long rowId) {
@@ -37,12 +37,12 @@ public class RowFacade {
     }
 
     public RowResponseDTO updateRow(RowUpdateDTO rowUpdateDTO) {
-        return rowCRUDService.updateRow(rowUpdateDTO);
+        var rowId = Long.parseLong(rowUpdateDTO.rowId());
+        return rowCRUDService.updateRow(rowId, rowUpdateDTO.title()).toDto();
     }
 
     public void deleteRow(Long rowId) {
-        var board = rowCRUDService.getRowById(rowId).getBoard();
-        rowCRUDService.deleteRow(board, rowId);
+        rowCRUDService.deleteRow(rowId);
     }
 
 }

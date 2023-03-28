@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.row.Row;
-import pl.uwm.projektzespolowy.models.row.RowResponseDTO;
-import pl.uwm.projektzespolowy.models.row.RowUpdateDTO;
 
 import java.util.List;
 
@@ -18,8 +16,8 @@ public class RowCRUDService {
     private final RowUpdater rowUpdater;
     private final RowDeleter rowDeleter;
 
-    public RowResponseDTO createRow(Board board, String title) {
-        return rowCreator.createRow(board, title).toDto();
+    public Row createRow(Board board, String title) {
+        return rowCreator.createRow(board, title);
     }
 
     public Row getRowById(Long rowId) {
@@ -30,16 +28,14 @@ public class RowCRUDService {
         return rowReader.getAllRowsByBoardId(boardId);
     }
 
-    public RowResponseDTO updateRow(RowUpdateDTO rowUpdateDTO) {
-        var rowId = Long.parseLong(rowUpdateDTO.rowId());
+    public Row updateRow(Long rowId, String newTitle) {
         var rowToChange = rowReader.getRowById(rowId);
-        return rowUpdater
-                .editRow(rowToChange, rowUpdateDTO.title())
-                .toDto();
+        return rowUpdater.editRow(rowToChange, newTitle);
     }
 
-    public void deleteRow(Board board, Long rowId) {
+    public void deleteRow(Long rowId) {
         var rowToDelete = rowReader.getRowById(rowId);
+        var board = rowToDelete.getBoard();
         rowDeleter.deleteRow(board, rowToDelete);
     }
 

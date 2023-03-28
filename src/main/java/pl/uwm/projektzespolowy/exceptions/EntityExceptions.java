@@ -26,6 +26,12 @@ public class EntityExceptions {
         return new ErrorMessage("column", exception.getMessage());
     }
 
+    @ExceptionHandler(value = BoardHasTooFewRowsToDeleteException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage boardHasTooFewRowsToDeleteException(BoardHasTooFewRowsToDeleteException exception) {
+        return new ErrorMessage("rows", exception.getMessage());
+    }
+
     @ExceptionHandler(value = RowCantBeDeletedException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ErrorMessage rowCantBeDeletedException(RowCantBeDeletedException exception) {

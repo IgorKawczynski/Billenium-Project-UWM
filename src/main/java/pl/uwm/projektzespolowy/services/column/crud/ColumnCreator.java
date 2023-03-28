@@ -16,7 +16,6 @@ class ColumnCreator {
     private final ColumnRepository columnRepository;
 
     public Column createColumn(Board board, String givenTitle) {
-
         var boardColumns = new PositionableList<>(board.getColumns());
         var position = board.getPositionForNewColumn();
         var column = new Column(new Title(givenTitle), DEFAULT_SIZE, position, board);

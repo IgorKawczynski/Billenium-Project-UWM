@@ -16,18 +16,23 @@ class RowCreator {
     public final RowRepository rowRepository;
 
     public Row createRow(Board board, String givenTitle) {
-        var position = board.getPositionForNewRow();
         var boardRows = new PositionableList<>(board.getRows());
+        var position = board.getPositionForNewRow();
         var row = new Row(new Title(givenTitle), position, board);
+
         boardRows.getLastElement().getPosition().moveRight();
+
         var boardColumns = new PositionableList<>(board.getColumns());
         for (Column column : boardColumns) {
             var newCellPosition = column.getPositionForNewCell();
-            column.getCells().add(new Cell(column, newCellPosition));
+            var cell = new Cell(column, newCellPosition);
+            column.add(cell);
+
             var lastColumnCell = new PositionableList<>(column.getCells()).getLastElement();
             lastColumnCell.getPosition().moveRight();
         }
 
         return rowRepository.saveAndFlush(row);
     }
+
 }

@@ -39,7 +39,6 @@ public class Column extends BasicEntity implements Positionable {
     public final static int DEFAULT_SIZE = 3;
 
     public Column(Title title, Integer cardsLimit, Position position, Board board) {
-
         this.title = title;
         this.cardsLimit = cardsLimit;
         this.position = position;
@@ -70,6 +69,10 @@ public class Column extends BasicEntity implements Positionable {
         int cellsNumber = this.getCells().size();
         if (cellsNumber > 0) cellsNumber -= 1;
         return new Position(cellsNumber);
+    }
+
+    public void add(Cell cell) {
+        this.cells.add(cell);
     }
 
 }
