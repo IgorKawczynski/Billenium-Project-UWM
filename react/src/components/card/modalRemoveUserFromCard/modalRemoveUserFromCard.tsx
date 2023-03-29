@@ -10,7 +10,7 @@ import {modalStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {
     ModalRemoveUserFromCardProps
-} from "@/componenets/card/interfaces/modalRemoveUserFromCard/modalRemoveUserFromCard";
+} from "@/components/card/interfaces/modalRemoveUserFromCard/modalRemoveUserFromCard";
 import {removeUserFromCard} from "@/services/utils/cardUtils/cardUtils";
 const ModalRemoveUserFromCard = (props:ModalRemoveUserFromCardProps) => {
     const handleClose = () => {

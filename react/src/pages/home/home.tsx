@@ -17,8 +17,8 @@ import { ColorModeContext } from '@/App';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import '@/assets/styles/home.css'
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
-import LoginForm from "@/componenets/loginForm/loginForm";
-import RegisterForm from "@/componenets/registerForm/registerForm";
+import LoginForm from "@/components/loginForm/loginForm";
+import RegisterForm from "@/components/registerForm/registerForm";
 import {useNavigate} from "react-router-dom";
 const Home = () => {
     const [modalLogin, setModalLogin] = useState(false);

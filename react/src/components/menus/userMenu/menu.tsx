@@ -6,7 +6,7 @@ import {ColorModeContext} from "@/App";
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {Link} from "react-router-dom";
-import {UserMenuProps} from "@/componenets/menus/interfaces/userMenu";
+import {UserMenuProps} from "@/components/menus/interfaces/userMenu";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import MarkunreadIcon from '@mui/icons-material/Markunread';

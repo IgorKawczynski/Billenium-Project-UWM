@@ -2,9 +2,9 @@ import React, {useState} from "react";
 import {Grid, Box, useTheme, Typography, IconButton, Tooltip} from "@mui/material";
 import {ColorModeContext} from "@/App";
 import {Link} from "react-router-dom";
-import {BoardCardProps} from "@/componenets/board/interfaces/boardCard/boardCard";
+import {BoardCardProps} from "@/components/board/interfaces/boardCard/boardCard";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import ModalLeaveBoard from "@/componenets/board/modalLeaveBoard/modalLeaveBoard";
+import ModalLeaveBoard from "@/components/board/modalLeaveBoard/modalLeaveBoard";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 
 

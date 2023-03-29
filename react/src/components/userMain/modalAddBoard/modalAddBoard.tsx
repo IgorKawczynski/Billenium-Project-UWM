@@ -10,7 +10,7 @@ import {modalStyle} from "@/assets/themes/modalStyle";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import {ModalAddBoardProps} from "@/componenets/userMain/interfaces/modalAddBoard/modalAddBoard";
+import {ModalAddBoardProps} from "@/components/userMain/interfaces/modalAddBoard/modalAddBoard";
 import {addBoard} from "@/services/utils/UserUtils/userMainUtils";
 
 

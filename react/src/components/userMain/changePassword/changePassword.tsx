@@ -5,7 +5,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import {ChangePasswordProps} from "@/componenets/userMain/interfaces/changePassword/changePassword";
+import {ChangePasswordProps} from "@/components/userMain/interfaces/changePassword/changePassword";
 import {openModal, closeModal} from "@/services/utils/modalUtils/modalUtils";
 
 const ChangePassword = (props:ChangePasswordProps) =>{

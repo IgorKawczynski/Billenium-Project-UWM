@@ -8,6 +8,7 @@ import {modalStyle} from "@/assets/themes/modalStyle";
 import {Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import {removeColumn} from "@/services/utils/columnUtils/columnUtils";
 import ModalRemoveRowProps from "@/components/row/interfaces/modalRemoveRowInterface/modalRemoveRow";
 import {removeRow} from "@/services/utils/rowUtils/rowUtils";
 

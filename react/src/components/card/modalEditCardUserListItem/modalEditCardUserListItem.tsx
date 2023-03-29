@@ -3,9 +3,9 @@ import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import {Box, MenuItem, useTheme} from "@mui/material";
 import {
     ModalEditCardUserListItemProps
-} from "@/componenets/card/interfaces/modalEditCardUserListItem/modalEditCardUserListItem";
+} from "@/components/card/interfaces/modalEditCardUserListItem/modalEditCardUserListItem";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
-import ModalRemoveUserFromCard from "@/componenets/card/modalRemoveUserFromCard/modalRemoveUserFromCard";
+import ModalRemoveUserFromCard from "@/components/card/modalRemoveUserFromCard/modalRemoveUserFromCard";
 const ModalEditCardUserListItem = (props:ModalEditCardUserListItemProps) =>{
     const theme = useTheme()
     const [modalDelete, setModalDelete] = useState(false)

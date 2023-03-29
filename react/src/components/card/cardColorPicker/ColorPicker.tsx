@@ -5,6 +5,7 @@ import {StyledMenu} from "@/assets/styles/styledMenu";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import ListItemText from "@mui/material/ListItemText";
+import CardColor from "@/assets/themes/colors";
 import CardColorPickerItem from "@/components/card/cardColorPickerItem/cardColorPickerItem";
 import {useTheme} from "@mui/material";
 import {ColorPickerProps} from "@/components/color/interfaces/ColorPicker/colorPicker";

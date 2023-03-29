@@ -1,5 +1,6 @@
 import React from "react";
 import {Box, Typography, useTheme} from "@mui/material";
+import CardColor from "@/assets/themes/colors";
 import {ColorProps} from "@/components/color/interfaces/colorInterface/Color";
 
 const ColorLegendItem = (props:ColorProps) => {

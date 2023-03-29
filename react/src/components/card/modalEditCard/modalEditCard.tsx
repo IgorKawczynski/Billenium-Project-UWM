@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {Modal, Stack, Typography, Fade, Backdrop, Button, TextField, Box} from "@mui/material";
-import ModalEditCardProps from "@/componenets/card/interfaces/modalEditcardInterface/ModalEditCard";
+import ModalEditCardProps from "@/components/card/interfaces/modalEditcardInterface/ModalEditCard";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {updateCard} from "@/services/utils/cardUtils/cardUtils";
-import CardMenu from "@/componenets/card/modalEditCardMenu/modalEditCardMenu";
+import CardMenu from "@/components/card/modalEditCardMenu/modalEditCardMenu";
 export default function ModalEditCard(props:ModalEditCardProps) {
     const [title, setTitle] = useState(props.title);
     const [desc, setDesc] = useState(props.desc);

@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
-import {columnHeaderProps} from "@/componenets/column/interfaces/columnHeaderInterface/ColumnHeader";
+import {columnHeaderProps} from "@/components/column/interfaces/columnHeaderInterface/ColumnHeader";
 import AllInclusiveOutlinedIcon from '@mui/icons-material/AllInclusiveOutlined';
 const ColumnHeader = (props:columnHeaderProps) =>{
     const theme = useTheme();

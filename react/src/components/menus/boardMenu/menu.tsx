@@ -8,7 +8,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import BackupTableIcon from '@mui/icons-material/BackupTable';
 import {Link} from "react-router-dom";
-import {BoardMenuProps} from "@/componenets/menus/interfaces/boardMenu";
+import {BoardMenuProps} from "@/components/menus/interfaces/boardMenu";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import {logoutUser} from "@/services/utils/loginUtils/loginUtils";
 

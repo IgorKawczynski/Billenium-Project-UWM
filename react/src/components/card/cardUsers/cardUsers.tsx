@@ -2,7 +2,7 @@ import React from "react";
 import {Droppable} from "react-beautiful-dnd";
 import {Avatar, AvatarGroup, Tooltip, useTheme} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import {CardUsersProps} from "@/componenets/card/interfaces/CardUsers/cardUsers";
+import {CardUsersProps} from "@/components/card/interfaces/CardUsers/cardUsers";
 
 
 const CardUsers = (props:CardUsersProps) =>{

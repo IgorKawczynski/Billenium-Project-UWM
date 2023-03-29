@@ -4,12 +4,12 @@ import {loadDefaultData} from "@/services/actions/boardService";
 import {useTheme, Stack, Box} from "@mui/material";
 import {ColorModeContext} from "@/App";
 import '@/assets/styles/board.css'
-import ModalEditBoard from "@/componenets/board/modalEditBoard/modalEditBoard";
+import ModalEditBoard from "@/components/board/modalEditBoard/modalEditBoard";
 import {fetchData} from "@/services/actions/boardService";
-import BoardHeader from "@/componenets/board/boardHeader/boardHeader";
-import BoardContent from "@/componenets/board/boardContent/boardContent";
-import AddRowButton from "@/componenets/row/addRowButton/addRowButton";
-import BoardMenu from "@/componenets/menus/boardMenu/menu";
+import BoardHeader from "@/components/board/boardHeader/boardHeader";
+import BoardContent from "@/components/board/boardContent/boardContent";
+import AddRowButton from "@/components/row/addRowButton/addRowButton";
+import BoardMenu from "@/components/menus/boardMenu/menu";
 import {useNavigate, useParams} from "react-router-dom";
 const Board = () => {
     const theme = useTheme();

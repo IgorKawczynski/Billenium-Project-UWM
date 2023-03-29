@@ -14,9 +14,9 @@ import {
 } from "@mui/material";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
-import {ModalUserEditProfileProps} from "@/componenets/userMain/interfaces/modalUserEditProfile/modalUserEditProfile";
+import {ModalUserEditProfileProps} from "@/components/userMain/interfaces/modalUserEditProfile/modalUserEditProfile";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ChangePassword from "@/componenets/userMain/changePassword/changePassword";
+import ChangePassword from "@/components/userMain/changePassword/changePassword";
 const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     const [firstName, setFirstName] = useState(props.firstName);
     const [lastName, setLastName] = useState(props.lastName);

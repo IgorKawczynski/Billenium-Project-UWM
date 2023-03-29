@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import {Box, useTheme, Tooltip} from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import EditCardButtonProps from "@/componenets/card/interfaces/editCardButtonInterface/EditCardButton";
-import ModalEditCard from "@/componenets/card/modalEditCard/modalEditCard";
-import ModalRemoveCard from "@/componenets/card/modalRemoveCard/modalRemoveCard";
+import EditCardButtonProps from "@/components/card/interfaces/editCardButtonInterface/EditCardButton";
+import ModalEditCard from "@/components/card/modalEditCard/modalEditCard";
+import ModalRemoveCard from "@/components/card/modalRemoveCard/modalRemoveCard";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import IconButton from "@mui/material/IconButton";
 

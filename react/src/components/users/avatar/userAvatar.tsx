@@ -1,5 +1,5 @@
 import React from "react";
-import AvatarProps from "@/componenets/card/interfaces/avatarInterface/Avatar"
+import AvatarProps from "@/components/card/interfaces/avatarInterface/Avatar"
 import Box from "@mui/material/Box";
 import {Grid,Avatar, Badge, Tooltip, Typography, useTheme} from "@mui/material";
 import {Draggable} from "react-beautiful-dnd";

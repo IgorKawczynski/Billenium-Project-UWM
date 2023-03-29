@@ -5,10 +5,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import ListItemText from "@mui/material/ListItemText";
 import {StyledMenu} from "@/assets/styles/styledMenu";
-import CardColorPickerItem from "@/componenets/card/cardColorPickerItem/cardColorPickerItem";
-import {ModalEditCardUserListProps} from "@/componenets/card/interfaces/modalEditCardUserList/modalEditCardUserList";
+import CardColorPickerItem from "@/components/card/cardColorPickerItem/cardColorPickerItem";
+import {ModalEditCardUserListProps} from "@/components/card/interfaces/modalEditCardUserList/modalEditCardUserList";
 import {useTheme} from "@mui/material";
-import ModalEditCardUserListItem from "@/componenets/card/modalEditCardUserListItem/modalEditCardUserListItem";
+import ModalEditCardUserListItem from "@/components/card/modalEditCardUserListItem/modalEditCardUserListItem";
 import GroupIcon from "@mui/icons-material/Group";
 
 

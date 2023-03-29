@@ -4,7 +4,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
-import {TextField, useTheme} from "@mui/material";
+import {useTheme, TextField} from "@mui/material";
 import {setColorProps} from "@/components/color/interfaces/colorInterface/Color";
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import CloseIcon from "@mui/icons-material/Close";

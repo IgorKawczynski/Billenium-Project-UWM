@@ -7,11 +7,13 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
+import {Grid} from "@mui/material";
 import ModalAddColumnProps from "@/components/column/interfaces/modalAddColumnInterface/ModalAddColumn";
 import {modalStyle} from '@/assets/themes/modalStyle'
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {addColumn} from "@/services/utils/columnUtils/columnUtils";
 import {useSnackbar} from "notistack";
+import {Snackbar} from "@mui/material";
 export default function ModalAddColumn(props:ModalAddColumnProps) {
     const [columnName, setColumnName] = useState("");
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {

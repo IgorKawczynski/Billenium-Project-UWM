@@ -9,7 +9,7 @@ import {Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {removeColumn} from "@/services/utils/columnUtils/columnUtils";
-import {ModalLeaveBoardProps} from "@/componenets/board/interfaces/modalLeaveBoard/modalLeaveBoard";
+import {ModalLeaveBoardProps} from "@/components/board/interfaces/modalLeaveBoard/modalLeaveBoard";
 import {deleteBoard} from "@/services/utils/UserUtils/userMainUtils";
 
 

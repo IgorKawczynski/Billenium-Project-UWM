@@ -8,7 +8,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {InputLabel,FormControl} from "@mui/material";
-import {RegisterFormProps} from "@/componenets/registerForm/interfaces/registerFormInterface/RegisterForm";
+import {RegisterFormProps} from "@/components/registerForm/interfaces/registerFormInterface/RegisterForm";
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import {registerUser} from "@/services/utils/registerUtils/registerUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";

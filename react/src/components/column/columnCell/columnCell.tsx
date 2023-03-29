@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import {ColumnCellProps} from "@/componenets/column/interfaces/columnCellInterface/ColumnCell";
-import Task from "@/componenets/card/card";
+import {ColumnCellProps} from "@/components/column/interfaces/columnCellInterface/ColumnCell";
+import Task from "@/components/card/card";
 import {Droppable} from "react-beautiful-dnd";
 import {Typography, useTheme, Tooltip, Box} from "@mui/material";
-import AddCardButton from "@/componenets/card/addCardButton/addCardButton";
+import AddCardButton from "@/components/card/addCardButton/addCardButton";
 import StyledCardScrollbar from "@/assets/styles/styledScrollbar";
-import ModalRemoveRow from "@/componenets/row/modalRemoveRow/modalRemoveRow";
-import ModalEditRow from "@/componenets/row/modalEditRow/modalEditRow";
+import ModalRemoveRow from "@/components/row/modalRemoveRow/modalRemoveRow";
+import ModalEditRow from "@/components/row/modalEditRow/modalEditRow";
 import IconButton from "@mui/material/IconButton";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";

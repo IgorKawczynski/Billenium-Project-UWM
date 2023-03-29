@@ -3,9 +3,9 @@ import {Box, Tooltip, Typography, useTheme} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import AddColumnButton from "@/componenets/column/addColumnButton/addColumnButton";
-import {boardHeaderProps} from "@/componenets/board/interfaces/boardHeaderInterface/BoardHeader";
-import ColorLegend from "@/componenets/color/colorLegend/colorLegend";
+import AddColumnButton from "@/components/column/addColumnButton/addColumnButton";
+import {boardHeaderProps} from "@/components/board/interfaces/boardHeaderInterface/BoardHeader";
+import ColorLegend from "@/components/color/colorLegend/colorLegend";
 
 
 const BoardHeader = (props:boardHeaderProps) => {

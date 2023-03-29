@@ -9,8 +9,12 @@ import Stack from "@mui/material/Stack";
 import ModalEditBoardProps from "@/components/board/interfaces/modalEditBoardInterface/ModalEditBoard";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {editBoard} from "@/services/utils/boardUtils/boardUtils";
-import {closeModal} from "@/services/utils/modalUtils/modalUtils";
+import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
+import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
+import MenuList from "@mui/material/MenuList";
+import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
+import IconButton from "@mui/material/IconButton";
 import ColorSetter from "@/components/color/colorSetter/colorSetter";
 
 const ModalEditBoard = (props:ModalEditBoardProps) => {

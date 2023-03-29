@@ -3,7 +3,7 @@ import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Typography, useTheme} from "@mui/material";
 import {modalStyle} from "@/assets/themes/modalStyle";
 import {Link, useNavigate} from "react-router-dom";
-import {LoginFormProps} from "@/componenets/loginForm/interfaces/loginFormInterface/LoginForm";
+import {LoginFormProps} from "@/components/loginForm/interfaces/loginFormInterface/LoginForm";
 import IconButton from '@mui/material/IconButton';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';

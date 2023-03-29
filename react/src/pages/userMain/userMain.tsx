@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {Stack, Grid, Box, Typography, useTheme} from '@mui/material'
-import UserMenu from "@/componenets/menus/userMenu/menu";
-import BoardCard from "@/componenets/board/boardCard/boardCard";
-import ModalUserEditProfile from "@/componenets/userMain/modalUserEditProfile/modalUserEditProfile";
+import UserMenu from "@/components/menus/userMenu/menu";
+import BoardCard from "@/components/board/boardCard/boardCard";
+import ModalUserEditProfile from "@/components/userMain/modalUserEditProfile/modalUserEditProfile";
 import {userBoardsData} from "@/services/utils/UserUtils/userBoardsData";
 import {fetchBoardsData} from "@/services/actions/userMainService";
-import ModalAddBoard from "@/componenets/userMain/modalAddBoard/modalAddBoard";
+import ModalAddBoard from "@/components/userMain/modalAddBoard/modalAddBoard";
 import {useNavigate, useParams} from "react-router-dom";
 import {ColorModeContext} from "@/App";
 

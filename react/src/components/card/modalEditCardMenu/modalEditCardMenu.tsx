@@ -10,10 +10,10 @@ import GroupIcon from '@mui/icons-material/Group';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
-import ModalRemoveCard from "@/componenets/card/modalRemoveCard/modalRemoveCard";
-import {ModalEditCardMenuProps} from "@/componenets/card/interfaces/modalEditCardMenu/ModalEditCardMenu";
-import ColorPicker from "@/componenets/card/cardColorPicker/ColorPicker";
-import ModalEditCardUserList from "@/componenets/card/modalEditCardUserList/modalEditCardUserList";
+import ModalRemoveCard from "@/components/card/modalRemoveCard/modalRemoveCard";
+import {ModalEditCardMenuProps} from "@/components/card/interfaces/modalEditCardMenu/ModalEditCardMenu";
+import ColorPicker from "@/components/card/cardColorPicker/ColorPicker";
+import ModalEditCardUserList from "@/components/card/modalEditCardUserList/modalEditCardUserList";
 
 const CardMenu = (props:ModalEditCardMenuProps) => {
     return (
