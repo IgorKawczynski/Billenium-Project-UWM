@@ -52,7 +52,7 @@ public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/api/users/login", "/api/**", "/", "/**")
+                .antMatchers("/api/users/register", "/api/users/login")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
