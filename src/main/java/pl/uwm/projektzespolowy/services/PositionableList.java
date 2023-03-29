@@ -109,4 +109,5 @@ public class PositionableList<T extends Positionable> implements Iterable<T>{
             return get(currentPosition++);
         }
     }
+
 }
