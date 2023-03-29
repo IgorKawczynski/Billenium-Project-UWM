@@ -1,9 +1,8 @@
 import React from "react";
 import AvatarProps from "@/components/card/interfaces/avatarInterface/Avatar"
 import Box from "@mui/material/Box";
-import {Grid,Avatar, Badge, Tooltip, Typography, useTheme} from "@mui/material";
+import {Avatar, Tooltip, Typography, useTheme} from "@mui/material";
 import {Draggable} from "react-beautiful-dnd";
-import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 
 const UserAvatar = (props:AvatarProps) => {
     const initials = props.name[0].toUpperCase() + props.lastName[0].toUpperCase()

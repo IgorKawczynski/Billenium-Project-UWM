@@ -1,4 +1,4 @@
-import {getUserBoardsFromBackend, addBoardToBackend, deleteBoardFromBackend} from "@/services/actions/userMainService";
+import {addBoardToBackend, deleteBoardFromBackend, getUserBoardsFromBackend} from "@/services/actions/userMainService";
 import {userBoardsData} from "@/services/utils/UserUtils/userBoardsData";
 import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";

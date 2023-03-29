@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import {Drawer, Box, Grid, InputLabel, FormControl, Stack, useTheme, Typography, Tooltip} from "@mui/material";
+import {Box, Drawer, FormControl, InputLabel, Stack, Tooltip, Typography, useTheme} from "@mui/material";
 import {BoardUsersProps} from "@/components/board/interfaces/boardUsers/boardUsers";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from '@mui/icons-material/Close';
-import { Droppable} from "react-beautiful-dnd";
+import {Droppable} from "react-beautiful-dnd";
 import UserAvatar from "@/components/users/avatar/userAvatar";
 import GroupIcon from "@mui/icons-material/Group";
 import {assignUserToBoard} from "@/services/utils/boardUtils/boardUtils";

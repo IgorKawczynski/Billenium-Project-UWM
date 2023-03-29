@@ -1,6 +1,5 @@
 package pl.uwm.projektzespolowy.models.cell;
 
-import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +12,7 @@ import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 
+import javax.persistence.*;
 import java.util.Comparator;
 import java.util.List;
 

@@ -2,8 +2,8 @@ import {
     addCardToBackend,
     assignUserToCardToBackend,
     removeCardToBackend,
-    updateCardToBackend,
-    removeUserFromCardToBackend
+    removeUserFromCardToBackend,
+    updateCardToBackend
 } from "@/services/actions/cardService";
 import {getColumnsFromBackend} from "@/services/actions/columnService";
 import {_Data} from "@/services/utils/boardUtils/DataBoard";

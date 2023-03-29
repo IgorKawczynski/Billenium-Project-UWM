@@ -5,7 +5,10 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import pl.uwm.projektzespolowy.exceptions.VOExceptions.*;
+import pl.uwm.projektzespolowy.exceptions.VOExceptions.EmailAlreadyExistsException;
+import pl.uwm.projektzespolowy.exceptions.VOExceptions.FieldLengthException;
+import pl.uwm.projektzespolowy.exceptions.VOExceptions.InvalidEmailException;
+import pl.uwm.projektzespolowy.exceptions.VOExceptions.RegexMatchException;
 
 @Component
 @RequiredArgsConstructor

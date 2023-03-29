@@ -1,22 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import {
-    Modal,
-    Stack,
-    Typography,
-    Fade,
-    Backdrop,
-    Button,
-    TextField,
-    Box,
-    InputLabel,
-    FormControl,
-    useTheme
-} from "@mui/material";
+import React, {useEffect, useState} from 'react';
+import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Typography, useTheme} from "@mui/material";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {ModalUserEditProfileProps} from "@/components/userMain/interfaces/modalUserEditProfile/modalUserEditProfile";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ChangePassword from "@/components/userMain/changePassword/changePassword";
+
 const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     const [firstName, setFirstName] = useState(props.firstName);
     const [lastName, setLastName] = useState(props.lastName);

@@ -1,8 +1,9 @@
 package pl.uwm.projektzespolowy.models.card;
 
-import javax.persistence.*;
-
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.Positionable;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
@@ -13,6 +14,7 @@ import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
+import javax.persistence.*;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;

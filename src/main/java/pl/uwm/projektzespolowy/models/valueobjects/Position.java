@@ -1,7 +1,8 @@
 package pl.uwm.projektzespolowy.models.valueobjects;
 
-import javax.persistence.Embeddable;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Embeddable;
 
 @Embeddable
 @NoArgsConstructor

@@ -10,6 +10,7 @@ import {
     removeRowToBackend
 } from "@/services/actions/rowService";
 import {getColumnsFromBackend} from "@/services/actions/columnService";
+
 export function addRow(name:string,
                           data:_Data["data"],
                           setData:_Data["setData"],

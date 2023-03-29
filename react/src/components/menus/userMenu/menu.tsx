@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Box, useTheme, Stack, Tooltip, Badge} from "@mui/material";
+import React from "react";
+import {Box, Stack, Tooltip, useTheme} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import {ColorModeContext} from "@/App";
@@ -9,7 +9,6 @@ import {Link} from "react-router-dom";
 import {UserMenuProps} from "@/components/menus/interfaces/userMenu";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
-import MarkunreadIcon from '@mui/icons-material/Markunread';
 import {logoutUser} from "@/services/utils/loginUtils/loginUtils";
 
 const UserMenu = (props:UserMenuProps) => {

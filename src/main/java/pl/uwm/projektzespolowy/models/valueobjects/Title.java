@@ -1,9 +1,10 @@
 package pl.uwm.projektzespolowy.models.valueobjects;
 
-import javax.persistence.Embeddable;
 import lombok.NoArgsConstructor;
 import pl.uwm.projektzespolowy.exceptions.VOExceptions.EmptyTitleException;
 import pl.uwm.projektzespolowy.exceptions.VOExceptions.InvalidTitleLengthException;
+
+import javax.persistence.Embeddable;
 
 @Embeddable
 @NoArgsConstructor

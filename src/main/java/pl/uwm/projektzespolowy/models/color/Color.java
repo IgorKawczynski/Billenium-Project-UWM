@@ -1,12 +1,13 @@
 package pl.uwm.projektzespolowy.models.color;
 
-import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
+
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor

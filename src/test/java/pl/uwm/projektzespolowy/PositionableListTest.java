@@ -6,8 +6,11 @@ import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 import pl.uwm.projektzespolowy.services.PositionableList;
-import static org.assertj.core.api.Assertions.*;
+
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PositionableListTest {
 

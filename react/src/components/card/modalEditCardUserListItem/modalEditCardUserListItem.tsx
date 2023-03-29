@@ -6,6 +6,7 @@ import {
 } from "@/components/card/interfaces/modalEditCardUserListItem/modalEditCardUserListItem";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import ModalRemoveUserFromCard from "@/components/card/modalRemoveUserFromCard/modalRemoveUserFromCard";
+
 const ModalEditCardUserListItem = (props:ModalEditCardUserListItemProps) =>{
     const theme = useTheme()
     const [modalDelete, setModalDelete] = useState(false)

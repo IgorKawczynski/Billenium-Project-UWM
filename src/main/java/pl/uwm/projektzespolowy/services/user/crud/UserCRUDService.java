@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.user.UserBoardsDTO;
+import pl.uwm.projektzespolowy.models.user.UserCreateDTO;
 
 import java.util.List;
-import pl.uwm.projektzespolowy.models.user.UserCreateDTO;
 
 
 @Service

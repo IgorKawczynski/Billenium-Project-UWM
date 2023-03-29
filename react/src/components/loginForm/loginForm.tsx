@@ -1,8 +1,20 @@
-import React, {useEffect, useState} from 'react'
-import {closeModal} from "@/services/utils/modalUtils/modalUtils";
-import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Typography, useTheme} from "@mui/material";
+import React, {useState} from 'react'
+import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
+import {
+    Backdrop,
+    Box,
+    Button,
+    Fade,
+    FormControl,
+    InputLabel,
+    Modal,
+    Stack,
+    TextField,
+    Typography,
+    useTheme
+} from "@mui/material";
 import {modalStyle} from "@/assets/themes/modalStyle";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {LoginFormProps} from "@/components/loginForm/interfaces/loginFormInterface/LoginForm";
 import IconButton from '@mui/material/IconButton';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
@@ -11,9 +23,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import {InputLabel,FormControl} from "@mui/material";
-import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import {loginUser} from "@/services/utils/loginUtils/loginUtils";
+
 const LoginForm = (props:LoginFormProps) => {
     const theme = useTheme()
     const [mail, setMail] = useState("");

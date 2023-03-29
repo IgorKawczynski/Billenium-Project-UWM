@@ -2,14 +2,10 @@ package pl.uwm.projektzespolowy.services.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.projektzespolowy.models.user.UserBoardsDTO;
-import pl.uwm.projektzespolowy.models.user.UserCreateDTO;
-import pl.uwm.projektzespolowy.models.user.UserLoginRequestDTO;
-import pl.uwm.projektzespolowy.models.user.UserLoginResponseDTO;
-import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
+import pl.uwm.projektzespolowy.models.user.*;
 
 import java.util.List;
 

@@ -1,5 +1,5 @@
 import React, {SetStateAction} from "react";
-import {userBoard, userBoardsData} from "@/services/utils/UserUtils/userBoardsData";
+import {userBoardsData} from "@/services/utils/UserUtils/userBoardsData";
 
 export interface UserMenuProps{
     modalEdit:boolean,
