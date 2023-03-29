@@ -35,8 +35,6 @@ function changePositionToLeft(columns:_Data["data"]['columnList']){
 
 export const onDragEnd = (result: any, columns:Column[], setData:_Data["setData"], data:_Data["data"]) => {
     if (!result.destination) return
-
-    console.log(result)
     const {source, destination} = result;
     if (result.type === 'column') {
         if (columns != null) {

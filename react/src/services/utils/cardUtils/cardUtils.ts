@@ -66,7 +66,6 @@ export const addCard = (name: string,
             // tutaj możesz wykonywać operacje na otrzymanym id
         }})
         .catch(error => {
-            console.error(error);
         });
 };
 
@@ -97,8 +96,6 @@ export const updateCard = (id:string,
             // tutaj możesz wykonywać operacje na otrzymanym id
         }})
         .catch(error => {
-            // console.log(error.response.fieldName);
-            // obsługa błędów
         });
 };
 

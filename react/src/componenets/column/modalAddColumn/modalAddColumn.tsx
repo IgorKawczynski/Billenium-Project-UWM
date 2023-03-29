@@ -22,7 +22,6 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
 
     const handleSubmit = ({event}: { event: any }) => {
         event.preventDefault();
-        console.log(name);
         // możesz tutaj przesłać dane do serwera lub zaktualizować stan aplikacji
     };
 

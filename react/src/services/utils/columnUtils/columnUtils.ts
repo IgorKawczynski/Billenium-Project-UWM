@@ -93,7 +93,6 @@ export function addColumn(name:string,
         }})
         .catch(res => {
             handleClickVariant(enqueueSnackbar)('Column title is required', 'error')
-            console.error(res);
             // obsługa błędów
         });
 }

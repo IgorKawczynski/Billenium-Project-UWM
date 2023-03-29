@@ -43,7 +43,6 @@ export function addRow(name:string,
             }})
         .catch(res => {
             handleClickVariant(enqueueSnackbar)('Row title is required', 'error')
-            console.error(res);
             // obsługa błędów
         });
 }
@@ -81,7 +80,6 @@ export function editRow(
         }})
         .catch(res => {
             handleClickVariant(enqueueSnackbar)('Row title is required', 'error')
-            console.error(res);
             // obsługa błędów
         });
 }

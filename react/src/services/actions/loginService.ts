@@ -7,7 +7,6 @@ export async function loginUserToBackend(
 ){
     try{
         const response = await axios.post(urlDomain+'/api/users/login', {email, password})
-        console.log(response)
         return response.data
     }catch(error:any) {
         if (error.response && error.response.data && error.response.data.error) {

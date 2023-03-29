@@ -10,7 +10,6 @@ export async function createUserToBackend(
 ){
     try{
         const response = await axios.post(urlDomain+'/api/users/register', {email, firstName, lastName, password})
-        console.log(response)
         return response.data
     }catch(error:any) {
         if (error.response && error.response.data && error.response.data.error) {

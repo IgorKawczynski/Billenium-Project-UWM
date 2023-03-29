@@ -42,7 +42,6 @@ export async function assignUserToCardToBackend(cardId:string, userId:string){
     const apiUrl = urlDomain+`/api/cards/assign-user`;
     try {
         const response = await axios.patch(apiUrl, {cardId, userId});
-        console.log(response)
         return response.data
     } catch (error:any) {
         if (error.response && error.response.data && error.response.data.error) {
