@@ -165,9 +165,9 @@ export async function getBoardTitleFromBackend(boardId:string){
 }
 
 export async function assignUserToBoardToBackend(boardId:string,userEmail:string){
-    const apiUrl = urlDomain+`/api/boards/users`;
+    const apiUrl = urlDomain+`/api/boards/assign-user`;
     try {
-        const response = await axios.put(apiUrl, {boardId, userEmail});
+        const response = await axios.patch(apiUrl, {boardId, userEmail});
         return response.data
     } catch (error:any) {
         if (error.response && error.response.data && error.response.data.error) {

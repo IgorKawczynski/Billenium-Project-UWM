@@ -16,7 +16,7 @@ export async function addColumnToBackend(boardId:string, title:string){
 export async function removeColumnToBackend(id:string){
     const columnId = parseInt(id)
     try{
-        const response =  await axios.get(urlDomain+`/api/columns/${id}/all`)
+        const response =  await axios.delete(urlDomain+`/api/columns/${id}`)
         return response.data
     }catch(error:any){
         if (error.response && error.response.data && error.response.data.error) {

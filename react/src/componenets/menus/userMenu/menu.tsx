@@ -53,16 +53,16 @@ const UserMenu = (props:UserMenuProps) => {
                             <DashboardCustomizeIcon/>
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title={"Your invitations"} placement={"left"}>
-                        <IconButton
-                            sx={{color:theme.palette.text.theme}}
-                            size={"large"}
-                        >
-                            <Badge badgeContent={3} color={"info"}>
-                                <MarkunreadIcon/>
-                            </Badge>
-                        </IconButton>
-                    </Tooltip>
+                    {/*<Tooltip title={"Your invitations"} placement={"left"}>*/}
+                    {/*    <IconButton*/}
+                    {/*        sx={{color:theme.palette.text.theme}}*/}
+                    {/*        size={"large"}*/}
+                    {/*    >*/}
+                    {/*        <Badge badgeContent={3} color={"info"}>*/}
+                    {/*            <MarkunreadIcon/>*/}
+                    {/*        </Badge>*/}
+                    {/*    </IconButton>*/}
+                    {/*</Tooltip>*/}
                 </Stack>
 
                 <Stack

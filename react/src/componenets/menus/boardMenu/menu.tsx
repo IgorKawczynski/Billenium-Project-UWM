@@ -10,10 +10,12 @@ import BackupTableIcon from '@mui/icons-material/BackupTable';
 import {Link} from "react-router-dom";
 import {BoardMenuProps} from "@/componenets/menus/interfaces/boardMenu";
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import {logoutUser} from "@/services/utils/loginUtils/loginUtils";
 
 const BoardMenu = (props:BoardMenuProps) => {
     const theme = useTheme()
     const colorMode = React.useContext(ColorModeContext);
+    const userId = sessionStorage.getItem('userId')
     return(
         <Box
             minWidth={'64px'}
@@ -34,7 +36,7 @@ const BoardMenu = (props:BoardMenuProps) => {
                     minHeight={'85vh'}
                     spacing={2}
                 >
-                    <Link to={'/userMain'}>
+                    <Link to={`/userMain/${userId}`}>
                         <Tooltip title={"Your Boards"} placement={'left'}>
                     <IconButton
                         sx={{color:theme.palette.text.theme}}
@@ -72,6 +74,7 @@ const BoardMenu = (props:BoardMenuProps) => {
                     <Link to={'/'}><IconButton
                         sx={{color:theme.palette.text.theme}}
                         size={"large"}
+                        onClick={() => logoutUser()}
                     >
                         <LogoutIcon/>
                     </IconButton>

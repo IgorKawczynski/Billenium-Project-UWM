@@ -54,7 +54,7 @@ const BoardUsers = (props:BoardUsersProps) => {
                 </Box>
                 <Box>
                     <Typography variant={"caption"}>
-                            Add your member here
+                            Assign member to board
                     </Typography>
                     <FormControl variant="outlined">
                         <InputLabel>Email</InputLabel>
@@ -84,7 +84,7 @@ const BoardUsers = (props:BoardUsersProps) => {
                     </FormControl>
                 </Box>
                 <Typography variant={"caption"}>
-                    Drag your member to card
+                    Drag member to card
                 </Typography>
                 <Droppable
                     droppableId={"AvatarBox"}
