@@ -6,7 +6,7 @@ import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
 
 
-export const urlDomain = 'http://localhost:8080'
+export const urlDomain = 'https://billenium-project-uwm-production-b520.up.railway.app'
 
 export function loadDefaultData(){
     return {
