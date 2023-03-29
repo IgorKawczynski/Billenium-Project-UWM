@@ -1,41 +1,35 @@
 import React, {useState} from 'react'
-import {closeModal} from "@/services/utils/modalUtils/modalUtils";
-import {
-    Backdrop,
-    Box,
-    Button,
-    Fade,
-    FormControl,
-    InputLabel,
-    Modal,
-    Stack,
-    TextField,
-    Typography,
-    useTheme
-} from "@mui/material";
+import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
+import {Backdrop, Box, Button, Fade, Icon, Modal, Stack, TextField, Typography, useTheme} from "@mui/material";
 import {modalStyle} from "@/assets/themes/modalStyle";
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import {RegisterFormProps} from "@/components/registerForm/interfaces/registerFormInterface/RegisterForm";
-
+import {InputLabel,FormControl} from "@mui/material";
+import {RegisterFormProps} from "@/componenets/registerForm/interfaces/registerFormInterface/RegisterForm";
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import {registerUser} from "@/services/utils/registerUtils/registerUtils";
+import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
+import {enqueueSnackbar} from "notistack";
+import {useNavigate} from "react-router-dom";
 const RegisterForm = (props:RegisterFormProps) => {
     const theme = useTheme()
-    const [name, setName] = useState("");
+    const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
-    const [passwordAgain, setPasswordAgain] = useState("");
+    const [repeatPassword, setRepeatPassword] = useState("");
     const [showPassword, setShowPassword] = React.useState(false);
+    const navigate = useNavigate();
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
-    const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setName(event.target.value);
+    const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFirstName(event.target.value);
     };
     const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLastName(event.target.value);
@@ -48,6 +42,24 @@ const RegisterForm = (props:RegisterFormProps) => {
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
     };
+    const handleRepeatPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setRepeatPassword(event.target.value);
+    };
+
+    const handleSentForm = () =>{
+        if(password === repeatPassword){
+            registerUser(
+                mail,
+                firstName,
+                lastName,
+                password,
+                props.setModalLogin,
+                props.setModalRegister
+            )
+        }else{
+            handleClickVariant(enqueueSnackbar)(`Passwords must be the same` ,'error')
+        }
+    }
 
     return(
         <Modal
@@ -66,39 +78,52 @@ const RegisterForm = (props:RegisterFormProps) => {
         >
             <Fade in={props.modalRegister}>
                 <Stack sx={modalStyle} spacing={2}>
-                    <Typography color={theme.palette.text.secondary} id="transition-modal-title" variant="h6" component="h2">
-                        Registration
-                    </Typography>
-                    <TextField
-                        sx={{margin:'0 0 8px 0'}}
-                        id="outlined-basic"
-                        label="Name"
-                        variant="outlined"
-                        value={name}
-                        onChange={handleMailChange}
-                    />
-                    <TextField
-                        sx={{margin:'0 0 8px 0'}}
-                        id="outlined-basic"
-                        label="Last Name"
-                        variant="outlined"
-                        value={lastName}
-                        onChange={handleMailChange}
-                    />
-                            <TextField
-                                sx={{margin:'0 0 8px 0'}}
-                                id="outlined-basic"
-                                label="E-mail"
-                                variant="outlined"
-                                value={mail}
-                                onChange={handleMailChange}
-                            />
+                    <Box display={"flex"} alignItems={"center"} color={theme.palette.text.secondary}>
+                        <HowToRegIcon/>
+                        <Typography color={theme.palette.text.secondary} id="transition-modal-title" variant="h6" component="h2">
+                            Registration
+                        </Typography>
+                    </Box>
+                    <FormControl variant="outlined">
+                        <InputLabel>First Name</InputLabel>
+                        <OutlinedInput
+                            sx={{margin:'0 0 8px 0'}}
+                            id="outlined-basic"
+                            label="First Name"
+                            inputMode={"text"}
+                            value={firstName}
+                            onChange={handleFirstNameChange}
+                        />
+                    </FormControl>
+                    <FormControl variant="outlined">
+                        <InputLabel>Last Name</InputLabel>
+                        <OutlinedInput
+                            sx={{margin:'0 0 8px 0'}}
+                            id="outlined-basic"
+                            label="Last Name"
+                            inputMode={"text"}
+                            value={lastName}
+                            onChange={handleLastNameChange}
+                        />
+                    </FormControl>
+                    <FormControl variant="outlined">
+                        <InputLabel>E-mail</InputLabel>
+                        <OutlinedInput
+                            sx={{margin:'0 0 8px 0'}}
+                            id="outlined-basic"
+                            label="E-mail"
+                            inputMode={'email'}
+                            value={mail}
+                            onChange={handleMailChange}
+                        />
+                    </FormControl>
                     <FormControl variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password"
-                            type={showPassword ? 'text' : 'password'}
                             value={password}
+                            onChange={handlePasswordChange}
+                            type={showPassword ? 'text' : 'password'}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -118,8 +143,9 @@ const RegisterForm = (props:RegisterFormProps) => {
                         <InputLabel htmlFor="outlined-adornment-password">Repeat password</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password"
+                            value={repeatPassword}
+                            onChange={handleRepeatPasswordChange}
                             type={showPassword ? 'text' : 'password'}
-                            value={passwordAgain}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -156,6 +182,7 @@ const RegisterForm = (props:RegisterFormProps) => {
                         <Button
                             sx={{maxHeight:'50px', width:'100px'}}
                             variant="contained"
+                            onClick={() => handleSentForm()}
                         >
                                 Register
                         </Button>

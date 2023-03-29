@@ -1,6 +1,8 @@
 package pl.uwm.projektzespolowy.models.user;
 
-import jakarta.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,16 +30,7 @@ public class User extends BasicEntity {
 
     @ManyToMany(mappedBy = "assignedUsers")
     Set<Board> boards;
-
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-            },
-            fetch = FetchType.LAZY)
-    @JoinTable(name = "users_cards",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "card_id")
-    )
+    @ManyToMany(mappedBy = "assignedUsers")
     Set<Card> cards;
 
     public User(String email, String password, String firstName, String lastName) {

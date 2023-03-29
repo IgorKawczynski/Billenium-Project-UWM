@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {Box, useTheme} from "@mui/material";
+
+import {Box, useTheme, Tooltip} from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import EditCardButtonProps from "@/components/card/interfaces/editCardButtonInterface/EditCardButton";
-import ModalEditCard from "@/components/card/modalEditCard/modalEditCard";
-import ModalRemoveCard from "@/components/card/modalRemoveCard/modalRemoveCard";
+import EditCardButtonProps from "@/componenets/card/interfaces/editCardButtonInterface/EditCardButton";
+import ModalEditCard from "@/componenets/card/modalEditCard/modalEditCard";
+import ModalRemoveCard from "@/componenets/card/modalRemoveCard/modalRemoveCard";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import IconButton from "@mui/material/IconButton";
 
@@ -25,22 +26,24 @@ export default function EditCardButton(props:EditCardButtonProps) {
 
     return (
         <Box style={{display:"flex",justifyContent:"flex-end"}}>
-
-            <IconButton
-                sx={{fontSize:12, color:theme.palette.primary.main, maxWidth:'30px', maxHeight:'30px'}}
-                aria-controls={open ? 'demo-customized-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={() => openModal(setModalEdit)}
-            >
-                <MoreVertIcon />
-            </IconButton>
+            <Tooltip title={"Show more"} placement={"bottom"}>
+                <IconButton
+                    sx={{fontSize:12, color:theme.palette.primary.main, maxWidth:'30px', maxHeight:'30px'}}
+                    aria-controls={open ? 'demo-customized-boardMenu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={() => openModal(setModalEdit)}
+                >
+                    <MoreVertIcon />
+                </IconButton>
+            </Tooltip>
             
             <ModalEditCard
                 id={props.id}
                 cellId={props.cellId}
                 title={props.title}
                 desc={props.desc}
+                assignedUsers={props.assignedUsers}
                 setModalEdit={setModalEdit}
                 modalEdit={modalEdit}
                 data={props.data}

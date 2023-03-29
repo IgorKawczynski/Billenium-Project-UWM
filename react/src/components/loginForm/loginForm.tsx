@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Typography, useTheme} from "@mui/material";
 import {modalStyle} from "@/assets/themes/modalStyle";
-import {Link} from "react-router-dom";
-import {LoginFormProps} from "@/components/loginForm/interfaces/loginFormInterface/LoginForm";
+import {Link, useNavigate} from "react-router-dom";
+import {LoginFormProps} from "@/componenets/loginForm/interfaces/loginFormInterface/LoginForm";
 import IconButton from '@mui/material/IconButton';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -13,12 +13,13 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {InputLabel,FormControl} from "@mui/material";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
+import {loginUser} from "@/services/utils/loginUtils/loginUtils";
 const LoginForm = (props:LoginFormProps) => {
     const theme = useTheme()
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = React.useState(false);
-
+    const navigate = useNavigate()
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -77,6 +78,8 @@ const LoginForm = (props:LoginFormProps) => {
                         <OutlinedInput
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
+                            value={password}
+                            onChange={handlePasswordChange}
                             startAdornment={
                                 <InputAdornment position="start">
                                     <LockOutlinedIcon />
@@ -90,7 +93,7 @@ const LoginForm = (props:LoginFormProps) => {
                                         onMouseDown={handleMouseDownPassword}
                                         edge="end"
                                     >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        {showPassword ? <Visibility /> : <VisibilityOff />}
                                     </IconButton>
                                 </InputAdornment>
                             }
@@ -113,14 +116,13 @@ const LoginForm = (props:LoginFormProps) => {
                         >
                             Register
                         </Button>
-                        <Link style={{width:'50%'}} to={'/board'}>
                             <Button
                             sx={{maxHeight:'50px', width:'100%'}}
                             variant="contained"
+                            onClick={() => loginUser(mail,password, navigate)}
                             >
                                 Log In
                             </Button>
-                        </Link>
                     </Box>
                 </Stack>
             </Fade>

@@ -24,7 +24,7 @@ const ColorPicker = (props:ColorPickerProps) => {
         <Box>
         <MenuItem
             id="demo-customized-button"
-            aria-controls={open ? 'demo-customized-menu' : undefined}
+            aria-controls={open ? 'demo-customized-boardMenu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
@@ -47,7 +47,8 @@ const ColorPicker = (props:ColorPickerProps) => {
                     <Box key={color.id}>
                     {color.value == "default" && (
                     <CardColorPickerItem
-                        id={props.id}
+                        cardId={props.cardId}
+                        cardTitle={props.cardTitle}
                         colorId={color.id}
                         colorValue={color.value}
                         color={theme.palette.text.secondary}
@@ -59,7 +60,8 @@ const ColorPicker = (props:ColorPickerProps) => {
                     )}
                     {color.value != 'default' &&(
                     <CardColorPickerItem
-                        id={props.id}
+                        cardId={props.cardId}
+                        cardTitle={props.cardTitle}
                         colorId={color.id}
                         colorValue={color.value}
                         color={color.value}

@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import {Draggable} from 'react-beautiful-dnd';
-import ColumnProps from '@/components/column/interfaces/columnInterface/Column'
-import ModalEditColumn from "@/components/column/modalEditColumn/modalEditColumn";
-import ModalRemoveColumn from "@/components/column/modalRemoveColumn/modalRemoveColumn";
+import ColumnProps from '@/componenets/column/interfaces/columnInterface/Column'
+import ModalEditColumn from "@/componenets/column/modalEditColumn/modalEditColumn";
+import ModalRemoveColumn from "@/componenets/column/modalRemoveColumn/modalRemoveColumn";
 import {Box, Stack, useTheme} from "@mui/material";
-import ColumnHeader from "@/components/column/columnHeader/columnHeader";
-import ColumnCell from "@/components/column/columnCell/columnCell";
+import ColumnHeader from "@/componenets/column/columnHeader/columnHeader";
+import ColumnCell from "@/componenets/column/columnCell/columnCell";
 
 const Column = (props:ColumnProps) => {
     const theme = useTheme()
@@ -20,6 +20,7 @@ const Column = (props:ColumnProps) => {
             <Draggable
                 draggableId={props.id}
                 index={props.position}
+                key={props.id}
             >
                 {provided => (
                     <Box

@@ -1,6 +1,6 @@
 package pl.uwm.projektzespolowy.models.color;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -42,10 +42,6 @@ public class Color extends BasicEntity {
 
     public void changeTitle(Title newTitle) {
         this.title = newTitle;
-    }
-
-    public void changeColorValue(ColorValue colorValue) {
-        this.value = colorValue;
     }
 
 }

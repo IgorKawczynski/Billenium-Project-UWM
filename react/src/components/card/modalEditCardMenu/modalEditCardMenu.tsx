@@ -5,23 +5,32 @@ import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import Typography from '@mui/material/Typography';
 import GroupIcon from '@mui/icons-material/Group';
+import ColorLensIcon from '@mui/icons-material/ColorLens';
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
-import {ModalEditCardMenuProps} from "@/components/card/interfaces/modalEditCardMenu/ModalEditCardMenu";
-import ColorPicker from "@/components/card/cardColorPicker/ColorPicker";
+import ModalRemoveCard from "@/componenets/card/modalRemoveCard/modalRemoveCard";
+import {ModalEditCardMenuProps} from "@/componenets/card/interfaces/modalEditCardMenu/ModalEditCardMenu";
+import ColorPicker from "@/componenets/card/cardColorPicker/ColorPicker";
+import ModalEditCardUserList from "@/componenets/card/modalEditCardUserList/modalEditCardUserList";
 
-export default function IconMenu(props:ModalEditCardMenuProps) {
+const CardMenu = (props:ModalEditCardMenuProps) => {
     return (
         <Paper sx={{ width: 200, maxWidth: '100%'}}>
             <MenuList>
-                <MenuItem>
-                    <ListItemIcon>
-                        <GroupIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Users</ListItemText>
-                </MenuItem>
-                <ColorPicker colors={props.data.colorList} data={props.data} setData={props.setData} id={props.id}/>
+                <ModalEditCardUserList
+                    cardId={props.cardId}
+                    cardTitle={props.cardTitle}
+                    assignedUsers={props.assignedUsers}
+                    data={props.data}
+                    setData={props.setData}/>
+                <ColorPicker
+                    colors={props.data.colorList}
+                    data={props.data}
+                    setData={props.setData}
+                    cardId={props.cardId}
+                    cardTitle={props.cardTitle}/>
                 <Divider />
                 <MenuItem onClick={() => openModal(props.setModalDelete)}>
                     <ListItemIcon>
@@ -35,3 +44,5 @@ export default function IconMenu(props:ModalEditCardMenuProps) {
         </Paper>
     );
 }
+
+export default CardMenu

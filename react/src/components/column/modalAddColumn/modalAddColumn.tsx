@@ -14,14 +14,12 @@ import {addColumn} from "@/services/utils/columnUtils/columnUtils";
 import {useSnackbar} from "notistack";
 export default function ModalAddColumn(props:ModalAddColumnProps) {
     const [columnName, setColumnName] = useState("");
-    const {enqueueSnackbar} = useSnackbar();
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setColumnName(event.target.value);
     };
 
     const handleSubmit = ({event}: { event: any }) => {
         event.preventDefault();
-        console.log(name);
         // możesz tutaj przesłać dane do serwera lub zaktualizować stan aplikacji
     };
 

@@ -3,7 +3,8 @@ import {SetStateAction} from "react";
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
 
 export interface cardColorPickerItemProps{
-    id:string
+    cardId:string
+    cardTitle:string
     colorId:string
     colorValue:string
     color:string

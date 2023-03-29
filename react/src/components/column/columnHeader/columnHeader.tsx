@@ -1,14 +1,11 @@
 import React from "react";
-import {useTheme} from "@mui/material";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
+import {useTheme, Typography, Box, Tooltip} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
-import {columnHeaderProps} from "@/components/column/interfaces/columnHeaderInterface/ColumnHeader";
+import {columnHeaderProps} from "@/componenets/column/interfaces/columnHeaderInterface/ColumnHeader";
 import AllInclusiveOutlinedIcon from '@mui/icons-material/AllInclusiveOutlined';
-
 const ColumnHeader = (props:columnHeaderProps) =>{
     const theme = useTheme();
 
@@ -117,22 +114,26 @@ const ColumnHeader = (props:columnHeaderProps) =>{
             <Box
             marginRight={'8px'}
             >
-                <IconButton
-                    aria-label="settingsColumn"
-                    size={"small"}
-                    onClick={() => openModal(props.setModalEdit)}
-                >
-                    <BorderColorOutlinedIcon />
-                </IconButton>
-                {props.position !== 0 && props.position !== Object.keys(props.data.columnList).length-1 && (
+                <Tooltip title={"Edit Column"} placement={"top"}>
                     <IconButton
-                        aria-label="delete"
+                        aria-label="settingsColumn"
                         size={"small"}
-                        onClick={() => openModal(props.setModalDelete)}
-                        sx={{color:theme.palette.primary.main}}
+                        onClick={() => openModal(props.setModalEdit)}
                     >
-                        <DeleteOutlinedIcon />
+                        <BorderColorOutlinedIcon />
                     </IconButton>
+                </Tooltip>
+                {props.position !== 0 && props.position !== Object.keys(props.data.columnList).length-1 && (
+                    <Tooltip title={"Delete Column"} placement={"top"}>
+                        <IconButton
+                            aria-label="delete"
+                            size={"small"}
+                            onClick={() => openModal(props.setModalDelete)}
+                            sx={{color:theme.palette.primary.main}}
+                        >
+                            <DeleteOutlinedIcon />
+                        </IconButton>
+                    </Tooltip>
 
                 )}
             </Box>

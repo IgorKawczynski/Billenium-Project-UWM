@@ -3,6 +3,11 @@ package pl.uwm.projektzespolowy.services.user.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.user.UserBoardsDTO;
+
+import java.util.List;
+import pl.uwm.projektzespolowy.models.user.UserCreateDTO;
+
 
 @Service
 @RequiredArgsConstructor
@@ -13,8 +18,20 @@ public class UserCRUDService {
     private final UserUpdater userUpdater;
     private final UserDeleter userDeleter;
 
-    public User getUserById(Long id) {
-        return userReader.getUserById(id);
+    public User createUser(UserCreateDTO userCreateDTO) {
+        return userCreator.createUser(userCreateDTO);
+    }
+
+    public User getUserById(Long userId) {
+        return userReader.getUserById(userId);
+    }
+
+    public List<UserBoardsDTO> getAllUserBoardsById(Long userId) {
+        return userReader.getAllUserBoardsById(userId);
+    }
+
+    public User getUserByEmail(String email) {
+        return userReader.getUserByEmail(email);
     }
 
     public void deleteUser(Long userId) {

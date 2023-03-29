@@ -7,7 +7,9 @@ export async function addCardToBackend(cellId:string, title:string, description:
         const response = await axios.post(urlDomain+'/api/cards', {cellId, title, description})
         return response.data
     }catch(error:any){
-        return error.response.data.error
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
     }
 
 }
@@ -16,7 +18,9 @@ export async function updateCardToBackend(cardId:string, title:string, descripti
         const response = await axios.put(urlDomain+`/api/cards`, {cardId, title, description})
         return response.data
     }catch(error:any){
-        return error.response.data.error
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
     }
 
 }
@@ -34,6 +38,31 @@ export async function moveCardInCell(movedObjectId:string, newPosition:number){
     } catch (error) {
     }
 }
+
+export async function assignUserToCardToBackend(cardId:string, userId:string){
+    const apiUrl = urlDomain+`/api/cards/assign-user`;
+    try {
+        const response = await axios.patch(apiUrl, {cardId, userId});
+        return response.data
+    } catch (error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+}
+
+export async function removeUserFromCardToBackend(cardId:string, userId:string){
+    const apiUrl = urlDomain+`/api/cards/users`;
+    try {
+        const response = await axios.patch(apiUrl, {cardId, userId});
+        return response.data
+    } catch (error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+}
+
 export async function removeCardToBackend(cardId:string){
     const apiUrl = urlDomain+`/api/cards/${cardId}`;
     try {

@@ -1,13 +1,12 @@
 import React, {useState} from "react";
-import Box from "@mui/material/Box"
-import {ColumnCellProps} from "@/components/column/interfaces/columnCellInterface/ColumnCell";
-import Task from "@/components/card/card";
+import {ColumnCellProps} from "@/componenets/column/interfaces/columnCellInterface/ColumnCell";
+import Task from "@/componenets/card/card";
 import {Droppable} from "react-beautiful-dnd";
-import {Typography, useTheme} from "@mui/material";
-import AddCardButton from "@/components/card/addCardButton/addCardButton";
-import StyledScrollbar from "@/assets/styles/styledScrollbar";
-import ModalRemoveRow from "@/components/row/modalRemoveRow/modalRemoveRow";
-import ModalEditRow from "@/components/row/modalEditRow/modalEditRow";
+import {Typography, useTheme, Tooltip, Box} from "@mui/material";
+import AddCardButton from "@/componenets/card/addCardButton/addCardButton";
+import StyledCardScrollbar from "@/assets/styles/styledScrollbar";
+import ModalRemoveRow from "@/componenets/row/modalRemoveRow/modalRemoveRow";
+import ModalEditRow from "@/componenets/row/modalEditRow/modalEditRow";
 import IconButton from "@mui/material/IconButton";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
@@ -17,7 +16,7 @@ const ColumnCell = (props:ColumnCellProps) =>{
     const [modalEditRow, setModalEditRow] = useState(false);
     const [modalDeleteRow, setModalDeleteRow] = React.useState(false);
     const theme = useTheme()
-    const CustomScrollbar = StyledScrollbar()
+    const CustomScrollbar = StyledCardScrollbar()
     return(
         <Droppable
             droppableId={props.id}
@@ -41,22 +40,29 @@ const ColumnCell = (props:ColumnCellProps) =>{
                                         {props.rowTitle.length <= 18 && (props.rowTitle)}
                                     </Typography>
                                 </Box>
-                                <IconButton
-                                    sx={{maxHeight:'25', maxWidth:'25px'}}
-                                    size={"small"}
-                                    aria-label="settingsColumn"
-                                    onClick={() => openModal(setModalEditRow)}
-                                >
-                                    <BorderColorOutlinedIcon/>
-                                </IconButton>
-                                <IconButton
-                                    sx={{maxHeight:'25', maxWidth:'25px', color:theme.palette.primary.main}}
-                                    size={"small"}
-                                    aria-label="settingsColumn"
-                                    onClick={() => openModal(setModalDeleteRow)}
-                                >
-                                    <DeleteOutlinedIcon />
-                                </IconButton>
+                                <Tooltip title={"Edit Row"} placement={"top"}>
+                                    <IconButton
+                                        sx={{maxHeight:'25', maxWidth:'25px'}}
+                                        size={"small"}
+                                        aria-label="settingsColumn"
+                                        onClick={() => openModal(setModalEditRow)}
+                                    >
+                                        <BorderColorOutlinedIcon/>
+                                    </IconButton>
+                                </Tooltip>
+                                {props.position != Object.keys(props.data.rowList).length-1 &&
+                                    (
+                                        <Tooltip title={"Delete Row"} placement={"top"}>
+                                            <IconButton
+                                                        sx={{maxHeight:'25', maxWidth:'25px', color:theme.palette.primary.main}}
+                                                        size={"small"}
+                                                        aria-label="settingsColumn"
+                                                        onClick={() => openModal(setModalDeleteRow)}
+                                                    >
+                                                <DeleteOutlinedIcon />
+                                            </IconButton>
+                                        </Tooltip>
+                                    )}
                             </Box>
                         )}
                     <Box
@@ -91,6 +97,7 @@ const ColumnCell = (props:ColumnCellProps) =>{
                                         title={item.title}
                                         desc={item.description}
                                         color={item.color}
+                                        assignedUsers={item.assignedUsers}
                                         index={index}
                                         cellId={props.id}
                                         setData={props.setData}

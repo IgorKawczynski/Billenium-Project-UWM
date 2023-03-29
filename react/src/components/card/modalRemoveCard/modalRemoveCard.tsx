@@ -55,6 +55,7 @@ export default function ModalRemoveCard(props:ModalRemoveCardProps) {
                         <Button
                             sx={{maxHeight:'50px'}}
                             onClick={() => removeCard(props.id,
+                                                    props.title,
                                                     props.cellId,
                                                     props.setData,
                                                     props.data

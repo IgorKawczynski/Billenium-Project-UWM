@@ -13,11 +13,9 @@ class CardReader {
 
     private final CardRepository cardRepository;
 
-    public Card getCardById(Long id) {
-        return cardRepository
-                .findById(id)
-                .orElseThrow(
-                        () -> new EntityNotFoundException("card", "Card with id: " + id + " does not exist!")
+    public Card getCardById(Long cardId) {
+        return cardRepository.findById(cardId).orElseThrow(
+                        () -> new EntityNotFoundException("card", "Card with id: " + cardId + " does not exist!")
                 );
     }
 

@@ -1,21 +1,22 @@
 package pl.uwm.projektzespolowy.models.card;
 
-import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.*;
+
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.Positionable;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.color.ColorValue;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "cards")
@@ -29,7 +30,15 @@ public class Card extends BasicEntity implements Positionable {
     String description;
     Position position;
 
-    @ManyToMany(mappedBy = "cards")
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    },
+            fetch = FetchType.LAZY)
+    @JoinTable(name = "users_cards",
+            joinColumns = @JoinColumn(name = "card_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     Set<User> assignedUsers;
 
     @Enumerated(EnumType.STRING)
@@ -56,7 +65,20 @@ public class Card extends BasicEntity implements Positionable {
                 .description(this.description)
                 .position(this.position.value())
                 .color(this.color.getValue())
+                .assignedUsers(this.assignedUsers.stream()
+                        .map(User::toDto)
+                        .sorted(Comparator.comparing(UserResponseDTO::firstName)
+                                .thenComparing(UserResponseDTO::lastName))
+                        .collect(Collectors.toList()))
                 .build();
+    }
+
+    public void assignUser(User user) {
+        this.assignedUsers.add(user);
+    }
+
+    public void removeUser(User user) {
+        this.assignedUsers.remove(user);
     }
 
     @Override

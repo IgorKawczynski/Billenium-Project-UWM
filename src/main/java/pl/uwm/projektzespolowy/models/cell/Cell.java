@@ -1,6 +1,6 @@
 package pl.uwm.projektzespolowy.models.cell;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -55,6 +55,13 @@ public class Cell extends BasicEntity implements Positionable {
     public Position getPositionForNewCard() {
         int cardsNumber = this.getCards().size();
         return new Position(cardsNumber);
+    }
+
+    public void addAll(List<Card> cards) {
+        cards.forEach(card -> {
+            card.setPosition(this.getPositionForNewCard());
+            this.add(card);
+        });
     }
 
     public void add(Card card) {

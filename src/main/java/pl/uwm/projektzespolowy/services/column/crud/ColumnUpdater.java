@@ -2,8 +2,8 @@ package pl.uwm.projektzespolowy.services.column.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.uwm.projektzespolowy.models.valueobjects.Title;
 import pl.uwm.projektzespolowy.models.column.Column;
+import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import java.util.List;
 

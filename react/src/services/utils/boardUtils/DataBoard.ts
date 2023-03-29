@@ -70,5 +70,11 @@ export interface Card{
     description: string;
     position:number;
     color:string;
+
+    assignedUsers:{
+        id: string;
+        firstName: string;
+        lastName: string;
+    }[]
 };
 

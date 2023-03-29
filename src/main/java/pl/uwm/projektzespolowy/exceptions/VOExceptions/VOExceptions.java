@@ -1,6 +1,7 @@
 package pl.uwm.projektzespolowy.exceptions.VOExceptions;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -26,5 +27,43 @@ public class VOExceptions {
     public ErrorMessage invalidColorValueHandler(InvalidColorValueException exception) {
         return new ErrorMessage("color", exception.getMessage());
     }
+
+    @ExceptionHandler(value = EmailNotFoundException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage emailNotFoundException(EmailNotFoundException exception) {
+        return new ErrorMessage("email", exception.getMessage());
+    }
+
+    @ExceptionHandler(value = InvalidEmailException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage invalidEmailException(InvalidEmailException exception) {
+        return new ErrorMessage("email", exception.getMessage());
+    }
+
+    @ExceptionHandler(value = EmailAlreadyExistsException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage emailAlreadyExistsException(EmailAlreadyExistsException exception) {
+        return new ErrorMessage("email", exception.getMessage());
+    }
+
+    // TODO -- detailing of fieldName for 2 below methods
+    @ExceptionHandler(value = RegexMatchException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage regexMatchException(RegexMatchException exception) {
+        return new ErrorMessage("", exception.getMessage());
+    }
+
+    @ExceptionHandler(value = FieldLengthException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage fieldLengthException(FieldLengthException exception) {
+        return new ErrorMessage("", exception.getMessage());
+    }
+
+    @ExceptionHandler(value = BadCredentialsException.class)
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+    public ErrorMessage badCredentialsException() {
+        return new ErrorMessage("password", "You have written wrong email or password");
+    }
+
 
 }

@@ -21,4 +21,5 @@ class RowReader {
     public List<Row> getAllRowsByBoardId(Long boardId) {
         return rowRepository.findAllByBoardId(boardId);
     }
+
 }

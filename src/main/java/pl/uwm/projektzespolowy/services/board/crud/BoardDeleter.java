@@ -2,6 +2,10 @@ package pl.uwm.projektzespolowy.services.board.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.uwm.projektzespolowy.models.board.Board;
+import pl.uwm.projektzespolowy.models.user.User;
+
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -11,6 +15,11 @@ class BoardDeleter {
 
     public void deleteBoardById(Long id) {
         boardRepository.deleteById(id);
+    }
+
+    public Set<User> deleteAssignedUserFromBoard(Board board, User userToDeleteFromBoard) {
+        board.removeUser(userToDeleteFromBoard);
+        return boardRepository.saveAndFlush(board).getAssignedUsers();
     }
 
 }

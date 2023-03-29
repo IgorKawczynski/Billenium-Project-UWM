@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.user.UserBoardsDTO;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -15,6 +18,16 @@ class UserReader {
         return userRepository
                 .findById(userId)
                 .orElseThrow( () -> new EntityNotFoundException("user", "User with id: " + userId + " does not exist!"));
+    }
+
+    public User getUserByEmail(String email) {
+        return userRepository
+                .findUserByEmail(email)
+                .orElseThrow( () -> new EntityNotFoundException("user", "User with email: " + email + " does not exist!"));
+    }
+
+    public List<UserBoardsDTO> getAllUserBoardsById(Long userId) {
+        return userRepository.getAllUserBoardsById(userId);
     }
 
 }

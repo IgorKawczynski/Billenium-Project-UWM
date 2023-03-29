@@ -52,6 +52,7 @@ const ModalRemoveRow = (props:ModalRemoveRowProps) =>{
                             sx={{maxHeight:'50px'}}
                             onClick={() => removeRow(
                                 props.id,
+                                props.title,
                                 props.data,
                                 props.setData,
                                 props.setModalDelete

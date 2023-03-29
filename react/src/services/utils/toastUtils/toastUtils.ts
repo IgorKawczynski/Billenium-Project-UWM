@@ -1,5 +1,5 @@
-import {EnqueueSnackbar, VariantType} from 'notistack';
-
+import {VariantType} from 'notistack';
+import {EnqueueSnackbar} from "notistack";
 export const handleClickVariant = (toast: EnqueueSnackbar) => (
                                     message: string,
                                     variant: VariantType

@@ -6,6 +6,11 @@ interface ModalEditCardProps {
     cellId:string;
     title:string;
     desc:string;
+    assignedUsers:{
+        id: string;
+        firstName: string;
+        lastName: string;
+    }[]
     setModalEdit: React.Dispatch<SetStateAction<boolean>>
     modalEdit:boolean
     setModalDelete:React.Dispatch<SetStateAction<boolean>>

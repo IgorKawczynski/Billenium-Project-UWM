@@ -6,7 +6,7 @@ import {changeCardColor} from "@/services/utils/colorUtils/colorUtils";
 
 const CardColorPickerItem = (props:cardColorPickerItemProps) =>{
     const Change = () => {
-        changeCardColor(props.id, props.colorValue, props.setData, props.data)
+        changeCardColor(props.cardId, props.cardTitle , props.title, props.colorValue, props.setData, props.data)
         props.setAnchorEl(null);
     };
 

@@ -3,10 +3,10 @@ package pl.uwm.projektzespolowy.services.board.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.board.Board;
-import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
-import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -17,8 +17,8 @@ public class BoardCRUDService {
     private final BoardUpdater boardUpdater;
     private final BoardDeleter boardDeleter;
 
-    public BoardResponseDTO createBoard(User creator, String title) {
-        return boardCreator.createBoard(creator, title).toDto();
+    public Board createBoard(User creator, String title) {
+        return boardCreator.createBoard(creator, title);
     }
 
     public Board getBoardById(Long boardId) {
@@ -29,14 +29,27 @@ public class BoardCRUDService {
         return boardReader.getBoardById(boardId).getTitle();
     }
 
-    public BoardResponseDTO updateBoard(BoardUpdateDTO boardUpdateDTO) {
-        var boardId = Long.parseLong(boardUpdateDTO.boardId());
+    public List<User> getAllAssignedUsersToBoard(Long boardId) {
+        return boardReader.getBoardById(boardId).getAssignedUsers().stream().toList();
+    }
+
+    public Board updateBoard(Long boardId, String newTitle) {
         var boardToChange = boardReader.getBoardById(boardId);
-        return boardUpdater.editBoard(boardToChange, boardUpdateDTO.newTitle()).toDto();
+        return boardUpdater.editBoard(boardToChange, newTitle);
+    }
+
+    public List<User> assignUserToBoard(Long boardId, User userToAssign) {
+        var board = boardReader.getBoardById(boardId);
+        return boardUpdater.assignUserToBoard(board, userToAssign).stream().toList();
     }
 
     public void deleteBoard(Long boardId) {
         boardDeleter.deleteBoardById(boardId);
+    }
+
+    public List<User> deleteAssignedUserFromBoard(Long boardId, User userToDeleteFromBoard) {
+        var board = boardReader.getBoardById(boardId);
+        return boardDeleter.deleteAssignedUserFromBoard(board, userToDeleteFromBoard).stream().toList();
     }
 
 }

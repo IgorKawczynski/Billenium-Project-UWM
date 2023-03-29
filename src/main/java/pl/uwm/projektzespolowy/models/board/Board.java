@@ -1,6 +1,6 @@
 package pl.uwm.projektzespolowy.models.board;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,10 +15,14 @@ import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
 import pl.uwm.projektzespolowy.models.row.Row;
 import pl.uwm.projektzespolowy.models.row.RowResponseDTO;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static pl.uwm.projektzespolowy.models.column.Column.DEFAULT_SIZE;
 import static pl.uwm.projektzespolowy.models.column.Column.UNLIMITED_SIZE;
@@ -71,7 +75,7 @@ public class Board extends BasicEntity {
         this.assignedUsers = new HashSet<>();
         this.assignedUsers.add(creator);
         this.rows = List.of(
-                new Row(new Title("Tasks"), Position.first(), this)
+                new Row(new Title("Default"), Position.first(), this)
         );
         this.columns = List.of(
                 new Column(new Title("Todo"), UNLIMITED_SIZE, Position.first(), this),
@@ -96,6 +100,8 @@ public class Board extends BasicEntity {
                 .creatorName(this.creator.getFullName())
                 .assignedUsers(this.assignedUsers.stream()
                         .map(User::toDto)
+                        .sorted(Comparator.comparing(UserResponseDTO::firstName)
+                                .thenComparing(UserResponseDTO::lastName))
                         .toList())
                 .columnList(this.columns.stream()
                         .map(Column::toDto)
@@ -125,12 +131,21 @@ public class Board extends BasicEntity {
 
     public Position getPositionForNewRow() {
         int rowsNumber = this.getRows().size();
+        if (rowsNumber > 0) rowsNumber -= 1;
         return new Position(rowsNumber);
     }
 
     public void deleteRow(Row row) {
         this.rows.remove(row);
         row.setBoard(null);
+    }
+
+    public void assignUser(User user) {
+        this.assignedUsers.add(user);
+    }
+
+    public void removeUser(User user) {
+        this.assignedUsers.remove(user);
     }
 
 }

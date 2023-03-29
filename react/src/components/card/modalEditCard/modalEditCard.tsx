@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Typography} from "@mui/material";
-import ModalEditCardProps from "@/components/card/interfaces/modalEditcardInterface/ModalEditCard";
+import React, {useState, useEffect} from 'react';
+import {Modal, Stack, Typography, Fade, Backdrop, Button, TextField, Box} from "@mui/material";
+import ModalEditCardProps from "@/componenets/card/interfaces/modalEditcardInterface/ModalEditCard";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {updateCard} from "@/services/utils/cardUtils/cardUtils";
-import IconMenu from "@/components/card/modalEditCardMenu/modalEditCardMenu";
-
+import CardMenu from "@/componenets/card/modalEditCardMenu/modalEditCardMenu";
 export default function ModalEditCard(props:ModalEditCardProps) {
     const [title, setTitle] = useState(props.title);
     const [desc, setDesc] = useState(props.desc);
@@ -83,9 +82,10 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                 justifyContent={'end'}
                             >
                                 <Box>
-                                    <IconMenu
-                                        id={props.id}
-                                        title={props.title}
+                                    <CardMenu
+                                        cardId={props.id}
+                                        cardTitle={props.title}
+                                        assignedUsers={props.assignedUsers}
                                         setModalDelete={props.setModalDelete}
                                         modalDelete={props.modalDelete}
                                         data={props.data}
