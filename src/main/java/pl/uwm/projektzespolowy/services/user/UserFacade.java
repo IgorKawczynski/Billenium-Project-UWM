@@ -4,11 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
-import pl.uwm.projektzespolowy.models.user.UserBoardsDTO;
-import pl.uwm.projektzespolowy.models.user.UserCreateDTO;
-import pl.uwm.projektzespolowy.models.user.UserLoginRequestDTO;
-import pl.uwm.projektzespolowy.models.user.UserLoginResponseDTO;
-import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
+import pl.uwm.projektzespolowy.models.user.*;
 import pl.uwm.projektzespolowy.security.SessionRegistry;
 import pl.uwm.projektzespolowy.services.user.crud.UserCRUDService;
 import pl.uwm.projektzespolowy.services.user.crud.UserLoginService;
@@ -45,6 +41,10 @@ public class UserFacade {
 
     public UserResponseDTO getUserById(Long userId) {
         return userCRUDService.getUserById(userId).toDto();
+    }
+
+    public UserResponseDTO getUserByEmail(String email) {
+        return userCRUDService.getUserByEmail(email).toDto();
     }
 
     public List<UserBoardsDTO> getAllUserBoards(Long userId) {

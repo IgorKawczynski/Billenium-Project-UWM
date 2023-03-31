@@ -1,11 +1,10 @@
-package pl.uwm.projektzespolowy;
+package pl.uwm.projektzespolowy.services;
 
 import org.junit.jupiter.api.Test;
 import pl.uwm.projektzespolowy.exceptions.ElementDoesNotExists;
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
-import pl.uwm.projektzespolowy.services.PositionableList;
 import static org.assertj.core.api.Assertions.*;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class PositionableListTest {
         // then
         assertThatThrownBy(() -> positionables.get(wrongPosition))
                 .isInstanceOf(ElementDoesNotExists.class)
-                .hasMessage("Element with position " + wrongPosition + " doesn't exists!");
+                .hasMessage("Element with position " + wrongPosition + " does not exist!");
     }
     @Test
     void shouldReturnPreviousCard() {
