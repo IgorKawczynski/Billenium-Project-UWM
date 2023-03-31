@@ -1,12 +1,12 @@
-import React, {useState} from "react";
-import {Button, FormControl, InputLabel, Box} from "@mui/material";
+import React from "react";
+import {Button, FormControl, InputLabel} from "@mui/material";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {ChangePasswordProps} from "@/components/userMain/interfaces/changePassword/changePassword";
-import {openModal, closeModal} from "@/services/utils/modalUtils/modalUtils";
+import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 
 const ChangePassword = (props:ChangePasswordProps) =>{
     const [showPassword, setShowPassword] = React.useState(false);

@@ -1,5 +1,4 @@
 import {_Data, Card} from "@/services/utils/boardUtils/DataBoard";
-import React, {SetStateAction} from "react";
 
 export interface ColumnCellProps{
     id:string

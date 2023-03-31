@@ -1,4 +1,3 @@
-import React, {SetStateAction} from "react";
 import {userBoardsData} from "@/services/utils/UserUtils/userBoardsData";
 
 export interface BoardCardProps{

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {ColumnCellProps} from "@/components/column/interfaces/columnCellInterface/ColumnCell";
 import Task from "@/components/card/card";
 import {Droppable} from "react-beautiful-dnd";
-import {Typography, useTheme, Tooltip, Box} from "@mui/material";
+import {Box, Tooltip, Typography, useTheme} from "@mui/material";
 import AddCardButton from "@/components/card/addCardButton/addCardButton";
 import StyledCardScrollbar from "@/assets/styles/styledScrollbar";
 import ModalRemoveRow from "@/components/row/modalRemoveRow/modalRemoveRow";

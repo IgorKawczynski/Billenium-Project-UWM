@@ -1,12 +1,13 @@
 import React from "react";
 import {Draggable, Droppable} from 'react-beautiful-dnd'
 import Card from "@mui/material/Card"
-import {Avatar, AvatarGroup, Tooltip, useTheme} from "@mui/material"
+import {useTheme} from "@mui/material"
 import CardProps from '@/components/card/interfaces/cardInterface/Card'
 import EditCardButton from '@/components/card/editCardButton/editCardButton'
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import CardUsers from "@/components/card/cardUsers/cardUsers";
+
 const Task = (props:CardProps) => {
     const theme = useTheme()
     return(

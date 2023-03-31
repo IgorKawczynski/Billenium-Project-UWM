@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Stack, Grid, Box, Typography, useTheme} from '@mui/material'
+import {Box, Grid, Stack, Typography, useTheme} from '@mui/material'
 import UserMenu from "@/components/menus/userMenu/menu";
 import BoardCard from "@/components/board/boardCard/boardCard";
 import ModalUserEditProfile from "@/components/userMain/modalUserEditProfile/modalUserEditProfile";

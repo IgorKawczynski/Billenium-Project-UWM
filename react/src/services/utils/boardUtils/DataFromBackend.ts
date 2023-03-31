@@ -1,4 +1,5 @@
 import {Card} from "@/services/utils/boardUtils/DataBoard";
+
 export default interface DataFromBackend {
         id:string
         title: string;

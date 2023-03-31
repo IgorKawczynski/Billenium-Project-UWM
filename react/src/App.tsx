@@ -2,10 +2,11 @@ import React, {useEffect, useMemo} from 'react'
 import Board from "./pages/board/board"
 import Home from "./pages/home/home";
 import {Route, Routes} from "react-router-dom";
-import {createTheme,  ThemeProvider} from '@mui/material/styles';
-import {lightOptions, darkOptions} from './assets/themes/BasicTheme'
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {darkOptions, lightOptions} from './assets/themes/BasicTheme'
 import {SnackbarProvider, useSnackbar} from 'notistack'
 import UserMain from "@/pages/userMain/userMain";
+
 export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 const customThemes = {

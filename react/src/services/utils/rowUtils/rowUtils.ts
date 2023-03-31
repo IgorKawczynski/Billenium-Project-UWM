@@ -2,7 +2,7 @@ import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
 import React, {SetStateAction} from "react";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
-import {enqueueSnackbar, EnqueueSnackbar} from "notistack";
+import {enqueueSnackbar} from "notistack";
 import {
     addRowToBackend,
     editRowToBackend,
@@ -10,6 +10,7 @@ import {
     removeRowToBackend
 } from "@/services/actions/rowService";
 import {getColumnsFromBackend} from "@/services/actions/columnService";
+
 export function addRow(name:string,
                           data:_Data["data"],
                           setData:_Data["setData"],

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Grid, Box, useTheme, Typography, IconButton, Tooltip} from "@mui/material";
+import {Box, Grid, IconButton, Tooltip, Typography, useTheme} from "@mui/material";
 import {ColorModeContext} from "@/App";
 import {Link} from "react-router-dom";
 import {BoardCardProps} from "@/components/board/interfaces/boardCard/boardCard";

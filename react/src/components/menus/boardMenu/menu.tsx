@@ -1,12 +1,11 @@
 import React from "react";
-import {Box, useTheme, Stack, Tooltip} from "@mui/material";
+import {Box, Stack, Tooltip, useTheme} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import {ColorModeContext} from "@/App";
 import LogoutIcon from '@mui/icons-material/Logout';
 import GroupIcon from '@mui/icons-material/Group';
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
-import BackupTableIcon from '@mui/icons-material/BackupTable';
 import {Link} from "react-router-dom";
 import {BoardMenuProps} from "@/components/menus/interfaces/boardMenu";
 import DashboardIcon from '@mui/icons-material/Dashboard';

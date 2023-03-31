@@ -1,4 +1,5 @@
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
+
 interface EditCardButtonProps {
 
     id: string;

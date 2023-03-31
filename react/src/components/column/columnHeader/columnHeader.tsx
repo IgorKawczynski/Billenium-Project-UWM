@@ -1,11 +1,12 @@
 import React from "react";
-import {useTheme, Typography, Box, Tooltip} from "@mui/material";
+import {Box, Tooltip, Typography, useTheme} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import {columnHeaderProps} from "@/components/column/interfaces/columnHeaderInterface/ColumnHeader";
 import AllInclusiveOutlinedIcon from '@mui/icons-material/AllInclusiveOutlined';
+
 const ColumnHeader = (props:columnHeaderProps) =>{
     const theme = useTheme();
 

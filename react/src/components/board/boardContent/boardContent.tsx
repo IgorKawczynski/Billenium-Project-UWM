@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import {onDragEnd} from "@/services/utils/boardUtils/boardUtils";
-import {Box, Button, Stack, useTheme} from "@mui/material";
+import {Box, Stack, useTheme} from "@mui/material";
 import Column from "@/components/column/column";
 import {boardContentProps} from "@/components/board/interfaces/boardContentInterface/BoardContent";
-import {StyledContentScrollbar} from "@/assets/styles/styledScrollbar";
 import BoardUsers from "@/components/users/usersMenu/boardUsers";
+
 const BoardContent = (props:boardContentProps) =>{
     const theme = useTheme();
     return(

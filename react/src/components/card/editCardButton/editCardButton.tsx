@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Box, useTheme, Tooltip} from "@mui/material";
+import {Box, Tooltip, useTheme} from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditCardButtonProps from "@/components/card/interfaces/editCardButtonInterface/EditCardButton";
 import ModalEditCard from "@/components/card/modalEditCard/modalEditCard";

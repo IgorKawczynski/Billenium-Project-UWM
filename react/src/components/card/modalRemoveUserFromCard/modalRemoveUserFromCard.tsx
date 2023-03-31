@@ -7,11 +7,11 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
 import {modalStyle} from "@/assets/themes/modalStyle";
-import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {
     ModalRemoveUserFromCardProps
 } from "@/components/card/interfaces/modalRemoveUserFromCard/modalRemoveUserFromCard";
 import {removeUserFromCard} from "@/services/utils/cardUtils/cardUtils";
+
 const ModalRemoveUserFromCard = (props:ModalRemoveUserFromCardProps) => {
     const handleClose = () => {
         props.setAnchorEl(null);

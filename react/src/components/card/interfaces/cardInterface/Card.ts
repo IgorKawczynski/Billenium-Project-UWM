@@ -1,5 +1,5 @@
-import {_Data} from "@/services/utils/boardUtils/DataBoard";
-import {Card} from "@/services/utils/boardUtils/DataBoard";
+import {_Data, Card} from "@/services/utils/boardUtils/DataBoard";
+
 interface CardProps {
     id: string
     title: string
