@@ -14,10 +14,7 @@ import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -63,6 +60,7 @@ public class Card extends BasicEntity implements Positionable {
         this.position = position;
         this.assignedUsers = new HashSet<>();
         this.color = ColorValue.DEFAULT;
+        this.checkboxes = new ArrayList<>();
     }
 
     public CardResponseDTO toDto() {
@@ -78,6 +76,8 @@ public class Card extends BasicEntity implements Positionable {
                         .sorted(Comparator.comparing(UserResponseDTO::firstName)
                                 .thenComparing(UserResponseDTO::lastName))
                         .collect(Collectors.toList()))
+//                TODO: Create checkboxDTO and sort by id
+//                .checkboxes(this.checkboxes)
                 .build();
     }
 
