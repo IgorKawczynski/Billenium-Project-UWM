@@ -116,4 +116,40 @@ public class PositionableListTest {
         assertThat(positionables.list()).containsOnlyOnce(fourthCard, sixthCard, seventhCard, eighthCard);
     }
 
+    @Test
+    void shouldMoveInRangeCardsToLeft() {
+       // given
+       var newPositionForCardWithPositionEqualsFour = new Position(7);
+       // when
+       positionables.moveInRange(fourthCard.getPosition(), newPositionForCardWithPositionEqualsFour);
+       fourthCard.getPosition().moveTo(newPositionForCardWithPositionEqualsFour.value());
+       // then
+       assertThat(firstCard.getPosition().value()).isEqualTo(0);
+       assertThat(secondCard.getPosition().value()).isEqualTo(1);
+       assertThat(thirdCard.getPosition().value()).isEqualTo(2);
+       assertThat(fourthCard.getPosition().value()).isEqualTo(7);
+       assertThat(fifthCard.getPosition().value()).isEqualTo(3);
+       assertThat(sixthCard.getPosition().value()).isEqualTo(4);
+       assertThat(seventhCard.getPosition().value()).isEqualTo(5);
+       assertThat(eighthCard.getPosition().value()).isEqualTo(6);
+    }
+
+    @Test
+    void shouldMoveInRangeCards() {
+        // given
+        var newPositionForCardWithPositionEqualsFour = new Position(1);
+        // when
+        positionables.moveInRange(fourthCard.getPosition(), newPositionForCardWithPositionEqualsFour);
+        fourthCard.getPosition().moveTo(newPositionForCardWithPositionEqualsFour.value());
+        // then
+        assertThat(firstCard.getPosition().value()).isEqualTo(0);
+        assertThat(secondCard.getPosition().value()).isEqualTo(2);
+        assertThat(thirdCard.getPosition().value()).isEqualTo(3);
+        assertThat(fourthCard.getPosition().value()).isEqualTo(1);
+        assertThat(fifthCard.getPosition().value()).isEqualTo(4);
+        assertThat(sixthCard.getPosition().value()).isEqualTo(5);
+        assertThat(seventhCard.getPosition().value()).isEqualTo(6);
+        assertThat(eighthCard.getPosition().value()).isEqualTo(7);
+    }
+
 }
