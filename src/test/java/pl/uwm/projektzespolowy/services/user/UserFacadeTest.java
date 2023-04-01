@@ -56,7 +56,7 @@ class UserFacadeTest {
                         "passwordSecondTest")
         ))
                 .isInstanceOf(EmailAlreadyExistsException.class)
-                .hasMessage("User with given email already exists");
+                .hasMessage("User with given email already exists.");
     }
 
     @Test
