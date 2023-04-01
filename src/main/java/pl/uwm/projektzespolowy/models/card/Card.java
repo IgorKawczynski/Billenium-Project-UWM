@@ -8,6 +8,7 @@ import pl.uwm.projektzespolowy.models.Positionable;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.checkbox.Checkbox;
+import pl.uwm.projektzespolowy.models.checkbox.CheckboxResponseDTO;
 import pl.uwm.projektzespolowy.models.color.ColorValue;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
@@ -76,8 +77,10 @@ public class Card extends BasicEntity implements Positionable {
                         .sorted(Comparator.comparing(UserResponseDTO::firstName)
                                 .thenComparing(UserResponseDTO::lastName))
                         .collect(Collectors.toList()))
-//                TODO: Create checkboxDTO and sort by id
-//                .checkboxes(this.checkboxes)
+                .checkboxes(this.checkboxes.stream()
+                        .map(Checkbox::toDto)
+                        .sorted(Comparator.comparing(CheckboxResponseDTO::id))
+                        .toList())
                 .build();
     }
 

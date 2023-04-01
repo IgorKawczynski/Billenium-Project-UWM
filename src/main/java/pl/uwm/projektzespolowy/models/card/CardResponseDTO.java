@@ -1,7 +1,7 @@
 package pl.uwm.projektzespolowy.models.card;
 
 import lombok.Builder;
-import pl.uwm.projektzespolowy.models.checkbox.Checkbox;
+import pl.uwm.projektzespolowy.models.checkbox.CheckboxResponseDTO;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public record CardResponseDTO(String id,
                               Integer position,
                               String color,
                               List<UserResponseDTO> assignedUsers,
-                              List<Checkbox> checkboxes) {
+                              List<CheckboxResponseDTO> checkboxes) {
 
     @Builder public CardResponseDTO {}
 

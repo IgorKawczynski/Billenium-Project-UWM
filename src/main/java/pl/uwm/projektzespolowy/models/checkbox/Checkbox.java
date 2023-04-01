@@ -34,4 +34,13 @@ public class Checkbox extends BasicEntity {
         this.card = card;
     }
 
+    public CheckboxResponseDTO toDto() {
+        return CheckboxResponseDTO
+                .builder()
+                .id(String.valueOf(this.id))
+                .title(this.title.toString())
+                .isChecked(this.isChecked)
+                .build();
+    }
+
 }
