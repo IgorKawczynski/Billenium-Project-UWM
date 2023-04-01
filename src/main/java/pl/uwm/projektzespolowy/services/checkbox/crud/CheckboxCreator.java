@@ -8,7 +8,7 @@ import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 @Component
 @RequiredArgsConstructor
-public class CheckboxCreator {
+class CheckboxCreator {
 
     private final CheckboxRepository checkboxRepository;
 

@@ -4,8 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.uwm.projektzespolowy.models.checkbox.Checkbox;
 
-@Repository
-public interface CheckboxRepository extends JpaRepository<Checkbox, Long> {
+import java.util.List;
 
+@Repository
+interface CheckboxRepository extends JpaRepository<Checkbox, Long> {
+
+    List<Checkbox> findAllByCardId(Long cardId);
 
 }
