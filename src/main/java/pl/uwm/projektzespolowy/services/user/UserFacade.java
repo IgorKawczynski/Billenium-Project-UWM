@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 import pl.uwm.projektzespolowy.models.user.*;
 import pl.uwm.projektzespolowy.security.SessionRegistry;
 import pl.uwm.projektzespolowy.services.user.crud.UserCRUDService;
@@ -17,6 +18,7 @@ public class UserFacade {
 
     private final UserCRUDService userCRUDService;
     private final UserLoginService userLoginService;
+    private final UserAvatarService userAvatarService;
     private final AuthenticationManager authenticationManager;
     private final SessionRegistry sessionRegistry;
 
@@ -49,6 +51,11 @@ public class UserFacade {
 
     public List<UserBoardsDTO> getAllUserBoards(Long userId) {
         return userCRUDService.getAllUserBoardsById(userId);
+    }
+
+    public void changeUserAvatar(Long userId, MultipartFile avatarImage) {
+        var user = userCRUDService.getUserById(userId);
+        userAvatarService.changeUserAvatar(user, avatarImage);
     }
 
     public void deleteUser(Long userId) {
