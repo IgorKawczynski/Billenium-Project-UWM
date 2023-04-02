@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {Box, Tooltip, useTheme} from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import EditCardButtonProps from "@/components/card/interfaces/editCardButtonInterface/EditCardButton";
+import EditCardButtonProps from "@/components/card/interfaces/editCardButton/EditCardButton";
 import ModalEditCard from "@/components/card/modalEditCard/modalEditCard";
 import ModalRemoveCard from "@/components/card/modalRemoveCard/modalRemoveCard";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
@@ -45,6 +45,7 @@ export default function EditCardButton(props:EditCardButtonProps) {
                 desc={props.desc}
                 assignedUsers={props.assignedUsers}
                 setModalEdit={setModalEdit}
+                subtasks={60}
                 modalEdit={modalEdit}
                 data={props.data}
                 setData={props.setData}

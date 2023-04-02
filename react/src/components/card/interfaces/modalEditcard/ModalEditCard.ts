@@ -6,6 +6,8 @@ interface ModalEditCardProps {
     cellId:string;
     title:string;
     desc:string;
+
+    subtasks:number
     assignedUsers:{
         id: string;
         firstName: string;

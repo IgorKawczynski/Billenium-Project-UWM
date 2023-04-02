@@ -6,7 +6,7 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import ModalAddCardProps from "@/components/card/interfaces/modalAddCardInterface/ModalAddCard";
+import ModalAddCardProps from "@/components/card/interfaces/modalAddCard/ModalAddCard";
 import {modalStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {addCard} from "@/services/utils/cardUtils/cardUtils";

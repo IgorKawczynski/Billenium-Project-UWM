@@ -5,7 +5,7 @@ import Fade from "@mui/material/Fade";
 import {Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import ModalRemoveCardProps from "@/components/card/interfaces/modalRemoveCardInterface/ModalRemoveCard";
+import ModalRemoveCardProps from "@/components/card/interfaces/modalRemoveCard/ModalRemoveCard";
 import Stack from "@mui/material/Stack";
 import {modalStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
