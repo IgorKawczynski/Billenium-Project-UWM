@@ -53,6 +53,8 @@ public class Card extends BasicEntity implements Positionable {
                orphanRemoval = true)
     List<Checkbox> checkboxes;
 
+    @Column(name = "is_locked")
+    boolean isLocked;
 
     public Card(Title title, String description, Cell cell, Position position) {
         this.title = title;
@@ -62,6 +64,7 @@ public class Card extends BasicEntity implements Positionable {
         this.assignedUsers = new HashSet<>();
         this.color = ColorValue.DEFAULT;
         this.checkboxes = new ArrayList<>();
+        this.isLocked = false;
     }
 
     public CardResponseDTO toDto() {
@@ -81,6 +84,7 @@ public class Card extends BasicEntity implements Positionable {
                         .map(Checkbox::toDto)
                         .sorted(Comparator.comparing(CheckboxResponseDTO::id))
                         .toList())
+                .isLocked(this.isLocked)
                 .build();
     }
 

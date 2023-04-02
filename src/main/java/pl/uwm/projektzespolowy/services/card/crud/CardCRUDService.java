@@ -38,6 +38,16 @@ public class CardCRUDService {
         return cardUpdater.editCard(cardToChange, newTitle, newDescription);
     }
 
+    public Card markAsLocked(Long cardId) {
+        var cardToChange = cardReader.getCardById(cardId);
+        return cardUpdater.markAsLocked(cardToChange);
+    }
+
+    public Card markAsUnlocked(Long cardId) {
+        var cardToChange = cardReader.getCardById(cardId);
+        return cardUpdater.markAsUnlocked(cardToChange);
+    }
+
     public Card assignUserToCard(Long cardId, User userToAssign) {
         var card = cardReader.getCardById(cardId);
         return cardUpdater.assignUserToCard(card, userToAssign);

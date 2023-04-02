@@ -17,7 +17,6 @@ public class UserLogin {
         userValidator.isNull("email", userLoginRequestDTO.email());
         userValidator.isNull("password", userLoginRequestDTO.password());
         userValidator.checkIfUserExists(userLoginRequestDTO.email());
-        // TODO --> check error 401, change decodin / smth else
         userValidator.checkIfCredentialsAreProper(userLoginRequestDTO.email(), userLoginRequestDTO.password());
 
         return userRepository.findRegisteredUserByEmail(userLoginRequestDTO.email());
