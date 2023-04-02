@@ -53,9 +53,11 @@ public class UserFacade {
         return userCRUDService.getAllUserBoardsById(userId);
     }
 
-    public void changeUserAvatar(Long userId, MultipartFile avatarImage) {
+    public UserResponseDTO changeUserAvatar(Long userId, MultipartFile avatarImage) {
         var user = userCRUDService.getUserById(userId);
         userAvatarService.changeUserAvatar(user, avatarImage);
+        userCRUDService.saveChangedUser(user);
+        return user.toDto();
     }
 
     public void deleteUser(Long userId) {

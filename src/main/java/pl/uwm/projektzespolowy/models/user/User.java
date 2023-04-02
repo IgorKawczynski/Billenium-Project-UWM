@@ -50,6 +50,7 @@ public class User extends BasicEntity {
                 .id(this.id.toString())
                 .firstName(this.firstName)
                 .lastName(this.lastName)
+                .avatarPath(this.avatarPath)
                 .build();
     }
 
