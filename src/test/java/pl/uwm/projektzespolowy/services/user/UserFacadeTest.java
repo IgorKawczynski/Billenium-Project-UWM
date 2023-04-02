@@ -77,9 +77,21 @@ class UserFacadeTest {
         assertThat(userLoginResponseDTO.sessionId()).isBase64();
     }
 
-
     @Test
     @Order(4)
+    void shouldLoginUnsuccessfully() {
+        // when
+        String rawPassword = "passwordTestBAD";
+        var user = userCRUDService.getUserByEmail("emailTest@op.pl");
+        var userToLogin = new UserLoginRequestDTO(user.getEmail(), rawPassword);
+        // then
+        assertThatThrownBy(() -> userFacade.login(userToLogin))
+                .isInstanceOf(BadCredentialsException.class)
+                .hasMessage("You have written bad email or password.");
+    }
+
+    @Test
+    @Order(5)
     void isUserProperlyDeleted() {
         // when
         var user = userFacade.getUserByEmail("emailTest@op.pl");
