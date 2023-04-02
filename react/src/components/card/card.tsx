@@ -7,6 +7,7 @@ import EditCardButton from '@/components/card/editCardButton/editCardButton'
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import CardUsers from "@/components/card/cardUsers/cardUsers";
+import {CardPercentageCompleted} from "@/components/card/cardPercentageCompleted/cardPercentageCompleted";
 
 const Task = (props:CardProps) => {
     const theme = useTheme()
@@ -101,12 +102,15 @@ const Task = (props:CardProps) => {
                                                 {props.desc.length > 20 && (props.desc.slice(0,22) + "...")}
                                                 {props.desc.length < 20 && (props.desc)}
                                             </Typography>
+                                            <Box display={"flex"} justifyContent={"space-between"} marginTop={1}>
+                                                <CardPercentageCompleted subtasks={90}/>
 
-                                            <CardUsers
-                                                providedDrop={providedDrop}
-                                                id={props.id}
-                                                assignedUsers={props.assignedUsers}
-                                            />
+                                                <CardUsers
+                                                    providedDrop={providedDrop}
+                                                    id={props.id}
+                                                    assignedUsers={props.assignedUsers}
+                                                />
+                                            </Box>
                                         </Box>
                                     </Box>
                                 </Card>

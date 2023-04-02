@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Typography} from "@mui/material";
-import ModalEditCardProps from "@/components/card/interfaces/modalEditcardInterface/ModalEditCard";
+import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Typography, useTheme, FormControlLabel, Checkbox} from "@mui/material";
+import ModalEditCardProps from "@/components/card/interfaces/modalEditcard/ModalEditCard";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {updateCard} from "@/services/utils/cardUtils/cardUtils";
 import CardMenu from "@/components/card/modalEditCardMenu/modalEditCardMenu";
+import ModalEditCardSubtasks from "@/components/card/modalEditCardSubtasks/modalEditCardSubtasks";
 
 export default function ModalEditCard(props:ModalEditCardProps) {
     const [title, setTitle] = useState(props.title);
     const [desc, setDesc] = useState(props.desc);
+    const theme = useTheme()
 
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
@@ -75,6 +77,7 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                         value={desc}
                                         onChange={handleDescChange}
                                     />
+                                <ModalEditCardSubtasks cardId={props.id} subtasks={60}/>
                             </Box>
                             <Box
                                 width={'50%'}
