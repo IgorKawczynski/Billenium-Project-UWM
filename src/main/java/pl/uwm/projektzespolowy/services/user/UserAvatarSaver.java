@@ -4,6 +4,7 @@ import com.google.common.io.Files;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import pl.uwm.projektzespolowy.exceptions.fileexceptions.CreatingFileException;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,18 +15,18 @@ import static pl.uwm.projektzespolowy.services.user.UserAvatarService.IMAGES_STO
 @RequiredArgsConstructor
 class UserAvatarSaver {
 
-    public void save(Long userId, MultipartFile file) {
-        if (file == null || file.getOriginalFilename() == null) {
-            throw new IllegalArgumentException(); // custom exception
-        }
+    public void saveAvatar(Long userId, MultipartFile file) {
         try {
             var fileExtension = Files.getFileExtension(file.getOriginalFilename());
-            File image = new File(IMAGES_STORED_PATH + userId.toString() + "." + fileExtension);
+            var image = new File(IMAGES_STORED_PATH + userId + "." + fileExtension);
             image.createNewFile();
             file.transferTo(image.getAbsoluteFile());
         }
         catch (IOException exception) {
-            throw new IllegalArgumentException(); // custom exception
+            // IOException is thrown here if the 'image' object path is invalid,
+            // so if it occurs, we must repair path.
+            // Might also occur if the directory from IMAGES_STORED_PATH doesn't exist
+            throw new CreatingFileException("Error while adding an avatar.");
         }
     }
 
