@@ -57,6 +57,14 @@ public class CardFacade {
         return cardCRUDService.updateCard(cardId, newTitle, newDescription).toDto();
     }
 
+    public CardResponseDTO markAsLocked(Long cardId) {
+        return cardCRUDService.markAsLocked(cardId).toDto();
+    }
+
+    public CardResponseDTO markAsUnlocked(Long cardId) {
+        return cardCRUDService.markAsUnlocked(cardId).toDto();
+    }
+
     public CardResponseDTO assignUserToCard(CardUserUpdateDTO cardUserUpdateDTO) {
         var userToAssign = userCRUDService.getUserById(Long.parseLong(cardUserUpdateDTO.userId()));
         var cardId = Long.parseLong(cardUserUpdateDTO.cardId());
