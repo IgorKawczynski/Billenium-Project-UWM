@@ -34,6 +34,10 @@ public class UserCRUDService {
         return userReader.getUserByEmail(email);
     }
 
+    public void saveChangedUser(User user) {
+        userUpdater.saveChangedUser(user);
+    }
+
     public void deleteUser(Long userId) {
         userDeleter.deleteUser(userId);
     }

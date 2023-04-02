@@ -45,8 +45,9 @@ public class UserController {
     }
 
     @PutMapping("/{userId}/avatar")
-    public void uploadImage(@PathVariable Long userId, @RequestParam("image") MultipartFile avatarImage) {
-        userFacade.changeUserAvatar(userId, avatarImage);
+    @ResponseStatus(HttpStatus.OK)
+    public UserResponseDTO uploadImage(@PathVariable Long userId, @RequestParam("image") MultipartFile avatarImage) {
+        return userFacade.changeUserAvatar(userId, avatarImage);
     }
 
     @DeleteMapping("/{userId}")
