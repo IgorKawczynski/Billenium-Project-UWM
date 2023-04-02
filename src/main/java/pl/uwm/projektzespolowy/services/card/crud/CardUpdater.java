@@ -44,4 +44,14 @@ class CardUpdater {
         return cardRepository.saveAndFlush(cardToChange);
     }
 
+    public Card markAsLocked(Card cardToChange) {
+        cardToChange.setLocked(true);
+        return cardRepository.saveAndFlush(cardToChange);
+    }
+
+    public Card markAsUnlocked(Card cardToChange) {
+        cardToChange.setLocked(false);
+        return cardRepository.saveAndFlush(cardToChange);
+    }
+
 }
