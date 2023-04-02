@@ -16,7 +16,7 @@ class CardReader {
     public Card getCardById(Long cardId) {
         return cardRepository.findById(cardId).orElseThrow(
                         () -> new EntityNotFoundException("card", "Card with id: " + cardId + " does not exist!")
-                );
+        );
     }
 
     public List<Card> getAllCardsByCellId(Long cellId) {

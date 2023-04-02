@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pl.uwm.projektzespolowy.models.user.*;
 
 import java.util.List;
@@ -41,6 +42,11 @@ public class UserController {
     )
     public UserLoginResponseDTO login(@RequestBody UserLoginRequestDTO user) {
         return userFacade.login(user);
+    }
+
+    @PutMapping("/{userId}/avatar")
+    public void uploadImage(@PathVariable Long userId, @RequestParam("image") MultipartFile avatarImage) {
+        userFacade.changeUserAvatar(userId, avatarImage);
     }
 
     @DeleteMapping("/{userId}")

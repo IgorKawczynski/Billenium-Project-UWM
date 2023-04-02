@@ -17,19 +17,24 @@ class UserCreator {
 
     public User createUser(UserCreateDTO userCreateDTO) {
         userValidator.checkIfUserAlreadyExists(userCreateDTO.email());
-        userValidator.isNull("firstName", userCreateDTO.firstName());
-        userValidator.validateFieldLength("firstName", userCreateDTO.firstName(), 2, 45);
-        userValidator.validateFieldRegex("firstName", userCreateDTO.firstName(), UserValidator.NAME_REGEX);
-        userValidator.isNull("lastName", userCreateDTO.lastName());
-        userValidator.validateFieldLength("lastName", userCreateDTO.lastName(), 2, 45);
-        userValidator.validateFieldRegex("lastName", userCreateDTO.lastName(), UserValidator.NAME_REGEX);
-        userValidator.isNull("email", userCreateDTO.email());
+
+        userValidator.isNull("First name", userCreateDTO.firstName());
+        userValidator.validateFieldLength("First name", userCreateDTO.firstName(), 2, 45);
+        userValidator.validateFieldRegex("First name", userCreateDTO.firstName(), UserValidator.NAME_REGEX);
+
+        userValidator.isNull("Last name", userCreateDTO.lastName());
+        userValidator.validateFieldLength("Last name", userCreateDTO.lastName(), 2, 45);
+        userValidator.validateFieldRegex("Last name", userCreateDTO.lastName(), UserValidator.NAME_REGEX);
+
+        userValidator.isNull("Email", userCreateDTO.email());
         userValidator.emailContainsAtSign(userCreateDTO.email());
-        userValidator.validateFieldLength("email", userCreateDTO.email(), 5, 45);
-        userValidator.validateFieldRegex("email", userCreateDTO.email(), UserValidator.EMAIL_REGEX);
-        userValidator.isNull("password", userCreateDTO.password());
-        userValidator.validateFieldLength("password", userCreateDTO.password(), 8, 45);
-        userValidator.validateFieldRegex("password", userCreateDTO.password(), UserValidator.PASSWORD_REGEX);
+        userValidator.validateFieldLength("Email", userCreateDTO.email(), 5, 45);
+        userValidator.validateFieldRegex("Email", userCreateDTO.email(), UserValidator.EMAIL_REGEX);
+
+        userValidator.isNull("Password", userCreateDTO.password());
+        userValidator.validateFieldLength("Password", userCreateDTO.password(), 8, 45);
+        userValidator.validateFieldRegex("Password", userCreateDTO.password(), UserValidator.PASSWORD_REGEX);
+
         var userToCreate = new User(userCreateDTO.email(), passwordEncoder.encode(userCreateDTO.password()), userCreateDTO.firstName(), userCreateDTO.lastName());
         userRepository.save(userToCreate);
         return userToCreate;

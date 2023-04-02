@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>pl.uwm</groupId>
 	<artifactId>projektzespolowy</artifactId>
-	<version>1.0-CORE-0</version>
+	<version>1.0-TRANSITION-2</version>
 	<name>projektzespolowy</name>
 	<description>Kanban Table implementation</description>
 	<properties>
@@ -41,6 +41,10 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
@@ -54,6 +58,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>31.1-jre</version>
 		</dependency>
 	</dependencies>
 
@@ -70,6 +79,43 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>8.0.0</version>
+				<configuration>
+					<user>postgres</user>
+					<password>qwerty</password>
+					<sqlMigrationSeparator>__</sqlMigrationSeparator>
+					<locations>
+						<location>filesystem:src/main/resources/flyway_scripts</location>
+					</locations>
+					<mixed>true</mixed> <!--> needed to create sequence <!-->
+					<url>jdbc:postgresql://localhost:5432/kanban</url>
+					<schemas>
+						<schema>public</schema>
+					</schemas>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.7</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

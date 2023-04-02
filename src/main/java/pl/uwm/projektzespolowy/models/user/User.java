@@ -27,6 +27,7 @@ public class User extends BasicEntity {
     String password;
     String firstName;
     String lastName;
+    String avatarPath;
 
     @ManyToMany(mappedBy = "assignedUsers")
     Set<Board> boards;
@@ -40,6 +41,7 @@ public class User extends BasicEntity {
         this.lastName = lastName;
         this.boards = new HashSet<>();
         this.cards = new HashSet<>();
+        this.avatarPath = null;
     }
 
     public UserResponseDTO toDto() {
