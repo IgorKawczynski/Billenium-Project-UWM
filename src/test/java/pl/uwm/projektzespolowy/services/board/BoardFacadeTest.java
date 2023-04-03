@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.models;
+package pl.uwm.projektzespolowy.services.board;
 
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.*;
@@ -10,7 +10,6 @@ import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.user.UserCreateDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
-import pl.uwm.projektzespolowy.services.board.BoardFacade;
 import pl.uwm.projektzespolowy.services.user.UserFacade;
 
 import static org.assertj.core.api.Assertions.*;
