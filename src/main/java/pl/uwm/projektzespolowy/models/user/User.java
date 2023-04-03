@@ -50,6 +50,7 @@ public class User extends BasicEntity {
         return UserResponseDTO
                 .builder()
                 .id(this.id.toString())
+                .email(this.email)
                 .firstName(this.firstName)
                 .lastName(this.lastName)
                 .avatarPath(this.avatarPath)
