@@ -5,12 +5,7 @@ export interface _Data {
         id:string
         title: string;
         creatorName: string;
-        assignedUsers: {
-            id: string;
-            firstName: string;
-            lastName:string;
-            avatarPath:string;
-        }[];
+        assignedUsers:assignedUser[]
         columnList:Column[];
 
         rowList: Row[];
@@ -22,12 +17,7 @@ export interface _Data {
             id: string
             title: string;
             creatorName: string;
-            assignedUsers: {
-                id: string;
-                firstName: string;
-                lastName: string;
-                avatarPath:string;
-            }[];
+            assignedUsers: assignedUser[]
 
             columnList: Column[];
 
@@ -73,12 +63,7 @@ export interface Card{
     position:number;
     color:string;
 
-    assignedUsers:{
-        id: string;
-        firstName: string;
-        lastName: string;
-        avatarPath:string;
-    }[]
+    assignedUsers:assignedUser[]
     checkboxes:{
         id:number
         title:string
@@ -86,4 +71,17 @@ export interface Card{
     }[]
     isLocked:boolean
 };
+export interface assignedUser{
+    id: string;
+    firstName: string;
+    lastName: string;
+    avatarPath:string;
+}
+export interface activeUser{
+    id: string;
+    firstName: string;
+    lastName: string;
+    email:string;
+    avatarPath:string;
+}
 

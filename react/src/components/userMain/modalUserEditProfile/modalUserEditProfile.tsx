@@ -1,10 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Typography, useTheme} from "@mui/material";
+import {
+    Avatar,
+    Backdrop,
+    Box,
+    Button,
+    Fade,
+    Modal,
+    Stack,
+    TextField,
+    Tooltip,
+    Typography,
+    useTheme,
+    IconButton
+} from "@mui/material";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {ModalUserEditProfileProps} from "@/components/userMain/interfaces/modalUserEditProfile/modalUserEditProfile";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import {PhotoCamera} from "@mui/icons-material";
 import ChangePassword from "@/components/userMain/changePassword/changePassword";
+import {changeAvatar} from "@/services/utils/UserUtils/userMainUtils";
 
 const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     const [firstName, setFirstName] = useState(props.firstName);
@@ -14,7 +28,6 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     const [repeatPassword, setRepeatPassword] = useState("");
     const [passwordToChange, setPasswordToChange] =useState(false);
     const theme = useTheme()
-
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
         setFirstName(props.firstName);
@@ -45,6 +58,18 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     };const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
     };
+    function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) {
+        if(event.target.files){
+            const file = event.target.files[0];
+            const image = new FormData();
+            image.append('avatarImage', file)
+            changeAvatar(
+                props.userId,
+                image,
+                props.setActiveUser
+            )
+        };
+    }
 
     return (
         <Modal
@@ -67,9 +92,30 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                         display={"flex"}
                         alignItems={"center"}
                     >
-                        <AccountCircleIcon
-                            sx={{color:theme.palette.text.primary}}
-                        />
+
+                            <Avatar
+                                src={props.avatarPath && props.avatarPath}
+                                sx={{
+                                    bgcolor:theme.palette.primary.main
+                                }}
+                            >
+                                <Typography variant={"body1"}>
+                                    {props.firstName[0].toUpperCase() + props.lastName[0].toUpperCase()}
+                                </Typography>
+                            </Avatar>
+                        <Tooltip
+                            title={"Upload your avatar"}
+                            placement={"top"}
+                        >
+                            <IconButton
+                                color="primary"
+                                aria-label="upload picture"
+                                component="label"
+                            >
+                                <input hidden accept="image/*" type="file" onChange={handleFileUpload}/>
+                                <PhotoCamera />
+                            </IconButton>
+                    </Tooltip>
                         <Typography
                             color={'textPrimary'}
                             id="transition-modal-title"
