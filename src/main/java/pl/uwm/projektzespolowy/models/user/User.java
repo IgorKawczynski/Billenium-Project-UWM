@@ -9,9 +9,7 @@ import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.card.Card;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,12 +27,15 @@ public class User extends BasicEntity {
     String lastName;
     String avatarPath;
 
+    @Enumerated(EnumType.STRING)
+    AvatarColor avatarColor;
+
     @ManyToMany(mappedBy = "assignedUsers")
     Set<Board> boards;
     @ManyToMany(mappedBy = "assignedUsers")
     Set<Card> cards;
 
-    public User(String email, String password, String firstName, String lastName) {
+    public User(String email, String password, String firstName, String lastName, AvatarColor avatarColor) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -42,6 +43,7 @@ public class User extends BasicEntity {
         this.boards = new HashSet<>();
         this.cards = new HashSet<>();
         this.avatarPath = null;
+        this.avatarColor = avatarColor;
     }
 
     public UserResponseDTO toDto() {
@@ -51,6 +53,7 @@ public class User extends BasicEntity {
                 .firstName(this.firstName)
                 .lastName(this.lastName)
                 .avatarPath(this.avatarPath)
+                .avatarColor(this.avatarColor.getValue())
                 .build();
     }
 
