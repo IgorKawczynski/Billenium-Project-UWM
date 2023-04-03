@@ -95,6 +95,7 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                     />
                                 <ModalEditCardSubtasks
                                     cardId={props.id}
+                                    cardTitle={props.title}
                                     subtasks={props.subtasks}
                                     data={props.data}
                                     setData={props.setData}

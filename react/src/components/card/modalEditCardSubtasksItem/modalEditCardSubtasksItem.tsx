@@ -9,10 +9,12 @@ import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import RedoIcon from "@mui/icons-material/Redo";
 import {checkSubtask, removeSubtask, uncheckSubtask, updateSubtask} from "@/services/utils/cardUtils/subtaskUtils";
+import ModalRemoveSubtaskFromCard from "@/components/card/modalRemoveSubtaskFromCard/modalRemoveSubtaskFromCard";
 
 const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
     const theme = useTheme()
     const [isChecked, setIsChecked] = useState(props.isChecked)
+    const [modalDelete, setModalDelete] = useState(false)
     const [title, setTitle] = useState(props.title)
     const [open, setOpen] = useState(false)
 
@@ -65,31 +67,30 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
                             }
                             label={props.title}
                         />
-                        <IconButton
-                            sx={{
-                                maxWidth:'35px',
-                                maxHeight:'35px'
-                            }}
-                            size={"small"}
-                            onClick={() => openModal(setOpen)}
-                        >
-                            <BorderColorOutlinedIcon/>
-                        </IconButton>
-                        <IconButton
-                            sx={{
-                                maxWidth:'35px',
-                                maxHeight:'35px'
-                            }}
-                            size={"small"}
-                            onClick={() => removeSubtask(
-                                                        props.id,
-                                                        title,
-                                                        props.data,
-                                                        props.setData
-                                                    )}
-                        >
-                            <DeleteOutlinedIcon/>
-                        </IconButton>
+                        <Tooltip title={'Edit subtask'}>
+                            <IconButton
+                                sx={{
+                                    maxWidth:'35px',
+                                    maxHeight:'35px'
+                                }}
+                                size={"small"}
+                                onClick={() => openModal(setOpen)}
+                            >
+                                <BorderColorOutlinedIcon/>
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title={"Delete subtask"}>
+                            <IconButton
+                                sx={{
+                                    maxWidth:'35px',
+                                    maxHeight:'35px'
+                                }}
+                                size={"small"}
+                                onClick={() => openModal(setModalDelete)}
+                            >
+                                <DeleteOutlinedIcon/>
+                            </IconButton>
+                        </Tooltip>
                     </Box>
                 )
             }
@@ -133,7 +134,15 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
                 </Box>
             )
             }
-
+            <ModalRemoveSubtaskFromCard
+                id={props.id}
+                title={props.title}
+                cardTitle={props.cardTitle}
+                data={props.data}
+                setData={props.setData}
+                modalDelete={modalDelete}
+                setModalDelete={setModalDelete}
+            />
         </>
     )
 }

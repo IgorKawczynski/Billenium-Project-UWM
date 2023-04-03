@@ -6,6 +6,7 @@ export interface ModalEditCardSubtasksItemProps{
     title:string
     isChecked:boolean
     cardId:string
+    cardTitle:string
     data:_Data['data']
     setData:_Data["setData"]
     window: React.Dispatch<SetStateAction<boolean>>

@@ -3,6 +3,7 @@ import React, {SetStateAction} from "react";
 
 export interface ModalEditCardSubtasksProps{
     cardId:string
+    cardTitle:string
     subtasks:{
         id:string
         title:string

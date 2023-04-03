@@ -36,6 +36,7 @@ const ModalEditCardSubtasks = (props:ModalEditCardSubtasksProps) =>{
                     <ModalEditCardSubtasksItem
                         key={subtask.id}
                         cardId={props.cardId}
+                        cardTitle={props.cardTitle}
                         isChecked={subtask.isChecked}
                         title={subtask.title}
                         id={subtask.id}
