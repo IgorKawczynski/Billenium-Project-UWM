@@ -1,0 +1,1 @@
+alter table users alter column avatar_color set NOT NULL;

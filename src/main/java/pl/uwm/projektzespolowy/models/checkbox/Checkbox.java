@@ -21,7 +21,6 @@ public class Checkbox extends BasicEntity {
 
     Title title;
 
-    @Column(name = "is_checked")
     boolean isChecked;
 
     @ManyToOne

@@ -53,7 +53,6 @@ public class Card extends BasicEntity implements Positionable {
                orphanRemoval = true)
     List<Checkbox> checkboxes;
 
-    @Column(name = "is_locked")
     boolean isLocked;
 
     public Card(Title title, String description, Cell cell, Position position) {

@@ -1,0 +1,1 @@
+alter table users add column avatar_color VARCHAR(25);
