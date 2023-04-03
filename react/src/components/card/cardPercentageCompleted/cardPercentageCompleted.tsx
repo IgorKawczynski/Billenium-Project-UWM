@@ -1,5 +1,5 @@
 import React from "react";
-import {Box, CircularProgress, Tooltip, Typography, LinearProgress} from "@mui/material";
+import {Box, CircularProgress, LinearProgress, Tooltip, Typography} from "@mui/material";
 import {
     CardPercentageCompletedProps
 } from "@/components/card/interfaces/cardPercentageCompleted/cardPercentageCompleted";

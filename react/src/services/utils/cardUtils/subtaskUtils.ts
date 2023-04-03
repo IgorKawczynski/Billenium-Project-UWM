@@ -6,7 +6,8 @@ import {getColumnsFromBackend} from "@/services/actions/columnService";
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import {
     addSubtaskToCardOnBackend,
-    checkSubtaskOnBackend, deleteSubtaskOnBackend,
+    checkSubtaskOnBackend,
+    deleteSubtaskOnBackend,
     uncheckSubtaskOnBackend,
     updateCardSubtaskOnBackend
 } from "@/services/actions/subtaskService";

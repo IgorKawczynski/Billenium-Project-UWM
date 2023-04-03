@@ -1,18 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-    Backdrop,
-    Box,
-    Button,
-    Fade,
-    Modal,
-    Stack,
-    TextField,
-    Typography,
-    useTheme,
-    FormControlLabel,
-    Checkbox,
-    Tooltip
-} from "@mui/material";
+import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Tooltip, Typography, useTheme} from "@mui/material";
 import ModalEditCardProps from "@/components/card/interfaces/modalEditcard/ModalEditCard";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";

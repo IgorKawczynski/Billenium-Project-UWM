@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-import {Box, Typography, IconButton, InputLabel, Tooltip, FormControl, TextField, useTheme} from "@mui/material";
+import {Box, IconButton, TextField, Tooltip, Typography, useTheme} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import RedoIcon from '@mui/icons-material/Redo';

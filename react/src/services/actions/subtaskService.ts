@@ -1,6 +1,5 @@
 import axios from "axios";
 import {urlDomain} from "@/services/actions/boardService";
-import {useParams} from "react-router-dom";
 
 export async function addSubtaskToCardOnBackend(cardId:string, title:string){
 

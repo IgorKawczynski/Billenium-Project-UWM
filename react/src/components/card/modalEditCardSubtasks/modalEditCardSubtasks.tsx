@@ -1,5 +1,5 @@
 import React from "react";
-import {Box, Stack, Checkbox, FormControlLabel, Typography, useTheme} from "@mui/material";
+import {Box, Stack, Typography, useTheme} from "@mui/material";
 import ModalEditCardSubtasksItem from "@/components/card/modalEditCardSubtasksItem/modalEditCardSubtasksItem";
 import {ModalEditCardSubtasksProps} from "@/components/card/interfaces/modalEditCardSubtasks/modalEditCardSubtasks";
 import {CardPercentageCompletedLinear} from "@/components/card/cardPercentageCompleted/cardPercentageCompleted";

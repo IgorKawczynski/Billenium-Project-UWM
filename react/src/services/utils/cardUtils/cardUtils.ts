@@ -1,11 +1,11 @@
 import {
     addCardToBackend,
     assignUserToCardToBackend,
+    lockCardOnBackend,
     removeCardToBackend,
     removeUserFromCardToBackend,
-    updateCardToBackend,
-    lockCardOnBackend,
-    unlockCardOnBackend
+    unlockCardOnBackend,
+    updateCardToBackend
 } from "@/services/actions/cardService";
 import {getColumnsFromBackend} from "@/services/actions/columnService";
 import {_Data} from "@/services/utils/boardUtils/DataBoard";

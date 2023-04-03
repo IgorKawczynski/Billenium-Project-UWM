@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Checkbox, FormControlLabel, useTheme, Box, IconButton, Typography, TextField, Tooltip} from "@mui/material";
+import {Box, Checkbox, FormControlLabel, IconButton, TextField, Tooltip, useTheme} from "@mui/material";
 import {
     ModalEditCardSubtasksItemProps
 } from "@/components/card/interfaces/modalEditCardSubtasksItem/modalEditCardSubtasksItem";
@@ -8,7 +8,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import RedoIcon from "@mui/icons-material/Redo";
-import {checkSubtask, uncheckSubtask, updateSubtask, removeSubtask} from "@/services/utils/cardUtils/subtaskUtils";
+import {checkSubtask, removeSubtask, uncheckSubtask, updateSubtask} from "@/services/utils/cardUtils/subtaskUtils";
 
 const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
     const theme = useTheme()
