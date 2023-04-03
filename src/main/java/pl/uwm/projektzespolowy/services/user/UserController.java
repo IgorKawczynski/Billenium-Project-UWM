@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping("/register")
     public UserResponseDTO registerUser(@RequestBody UserCreateDTO userCreateDTO) {
-        return userFacade.createUser(userCreateDTO);
+        return userFacade.createUser(userCreateDTO).toDto();
     }
 
     @PostMapping(

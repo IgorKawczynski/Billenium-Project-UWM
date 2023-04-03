@@ -22,8 +22,8 @@ public class UserFacade {
     private final AuthenticationManager authenticationManager;
     private final SessionRegistry sessionRegistry;
 
-    public UserResponseDTO createUser(UserCreateDTO userCreateDTO) {
-        return userCRUDService.createUser(userCreateDTO).toDto();
+    public User createUser(UserCreateDTO userCreateDTO) {
+        return userCRUDService.createUser(userCreateDTO);
     }
 
     public UserLoginResponseDTO login(UserLoginRequestDTO userLoginRequestDTO) {

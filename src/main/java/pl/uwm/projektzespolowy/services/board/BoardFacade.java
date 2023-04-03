@@ -2,10 +2,7 @@ package pl.uwm.projektzespolowy.services.board;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
-import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
-import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
-import pl.uwm.projektzespolowy.models.board.BoardUserUpdateDTO;
+import pl.uwm.projektzespolowy.models.board.*;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.services.board.crud.BoardCRUDService;
@@ -22,14 +19,14 @@ public class BoardFacade {
     private final BoardCRUDService boardCRUDService;
     private final UserCRUDService userCRUDService;
 
-    public BoardResponseDTO createBoard(BoardCreateDTO boardCreateDTO) {
+    public Board createBoard(BoardCreateDTO boardCreateDTO) {
         var creatorId = Long.parseLong(boardCreateDTO.userId());
         var creator = userCRUDService.getUserById(creatorId);
-        return boardCRUDService.createBoard(creator, boardCreateDTO.title()).toDto();
+        return boardCRUDService.createBoard(creator, boardCreateDTO.title());
     }
 
-    public BoardResponseDTO getBoardById(Long boardId) {
-        return boardCRUDService.getBoardById(boardId).toDto();
+    public Board getBoardById(Long boardId) {
+        return boardCRUDService.getBoardById(boardId);
     }
 
     public String getBoardTitleById(String boardId) {

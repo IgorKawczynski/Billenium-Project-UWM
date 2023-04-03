@@ -21,13 +21,13 @@ public class BoardController {
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public BoardResponseDTO createBoard(@RequestBody BoardCreateDTO boardCreateDTO) {
-        return boardFacade.createBoard(boardCreateDTO);
+        return boardFacade.createBoard(boardCreateDTO).toDto();
     }
 
     @GetMapping("/{boardId}")
     @ResponseStatus(HttpStatus.OK)
     public BoardResponseDTO getBoardById(@PathVariable Long boardId) {
-        return boardFacade.getBoardById(boardId);
+        return boardFacade.getBoardById(boardId).toDto();
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"boardId"})
