@@ -10,6 +10,16 @@ const CardUsers = (props:CardUsersProps) =>{
     return(
                     <AvatarGroup
                         max={4}
+                        sx={{
+                            '.MuiAvatarGroup-more':{
+                            backgroundColor: 'red',
+                            fontSize: 12
+                            },
+                            '.MuiAvatarGroup-avatar': {
+                                width: 30,
+                                height: 30,
+                            },
+                        }}
                     >
                         {props.assignedUsers.map(user => {
                             return(
@@ -20,8 +30,6 @@ const CardUsers = (props:CardUsersProps) =>{
                                     <Avatar
                                         src={user.avatarPath && user.avatarPath}
                                         sx={{
-                                            width: 35,
-                                            height: 35,
                                             bgcolor:theme.palette.primary.main
                                         }}
                                     >

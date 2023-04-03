@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
-import {Box, MenuItem, useTheme} from "@mui/material";
+import {Avatar, Box, MenuItem, useTheme} from "@mui/material";
 import {
     ModalEditCardUserListItemProps
 } from "@/components/card/interfaces/modalEditCardUserListItem/modalEditCardUserListItem";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import ModalRemoveUserFromCard from "@/components/card/modalRemoveUserFromCard/modalRemoveUserFromCard";
+import Typography from "@mui/material/Typography";
 
 const ModalEditCardUserListItem = (props:ModalEditCardUserListItemProps) =>{
     const theme = useTheme()
@@ -23,10 +24,25 @@ const ModalEditCardUserListItem = (props:ModalEditCardUserListItemProps) =>{
                 justifyContent={"space-between"}
                 alignItems={"center"}
             >
+                    <Avatar
+                        src={props.userAvatarPath && props.userAvatarPath}
+                        sx={{
+                            width: 35,
+                            height: 35,
+                            marginRight:1
+                        }}
+                    >
+                        <Typography variant={"body1"}>
+                            {props.userName[0].toUpperCase() + props.userLastName[0].toUpperCase()}
+                        </Typography>
+                    </Avatar>
                 {props.userName + " " + props.userLastName}
                 <PersonRemoveIcon
-                    fontSize={"medium"}
-                    sx={{color:theme.palette.primary.main}}
+                    sx={{
+                        color:theme.palette.primary.main,
+                        fontSize:'18px',
+                        marginLeft:1
+                }}
                 />
             </Box>
             <ModalRemoveUserFromCard

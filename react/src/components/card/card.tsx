@@ -1,13 +1,14 @@
 import React from "react";
 import {Draggable, Droppable} from 'react-beautiful-dnd'
 import Card from "@mui/material/Card"
-import {useTheme} from "@mui/material"
+import {Tooltip, useTheme} from "@mui/material"
 import CardProps from '@/components/card/interfaces/cardInterface/Card'
 import EditCardButton from '@/components/card/editCardButton/editCardButton'
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import CardUsers from "@/components/card/cardUsers/cardUsers";
 import {CardPercentageCompleted} from "@/components/card/cardPercentageCompleted/cardPercentageCompleted";
+import LockIcon from "@mui/icons-material/Lock";
 
 const Task = (props:CardProps) => {
     const theme = useTheme()
@@ -77,13 +78,27 @@ const Task = (props:CardProps) => {
                                                 justifyContent={"space-between"}
                                                 width={'100%'}
                                             >
-                                                <Typography
-                                                    color={'textPrimary'}
-                                                    variant={'subtitle1'}
+                                                <Box
+                                                    display={"flex"}
+                                                    alignItems={"center"}
                                                 >
-                                                    {props.title.length >= 13 && (props.title.slice(0,13) + "...")}
-                                                    {props.title.length <= 13 && (props.title)}
-                                                </Typography>
+                                                    {props.isLocked && (
+                                                        <Tooltip title={'Card is Locked'} placement={"top"}>
+                                                            <LockIcon sx={{
+                                                                color:theme.palette.primary.main,
+                                                                fontSize:'14px'
+                                                                 }}
+                                                            />
+                                                        </Tooltip>
+                                                    )}
+                                                    <Typography
+                                                        color={'textPrimary'}
+                                                        variant={'subtitle1'}
+                                                    >
+                                                        {props.title.length >= 13 && (props.title.slice(0,13) + "...")}
+                                                        {props.title.length <= 13 && (props.title)}
+                                                    </Typography>
+                                                </Box>
                                                 <EditCardButton
                                                     id={props.id}
                                                     cellId={props.cellId}

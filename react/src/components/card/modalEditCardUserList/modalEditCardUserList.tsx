@@ -49,6 +49,7 @@ const ModalEditCardUserList = (props:ModalEditCardUserListProps) => {
                         userId={user.id}
                         userName={user.firstName}
                         userLastName={user.lastName}
+                        userAvatarPath={user.avatarPath}
                         cardId={props.cardId}
                         cardTitle={props.cardTitle}
                         setAnchorEl={setAnchorEl}

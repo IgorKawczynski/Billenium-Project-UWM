@@ -34,6 +34,7 @@ const ModalEditCardSubtasks = (props:ModalEditCardSubtasksProps) =>{
                 {props.subtasks.map(subtask => {
                     return(
                     <ModalEditCardSubtasksItem
+                        key={subtask.id}
                         cardId={props.cardId}
                         isChecked={subtask.isChecked}
                         title={subtask.title}

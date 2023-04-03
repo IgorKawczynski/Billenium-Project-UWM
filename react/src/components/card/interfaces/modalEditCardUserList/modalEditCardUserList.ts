@@ -7,6 +7,7 @@ export interface ModalEditCardUserListProps{
         id: string;
         firstName: string;
         lastName: string;
+        avatarPath:string;
     }[]
     data:_Data["data"]
     setData:_Data['setData']

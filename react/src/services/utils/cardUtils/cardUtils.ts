@@ -3,7 +3,9 @@ import {
     assignUserToCardToBackend,
     removeCardToBackend,
     removeUserFromCardToBackend,
-    updateCardToBackend
+    updateCardToBackend,
+    lockCardOnBackend,
+    unlockCardOnBackend
 } from "@/services/actions/cardService";
 import {getColumnsFromBackend} from "@/services/actions/columnService";
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
@@ -121,6 +123,62 @@ export function assignUserToCard(
             }
         })
 }
+export const lockCard = (
+    id:string,
+    title:string,
+    data:_Data['data'],
+    setData:_Data['setData']
+) => {
+    lockCardOnBackend(id)
+        .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else{
+                getColumnsFromBackend(data.id)
+                    .then( resCol => {
+                            if(resCol) {
+                                setData({
+                                    ...data,
+                                    columnList: resCol
+
+                                })
+                                handleClickVariant(enqueueSnackbar)(`Card ${title} locked` ,'info')
+                            }
+                        }
+                    )
+                // tutaj możesz wykonywać operacje na otrzymanym id
+            }})
+        .catch(error => {
+        });
+};
+export const unlockCard = (
+    id:string,
+    title:string,
+    data:_Data['data'],
+    setData:_Data['setData']
+) => {
+    unlockCardOnBackend(id)
+        .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else{
+                getColumnsFromBackend(data.id)
+                    .then( resCol => {
+                            if(resCol) {
+                                setData({
+                                    ...data,
+                                    columnList: resCol
+
+                                })
+                                handleClickVariant(enqueueSnackbar)(`Card ${title} unlocked` ,'info')
+                            }
+                        }
+                    )
+                // tutaj możesz wykonywać operacje na otrzymanym id
+            }})
+        .catch(error => {
+        });
+};
 export function removeUserFromCard(
     cardId:string,
     userId:string,

@@ -31,6 +31,7 @@ const CardMenu = (props:ModalEditCardMenuProps) => {
                     cardTitle={props.cardTitle}/>
                 <ModalEditCardLockCard
                     cardId={props.cardId}
+                    title={props.cardTitle}
                     isLocked={props.isLocked}
                     data={props.data}
                     setData={props.setData}
