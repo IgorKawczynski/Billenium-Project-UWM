@@ -36,7 +36,7 @@ class UserFacadeTest {
                         "lNameTest",
                         rawPassword)
         );
-        var user = userCRUDService.getUserById(Long.parseLong(userToCreate.id()));
+        var user = userCRUDService.getUserById(userToCreate.getId());
         // given
         Boolean isEncoded = passwordEncoder.matches(rawPassword, user.getPassword());
         // then
