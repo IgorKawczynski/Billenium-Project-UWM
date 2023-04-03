@@ -1,4 +1,5 @@
 import {_Data} from "@/services/utils/boardUtils/DataBoard";
+import React, {SetStateAction} from "react";
 
 export interface ModalEditCardSubtasksProps{
     cardId:string
@@ -9,4 +10,5 @@ export interface ModalEditCardSubtasksProps{
     }[]
     data:_Data["data"]
     setData:_Data['setData']
+    window:React.Dispatch<SetStateAction<boolean>>
 }

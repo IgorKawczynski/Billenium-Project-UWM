@@ -104,7 +104,12 @@ const Task = (props:CardProps) => {
                                                 {props.desc.length < 20 && (props.desc)}
                                             </Typography>
                                             <Box display={"flex"} justifyContent={"space-between"} marginTop={1}>
-                                                <CardPercentageCompleted subtasks={props.subtasks}/>
+                                                {props.subtasks.length > 0 && (
+                                                    <CardPercentageCompleted subtasks={props.subtasks}/>
+                                                )}
+                                                {props.subtasks.length == 0 && (
+                                                    <Box/>
+                                                )}
 
                                                 <CardUsers
                                                     providedDrop={providedDrop}

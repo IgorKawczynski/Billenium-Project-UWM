@@ -82,6 +82,7 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                     subtasks={props.subtasks}
                                     data={props.data}
                                     setData={props.setData}
+                                    window={props.setModalEdit}
                                 />
                             </Box>
                             <Box

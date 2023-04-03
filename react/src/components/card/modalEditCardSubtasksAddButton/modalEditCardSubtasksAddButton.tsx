@@ -51,6 +51,7 @@ const ModalEditCardSubtasksAddButton = (props:ModalEditCardSubtasksAddButtonProp
                                         placement={'top'}
                                     >
                                         <IconButton
+                                            sx={{color:theme.palette.primary.main}}
                                             onClick={() => addSubtask(
                                                     props.cardId,
                                                     title,
@@ -66,11 +67,13 @@ const ModalEditCardSubtasksAddButton = (props:ModalEditCardSubtasksAddButtonProp
                             )
                             }}
                         />
-                        <IconButton
-                        onClick={() => closeModal(setOpen)}
-                        >
-                            <RedoIcon sx={{color:theme.palette.primary.main}} />
-                        </IconButton>
+                        <Tooltip title={'Redo'} placement={'top'}>
+                            <IconButton
+                            onClick={() => closeModal(setOpen)}
+                            >
+                                <RedoIcon />
+                            </IconButton>
+                        </Tooltip>
                 </Box>
                 )
             }

@@ -8,7 +8,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import RedoIcon from "@mui/icons-material/Redo";
-import {checkSubtask} from "@/services/utils/cardUtils/subtaskUtils";
+import {checkSubtask, uncheckSubtask, updateSubtask, removeSubtask} from "@/services/utils/cardUtils/subtaskUtils";
 
 const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
     const theme = useTheme()
@@ -24,8 +24,19 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
         if(!isChecked){
             checkSubtask(
                 props.id,
+                title,
                 props.data,
-                props.setData
+                props.setData,
+                props.window
+            )
+        }
+        if(isChecked){
+            uncheckSubtask(
+                props.id,
+                title,
+                props.data,
+                props.setData,
+                props.window
             )
         }
         setIsChecked(prevState => !prevState)
@@ -69,6 +80,12 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
                                 maxHeight:'35px'
                             }}
                             size={"small"}
+                            onClick={() => removeSubtask(
+                                                        props.id,
+                                                        title,
+                                                        props.data,
+                                                        props.setData
+                                                    )}
                         >
                             <DeleteOutlinedIcon/>
                         </IconButton>
@@ -89,6 +106,13 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
                                     placement={'top'}
                                 >
                                     <IconButton
+                                        sx={{color:theme.palette.primary.main}}
+                                        onClick={() => updateSubtask(
+                                                            props.id,
+                                                            title,
+                                                            props.data,
+                                                            props.setData
+                                                            )}
                                     >
                                         <SaveOutlinedIcon/>
                                     </IconButton>
@@ -96,11 +120,13 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
                             )
                         }}
                     />
+                    <Tooltip title={'Redo'} placement={"top"}>
                     <IconButton
                         onClick={() => closeModal(setOpen)}
                     >
-                        <RedoIcon sx={{color:theme.palette.primary.main}} />
+                        <RedoIcon />
                     </IconButton>
+                </Tooltip>
                 </Box>
             )
             }

@@ -40,6 +40,7 @@ const ModalEditCardSubtasks = (props:ModalEditCardSubtasksProps) =>{
                         id={subtask.id}
                         data={props.data}
                         setData={props.setData}
+                        window={props.window}
                     />
                     )
                 })}

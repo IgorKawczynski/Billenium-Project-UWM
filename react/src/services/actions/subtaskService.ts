@@ -69,6 +69,7 @@ export async function deleteSubtaskOnBackend(checkboxId:string){
 
     try{
         const response = await axios.delete(urlDomain+`/api/checkboxes/${checkboxId}`)
+        console.log(response.data)
         return response.data
     }catch(error:any){
         if (error.response && error.response.data && error.response.data.error) {
