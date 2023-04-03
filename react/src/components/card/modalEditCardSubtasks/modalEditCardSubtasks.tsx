@@ -1,8 +1,10 @@
 import React from "react";
-import {Box, Stack, Checkbox, FormControlLabel, Typography, useTheme} from "@mui/material";
+import {Box, Stack, Typography, useTheme} from "@mui/material";
 import ModalEditCardSubtasksItem from "@/components/card/modalEditCardSubtasksItem/modalEditCardSubtasksItem";
 import {ModalEditCardSubtasksProps} from "@/components/card/interfaces/modalEditCardSubtasks/modalEditCardSubtasks";
 import {CardPercentageCompletedLinear} from "@/components/card/cardPercentageCompleted/cardPercentageCompleted";
+import ModalEditCardSubtasksAddButton
+    from "@/components/card/modalEditCardSubtasksAddButton/modalEditCardSubtasksAddButton";
 
 const ModalEditCardSubtasks = (props:ModalEditCardSubtasksProps) =>{
     const theme = useTheme()
@@ -28,13 +30,22 @@ const ModalEditCardSubtasks = (props:ModalEditCardSubtasksProps) =>{
                 maxHeight={'200px'}
                 overflow={"auto"}
             >
-                <ModalEditCardSubtasksItem cardId={props.cardId} isChecked={false} title={"tytuł taska"}/>
-                <ModalEditCardSubtasksItem cardId={props.cardId} isChecked={true} title={"tytuł taska"}/>
-                <ModalEditCardSubtasksItem cardId={props.cardId} isChecked={true} title={"tytuł taska"}/>
-                <ModalEditCardSubtasksItem cardId={props.cardId} isChecked={true} title={"tytuł taska"}/>
-                <ModalEditCardSubtasksItem cardId={props.cardId} isChecked={true} title={"tytuł taska"}/>
-                <ModalEditCardSubtasksItem cardId={props.cardId} isChecked={true} title={"tytuł taska"}/>
-                <ModalEditCardSubtasksItem cardId={props.cardId} isChecked={true} title={"tytuł taska"}/>
+                <ModalEditCardSubtasksAddButton cardId={props.cardId} data={props.data} setData={props.setData}/>
+                {props.subtasks.map(subtask => {
+                    return(
+                    <ModalEditCardSubtasksItem
+                        key={subtask.id}
+                        cardId={props.cardId}
+                        cardTitle={props.cardTitle}
+                        isChecked={subtask.isChecked}
+                        title={subtask.title}
+                        id={subtask.id}
+                        data={props.data}
+                        setData={props.setData}
+                        window={props.window}
+                    />
+                    )
+                })}
 
             </Stack>
 

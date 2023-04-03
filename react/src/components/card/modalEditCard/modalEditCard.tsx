@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Typography, useTheme, FormControlLabel, Checkbox} from "@mui/material";
+import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Tooltip, Typography, useTheme} from "@mui/material";
 import ModalEditCardProps from "@/components/card/interfaces/modalEditcard/ModalEditCard";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {updateCard} from "@/services/utils/cardUtils/cardUtils";
 import CardMenu from "@/components/card/modalEditCardMenu/modalEditCardMenu";
 import ModalEditCardSubtasks from "@/components/card/modalEditCardSubtasks/modalEditCardSubtasks";
+import LockIcon from "@mui/icons-material/Lock";
 
 export default function ModalEditCard(props:ModalEditCardProps) {
     const [title, setTitle] = useState(props.title);
@@ -47,9 +48,24 @@ export default function ModalEditCard(props:ModalEditCardProps) {
             >
                 <Fade in={props.modalEdit}>
                     <Stack sx={modalBigStyle} spacing={2}>
-                        <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
-                            {props.title}
-                        </Typography>
+                        <Box
+                            display={"flex"}
+                            justifyContent={"center"}
+                            alignItems={"center"}
+                        >
+                            {props.isLocked && (
+                                <Tooltip title={'Card is Locked'} placement={"top"}>
+                                    <LockIcon sx={{
+                                        color:theme.palette.primary.main,
+                                        fontSize:'18px'
+                                    }}
+                                    />
+                                </Tooltip>
+                            )}
+                            <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
+                                {props.title}
+                            </Typography>
+                        </Box>
                         <Box
                             display={'flex'}
                         >
@@ -77,7 +93,14 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                         value={desc}
                                         onChange={handleDescChange}
                                     />
-                                <ModalEditCardSubtasks cardId={props.id} subtasks={60}/>
+                                <ModalEditCardSubtasks
+                                    cardId={props.id}
+                                    cardTitle={props.title}
+                                    subtasks={props.subtasks}
+                                    data={props.data}
+                                    setData={props.setData}
+                                    window={props.setModalEdit}
+                                />
                             </Box>
                             <Box
                                 width={'50%'}
@@ -90,6 +113,7 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                         cardId={props.id}
                                         cardTitle={props.title}
                                         assignedUsers={props.assignedUsers}
+                                        isLocked={props.isLocked}
                                         setModalDelete={props.setModalDelete}
                                         modalDelete={props.modalDelete}
                                         data={props.data}

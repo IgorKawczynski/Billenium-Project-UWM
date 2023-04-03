@@ -17,7 +17,8 @@ export function loadDefaultData(){
             {
                 id: "1",
                 firstName: "Test",
-                lastName: "Test"
+                lastName: "Test",
+                avatarPath: ""
             }
         ],
         columnList: [
@@ -37,7 +38,9 @@ export function loadDefaultData(){
                                 description: "Jakis Opis",
                                 position: 0,
                                 color: "default",
-                                assignedUsers:[]
+                                assignedUsers:[],
+                                checkboxes:[],
+                                isLocked:false
                             },
                             {
                                 id: "10",
@@ -45,7 +48,9 @@ export function loadDefaultData(){
                                 description: "Jakis Opis",
                                 position: 1,
                                 color: "default",
-                                assignedUsers:[]
+                                assignedUsers:[],
+                                checkboxes:[],
+                                isLocked:false
                             }
                         ]
                     }

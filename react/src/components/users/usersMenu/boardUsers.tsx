@@ -110,6 +110,7 @@ const BoardUsers = (props:BoardUsersProps) => {
                                                         setUsers={props.setUsers}
                                                         name={user.firstName}
                                                         lastName={user.lastName}
+                                                        avatarPath={user.avatarPath}
                                             />
                                         )
                                 })}

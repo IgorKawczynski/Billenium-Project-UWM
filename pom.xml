@@ -102,6 +102,23 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.7</version>
+				<configuration>
+					<excludes>
+						<exclude>pl/uwm/projektzespolowy/**/BasicEntity.*</exclude>
+						<exclude>pl/uwm/projektzespolowy/**/User.*</exclude>
+						<exclude>pl/uwm/projektzespolowy/**/Board.*</exclude>
+						<exclude>pl/uwm/projektzespolowy/**/Column.*</exclude>
+						<exclude>pl/uwm/projektzespolowy/**/Row.*</exclude>
+						<exclude>pl/uwm/projektzespolowy/**/Cell.*</exclude>
+						<exclude>pl/uwm/projektzespolowy/**/Card.*</exclude>
+						<exclude>pl/uwm/projektzespolowy/**/Color.*</exclude>
+						<exclude>pl/uwm/projektzespolowy/**/Checkbox.*</exclude>
+						<exclude>pl/uwm/projektzespolowy/**/*DTO.*</exclude>
+						<exclude>pl/uwm/projektzespolowy/**/*DTOBuilder.*</exclude>
+						<exclude>pl/uwm/projektzespolowy/**/*Controller.*</exclude>
+						<exclude>pl/uwm/projektzespolowy/**/deleteAssignedUserFromBoard.*</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>

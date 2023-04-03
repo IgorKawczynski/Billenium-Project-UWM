@@ -1,6 +1,7 @@
 import axios from "axios";
 import {urlDomain} from "@/services/actions/boardService";
 import {userBoardsData} from "@/services/utils/UserUtils/userBoardsData";
+import {activeUser, assignedUser} from "@/services/utils/boardUtils/DataBoard";
 
 export function loadEmptyBoardsList(): { userBoards: userBoardsData["userBoards"] } {
     return {
@@ -14,6 +15,33 @@ export function loadEmptyBoardsList(): { userBoards: userBoardsData["userBoards"
     };
 }
 
+export async function getUserFromBackend(userId:string): Promise<activeUser | undefined>{
+    try{
+        const response = await axios.get(urlDomain+`/api/users/${userId}`)
+        return response.data
+    }catch(error:any){
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+
+}
+
+export async function changeUserAvatarOnBackend(userId:string, avatarImage:FormData){
+    try{
+        const response = await axios.put(urlDomain+`/api/users/${userId}/avatar`,avatarImage, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }}
+    )
+        return response.data
+    }catch(error:any){
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+
+}
 
 export async function getUserBoardsFromBackend(userId:string){
     try{

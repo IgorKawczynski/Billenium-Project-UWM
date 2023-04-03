@@ -1,4 +1,9 @@
-import {addBoardToBackend, deleteBoardFromBackend, getUserBoardsFromBackend} from "@/services/actions/userMainService";
+import {
+    addBoardToBackend,
+    changeUserAvatarOnBackend,
+    deleteBoardFromBackend,
+    getUserBoardsFromBackend, getUserFromBackend
+} from "@/services/actions/userMainService";
 import {userBoardsData} from "@/services/utils/UserUtils/userBoardsData";
 import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
@@ -13,6 +18,19 @@ export function getUserBoards  (
     getUserBoardsFromBackend(userId)
         .then( res => {
             setUserBoards(res)
+        })
+}
+export function changeAvatar  (
+    userId:string,
+    avatarImage:FormData,
+    setActiveUser:any
+)  {
+    changeUserAvatarOnBackend(userId, avatarImage)
+        .then( res => {
+            getUserFromBackend(userId)
+                .then(res => {
+                    setActiveUser(res)
+                })
         })
 }
 
