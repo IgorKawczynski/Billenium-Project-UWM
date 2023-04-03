@@ -44,8 +44,9 @@ export default function EditCardButton(props:EditCardButtonProps) {
                 title={props.title}
                 desc={props.desc}
                 assignedUsers={props.assignedUsers}
-                setModalEdit={setModalEdit}
                 subtasks={props.subtasks}
+                isLocked={props.isLocked}
+                setModalEdit={setModalEdit}
                 modalEdit={modalEdit}
                 data={props.data}
                 setData={props.setData}

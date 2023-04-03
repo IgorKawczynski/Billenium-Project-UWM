@@ -12,6 +12,7 @@ interface CardProps {
         title:string
         isChecked:boolean
     }[]
+    isLocked:boolean
     cellId:string
     setData:_Data["setData"]
     data:_Data["data"]

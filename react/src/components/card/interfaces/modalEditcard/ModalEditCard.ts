@@ -11,12 +11,14 @@ interface ModalEditCardProps {
         id: string;
         firstName: string;
         lastName: string;
+        avatarPath:string
     }[]
     subtasks:{
         id:string
         title:string
         isChecked:boolean
     }[]
+    isLocked:boolean
     setModalEdit: React.Dispatch<SetStateAction<boolean>>
     modalEdit:boolean
     setModalDelete:React.Dispatch<SetStateAction<boolean>>

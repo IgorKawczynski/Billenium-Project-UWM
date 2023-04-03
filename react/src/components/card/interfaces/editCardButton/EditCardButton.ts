@@ -10,12 +10,14 @@ interface EditCardButtonProps {
         id: string;
         firstName: string;
         lastName: string;
+        avatarPath:string;
     }[]
     subtasks:{
         id:string
         title:string
         isChecked:boolean
     }[]
+    isLocked:boolean
     data:_Data["data"]
     setData:_Data["setData"]
 }

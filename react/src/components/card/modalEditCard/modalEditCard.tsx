@@ -96,6 +96,7 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                         cardId={props.id}
                                         cardTitle={props.title}
                                         assignedUsers={props.assignedUsers}
+                                        isLocked={props.isLocked}
                                         setModalDelete={props.setModalDelete}
                                         modalDelete={props.modalDelete}
                                         data={props.data}

@@ -16,6 +16,7 @@ const Task = (props:CardProps) => {
             key={props.id}
             draggableId={props.id}
             index={props.index}
+            isDragDisabled={props.isLocked}
         >
             {(provided:any, snapshot:any) => {
                 return (
@@ -90,6 +91,7 @@ const Task = (props:CardProps) => {
                                                     desc={props.desc}
                                                     assignedUsers={props.assignedUsers}
                                                     subtasks={props.subtasks}
+                                                    isLocked={props.isLocked}
                                                     data={props.data}
                                                     setData={props.setData}
 
