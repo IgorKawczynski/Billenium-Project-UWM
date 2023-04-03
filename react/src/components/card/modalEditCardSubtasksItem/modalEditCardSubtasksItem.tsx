@@ -49,6 +49,7 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
                     <Box
                         display={"flex"}
                         justifyContent={"end"}
+                        maxHeight={'40px'}
                     >
                         <FormControlLabel
                             sx={{
@@ -93,7 +94,9 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
                 )
             }
             {open && (
-                <Box>
+                <Box
+                    maxHeight={'40px'}
+                >
                     <TextField
                         variant={"standard"}
                         inputMode={"email"}

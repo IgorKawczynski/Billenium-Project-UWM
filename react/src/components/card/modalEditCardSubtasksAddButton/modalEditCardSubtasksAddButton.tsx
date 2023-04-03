@@ -31,7 +31,7 @@ const ModalEditCardSubtasksAddButton = (props:ModalEditCardSubtasksAddButtonProp
                         >
                             <AddIcon/>
                         </IconButton>
-                        <Typography variant={"body2"}>
+                        <Typography variant={"body2"} color={theme.palette.text.primary}>
                             Add new subtask
                         </Typography>
                     </Box>
