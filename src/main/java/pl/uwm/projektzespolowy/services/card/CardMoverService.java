@@ -2,6 +2,7 @@ package pl.uwm.projektzespolowy.services.card;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.uwm.projektzespolowy.exceptions.CardMoveNotAllowedException;
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 class CardMoverService {
 
     public ArrayList<Card> moveCardToAnotherCell(Card card, Cell cardOldCell, Cell cardNewCell, Integer newPosition) {
+        isMoveAllowed(card);
+
         var cardsFromOldCell = new PositionableList<>(cardOldCell.getCards());
         cardsFromOldCell.withHigherOrEqualPositionThanGiven(card);
         cardsFromOldCell.moveLeftAll();
@@ -37,11 +40,19 @@ class CardMoverService {
     }
 
     public ArrayList<Card> moveCard(Card card, Integer newPosition) {
+        isMoveAllowed(card);
+
         var cardsToChange = new PositionableList<>(card.getCell().getCards());
         cardsToChange.moveInRange(card.getPosition(), new Position(newPosition));
 
         card.getPosition().moveTo(newPosition);
         return new ArrayList<>(cardsToChange.list());
+    }
+
+    private void isMoveAllowed(Card card) {
+        if (card.isLocked()) {
+            throw new CardMoveNotAllowedException("The moving card cannot be locked.");
+        }
     }
 
 }
