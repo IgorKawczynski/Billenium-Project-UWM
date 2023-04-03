@@ -77,7 +77,12 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                         value={desc}
                                         onChange={handleDescChange}
                                     />
-                                <ModalEditCardSubtasks cardId={props.id} subtasks={60}/>
+                                <ModalEditCardSubtasks
+                                    cardId={props.id}
+                                    subtasks={props.subtasks}
+                                    data={props.data}
+                                    setData={props.setData}
+                                />
                             </Box>
                             <Box
                                 width={'50%'}

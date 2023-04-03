@@ -7,6 +7,11 @@ interface CardProps {
     index: number
     color:string
     assignedUsers:Card["assignedUsers"]
+    subtasks:{
+        id:string
+        title:string
+        isChecked:boolean
+    }[]
     cellId:string
     setData:_Data["setData"]
     data:_Data["data"]

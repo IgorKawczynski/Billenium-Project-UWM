@@ -98,6 +98,7 @@ const ColumnCell = (props:ColumnCellProps) =>{
                                         desc={item.description}
                                         color={item.color}
                                         assignedUsers={item.assignedUsers}
+                                        subtasks={item.checkboxes}
                                         index={index}
                                         cellId={props.id}
                                         setData={props.setData}

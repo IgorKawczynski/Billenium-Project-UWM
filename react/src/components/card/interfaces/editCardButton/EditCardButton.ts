@@ -11,6 +11,11 @@ interface EditCardButtonProps {
         firstName: string;
         lastName: string;
     }[]
+    subtasks:{
+        id:string
+        title:string
+        isChecked:boolean
+    }[]
     data:_Data["data"]
     setData:_Data["setData"]
 }

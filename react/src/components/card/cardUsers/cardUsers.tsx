@@ -18,6 +18,7 @@ const CardUsers = (props:CardUsersProps) =>{
                                     title={user.firstName + " " +user.lastName}
                                     placement={"bottom"}>
                                     <Avatar
+                                        src={user.avatarPath && user.avatarPath}
                                         sx={{
                                             width: 35,
                                             height: 35,

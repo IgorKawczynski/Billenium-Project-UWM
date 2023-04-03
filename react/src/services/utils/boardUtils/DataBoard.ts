@@ -9,6 +9,7 @@ export interface _Data {
             id: string;
             firstName: string;
             lastName:string;
+            avatarPath:string;
         }[];
         columnList:Column[];
 
@@ -25,6 +26,7 @@ export interface _Data {
                 id: string;
                 firstName: string;
                 lastName: string;
+                avatarPath:string;
             }[];
 
             columnList: Column[];
@@ -75,6 +77,13 @@ export interface Card{
         id: string;
         firstName: string;
         lastName: string;
+        avatarPath:string;
     }[]
+    checkboxes:{
+        id:number
+        title:string
+        isChecked:boolean
+    }[]
+    isLocked:boolean
 };
 

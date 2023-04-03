@@ -7,11 +7,15 @@ interface ModalEditCardProps {
     title:string;
     desc:string;
 
-    subtasks:number
     assignedUsers:{
         id: string;
         firstName: string;
         lastName: string;
+    }[]
+    subtasks:{
+        id:string
+        title:string
+        isChecked:boolean
     }[]
     setModalEdit: React.Dispatch<SetStateAction<boolean>>
     modalEdit:boolean

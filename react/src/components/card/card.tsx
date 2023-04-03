@@ -89,6 +89,7 @@ const Task = (props:CardProps) => {
                                                     title={props.title}
                                                     desc={props.desc}
                                                     assignedUsers={props.assignedUsers}
+                                                    subtasks={props.subtasks}
                                                     data={props.data}
                                                     setData={props.setData}
 
@@ -103,7 +104,7 @@ const Task = (props:CardProps) => {
                                                 {props.desc.length < 20 && (props.desc)}
                                             </Typography>
                                             <Box display={"flex"} justifyContent={"space-between"} marginTop={1}>
-                                                <CardPercentageCompleted subtasks={90}/>
+                                                <CardPercentageCompleted subtasks={props.subtasks}/>
 
                                                 <CardUsers
                                                     providedDrop={providedDrop}

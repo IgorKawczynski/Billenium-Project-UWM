@@ -26,6 +26,7 @@ const UserAvatar = (props:AvatarProps) => {
                                 ref={provided.innerRef}
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
+                                src={props.avatarPath && props.avatarPath}
                                 sx={{
                                         width: 35,
                                         height: 35,
