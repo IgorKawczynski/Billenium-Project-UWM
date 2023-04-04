@@ -3,11 +3,16 @@ package pl.uwm.projektzespolowy.services.board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.board.*;
+import pl.uwm.projektzespolowy.models.card.Card;
+import pl.uwm.projektzespolowy.models.cell.Cell;
+import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.services.board.crud.BoardCRUDService;
+import pl.uwm.projektzespolowy.services.card.crud.CardCRUDService;
 import pl.uwm.projektzespolowy.services.user.crud.UserCRUDService;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +23,7 @@ public class BoardFacade {
 
     private final BoardCRUDService boardCRUDService;
     private final UserCRUDService userCRUDService;
+    private final CardCRUDService cardCRUDService;
 
     public Board createBoard(BoardCreateDTO boardCreateDTO) {
         var creatorId = Long.parseLong(boardCreateDTO.userId());
@@ -47,7 +53,9 @@ public class BoardFacade {
     public BoardResponseDTO updateBoard(BoardUpdateDTO boardUpdateDTO) {
         var boardId = Long.parseLong(boardUpdateDTO.boardId());
         var newTitle = boardUpdateDTO.newTitle();
-        return boardCRUDService.updateBoard(boardId, newTitle).toDto();
+        return boardCRUDService
+                .updateBoard(boardId, newTitle)
+                .toDto();
     }
 
     public List<UserResponseDTO> assignUserToBoard(BoardUserCreateDTO boardUserCreateDTO) {
@@ -69,6 +77,20 @@ public class BoardFacade {
     public List<UserResponseDTO> deleteAssignedUserFromBoard(BoardUserDeleteDTO boardUserDeleteDTO) {
         var boardId = Long.parseLong(boardUserDeleteDTO.boardId());
         var userToDeleteFromBoard = userCRUDService.getUserById(Long.parseLong(boardUserDeleteDTO.userId()));
+
+        var board = boardCRUDService.getBoardById(boardId);
+        var columns = board.getColumns();
+        var cells = new ArrayList<Cell>();
+
+        for(Column column: columns) {
+            cells.addAll(column.getCells());
+        }
+        for(Cell cell: cells){
+            for(Card card: cell.getCards()){
+               cardCRUDService.deleteAssignedUserFromCard(card.getId(), userToDeleteFromBoard) ;
+            }
+        }
+
         return boardCRUDService
                 .deleteAssignedUserFromBoard(boardId, userToDeleteFromBoard)
                 .stream()

@@ -25,15 +25,20 @@ public class CardFacade {
 
     public CardResponseDTO createCard(CardCreateDTO cardCreateDTO) {
         var cell = cellCRUDService.getCellById(Long.parseLong(cardCreateDTO.cellId()));
-        return cardCRUDService.createCard(cell, cardCreateDTO.title(), cardCreateDTO.description()).toDto();
+        return cardCRUDService
+                .createCard(cell, cardCreateDTO.title(), cardCreateDTO.description())
+                .toDto();
     }
 
     public CardResponseDTO getCardById(Long cardId) {
-        return cardCRUDService.getCardById(cardId).toDto();
+        return cardCRUDService
+                .getCardById(cardId)
+                .toDto();
     }
 
     public List<CardResponseDTO> getAllCardsByCellId(Long cellId) {
-        return cardCRUDService.getAllCardsByCellId(cellId)
+        return cardCRUDService
+                .getAllCardsByCellId(cellId)
                 .stream()
                 .map(Card::toDto)
                 .sorted(Comparator.comparingInt(CardResponseDTO::position))
@@ -54,7 +59,9 @@ public class CardFacade {
         var cardId = Long.parseLong(cardUpdateDTO.cardId());
         var newTitle = cardUpdateDTO.title();
         var newDescription = cardUpdateDTO.description();
-        return cardCRUDService.updateCard(cardId, newTitle, newDescription).toDto();
+        return cardCRUDService
+                .updateCard(cardId, newTitle, newDescription)
+                .toDto();
     }
 
     public CardResponseDTO markAsLocked(Long cardId) {
@@ -68,7 +75,9 @@ public class CardFacade {
     public CardResponseDTO assignUserToCard(CardUserUpdateDTO cardUserUpdateDTO) {
         var userToAssign = userCRUDService.getUserById(Long.parseLong(cardUserUpdateDTO.userId()));
         var cardId = Long.parseLong(cardUserUpdateDTO.cardId());
-        return cardCRUDService.assignUserToCard(cardId, userToAssign).toDto();
+        return cardCRUDService
+                .assignUserToCard(cardId, userToAssign)
+                .toDto();
     }
 
     public void deleteCard(Long cardId) {
@@ -96,13 +105,17 @@ public class CardFacade {
 
     public CardResponseDTO changeCardColor(CardColorChangeDTO cardColorChangeDTO) {
         var cardId = Long.parseLong(cardColorChangeDTO.cardId());
-        return cardCRUDService.changeCardColor(cardId, cardColorChangeDTO.newColor()).toDto();
+        return cardCRUDService
+                .changeCardColor(cardId, cardColorChangeDTO.newColor())
+                .toDto();
     }
 
     public CardResponseDTO deleteAssignedUserFromCard(CardUserUpdateDTO cardUserUpdateDTO) {
         var cardId = Long.parseLong(cardUserUpdateDTO.cardId());
-        var userToDeleteFromCard = userCRUDService.getUserById(Long.parseLong(cardUserUpdateDTO.userId()));
-        return cardCRUDService.deleteAssignedUserFromCard(cardId, userToDeleteFromCard).toDto();
+        var userToDelete = userCRUDService.getUserById(Long.parseLong(cardUserUpdateDTO.userId()));
+        return cardCRUDService
+                .deleteAssignedUserFromCard(cardId, userToDelete)
+                .toDto();
     }
 
 }
