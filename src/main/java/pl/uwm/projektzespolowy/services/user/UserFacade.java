@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import pl.uwm.projektzespolowy.models.user.*;
 import pl.uwm.projektzespolowy.security.SessionRegistry;
+import pl.uwm.projektzespolowy.services.user.avatar.UserAvatarService;
 import pl.uwm.projektzespolowy.services.user.crud.UserCRUDService;
 import pl.uwm.projektzespolowy.services.user.crud.UserLoginService;
 
