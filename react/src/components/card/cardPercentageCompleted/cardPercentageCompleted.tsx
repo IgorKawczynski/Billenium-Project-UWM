@@ -43,6 +43,7 @@ export const CardPercentageCompleted = (props:CardPercentageCompletedProps) => {
                                 variant="caption"
                                 component="div"
                                 color="text.secondary"
+                                letterSpacing={0.1}
                             >
                                 {`${Math.round(calculateCompleted(props.subtasks))}%`}
                             </Typography>
