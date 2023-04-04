@@ -1,14 +1,9 @@
-import {_Data} from "@/services/utils/boardUtils/DataBoard";
+import {_Data, assignedUser} from "@/services/utils/boardUtils/DataBoard";
 
 export interface ModalEditCardUserListProps{
     cardId:string
     cardTitle:string
-    assignedUsers:{
-        id: string;
-        firstName: string;
-        lastName: string;
-        avatarPath:string;
-    }[]
+    assignedUsers:assignedUser[]
     data:_Data["data"]
     setData:_Data['setData']
 }

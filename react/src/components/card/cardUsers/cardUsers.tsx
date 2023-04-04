@@ -12,7 +12,6 @@ const CardUsers = (props:CardUsersProps) =>{
                         max={4}
                         sx={{
                             '.MuiAvatarGroup-more':{
-                            backgroundColor: 'red',
                             fontSize: 12
                             },
                             '.MuiAvatarGroup-avatar': {
@@ -30,7 +29,7 @@ const CardUsers = (props:CardUsersProps) =>{
                                     <Avatar
                                         src={user.avatarPath && user.avatarPath}
                                         sx={{
-                                            bgcolor:theme.palette.primary.main
+                                            bgcolor:user.avatarColor
                                         }}
                                     >
                                         <Typography variant={"body1"}>

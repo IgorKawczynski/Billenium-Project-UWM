@@ -5,6 +5,7 @@ import {Box, Stack, useTheme} from "@mui/material";
 import Column from "@/components/column/column";
 import {boardContentProps} from "@/components/board/interfaces/boardContentInterface/BoardContent";
 import BoardUsers from "@/components/users/usersMenu/boardUsers";
+import AddRowButton from "@/components/row/addRowButton/addRowButton";
 
 const BoardContent = (props:boardContentProps) =>{
     const theme = useTheme();
@@ -24,7 +25,6 @@ const BoardContent = (props:boardContentProps) =>{
                     {(provided, snapshot) => (
                         <Stack
                             spacing={2}
-                            direction={"row"}
                             {...provided.droppableProps}
                             ref={provided.innerRef}
                             marginLeft={props.users ? '250px' : '0'}
@@ -33,6 +33,10 @@ const BoardContent = (props:boardContentProps) =>{
                                     duration: theme.transitions.duration.enteringScreen,
                                 }),}}
                         >
+                            <Stack
+                                spacing={2}
+                                direction={"row"}
+                            >
                             {Object.values(props.data.columnList)
                                 .sort((a, b) => a.position - b.position) // sortowanie po pozycji
                                 .map((column) => (
@@ -49,6 +53,8 @@ const BoardContent = (props:boardContentProps) =>{
                                     />
                                 ))}
                             {provided.placeholder}
+                            </Stack>
+                            <AddRowButton data={props.data} setData={props.setData}/>
                         </Stack>
                     )}
                 </Droppable>

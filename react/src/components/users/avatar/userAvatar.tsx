@@ -28,6 +28,7 @@ const UserAvatar = (props:AvatarProps) => {
                                 {...provided.dragHandleProps}
                                 src={props.avatarPath && props.avatarPath}
                                 sx={{
+                                        bgcolor:props.avatarColor,
                                         width: 35,
                                         height: 35,
                                         ...provided.draggableProps.style

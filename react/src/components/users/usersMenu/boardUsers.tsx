@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Box, Drawer, FormControl, InputLabel, Stack, Tooltip, Typography, useTheme} from "@mui/material";
+import {Box, Drawer, FormControl, InputLabel, Stack, Tooltip, Typography, useTheme, Button} from "@mui/material";
 import {BoardUsersProps} from "@/components/board/interfaces/boardUsers/boardUsers";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
@@ -10,9 +10,12 @@ import {Droppable} from "react-beautiful-dnd";
 import UserAvatar from "@/components/users/avatar/userAvatar";
 import GroupIcon from "@mui/icons-material/Group";
 import {assignUserToBoard} from "@/services/utils/boardUtils/boardUtils";
+import {openModal} from "@/services/utils/modalUtils/modalUtils";
+import DeleteUserMenu from "@/components/menus/deleteUserMenu/deleteUserMenu";
 
 const BoardUsers = (props:BoardUsersProps) => {
     const [email, setEmail] = useState("")
+    const [modalDeleteUser, setModalDeleteUser] = useState(false)
     const theme = useTheme()
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
@@ -52,7 +55,7 @@ const BoardUsers = (props:BoardUsersProps) => {
                     </IconButton>
 
                 </Box>
-                <Box>
+                <Stack spacing={2}>
                     <Typography variant={"caption"}>
                             Assign member to board
                     </Typography>
@@ -82,7 +85,14 @@ const BoardUsers = (props:BoardUsersProps) => {
                             }
                         />
                     </FormControl>
-                </Box>
+                </Stack>
+
+                <Button
+                    onClick={() => openModal(setModalDeleteUser)}
+                >
+                    Delete user from board
+                </Button>
+
                 <Typography variant={"caption"}>
                     Drag member to card
                 </Typography>
@@ -111,6 +121,7 @@ const BoardUsers = (props:BoardUsersProps) => {
                                                         name={user.firstName}
                                                         lastName={user.lastName}
                                                         avatarPath={user.avatarPath}
+                                                        avatarColor={user.avatarColor}
                                             />
                                         )
                                 })}
@@ -122,6 +133,13 @@ const BoardUsers = (props:BoardUsersProps) => {
                 </Droppable>
 
             </Stack>
+            <DeleteUserMenu
+                assignedUsers={props.data.assignedUsers}
+                data={props.data}
+                setData={props.setData}
+                modalDeleteUser={modalDeleteUser}
+                setModalDeleteUser={setModalDeleteUser}
+            />
 
         </Drawer>
 

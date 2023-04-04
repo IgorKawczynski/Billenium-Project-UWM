@@ -6,5 +6,6 @@ interface AvatarProps {
     name: string,
     lastName:string
     avatarPath:string
+    avatarColor:string
 }
 export default AvatarProps
