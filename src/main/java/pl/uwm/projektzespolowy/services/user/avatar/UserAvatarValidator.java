@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.services.user;
+package pl.uwm.projektzespolowy.services.user.avatar;
 
 import com.google.common.io.Files;
 import lombok.RequiredArgsConstructor;

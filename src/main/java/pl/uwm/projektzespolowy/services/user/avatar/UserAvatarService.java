@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.services.user;
+package pl.uwm.projektzespolowy.services.user.avatar;
 
 import com.google.common.io.Files;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +8,7 @@ import pl.uwm.projektzespolowy.models.user.User;
 
 @Service
 @RequiredArgsConstructor
-class UserAvatarService {
+public class UserAvatarService {
 
     public static final String IMAGES_STORED_PATH = "react/src/assets/imgs/user_avatars/";
     public static final String IMAGES_PREFIX_IN_DATABASE = "/src/assets/imgs/user_avatars/";

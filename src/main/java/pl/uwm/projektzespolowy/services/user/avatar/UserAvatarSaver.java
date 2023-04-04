@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.services.user;
+package pl.uwm.projektzespolowy.services.user.avatar;
 
 import com.google.common.io.Files;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import pl.uwm.projektzespolowy.exceptions.fileexceptions.CreatingFileException;
 import java.io.File;
 import java.io.IOException;
 
-import static pl.uwm.projektzespolowy.services.user.UserAvatarService.IMAGES_STORED_PATH;
+import static pl.uwm.projektzespolowy.services.user.avatar.UserAvatarService.IMAGES_STORED_PATH;
 
 @Component
 @RequiredArgsConstructor
