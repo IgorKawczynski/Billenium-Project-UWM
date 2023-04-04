@@ -97,40 +97,45 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
             {open && (
                 <Box
                     maxHeight={'40px'}
+                    display={"flex"}
+                    justifyContent={"space-between"}
                 >
                     <TextField
                         variant={"standard"}
                         inputMode={"email"}
                         value={title}
                         onChange={handleTitleChange}
-                        InputProps={{
-                            startAdornment:(
-                                <Tooltip
-                                    title={"Save subtask"}
-                                    placement={'top'}
-                                >
-                                    <IconButton
-                                        sx={{color:theme.palette.primary.main}}
-                                        onClick={() => updateSubtask(
-                                                            props.id,
-                                                            title,
-                                                            props.data,
-                                                            props.setData
-                                                            )}
-                                    >
-                                        <SaveOutlinedIcon/>
-                                    </IconButton>
-                                </Tooltip>
-                            )
-                        }}
                     />
-                    <Tooltip title={'Redo'} placement={"top"}>
-                    <IconButton
-                        onClick={() => closeModal(setOpen)}
-                    >
-                        <RedoIcon />
-                    </IconButton>
-                </Tooltip>
+                    <Box display={"flex"}>
+                        <Tooltip
+                            title={"Save subtask"}
+                            placement={'top'}
+                        >
+                            <IconButton
+                                sx={{color:theme.palette.primary.main}}
+                                size={"small"}
+                                onClick={() => updateSubtask(
+                                    props.id,
+                                    title,
+                                    props.data,
+                                    props.setData
+                                )}
+                            >
+                                <SaveOutlinedIcon/>
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title={'Redo'} placement={"top"}>
+                            <IconButton
+                                size={"small"}
+                                onClick={() => closeModal(setOpen)}
+                            >
+                                <RedoIcon sx={{
+                                    maxWidth:'30px',
+                                    maxHeight:'30px'
+                                }} />
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
                 </Box>
             )
             }

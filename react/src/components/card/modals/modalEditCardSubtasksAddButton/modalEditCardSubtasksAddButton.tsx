@@ -25,55 +25,61 @@ const ModalEditCardSubtasksAddButton = (props:ModalEditCardSubtasksAddButtonProp
                     <Box
                         display={"flex"}
                         alignItems={"center"}
+                        justifyContent={"space-between"}
                     >
+                        <Typography variant={"body2"} color={theme.palette.text.primary}>
+                            Add new subtask
+                        </Typography>
                         <IconButton
+                            size={"small"}
                             onClick={() => openModal(setOpen)}
                         >
                             <AddIcon/>
                         </IconButton>
-                        <Typography variant={"body2"} color={theme.palette.text.primary}>
-                            Add new subtask
-                        </Typography>
                     </Box>
                 )
             }
             {open &&(
-                <Box>
+                <Box
+                    display={"flex"}
+                    justifyContent={"space-between"}
+                >
                         <TextField
                             variant={"standard"}
                             inputMode={"email"}
                             value={title}
                             onChange={handleTitleChange}
-                            InputProps={{
-                            startAdornment:(
-                                    <Tooltip
-                                        title={"Add subtask"}
-                                        placement={'top'}
-                                    >
-                                        <IconButton
-                                            sx={{color:theme.palette.primary.main}}
-                                            onClick={() => addSubtask(
-                                                    props.cardId,
-                                                    title,
-                                                    props.data,
-                                                    props.setData,
-                                                    setTitle,
-                                                    setOpen
-                                                )}
-                                        >
-                                            <AddIcon/>
-                                        </IconButton>
-                                    </Tooltip>
-                            )
-                            }}
+                            label={"Add new subtask"}
                         />
+                    <Box>
+                        <Tooltip
+                            title={"Add subtask"}
+                            placement={'top'}
+                        >
+                            <IconButton
+                                size={"small"}
+                                sx={{color:theme.palette.primary.main}}
+                                onClick={() => addSubtask(
+                                    props.cardId,
+                                    title,
+                                    props.data,
+                                    props.setData,
+                                    setTitle,
+                                    setOpen
+                                )}
+                            >
+                                <AddIcon/>
+                            </IconButton>
+                        </Tooltip>
                         <Tooltip title={'Redo'} placement={'top'}>
                             <IconButton
-                            onClick={() => closeModal(setOpen)}
+                                size={"small"}
+                                onClick={() => closeModal(setOpen)}
                             >
                                 <RedoIcon />
                             </IconButton>
                         </Tooltip>
+                    </Box>
                 </Box>
                 )
             }

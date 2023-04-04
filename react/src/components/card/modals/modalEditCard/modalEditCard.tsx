@@ -1,5 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Tooltip, Typography, useTheme} from "@mui/material";
+import {
+    Backdrop,
+    Box,
+    Button,
+    Fade,
+    IconButton,
+    Modal,
+    Stack,
+    TextField,
+    Tooltip,
+    Typography,
+    useTheme
+} from "@mui/material";
 import ModalEditCardProps from "@/components/card/interfaces/modalEditcard/ModalEditCard";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
@@ -9,6 +21,7 @@ import ModalEditCardSubtasks from "@/components/card/modals/modalEditCardSubtask
 import LockIcon from "@mui/icons-material/Lock";
 import EditCardTitle from "@/components/card/modals/editCardTitile/editCardTitle";
 import EditCardDesc from "@/components/card/modals/editCardDesc/editCardDesc";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function ModalEditCard(props:ModalEditCardProps) {
     const [title, setTitle] = useState(props.title);
@@ -49,36 +62,47 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                 }}
             >
                 <Fade in={props.modalEdit}>
-                    <Stack sx={modalBigStyle} spacing={2}>
-                        <Box
-                            display={"flex"}
-                            justifyContent={"center"}
-                            alignItems={"center"}
-                        >
-                            {props.isLocked && (
-                                <Tooltip title={'Card is Locked'} placement={"top"}>
-                                    <LockIcon sx={{
-                                        color:theme.palette.primary.main,
-                                        fontSize:'18px'
-                                    }}
-                                    />
-                                </Tooltip>
-                            )}
-                            <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
-                                {props.title}
-                            </Typography>
+                    <Stack sx={modalBigStyle} spacing={1}>
+                        <Box>
+                            <Box
+                                display={"flex"}
+                                justifyContent={"end"}
+                            >
+                                <IconButton>
+                                    <CloseIcon/>
+                                </IconButton>
+                            </Box>
+                            <Box
+                                display={"flex"}
+                                justifyContent={"center"}
+                                alignItems={"center"}
+                            >
+                                {props.isLocked && (
+                                    <Tooltip title={'Card is Locked'} placement={"top"}>
+                                        <LockIcon sx={{
+                                            color:theme.palette.primary.main,
+                                            fontSize:'18px'
+                                        }}
+                                        />
+                                    </Tooltip>
+                                )}
+                                <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
+                                    {props.title}
+                                </Typography>
+                            </Box>
                         </Box>
                         <Box
                             display={'flex'}
                         >
-                            <Box
-                            display={'flex'}
-                            flexDirection={'column'}
+                            <Stack
+                            direction={'column'}
                             width={'50%'}
-                            paddingX={1}
+                            spacing={2}
                             >
-                                   <EditCardTitle  handleChangeText={handleNameChange} text={title}/>
-                                    <EditCardDesc text={desc} handleChangeText={handleDescChange}/>
+                                <EditCardTitle  handleChangeText={handleNameChange} text={title}/>
+
+                                <EditCardDesc text={desc} handleChangeText={handleDescChange}/>
+
                                 <ModalEditCardSubtasks
                                     cardId={props.id}
                                     cardTitle={props.title}
@@ -87,7 +111,7 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                     setData={props.setData}
                                     window={props.setModalEdit}
                                 />
-                            </Box>
+                            </Stack>
                             <Box
                                 width={'50%'}
                                 paddingX={1}
@@ -113,19 +137,6 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                             display={'flex'}
                             justifyContent={'center'}
                         >
-                            <Button
-                                sx={{maxHeight:'50px', width:'100px'}}
-                                onClick={() => updateCard(props.id,
-                                                        title,
-                                                        desc,
-                                                        props.setData,
-                                                        props.data,
-                                                        props.setModalEdit
-                                                        )}
-                                variant="contained"
-                            >
-                                Edit
-                            </Button>
                         </Box>
                     </Stack>
                 </Fade>
