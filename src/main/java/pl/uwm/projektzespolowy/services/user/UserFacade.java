@@ -60,8 +60,13 @@ public class UserFacade {
         return user.toDto();
     }
 
+    public void deleteUserAvatar(Long userId) {
+        var user = userCRUDService.getUserById(userId);
+        userAvatarService.deleteUserAvatar(user);
+        userCRUDService.saveChangedUser(user);
+    }
+
     public void deleteUser(Long userId) {
         userCRUDService.deleteUser(userId);
     }
-
 }

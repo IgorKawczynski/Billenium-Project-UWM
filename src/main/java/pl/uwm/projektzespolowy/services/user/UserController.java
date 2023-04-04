@@ -50,6 +50,12 @@ public class UserController {
         return userFacade.changeUserAvatar(userId, avatarImage);
     }
 
+    @DeleteMapping("/{userId}/avatar")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteImage(@PathVariable Long userId) {
+        userFacade.deleteUserAvatar(userId);
+    }
+
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUserById(@PathVariable Long userId) {
