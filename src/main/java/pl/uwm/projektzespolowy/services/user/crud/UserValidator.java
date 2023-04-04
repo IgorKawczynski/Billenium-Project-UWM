@@ -15,7 +15,7 @@ import pl.uwm.projektzespolowy.exceptions.VOExceptions.RegexMatchException;
 class UserValidator {
 
     private final UserRepository userRepository;
-    public static final String NAME_REGEX = "[\\p{Alpha}\\p{Space}-.']++";
+    public static final String NAME_REGEX = "^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]*$";
     public static final String EMAIL_REGEX = "[\\p{Alpha}\\p{Digit}]++@[\\p{Alpha}\\p{Digit}]++.[\\p{Alpha}\\p{Digit}]++";
     public static final String PASSWORD_REGEX = "[\\p{Alnum}\\p{Punct}]++";
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

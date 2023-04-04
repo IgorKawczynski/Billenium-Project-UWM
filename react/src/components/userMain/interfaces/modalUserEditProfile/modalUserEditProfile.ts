@@ -6,6 +6,7 @@ export interface ModalUserEditProfileProps{
     lastName:string
     email:string
     avatarPath:string
+    avatarColor:string
     modalEdit:boolean
     setModalEdit: React.Dispatch<SetStateAction<boolean>>
     setActiveUser:any

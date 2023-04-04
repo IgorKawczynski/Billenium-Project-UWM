@@ -1,0 +1,1 @@
+alter table boards add column wip_limit INT;

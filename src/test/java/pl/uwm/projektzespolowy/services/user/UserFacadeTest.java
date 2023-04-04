@@ -9,6 +9,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
 import pl.uwm.projektzespolowy.exceptions.VOExceptions.EmailAlreadyExistsException;
+import pl.uwm.projektzespolowy.exceptions.VOExceptions.FieldLengthException;
+import pl.uwm.projektzespolowy.exceptions.VOExceptions.InvalidEmailException;
+import pl.uwm.projektzespolowy.exceptions.VOExceptions.RegexMatchException;
 import pl.uwm.projektzespolowy.models.user.UserCreateDTO;
 import pl.uwm.projektzespolowy.models.user.UserLoginRequestDTO;
 import pl.uwm.projektzespolowy.services.user.crud.UserCRUDService;
@@ -47,19 +50,13 @@ class UserFacadeTest {
     @Order(2)
     void doesCreatedUserAlreadyExist() {
         // when
-        var user = userFacade.getUserById(
-                Long.parseLong(
-                        userFacade.getUserByEmail("emailTest@op.pl").id()
-                )
-        );
+        var user = new UserCreateDTO(
+                "emailTest@op.pl",
+                "fNameSecondTest",
+                "lNameSecondTest",
+                "passwordSecondTest");
         // then
-        assertThatThrownBy(() -> userFacade.createUser(
-                new UserCreateDTO(
-                        "emailTest@op.pl",
-                        "fNameSecondTest",
-                        "lNameSecondTest",
-                        "passwordSecondTest")
-        ))
+        assertThatThrownBy(() -> userFacade.createUser(user))
                 .isInstanceOf(EmailAlreadyExistsException.class)
                 .hasMessage("User with given email already exists.");
     }
@@ -79,7 +76,20 @@ class UserFacadeTest {
 
     @Test
     @Order(4)
-    void shouldLoginUnsuccessfully() {
+    void shouldLoginUnsuccessfullyWithBadEmail() {
+        // when
+        String rawPassword = "passwordTest";
+        var user = userCRUDService.getUserByEmail("emailTest@op.pl");
+        var userToLogin = new UserLoginRequestDTO(user.getEmail() + "BAD", rawPassword);
+        // then
+        assertThatThrownBy(() -> userFacade.login(userToLogin))
+                .isInstanceOf(BadCredentialsException.class)
+                .hasMessage("There is no such user with given email.");
+    }
+
+    @Test
+    @Order(5)
+    void shouldLoginUnsuccessfullyWithBadPassword() {
         // when
         String rawPassword = "passwordTestBAD";
         var user = userCRUDService.getUserByEmail("emailTest@op.pl");
@@ -91,7 +101,7 @@ class UserFacadeTest {
     }
 
     @Test
-    @Order(5)
+    @Order(6)
     void isUserProperlyDeleted() {
         // when
         var user = userFacade.getUserByEmail("emailTest@op.pl");
@@ -103,9 +113,43 @@ class UserFacadeTest {
                 .hasMessage("User with id: " + Long.parseLong(user.id()) + " does not exist!");
     }
 
-    // Todo * -- Testy pod Boarda (m.in czy dodają się defaultowe rowy i kolumny)
+    @Test
+    @Order(7)
+    void doesRegistrationsValidationThrowProperExceptions() {
+        // when
+        var userToCreate1 = new UserCreateDTO(
+                null,
+                "fNameTest",
+                "lNameTest",
+                "paswordTest121");
+        var userToCreate2 = new UserCreateDTO(
+                "emailWithoutAtSign.com",
+                "fNameTest",
+                "lNameTest",
+                "paswordTest121");
+        var userToCreate3 = new UserCreateDTO(
+                "email@onet.com",
+                "fNameTest1111",
+                "lNameTest",
+                "paswordTest121");
+        var userToCreate4 = new UserCreateDTO(
+                "email@onet.com",
+                "fNameTest",
+                "lNameTest",
+                "pas");
+        // then
+        assertThatThrownBy(() -> userFacade.createUser(userToCreate1))
+                .isInstanceOf(NullPointerException.class)
+                .hasMessage("Field Email cannot be empty.");
+        assertThatThrownBy(() -> userFacade.createUser(userToCreate2))
+                .isInstanceOf(InvalidEmailException.class)
+                .hasMessage("Email must contain '@' sign.");
+        assertThatThrownBy(() -> userFacade.createUser(userToCreate3))
+                .isInstanceOf(RegexMatchException.class)
+                .hasMessage("First name includes not allowed characters.");
+        assertThatThrownBy(() -> userFacade.createUser(userToCreate4))
+                .isInstanceOf(FieldLengthException.class)
+                .hasMessage("Password must contain between 8 and 45 characters.");
+    }
+
 }
-
-
-
-

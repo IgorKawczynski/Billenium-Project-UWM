@@ -3,11 +3,17 @@ package pl.uwm.projektzespolowy.services.board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.board.*;
+import pl.uwm.projektzespolowy.models.card.Card;
+import pl.uwm.projektzespolowy.models.cell.Cell;
+import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.user.UserBoardAssignmentDTO;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.services.board.crud.BoardCRUDService;
+import pl.uwm.projektzespolowy.services.card.crud.CardCRUDService;
 import pl.uwm.projektzespolowy.services.user.crud.UserCRUDService;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +24,7 @@ public class BoardFacade {
 
     private final BoardCRUDService boardCRUDService;
     private final UserCRUDService userCRUDService;
+    private final CardCRUDService cardCRUDService;
 
     public Board createBoard(BoardCreateDTO boardCreateDTO) {
         var creatorId = Long.parseLong(boardCreateDTO.userId());
@@ -34,8 +41,15 @@ public class BoardFacade {
         return boardCRUDService.getBoardTitleById(id).toString();
     }
 
-    public List<UserResponseDTO> getAllAssignedUsersToBoard(Long boardId) {
-        return boardCRUDService.getAllAssignedUsersToBoard(boardId);
+    public List<UserBoardAssignmentDTO> getAllAssignedUsersToBoard(Long boardId) {
+        var board = boardCRUDService.getBoardById(boardId);
+        return boardCRUDService
+                .getAllAssignedUsersToBoard(boardId)
+                .stream()
+                .map((User user) -> user.toBoardDto(board))
+                .sorted(Comparator.comparing(UserBoardAssignmentDTO::firstName)
+                        .thenComparing(UserBoardAssignmentDTO::lastName))
+                .collect(Collectors.toList());
     }
 
     public BoardUpdateDTO updateBoardTitle(Long boardId, String newTitle) {
@@ -62,6 +76,20 @@ public class BoardFacade {
     public List<UserResponseDTO> deleteAssignedUserFromBoard(BoardUserDeleteDTO boardUserDeleteDTO) {
         var boardId = Long.parseLong(boardUserDeleteDTO.boardId());
         var userToDeleteFromBoard = userCRUDService.getUserById(Long.parseLong(boardUserDeleteDTO.userId()));
+
+        var board = boardCRUDService.getBoardById(boardId);
+        var columns = board.getColumns();
+        var cells = new ArrayList<Cell>();
+
+        for(Column column: columns) {
+            cells.addAll(column.getCells());
+        }
+        for(Cell cell: cells){
+            for(Card card: cell.getCards()){
+               cardCRUDService.deleteAssignedUserFromCard(card.getId(), userToDeleteFromBoard) ;
+            }
+        }
+
         return boardCRUDService
                 .deleteAssignedUserFromBoard(boardId, userToDeleteFromBoard)
                 .stream()

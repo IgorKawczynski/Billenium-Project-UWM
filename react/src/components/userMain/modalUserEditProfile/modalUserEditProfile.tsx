@@ -5,20 +5,21 @@ import {
     Box,
     Button,
     Fade,
+    IconButton,
     Modal,
     Stack,
     TextField,
     Tooltip,
     Typography,
-    useTheme,
-    IconButton
 } from "@mui/material";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
-import {closeModal} from "@/services/utils/modalUtils/modalUtils";
+import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import {ModalUserEditProfileProps} from "@/components/userMain/interfaces/modalUserEditProfile/modalUserEditProfile";
 import {PhotoCamera} from "@mui/icons-material";
 import ChangePassword from "@/components/userMain/changePassword/changePassword";
 import {changeAvatar} from "@/services/utils/UserUtils/userMainUtils";
+import NoPhotographyIcon from '@mui/icons-material/NoPhotography';
+import ModalDeleteAvatar from "@/components/userMain/modalDeleteAvatar/modalDeleteAvatar";
 
 const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     const [firstName, setFirstName] = useState(props.firstName);
@@ -26,8 +27,8 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     const [email, setEmail] = useState(props.email);
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
-    const [passwordToChange, setPasswordToChange] =useState(false);
-    const theme = useTheme()
+    const [passwordToChange, setPasswordToChange] = useState(false);
+    const [DeleteAvatar, setDeleteAvatar] = useState(false)
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
         setFirstName(props.firstName);
@@ -68,7 +69,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                 image,
                 props.setActiveUser
             )
-        };
+        }
     }
 
     return (
@@ -96,7 +97,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                             <Avatar
                                 src={props.avatarPath && props.avatarPath}
                                 sx={{
-                                    bgcolor:theme.palette.primary.main
+                                    bgcolor:props.avatarColor
                                 }}
                             >
                                 <Typography variant={"body1"}>
@@ -116,6 +117,22 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                                 <PhotoCamera />
                             </IconButton>
                     </Tooltip>
+                        {props.avatarPath != null && (
+                            <Tooltip
+                                title={"Delete avatar"}
+                                placement={"top"}
+                            >
+                                <IconButton
+                                    color="primary"
+                                    aria-label="Delete avatar"
+                                    component="label"
+                                    onClick={() => openModal(setDeleteAvatar)}
+                                >
+                                    <NoPhotographyIcon />
+                                </IconButton>
+                            </Tooltip>
+                        )}
+
                         <Typography
                             color={'textPrimary'}
                             id="transition-modal-title"
@@ -189,6 +206,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                             Edit
                         </Button>
                     </Box>
+                    <ModalDeleteAvatar userId={props.userId} modalDeleteAvatar={DeleteAvatar} setModalDeleteAvatar={setDeleteAvatar} setActiveUser={props.setActiveUser}/>
                 </Stack>
             </Fade>
         </Modal>

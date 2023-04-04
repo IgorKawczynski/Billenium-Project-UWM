@@ -7,7 +7,6 @@ import '@/assets/styles/board.css'
 import ModalEditBoard from "@/components/board/modalEditBoard/modalEditBoard";
 import BoardHeader from "@/components/board/boardHeader/boardHeader";
 import BoardContent from "@/components/board/boardContent/boardContent";
-import AddRowButton from "@/components/row/addRowButton/addRowButton";
 import BoardMenu from "@/components/menus/boardMenu/menu";
 import {useNavigate, useParams} from "react-router-dom";
 

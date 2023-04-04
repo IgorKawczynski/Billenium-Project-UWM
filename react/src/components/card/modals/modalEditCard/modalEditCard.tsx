@@ -1,32 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {
-    Backdrop,
-    Box,
-    Button,
-    Fade,
-    IconButton,
-    Modal,
-    Stack,
-    TextField,
-    Tooltip,
-    Typography,
-    useTheme
-} from "@mui/material";
+import {Backdrop, Box, Fade, Modal, Stack} from "@mui/material";
 import ModalEditCardProps from "@/components/card/interfaces/modalEditcard/ModalEditCard";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
-import {updateCard} from "@/services/utils/cardUtils/cardUtils";
 import CardMenu from "@/components/card/modals/modalEditCardMenu/modalEditCardMenu";
 import ModalEditCardSubtasks from "@/components/card/modals/modalEditCardSubtasks/modalEditCardSubtasks";
-import LockIcon from "@mui/icons-material/Lock";
 import EditCardTitle from "@/components/card/modals/editCardTitile/editCardTitle";
 import EditCardDesc from "@/components/card/modals/editCardDesc/editCardDesc";
-import CloseIcon from "@mui/icons-material/Close";
 
 export default function ModalEditCard(props:ModalEditCardProps) {
     const [title, setTitle] = useState(props.title);
     const [desc, setDesc] = useState(props.desc);
-    const theme = useTheme()
 
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie

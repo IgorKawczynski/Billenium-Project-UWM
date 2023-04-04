@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Box, Drawer, FormControl, InputLabel, Stack, Tooltip, Typography, useTheme, Button} from "@mui/material";
+import {Box, Button, Drawer, FormControl, InputLabel, Stack, Tooltip, Typography, useTheme} from "@mui/material";
 import {BoardUsersProps} from "@/components/board/interfaces/boardUsers/boardUsers";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
@@ -100,7 +100,7 @@ const BoardUsers = (props:BoardUsersProps) => {
                     droppableId={"AvatarBox"}
                     direction={"horizontal"}
                     type={'user'}>
-                    {(provided, snapshot) =>(
+                    {(provided) =>(
                             <Stack
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}

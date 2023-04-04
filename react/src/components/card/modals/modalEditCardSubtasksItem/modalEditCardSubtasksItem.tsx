@@ -8,7 +8,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import RedoIcon from "@mui/icons-material/Redo";
-import {checkSubtask, removeSubtask, uncheckSubtask, updateSubtask} from "@/services/utils/cardUtils/subtaskUtils";
+import {checkSubtask, uncheckSubtask, updateSubtask} from "@/services/utils/cardUtils/subtaskUtils";
 import ModalRemoveSubtaskFromCard from "@/components/card/modals/modalRemoveSubtaskFromCard/modalRemoveSubtaskFromCard";
 
 const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{

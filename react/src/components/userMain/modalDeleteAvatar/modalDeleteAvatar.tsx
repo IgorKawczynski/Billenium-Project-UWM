@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from "@mui/material/Modal";
+import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import Stack from "@mui/material/Stack";
@@ -7,22 +8,18 @@ import {modalStyle} from "@/assets/themes/modalStyle";
 import {Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {closeModal} from "@/services/utils/modalUtils/modalUtils";
-import {removeSubtask} from "@/services/utils/cardUtils/subtaskUtils";
-import {
-    ModalRemoveSubtaskFromCardProps
-} from "@/components/card/interfaces/modalRemoveSubtaskFromCard/modalRemoveSubtaskFromCard";
+import {ModalDeleteAvatarProps} from "@/components/userMain/interfaces/modalDeleteAvatar/modalDeleteAvatar";
+import {deleteAvatar} from "@/services/utils/UserUtils/userMainUtils";
 
+const ModalDeleteAvatar = (props:ModalDeleteAvatarProps) =>
+{
 
-const ModalRemoveSubtaskFromCard = (props:ModalRemoveSubtaskFromCardProps) =>{
-
-    return (
+    return(
         <Modal
-            style={{zIndex:'13'}}
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
-            open={props.modalDelete}
-            onClose={() => closeModal(props.setModalDelete)}
+            open={props.modalDeleteAvatar}
+            onClose={() => closeModal(props.setModalDeleteAvatar)}
             closeAfterTransition
             slots={{ backdrop: Backdrop }}
             slotProps={{
@@ -31,39 +28,35 @@ const ModalRemoveSubtaskFromCard = (props:ModalRemoveSubtaskFromCardProps) =>{
                 },
             }}
         >
-            <Fade in={props.modalDelete}>
+            <Fade in={props.modalDeleteAvatar}>
                 <Stack sx={modalStyle} spacing={3}>
-                    <Grid>
-                        <Typography
-                            color={'textPrimary'}
-                            id="transition-modal-title"
-                            variant="body1"
-                            component="h2"
-                            sx={{textAlign:"center"}}
-                        >
-                            Are you sure you want to delete subtask {props.title} from card {props.cardTitle} ?
+                    <Grid style={{display:"flex",
+                        textAlign:'center',
+                        justifyContent:"center"
+                    }}
+                    >
+                        <Typography color={'textPrimary'} variant={'body1'}>
+                            Are you sure you want to delete your avatar?
                         </Typography>
                     </Grid>
-                    <Grid style={{display:"flex",
+                    <Grid style={{ display:"flex",
                         justifyContent:"space-between",
                         width:"100%"}}
                     >
                         <Button
                             sx={{maxHeight:'50px'}}
-                            onClick={() => closeModal(props.setModalDelete)}
+                            onClick={() => closeModal(props.setModalDeleteAvatar)}
                             variant="contained"
                         >
-                            Close
+                            Cancel
                         </Button>
                         <Button
                             sx={{maxHeight:'50px'}}
                             variant="contained"
-                            onClick={() => removeSubtask(
-                                props.id,
-                                props.cardTitle,
-                                props.data,
-                                props.setData
-                            )}
+                            onClick={() => deleteAvatar(props.userId,
+                                                        props.setActiveUser,
+                                                        props.setModalDeleteAvatar
+                                                         )}
                         >
                             Delete
                         </Button>
@@ -72,6 +65,6 @@ const ModalRemoveSubtaskFromCard = (props:ModalRemoveSubtaskFromCardProps) =>{
             </Fade>
         </Modal>
     )
-}
 
-export default ModalRemoveSubtaskFromCard
+}
+export default ModalDeleteAvatar

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.projektzespolowy.models.board.*;
+import pl.uwm.projektzespolowy.models.user.UserBoardAssignmentDTO;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class BoardController {
 
     @GetMapping("/users/{boardId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponseDTO> getAllAssignedUsersToBoard(@PathVariable Long boardId) {
+    public List<UserBoardAssignmentDTO> getAllAssignedUsersToBoard(@PathVariable Long boardId) {
         return boardFacade.getAllAssignedUsersToBoard(boardId);
     }
 

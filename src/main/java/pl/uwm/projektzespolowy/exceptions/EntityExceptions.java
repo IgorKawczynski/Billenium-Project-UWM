@@ -44,4 +44,10 @@ public class EntityExceptions {
         return new ErrorMessage("card", exception.getMessage());
     }
 
+    @ExceptionHandler(value = WipLimitExceededException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage wipLimitExceededException(WipLimitExceededException exception) {
+        return new ErrorMessage("wipLimit", exception.getMessage());
+    }
+
 }

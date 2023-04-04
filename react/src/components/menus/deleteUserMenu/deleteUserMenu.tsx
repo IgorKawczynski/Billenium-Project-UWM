@@ -1,7 +1,6 @@
 import React from "react";
-import {Drawer, Stack, useTheme, Box, Avatar, Button, IconButton} from "@mui/material";
+import {Box, Drawer, IconButton, Stack, useTheme} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import DeleteUserMenuItem from "@/components/menus/deleteUserMenuItem/deleteUserMenuItem";
 import {DeleteUserMenuProps} from "@/components/menus/interfaces/deleteUserMenu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -10,8 +9,6 @@ import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 
 const DeleteUserMenu = (props:DeleteUserMenuProps) => {
     const theme = useTheme()
-    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    }
 
     return(
         <Drawer

@@ -1,0 +1,1 @@
+alter table boards alter column wip_limit set NOT NULL;

@@ -2,7 +2,9 @@ import {
     addBoardToBackend,
     changeUserAvatarOnBackend,
     deleteBoardFromBackend,
-    getUserBoardsFromBackend, getUserFromBackend
+    deleteUserAvatarOnBackend,
+    getUserBoardsFromBackend,
+    getUserFromBackend
 } from "@/services/actions/userMainService";
 import {userBoardsData} from "@/services/utils/UserUtils/userBoardsData";
 import React, {SetStateAction} from "react";
@@ -27,9 +29,28 @@ export function changeAvatar  (
 )  {
     changeUserAvatarOnBackend(userId, avatarImage)
         .then( res => {
+            if (typeof res === 'string') {
+                handleClickVariant(enqueueSnackbar)(res, 'error')
+            } else {
+                getUserFromBackend(userId)
+                    .then(res => {
+                        setActiveUser(res)
+                        handleClickVariant(enqueueSnackbar)(`User avatar added, please refresh page.` ,'success')
+                    })
+            }
+        })
+}
+export function deleteAvatar(
+    userId:string,
+    setActiveUser:any,
+    setAvatarDelete:React.Dispatch<SetStateAction<boolean>>
+)  {
+    deleteUserAvatarOnBackend(userId)
+        .then( res => {
             getUserFromBackend(userId)
                 .then(res => {
                     setActiveUser(res)
+                    closeModal(setAvatarDelete)
                 })
         })
 }

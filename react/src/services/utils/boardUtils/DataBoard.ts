@@ -84,5 +84,6 @@ export interface activeUser{
     lastName: string;
     email:string;
     avatarPath:string;
+    avatarColor:string
 }
 
