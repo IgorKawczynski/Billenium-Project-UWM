@@ -93,6 +93,7 @@ public class Board extends BasicEntity {
                 .builder()
                 .id(String.valueOf(this.id))
                 .title(this.title.toString())
+                .creatorId(String.valueOf(this.creator.getId()))
                 .creatorName(this.creator.getFullName())
                 .assignedUsers(this.assignedUsers.stream()
                         .map(User::toDto)

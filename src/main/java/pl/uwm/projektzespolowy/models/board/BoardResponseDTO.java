@@ -10,6 +10,7 @@ import java.util.List;
 
 public record BoardResponseDTO(String id,
                                String title,
+                               String creatorId,
                                String creatorName,
                                List<UserResponseDTO> assignedUsers,
                                List<ColumnResponseDTO> columnList,
