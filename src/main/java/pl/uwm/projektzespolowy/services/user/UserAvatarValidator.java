@@ -15,7 +15,7 @@ import java.util.List;
 class UserAvatarValidator {
 
     public final static List<String> ALLOWED_AVATAR_EXTENSIONS = List.of("jpeg", "jpg", "png", "gif");
-    public final static Long MAXIMUM_SIZE_IN_BYTES = 120000L;
+    public final static Long MAXIMUM_SIZE_IN_BYTES = 128000L;
 
     public void validate(MultipartFile userAvatar) {
         if (userAvatar.isEmpty() || userAvatar.getOriginalFilename() == null) {
