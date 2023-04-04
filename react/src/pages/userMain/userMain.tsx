@@ -10,11 +10,12 @@ import {useNavigate, useParams} from "react-router-dom";
 import {ColorModeContext} from "@/App";
 import {activeUser} from "@/services/utils/boardUtils/DataBoard";
 import {unmountComponentAtNode} from "react-dom";
+import ModalDeleteAvatar from "@/components/userMain/modalDeleteAvatar/modalDeleteAvatar";
 
 const UserMain = () => {
     const [modalEdit, setModalEdit] = useState(false);
     const [modalAddBoard, setModalAddBoard] = useState(false);
-    const [activeUser, setActiveUser] = useState<activeUser>({ id:"", firstName:"", lastName:"", email:"", avatarPath:""})
+    const [activeUser, setActiveUser] = useState<activeUser>({ id:"", firstName:"", lastName:"", email:"", avatarPath:"", avatarColor:""})
     const [userBoards, setUserBoards] = useState<userBoardsData['userBoards']>([]);
     const colorMode = React.useContext(ColorModeContext);
     const {userId} = useParams()
@@ -44,7 +45,7 @@ const UserMain = () => {
                     }
                 })
         }
-    },[])
+    },[setUserBoards])
 
 
     return(
@@ -113,6 +114,7 @@ const UserMain = () => {
                         lastName={activeUser.lastName}
                         email={activeUser.email}
                         avatarPath={activeUser.avatarPath}
+                        avatarColor={activeUser.avatarColor}
                         modalEdit={modalEdit}
                         setModalEdit={setModalEdit}
                         setActiveUser={setActiveUser}

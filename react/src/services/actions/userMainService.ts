@@ -78,6 +78,17 @@ export async function deleteBoardFromBackend(boardId:string){
     }
 
 }
+export async function deleteUserAvatarOnBackend(userId:string){
+    try{
+        const response = await axios.delete(urlDomain+`/api/users/${userId}/avatar`)
+        return response.data
+    }catch(error:any){
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+
+}
 
 export async function fetchBoardsData(setUserBoards:userBoardsData['setUserBoards'], userId:string) {
     const result = await getUserBoardsFromBackend(userId);
