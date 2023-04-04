@@ -7,6 +7,7 @@ import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.user.User;
+import pl.uwm.projektzespolowy.models.user.UserBoardAssignmentDTO;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.services.board.crud.BoardCRUDService;
 import pl.uwm.projektzespolowy.services.card.crud.CardCRUDService;
@@ -40,13 +41,14 @@ public class BoardFacade {
         return boardCRUDService.getBoardTitleById(id).toString();
     }
 
-    public List<UserResponseDTO> getAllAssignedUsersToBoard(Long boardId) {
+    public List<UserBoardAssignmentDTO> getAllAssignedUsersToBoard(Long boardId) {
+        var board = boardCRUDService.getBoardById(boardId);
         return boardCRUDService
                 .getAllAssignedUsersToBoard(boardId)
                 .stream()
-                .map(User::toDto)
-                .sorted(Comparator.comparing(UserResponseDTO::firstName)
-                        .thenComparing(UserResponseDTO::lastName))
+                .map((User user) -> user.toBoardDto(board))
+                .sorted(Comparator.comparing(UserBoardAssignmentDTO::firstName)
+                        .thenComparing(UserBoardAssignmentDTO::lastName))
                 .collect(Collectors.toList());
     }
 

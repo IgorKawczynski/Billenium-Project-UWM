@@ -14,7 +14,7 @@ import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
 import pl.uwm.projektzespolowy.models.row.Row;
 import pl.uwm.projektzespolowy.models.row.RowResponseDTO;
 import pl.uwm.projektzespolowy.models.user.User;
-import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
+import pl.uwm.projektzespolowy.models.user.UserBoardAssignmentDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
@@ -63,6 +63,9 @@ public class Board extends BasicEntity {
                orphanRemoval = true)
     List<Color> colors;
 
+    Integer wipLimit;
+
+    public final static int DEFAULT_WIP_LIMIT = 3;
 
     public Board(Title title, User creator) {
 
@@ -86,6 +89,7 @@ public class Board extends BasicEntity {
                 new Color(new Title("Color 4"), ColorValue.YELLOW, this),
                 new Color(new Title("Color 5"), ColorValue.RED, this)
         );
+        this.wipLimit = DEFAULT_WIP_LIMIT;
     }
 
     public BoardResponseDTO toDto() {
@@ -96,9 +100,9 @@ public class Board extends BasicEntity {
                 .creatorId(String.valueOf(this.creator.getId()))
                 .creatorName(this.creator.getFullName())
                 .assignedUsers(this.assignedUsers.stream()
-                        .map(User::toDto)
-                        .sorted(Comparator.comparing(UserResponseDTO::firstName)
-                                .thenComparing(UserResponseDTO::lastName))
+                        .map((User user) -> user.toBoardDto(this))
+                        .sorted(Comparator.comparing(UserBoardAssignmentDTO::firstName)
+                                .thenComparing(UserBoardAssignmentDTO::lastName))
                         .toList())
                 .columnList(this.columns.stream()
                         .map(Column::toDto)
@@ -112,6 +116,7 @@ public class Board extends BasicEntity {
                         .map(Color::toDto)
                         .sorted(Comparator.comparing(ColorResponseDTO::id))
                         .toList())
+                .wipLimit(this.wipLimit.toString())
                 .build();
     }
 
