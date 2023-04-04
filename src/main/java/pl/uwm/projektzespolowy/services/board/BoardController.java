@@ -40,10 +40,10 @@ public class BoardController {
         return boardFacade.getAllAssignedUsersToBoard(boardId);
     }
 
-    @PutMapping("")
+    @PutMapping("/{boardId}")
     @ResponseStatus(HttpStatus.OK)
-    public BoardResponseDTO updateBoard(@RequestBody BoardUpdateDTO boardUpdateDTO) {
-        return boardFacade.updateBoard(boardUpdateDTO);
+    public BoardUpdateDTO updateBoardTitle(@PathVariable Long boardId, @RequestParam("newTitle") String newTitle) {
+        return boardFacade.updateBoardTitle(boardId, newTitle);
     }
 
     @PatchMapping("/assign-user")

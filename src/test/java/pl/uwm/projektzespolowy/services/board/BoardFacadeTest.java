@@ -91,6 +91,36 @@ public class BoardFacadeTest {
     }
 
     @Test
+    @Order(7)
+    void shouldReturnBoardTitle() {
+        // when
+        var boardTitle = boardFacade.getBoardTitleById(board.getId().toString());
+        // then
+        assertThat(boardTitle).isInstanceOf(String.class);
+        assertThat(boardTitle).isEqualTo("test title");
+    }
+
+    @Test
+    @Order(8)
+    void shouldChangeBoardTitle() {
+        // given
+        var newTitle = "super new board title";
+        // when
+        var changedBoard = boardFacade.updateBoardTitle(board.getId(), newTitle);
+        // then
+        assertThat(changedBoard.newTitle()).isEqualTo("super new board title");
+    }
+
+//    @Test
+//    @Order(9)
+//    void shouldReturnAssignedUsers() {
+//        // when
+//        var assignedUsers = boardFacade.getAllAssignedUsersToBoard(board.getId());
+//        // then
+//        assertThat(assignedUsers).containsOnly(user.toBoardDto(board));
+//    }
+
+    @Test
     @Order(99999)
     void shouldDeleteBoard() {
         // when

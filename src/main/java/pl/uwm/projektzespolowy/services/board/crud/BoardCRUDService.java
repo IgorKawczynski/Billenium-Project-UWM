@@ -30,7 +30,7 @@ public class BoardCRUDService {
     }
 
     public List<User> getAllAssignedUsersToBoard(Long boardId) {
-        return boardReader.getBoardById(boardId).getAssignedUsers().stream().toList();
+        return boardReader.getBoardAssignedUsers(boardId);
     }
 
     public Board updateBoard(Long boardId, String newTitle) {

@@ -52,12 +52,9 @@ public class BoardFacade {
                 .collect(Collectors.toList());
     }
 
-    public BoardResponseDTO updateBoard(BoardUpdateDTO boardUpdateDTO) {
-        var boardId = Long.parseLong(boardUpdateDTO.boardId());
-        var newTitle = boardUpdateDTO.newTitle();
-        return boardCRUDService
-                .updateBoard(boardId, newTitle)
-                .toDto();
+    public BoardUpdateDTO updateBoardTitle(Long boardId, String newTitle) {
+        var board = boardCRUDService.updateBoard(boardId, newTitle);
+        return new BoardUpdateDTO(board.getId().toString(), board.getTitle().toString());
     }
 
     public List<UserResponseDTO> assignUserToBoard(BoardUserCreateDTO boardUserCreateDTO) {

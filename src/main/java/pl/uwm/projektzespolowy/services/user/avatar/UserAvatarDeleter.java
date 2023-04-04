@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.services.user;
+package pl.uwm.projektzespolowy.services.user.avatar;
 
 import com.google.common.io.Files;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
-public class UserAvatarDeleter {
+class UserAvatarDeleter {
 
     public void deleteOldUserAvatarIfExists(User user, MultipartFile newUserAvatar) {
         if (user.getAvatarPath() == null) {
