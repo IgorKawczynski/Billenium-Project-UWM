@@ -116,7 +116,6 @@
 						<exclude>pl/uwm/projektzespolowy/**/*DTO.*</exclude>
 						<exclude>pl/uwm/projektzespolowy/**/*DTOBuilder.*</exclude>
 						<exclude>pl/uwm/projektzespolowy/**/*Controller.*</exclude>
-						<exclude>pl/uwm/projektzespolowy/**/deleteAssignedUserFromBoard.*</exclude>
 					</excludes>
 				</configuration>
 				<executions>
