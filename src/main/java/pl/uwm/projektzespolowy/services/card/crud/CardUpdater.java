@@ -2,6 +2,7 @@ package pl.uwm.projektzespolowy.services.card.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.uwm.projektzespolowy.exceptions.WipLimitExceededException;
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.color.ColorValue;
 import pl.uwm.projektzespolowy.models.user.User;
@@ -26,6 +27,10 @@ class CardUpdater {
     }
 
     public Card assignUserToCard(Card card, User userToAssign) {
+        var wipLimit = card.getCell().getColumn().getBoard().getWipLimit();
+        if (userToAssign.calculateRemainingAssignments(card.getCell().getColumn().getBoard()) <= 0) {
+            throw new WipLimitExceededException(String.format("User has reached the assignment limit (%d).", wipLimit));
+        }
         card.assignUser(userToAssign);
         return cardRepository.saveAndFlush(card);
     }
