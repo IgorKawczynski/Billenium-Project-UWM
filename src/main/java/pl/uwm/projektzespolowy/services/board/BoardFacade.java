@@ -35,13 +35,7 @@ public class BoardFacade {
     }
 
     public List<UserResponseDTO> getAllAssignedUsersToBoard(Long boardId) {
-        return boardCRUDService
-                .getAllAssignedUsersToBoard(boardId)
-                .stream()
-                .map(User::toDto)
-                .sorted(Comparator.comparing(UserResponseDTO::firstName)
-                        .thenComparing(UserResponseDTO::lastName))
-                .collect(Collectors.toList());
+        return boardCRUDService.getAllAssignedUsersToBoard(boardId);
     }
 
     public BoardUpdateDTO updateBoardTitle(Long boardId, String newTitle) {
