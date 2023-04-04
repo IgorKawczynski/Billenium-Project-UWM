@@ -47,35 +47,44 @@ const EditCardDesc = (props:EditCardFormProps) => {
                 </Box>
 )}
     {!isEditing && (
-        <Box
-            display={"flex"}
-            alignItems={"center"}
-            justifyContent={"space-between"}
-        >
+        <Box>
             <Typography
                 textAlign={"left"}
-                variant={"body2"}
+                variant={"subtitle1"}
                 color={theme.palette.text.primary}
             >
-                {props.text}
+                Description
             </Typography>
-            <Tooltip title={'Edit Description'}>
-                <IconButton
-                    sx={{
-                        maxWidth:'30px',
-                        maxHeight:'30px'
-                    }}
-                    size={"small"}
-                    onClick={() => openModal(setIsEditing)}
+            <Box
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"space-between"}
+            >
+                <Typography
+                    textAlign={"left"}
+                    variant={"caption"}
+                    color={theme.palette.text.primary}
                 >
-                    <BorderColorOutlinedIcon
+                    {props.text}
+                </Typography>
+                <Tooltip title={'Edit Title'}>
+                    <IconButton
                         sx={{
-                            maxWidth:'20px',
-                            maxHeight:'20px'
+                            maxWidth:'30px',
+                            maxHeight:'30px'
                         }}
-                    />
-                </IconButton>
-            </Tooltip>
+                        size={"small"}
+                        onClick={() => openModal(setIsEditing)}
+                    >
+                        <BorderColorOutlinedIcon
+                            sx={{
+                                maxWidth:'20px',
+                                maxHeight:'20px'
+                            }}
+                        />
+                    </IconButton>
+                </Tooltip>
+            </Box>
         </Box>
     )}
     </>

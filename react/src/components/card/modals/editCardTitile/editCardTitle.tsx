@@ -46,13 +46,21 @@ const EditCardTitle = (props:EditCardFormProps) => {
                 </Box>
             )}
             {!isEditing && (
-                <Box
-                    display={"flex"}
-                    alignItems={"center"}
-                    justifyContent={"space-between"}
-                >
+                <Box>
                     <Typography
-                        variant={"body1"}
+                        textAlign={"left"}
+                        variant={"subtitle1"}
+                        color={theme.palette.text.primary}
+                    >
+                        Title
+                    </Typography>
+                    <Box
+                        display={"flex"}
+                        alignItems={"center"}
+                        justifyContent={"space-between"}
+                    >
+                    <Typography
+                        variant={"caption"}
                         color={theme.palette.text.primary}
                     >
                         {props.text}
@@ -74,6 +82,7 @@ const EditCardTitle = (props:EditCardFormProps) => {
                             />
                         </IconButton>
                     </Tooltip>
+                    </Box>
                 </Box>
             )}
         </>
