@@ -93,10 +93,10 @@ const Task = (props:CardProps) => {
                                                     )}
                                                     <Typography
                                                         color={'textPrimary'}
-                                                        variant={'subtitle1'}
+                                                        variant={'body2'}
                                                     >
-                                                        {props.title.length >= 13 && (props.title.slice(0,13) + "...")}
-                                                        {props.title.length <= 13 && (props.title)}
+                                                        {props.title.length > 18 && (props.title.slice(0,18) + "...")}
+                                                        {props.title.length <= 18 && (props.title)}
                                                     </Typography>
                                                 </Box>
                                                 <EditCardButton
@@ -112,14 +112,6 @@ const Task = (props:CardProps) => {
 
                                                 />
                                             </Box>
-                                            <Typography
-                                                color={'textPrimary'}
-                                                variant={'caption'}
-                                                overflow={'hidden'}
-                                            >
-                                                {props.desc.length > 20 && (props.desc.slice(0,22) + "...")}
-                                                {props.desc.length < 20 && (props.desc)}
-                                            </Typography>
                                             <Box display={"flex"} justifyContent={"space-between"} marginTop={1}>
                                                 {props.subtasks.length > 0 && (
                                                     <CardPercentageCompleted subtasks={props.subtasks}/>
