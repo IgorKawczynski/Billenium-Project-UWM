@@ -43,9 +43,10 @@ const DeleteUserMenu = (props:DeleteUserMenuProps) => {
                     return(
                         <DeleteUserMenuItem
                             userId={user.id}
-                            userAvatarPath={user.avatarPath}
                             userName={user.firstName}
                             userLastName={user.lastName}
+                            userAvatarPath={user.avatarPath}
+                            userAvatarColor={user.avatarColor}
                             data={props.data}
                             setData={props.setData}
                         />

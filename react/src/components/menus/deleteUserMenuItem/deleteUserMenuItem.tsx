@@ -18,6 +18,7 @@ const DeleteUserMenuItem = (props:DeleteUserMenuItemProps) =>{
             <Avatar
                 src={props.userAvatarPath && props.userAvatarPath}
                 sx={{
+                    bgcolor:props.userAvatarColor,
                     width: 35,
                     height: 35,
                     marginRight:1

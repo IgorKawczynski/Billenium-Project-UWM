@@ -29,7 +29,8 @@ const ModalEditCardUserListItem = (props:ModalEditCardUserListItemProps) =>{
                         sx={{
                             width: 35,
                             height: 35,
-                            marginRight:1
+                            marginRight:1,
+                            bgcolor:props.userAvatarColor
                         }}
                     >
                         <Typography variant={"body1"}>

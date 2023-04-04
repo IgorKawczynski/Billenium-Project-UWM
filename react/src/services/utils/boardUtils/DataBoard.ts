@@ -76,6 +76,7 @@ export interface assignedUser{
     firstName: string;
     lastName: string;
     avatarPath:string;
+    avatarColor:string;
 }
 export interface activeUser{
     id: string;

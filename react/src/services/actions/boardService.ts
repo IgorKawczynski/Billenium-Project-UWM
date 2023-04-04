@@ -18,7 +18,8 @@ export function loadDefaultData(){
                 id: "1",
                 firstName: "Test",
                 lastName: "Test",
-                avatarPath: ""
+                avatarPath: "",
+                avatarColor:""
             }
         ],
         columnList: [
@@ -180,7 +181,7 @@ export async function assignUserToBoardToBackend(boardId:string,userEmail:string
 }
 
 export async function unassignUserFromBoardOnBackend(boardId:string,userId:string){
-    const apiUrl = urlDomain+`/api/boards/users`;
+    const apiUrl = urlDomain+`/api/boards/delete-user`;
     try {
         const response = await axios.patch(apiUrl, {boardId, userId});
         return response.data

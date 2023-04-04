@@ -55,7 +55,7 @@ const BoardUsers = (props:BoardUsersProps) => {
                     </IconButton>
 
                 </Box>
-                <Box>
+                <Stack spacing={2}>
                     <Typography variant={"caption"}>
                             Assign member to board
                     </Typography>
@@ -85,7 +85,7 @@ const BoardUsers = (props:BoardUsersProps) => {
                             }
                         />
                     </FormControl>
-                </Box>
+                </Stack>
 
                 <Button
                     onClick={() => openModal(setModalDeleteUser)}
@@ -121,6 +121,7 @@ const BoardUsers = (props:BoardUsersProps) => {
                                                         name={user.firstName}
                                                         lastName={user.lastName}
                                                         avatarPath={user.avatarPath}
+                                                        avatarColor={user.avatarColor}
                                             />
                                         )
                                 })}

@@ -198,7 +198,7 @@ export function unassignUserFromBoard(
                     ...data,
                     assignedUsers:res
                 })
-                handleClickVariant(enqueueSnackbar)('Unassigned user from board' ,'error')
+                handleClickVariant(enqueueSnackbar)('Unassigned user from board' ,'warning')
             }
         })
 }
