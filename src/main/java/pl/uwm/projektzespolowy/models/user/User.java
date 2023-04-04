@@ -58,8 +58,35 @@ public class User extends BasicEntity {
                 .build();
     }
 
+    public UserBoardAssignmentDTO toBoardDto(Board board) {
+        return UserBoardAssignmentDTO
+                .builder()
+                .id(this.id.toString())
+                .email(this.email)
+                .firstName(this.firstName)
+                .lastName(this.lastName)
+                .avatarPath(this.avatarPath)
+                .avatarColor(this.avatarColor.getValue())
+                .remainingAssignments(calculateRemainingAssignments(board))
+                .build();
+    }
+
     public String getFullName() {
         return firstName + " " + lastName;
+    }
+
+    public Integer calculateRemainingAssignments(Board board) {
+        var wipLimit = board.getWipLimit();
+        return wipLimit - getTasksAssignedCount(board);
+    }
+
+    public Integer getTasksAssignedCount(Board board) {
+        return board.getColumns().stream()
+                .flatMap(column -> column.getCells().stream())
+                .flatMap(cell -> cell.getCards().stream())
+                .filter(card -> card.getAssignedUsers().stream().anyMatch(user -> user.getId().equals(this.getId())))
+                .mapToInt(card -> 1)
+                .sum();
     }
 
 }
