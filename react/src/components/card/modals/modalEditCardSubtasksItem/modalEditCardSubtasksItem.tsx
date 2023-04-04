@@ -9,7 +9,7 @@ import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import RedoIcon from "@mui/icons-material/Redo";
 import {checkSubtask, removeSubtask, uncheckSubtask, updateSubtask} from "@/services/utils/cardUtils/subtaskUtils";
-import ModalRemoveSubtaskFromCard from "@/components/card/modalRemoveSubtaskFromCard/modalRemoveSubtaskFromCard";
+import ModalRemoveSubtaskFromCard from "@/components/card/modals/modalRemoveSubtaskFromCard/modalRemoveSubtaskFromCard";
 
 const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
     const theme = useTheme()

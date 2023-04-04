@@ -4,9 +4,11 @@ import ModalEditCardProps from "@/components/card/interfaces/modalEditcard/Modal
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {updateCard} from "@/services/utils/cardUtils/cardUtils";
-import CardMenu from "@/components/card/modalEditCardMenu/modalEditCardMenu";
-import ModalEditCardSubtasks from "@/components/card/modalEditCardSubtasks/modalEditCardSubtasks";
+import CardMenu from "@/components/card/modals/modalEditCardMenu/modalEditCardMenu";
+import ModalEditCardSubtasks from "@/components/card/modals/modalEditCardSubtasks/modalEditCardSubtasks";
 import LockIcon from "@mui/icons-material/Lock";
+import EditCardTitle from "@/components/card/modals/editCardTitile/editCardTitle";
+import EditCardDesc from "@/components/card/modals/editCardDesc/editCardDesc";
 
 export default function ModalEditCard(props:ModalEditCardProps) {
     const [title, setTitle] = useState(props.title);
@@ -75,24 +77,8 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                             width={'50%'}
                             paddingX={1}
                             >
-                                    <TextField
-                                        sx={{margin:'0 0 8px 0'}}
-                                        id="outlined-basic"
-                                        label="Title"
-                                        variant="outlined"
-                                        value={title}
-                                        onChange={handleNameChange}
-                                    />
-                                    <TextField
-                                        sx={{margin:'0 0 8px 0'}}
-                                        id="outlined-basic"
-                                        label="Desc"
-                                        variant="outlined"
-                                        multiline={true}
-                                        maxRows={5}
-                                        value={desc}
-                                        onChange={handleDescChange}
-                                    />
+                                   <EditCardTitle  handleChangeText={handleNameChange} text={title}/>
+                                    <EditCardDesc text={desc} handleChangeText={handleDescChange}/>
                                 <ModalEditCardSubtasks
                                     cardId={props.id}
                                     cardTitle={props.title}

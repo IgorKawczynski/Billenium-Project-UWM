@@ -5,7 +5,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import {StyledMenu} from "@/assets/styles/styledMenu";
 import {ModalEditCardUserListProps} from "@/components/card/interfaces/modalEditCardUserList/modalEditCardUserList";
-import ModalEditCardUserListItem from "@/components/card/modalEditCardUserListItem/modalEditCardUserListItem";
+import ModalEditCardUserListItem from "@/components/card/modals/modalEditCardUserListItem/modalEditCardUserListItem";
 import GroupIcon from "@mui/icons-material/Group";
 
 

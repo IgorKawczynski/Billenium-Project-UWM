@@ -9,8 +9,8 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import {ModalEditCardMenuProps} from "@/components/card/interfaces/modalEditCardMenu/ModalEditCardMenu";
 import ColorPicker from "@/components/card/cardColorPicker/ColorPicker";
-import ModalEditCardUserList from "@/components/card/modalEditCardUserList/modalEditCardUserList";
-import ModalEditCardLockCard from "@/components/card/modalEditCardLockCard/modalEditCardLockCard";
+import ModalEditCardUserList from "@/components/card/modals/modalEditCardUserList/modalEditCardUserList";
+import ModalEditCardLockCard from "@/components/card/modals/modalEditCardLockCard/modalEditCardLockCard";
 
 const CardMenu = (props:ModalEditCardMenuProps) => {
     return (

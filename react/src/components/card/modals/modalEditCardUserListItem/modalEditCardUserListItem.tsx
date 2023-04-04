@@ -5,7 +5,7 @@ import {
     ModalEditCardUserListItemProps
 } from "@/components/card/interfaces/modalEditCardUserListItem/modalEditCardUserListItem";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
-import ModalRemoveUserFromCard from "@/components/card/modalRemoveUserFromCard/modalRemoveUserFromCard";
+import ModalRemoveUserFromCard from "@/components/card/modals/modalRemoveUserFromCard/modalRemoveUserFromCard";
 import Typography from "@mui/material/Typography";
 
 const ModalEditCardUserListItem = (props:ModalEditCardUserListItemProps) =>{

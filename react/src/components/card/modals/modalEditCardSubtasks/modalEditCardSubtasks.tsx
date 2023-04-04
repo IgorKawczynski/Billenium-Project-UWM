@@ -1,10 +1,10 @@
 import React from "react";
 import {Box, Stack, Typography, useTheme} from "@mui/material";
-import ModalEditCardSubtasksItem from "@/components/card/modalEditCardSubtasksItem/modalEditCardSubtasksItem";
+import ModalEditCardSubtasksItem from "@/components/card/modals/modalEditCardSubtasksItem/modalEditCardSubtasksItem";
 import {ModalEditCardSubtasksProps} from "@/components/card/interfaces/modalEditCardSubtasks/modalEditCardSubtasks";
 import {CardPercentageCompletedLinear} from "@/components/card/cardPercentageCompleted/cardPercentageCompleted";
 import ModalEditCardSubtasksAddButton
-    from "@/components/card/modalEditCardSubtasksAddButton/modalEditCardSubtasksAddButton";
+    from "@/components/card/modals/modalEditCardSubtasksAddButton/modalEditCardSubtasksAddButton";
 
 const ModalEditCardSubtasks = (props:ModalEditCardSubtasksProps) =>{
     const theme = useTheme()
