@@ -1,0 +1,16 @@
+package pl.uwm.projektzespolowy.models.user;
+
+import lombok.Builder;
+
+public record UserBoardAssignmentDTO(String id,
+                                     String email,
+                                     String firstName,
+                                     String lastName,
+                                     String avatarPath,
+                                     String avatarColor,
+                                     Integer remainingAssignments) {
+
+    @Builder
+    public UserBoardAssignmentDTO {}
+
+}
