@@ -6,7 +6,8 @@ import {
     assignUserToBoardToBackend,
     editBoardToBackend,
     loadBoardFromBackend,
-    moveColumnToBackend, unassignUserFromBoardOnBackend
+    moveColumnToBackend,
+    unassignUserFromBoardOnBackend
 } from "@/services/actions/boardService";
 import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
@@ -15,10 +16,9 @@ import {enqueueSnackbar} from "notistack";
 import {findCellById} from "@/services/utils/cellUtils/cellUtils";
 
 function withPositionInRange(lowerBound: number, upperBound: number, columns:_Data["data"]['columnList']){
-    const newColumns = Object.values(columns).filter((column) => {
+    return  Object.values(columns).filter((column) => {
         return column.position >= lowerBound && column.position <= upperBound;
     });
-    return newColumns;
 }
 
 function changePositionToRight(columns:_Data["data"]['columnList']){

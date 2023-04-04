@@ -9,8 +9,6 @@ import ModalAddBoard from "@/components/userMain/modalAddBoard/modalAddBoard";
 import {useNavigate, useParams} from "react-router-dom";
 import {ColorModeContext} from "@/App";
 import {activeUser} from "@/services/utils/boardUtils/DataBoard";
-import {unmountComponentAtNode} from "react-dom";
-import ModalDeleteAvatar from "@/components/userMain/modalDeleteAvatar/modalDeleteAvatar";
 
 const UserMain = () => {
     const [modalEdit, setModalEdit] = useState(false);
@@ -21,10 +19,6 @@ const UserMain = () => {
     const {userId} = useParams()
     const theme = useTheme()
     const navigate = useNavigate()
-    const userFirstName = sessionStorage.getItem("userName") ?? "";
-    const userLastName = sessionStorage.getItem("userLastName") ?? "";
-    const userEmail = sessionStorage.getItem("userEmail") ?? "";
-
 
 
     if(userId && userId != sessionStorage.getItem('userId')){

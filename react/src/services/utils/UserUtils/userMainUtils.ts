@@ -1,8 +1,10 @@
 import {
     addBoardToBackend,
     changeUserAvatarOnBackend,
-    deleteBoardFromBackend, deleteUserAvatarOnBackend,
-    getUserBoardsFromBackend, getUserFromBackend
+    deleteBoardFromBackend,
+    deleteUserAvatarOnBackend,
+    getUserBoardsFromBackend,
+    getUserFromBackend
 } from "@/services/actions/userMainService";
 import {userBoardsData} from "@/services/utils/UserUtils/userBoardsData";
 import React, {SetStateAction} from "react";

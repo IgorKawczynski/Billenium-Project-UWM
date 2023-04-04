@@ -7,7 +7,6 @@ import {modalStyle} from "@/assets/themes/modalStyle";
 import {Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {removeUserFromCard} from "@/services/utils/cardUtils/cardUtils";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {removeSubtask} from "@/services/utils/cardUtils/subtaskUtils";
 import {

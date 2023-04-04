@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {IconButton, TextField, Tooltip, Typography, useTheme, Box} from "@mui/material";
+import {Box, IconButton, TextField, Tooltip, Typography, useTheme} from "@mui/material";
 import {EditCardTitleProps} from "@/components/card/interfaces/editCardForm/editCardForm";
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";

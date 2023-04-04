@@ -8,7 +8,6 @@ import {modalStyle} from "@/assets/themes/modalStyle";
 import {Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {removeColumn} from "@/services/utils/columnUtils/columnUtils";
 import {ModalDeleteAvatarProps} from "@/components/userMain/interfaces/modalDeleteAvatar/modalDeleteAvatar";
 import {deleteAvatar} from "@/services/utils/UserUtils/userMainUtils";
 

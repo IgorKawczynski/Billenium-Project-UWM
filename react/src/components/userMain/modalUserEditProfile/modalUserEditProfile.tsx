@@ -5,13 +5,12 @@ import {
     Box,
     Button,
     Fade,
+    IconButton,
     Modal,
     Stack,
     TextField,
     Tooltip,
     Typography,
-    useTheme,
-    IconButton
 } from "@mui/material";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
@@ -30,7 +29,6 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     const [repeatPassword, setRepeatPassword] = useState("");
     const [passwordToChange, setPasswordToChange] = useState(false);
     const [DeleteAvatar, setDeleteAvatar] = useState(false)
-    const theme = useTheme()
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
         setFirstName(props.firstName);
@@ -71,7 +69,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                 image,
                 props.setActiveUser
             )
-        };
+        }
     }
 
     return (

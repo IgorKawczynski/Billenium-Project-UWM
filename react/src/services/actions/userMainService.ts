@@ -1,7 +1,7 @@
 import axios from "axios";
 import {urlDomain} from "@/services/actions/boardService";
 import {userBoardsData} from "@/services/utils/UserUtils/userBoardsData";
-import {activeUser, assignedUser} from "@/services/utils/boardUtils/DataBoard";
+import {activeUser} from "@/services/utils/boardUtils/DataBoard";
 
 export function loadEmptyBoardsList(): { userBoards: userBoardsData["userBoards"] } {
     return {
