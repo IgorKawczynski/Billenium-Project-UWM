@@ -56,7 +56,6 @@ const Board = () => {
             <Stack spacing={2} width={calculatedWidth}>
                 <BoardHeader data={data} setModalEdit={setModalEdit} setData={setData}/>
                 <BoardContent users={users} setUsers={setUsers} data={data} setData={setData}/>
-                <AddRowButton data={data} setData={setData}/>
                 <ModalEditBoard
                     id={data.id}
                     title={data.title}

@@ -179,6 +179,18 @@ export async function assignUserToBoardToBackend(boardId:string,userEmail:string
     }
 }
 
+export async function unassignUserFromBoardOnBackend(boardId:string,userId:string){
+    const apiUrl = urlDomain+`/api/boards/users`;
+    try {
+        const response = await axios.patch(apiUrl, {boardId, userId});
+        return response.data
+    } catch (error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+}
+
 
 export async function fetchData(
     setData:_Data['setData'],

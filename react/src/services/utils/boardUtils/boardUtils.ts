@@ -6,7 +6,7 @@ import {
     assignUserToBoardToBackend,
     editBoardToBackend,
     loadBoardFromBackend,
-    moveColumnToBackend
+    moveColumnToBackend, unassignUserFromBoardOnBackend
 } from "@/services/actions/boardService";
 import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
@@ -178,7 +178,27 @@ export function assignUserToBoard(
                     ...data,
                     assignedUsers:res
                 })
-                handleClickVariant(enqueueSnackbar)('Assign user to board' ,'success')
+                handleClickVariant(enqueueSnackbar)('Assigned user to board' ,'success')
+            }
+        })
+}
+
+export function unassignUserFromBoard(
+    boardId:string,
+    userId:string,
+    data:_Data["data"],
+    setData:_Data['setData']
+) {
+    unassignUserFromBoardOnBackend(boardId, userId)
+        .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else {
+                setData({
+                    ...data,
+                    assignedUsers:res
+                })
+                handleClickVariant(enqueueSnackbar)('Unassigned user from board' ,'error')
             }
         })
 }
