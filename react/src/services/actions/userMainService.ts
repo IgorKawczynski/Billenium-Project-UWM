@@ -42,6 +42,17 @@ export async function changeUserAvatarOnBackend(userId:string, avatarImage:FormD
     }
 
 }
+export async function deleteUserAvatarOnBackend(userId:string){
+    try{
+        const response = await axios.delete(urlDomain+`/api/users/${userId}/avatar`)
+        return response.data
+    }catch(error:any){
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+
+}
 
 export async function getUserBoardsFromBackend(userId:string){
     try{
@@ -70,17 +81,6 @@ export async function addBoardToBackend(userId:string, title:string){
 export async function deleteBoardFromBackend(boardId:string){
     try{
         const response = await axios.delete(urlDomain+`/api/boards/${boardId}`)
-        return response.data
-    }catch(error:any){
-        if (error.response && error.response.data && error.response.data.error) {
-            return error.response.data.error;
-        }
-    }
-
-}
-export async function deleteUserAvatarOnBackend(userId:string){
-    try{
-        const response = await axios.delete(urlDomain+`/api/users/${userId}/avatar`)
         return response.data
     }catch(error:any){
         if (error.response && error.response.data && error.response.data.error) {
