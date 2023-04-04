@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.user.User;
-import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class BoardCRUDService {
         return boardReader.getBoardById(boardId).getTitle();
     }
 
-    public List<UserResponseDTO> getAllAssignedUsersToBoard(Long boardId) {
+    public List<User> getAllAssignedUsersToBoard(Long boardId) {
         return boardReader.getBoardAssignedUsers(boardId);
     }
 
