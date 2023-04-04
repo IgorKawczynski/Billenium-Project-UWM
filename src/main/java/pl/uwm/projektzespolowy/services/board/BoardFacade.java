@@ -50,9 +50,9 @@ public class BoardFacade {
         return boardCRUDService.updateBoard(boardId, newTitle).toDto();
     }
 
-    public List<UserResponseDTO> assignUserToBoard(BoardUserUpdateDTO boardUserUpdateDTO) {
-        var userToAssign = userCRUDService.getUserByEmail(boardUserUpdateDTO.userEmail());
-        var boardId = Long.parseLong(boardUserUpdateDTO.boardId());
+    public List<UserResponseDTO> assignUserToBoard(BoardUserCreateDTO boardUserCreateDTO) {
+        var userToAssign = userCRUDService.getUserByEmail(boardUserCreateDTO.userEmail());
+        var boardId = Long.parseLong(boardUserCreateDTO.boardId());
         return boardCRUDService
                 .assignUserToBoard(boardId, userToAssign)
                 .stream()
@@ -66,9 +66,9 @@ public class BoardFacade {
         boardCRUDService.deleteBoard(boardId);
     }
 
-    public List<UserResponseDTO> deleteAssignedUserFromBoard(BoardUserUpdateDTO boardUserUpdateDTO) {
-        var boardId = Long.parseLong(boardUserUpdateDTO.boardId());
-        var userToDeleteFromBoard = userCRUDService.getUserByEmail(boardUserUpdateDTO.userEmail());
+    public List<UserResponseDTO> deleteAssignedUserFromBoard(BoardUserDeleteDTO boardUserDeleteDTO) {
+        var boardId = Long.parseLong(boardUserDeleteDTO.boardId());
+        var userToDeleteFromBoard = userCRUDService.getUserById(Long.parseLong(boardUserDeleteDTO.userId()));
         return boardCRUDService
                 .deleteAssignedUserFromBoard(boardId, userToDeleteFromBoard)
                 .stream()

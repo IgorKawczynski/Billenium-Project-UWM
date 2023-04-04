@@ -3,10 +3,7 @@ package pl.uwm.projektzespolowy.services.board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
-import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
-import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
-import pl.uwm.projektzespolowy.models.board.BoardUserUpdateDTO;
+import pl.uwm.projektzespolowy.models.board.*;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 
 import java.util.List;
@@ -50,8 +47,8 @@ public class BoardController {
 
     @PatchMapping("/assign-user")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponseDTO> assignUserToBoard(@RequestBody BoardUserUpdateDTO boardUserUpdateDTO) {
-        return boardFacade.assignUserToBoard(boardUserUpdateDTO);
+    public List<UserResponseDTO> assignUserToBoard(@RequestBody BoardUserCreateDTO boardUserCreateDTO) {
+        return boardFacade.assignUserToBoard(boardUserCreateDTO);
     }
 
     @DeleteMapping("/{boardId}")
@@ -60,10 +57,10 @@ public class BoardController {
         boardFacade.deleteBoard(boardId);
     }
 
-    @PatchMapping("/users")
+    @PatchMapping("/delete-user")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponseDTO> deleteAssignedUserFromBoard(@RequestBody BoardUserUpdateDTO boardUserUpdateDTO) {
-        return boardFacade.deleteAssignedUserFromBoard(boardUserUpdateDTO);
+    public List<UserResponseDTO> deleteAssignedUserFromBoard(@RequestBody BoardUserDeleteDTO boardUserDeleteDTO) {
+        return boardFacade.deleteAssignedUserFromBoard(boardUserDeleteDTO);
     }
 
 }
