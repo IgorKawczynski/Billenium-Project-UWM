@@ -57,7 +57,7 @@ public class BoardController {
         boardFacade.deleteBoard(boardId);
     }
 
-    @PatchMapping("/users")
+    @PatchMapping("/delete-user")
     @ResponseStatus(HttpStatus.OK)
     public List<UserResponseDTO> deleteAssignedUserFromBoard(@RequestBody BoardUserDeleteDTO boardUserDeleteDTO) {
         return boardFacade.deleteAssignedUserFromBoard(boardUserDeleteDTO);
