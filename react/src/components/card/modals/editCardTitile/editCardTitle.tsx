@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import {IconButton, TextField, Tooltip, Typography, useTheme, Box} from "@mui/material";
-import {EditCardFormProps} from "@/components/card/interfaces/editCardForm/editCardForm";
+import {EditCardTitleProps} from "@/components/card/interfaces/editCardForm/editCardForm";
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+import LockIcon from "@mui/icons-material/Lock";
 
-const EditCardTitle = (props:EditCardFormProps) => {
+const EditCardTitle = (props:EditCardTitleProps) => {
     const theme = useTheme()
     const [isEditing, setIsEditing] = useState(false)
 
@@ -18,7 +19,7 @@ const EditCardTitle = (props:EditCardFormProps) => {
                         sx={{margin:'0 0 8px 0', width:'80%'}}
                         id="outlined-basic"
                         label="Title"
-                        variant="outlined"
+                        variant="standard"
                         value={props.text}
                         onChange={props.handleChangeText}
                     />
@@ -46,25 +47,32 @@ const EditCardTitle = (props:EditCardFormProps) => {
                 </Box>
             )}
             {!isEditing && (
-                <Box>
-                    <Typography
-                        textAlign={"left"}
-                        variant={"subtitle1"}
-                        color={theme.palette.text.primary}
-                    >
-                        Title
-                    </Typography>
+                <Box
+                    width={'100%'}
+                    display={"flex"}
+                    justifyContent={"space-between"}
+                >
+                    <Box minWidth={'30px'}>
+                    </Box>
                     <Box
                         display={"flex"}
                         alignItems={"center"}
-                        justifyContent={"space-between"}
                     >
-                    <Typography
-                        variant={"caption"}
-                        color={theme.palette.text.primary}
-                    >
-                        {props.text}
-                    </Typography>
+                        {props.isLocked && (
+                            <Tooltip title={'Card is Locked'} placement={"top"}>
+                                <LockIcon sx={{
+                                    color:theme.palette.primary.main,
+                                    fontSize:'18px'
+                                }}
+                                />
+                            </Tooltip>
+                        )}
+                        <Typography
+                            variant={"h5"}
+                            color={theme.palette.text.primary}
+                        >
+                            {props.text}
+                        </Typography>
                     <Tooltip title={'Edit Title'}>
                         <IconButton
                             sx={{
@@ -82,6 +90,14 @@ const EditCardTitle = (props:EditCardFormProps) => {
                             />
                         </IconButton>
                     </Tooltip>
+                    </Box>
+
+                    <Box display={"flex"}>
+                        <IconButton
+                            onClick={() => closeModal(props.setModalEdit)}
+                        >
+                            <CloseIcon/>
+                        </IconButton>
                     </Box>
                 </Box>
             )}

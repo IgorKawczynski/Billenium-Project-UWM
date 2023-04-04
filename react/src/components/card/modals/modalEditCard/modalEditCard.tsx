@@ -63,33 +63,12 @@ export default function ModalEditCard(props:ModalEditCardProps) {
             >
                 <Fade in={props.modalEdit}>
                     <Stack sx={modalBigStyle} spacing={1}>
-                        <Box>
-                            <Box
-                                display={"flex"}
-                                justifyContent={"end"}
-                            >
-                                <IconButton>
-                                    <CloseIcon/>
-                                </IconButton>
-                            </Box>
-                            <Box
-                                display={"flex"}
-                                justifyContent={"center"}
-                                alignItems={"center"}
-                            >
-                                {props.isLocked && (
-                                    <Tooltip title={'Card is Locked'} placement={"top"}>
-                                        <LockIcon sx={{
-                                            color:theme.palette.primary.main,
-                                            fontSize:'18px'
-                                        }}
-                                        />
-                                    </Tooltip>
-                                )}
-                                <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
-                                    {props.title}
-                                </Typography>
-                            </Box>
+                        <Box
+                            display={"flex"}
+                            justifyContent={"center"}
+                            alignItems={"center"}
+                        >
+                            <EditCardTitle  handleChangeText={handleNameChange} text={title} isLocked={props.isLocked} setModalEdit={props.setModalEdit}/>
                         </Box>
                         <Box
                             display={'flex'}
@@ -99,8 +78,6 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                             width={'50%'}
                             spacing={2}
                             >
-                                <EditCardTitle  handleChangeText={handleNameChange} text={title}/>
-
                                 <EditCardDesc text={desc} handleChangeText={handleDescChange}/>
 
                                 <ModalEditCardSubtasks

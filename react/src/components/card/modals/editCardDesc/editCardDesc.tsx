@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {TextField, Typography, useTheme, Box, IconButton, Tooltip} from "@mui/material";
-import {EditCardFormProps} from "@/components/card/interfaces/editCardForm/editCardForm";
+import {EditCardDescProps} from "@/components/card/interfaces/editCardForm/editCardForm";
 import {openModal,closeModal} from "@/services/utils/modalUtils/modalUtils";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
-const EditCardDesc = (props:EditCardFormProps) => {
+const EditCardDesc = (props:EditCardDescProps) => {
     const theme = useTheme()
     const [isEditing, setIsEditing] = useState(false)
 
