@@ -63,6 +63,9 @@ public class Board extends BasicEntity {
                orphanRemoval = true)
     List<Color> colors;
 
+    Integer wipLimit;
+
+    public final static int DEFAULT_WIP_LIMIT = 3;
 
     public Board(Title title, User creator) {
 
@@ -86,6 +89,7 @@ public class Board extends BasicEntity {
                 new Color(new Title("Color 4"), ColorValue.YELLOW, this),
                 new Color(new Title("Color 5"), ColorValue.RED, this)
         );
+        this.wipLimit = DEFAULT_WIP_LIMIT;
     }
 
     public BoardResponseDTO toDto() {
@@ -111,6 +115,7 @@ public class Board extends BasicEntity {
                         .map(Color::toDto)
                         .sorted(Comparator.comparing(ColorResponseDTO::id))
                         .toList())
+                .wipLimit(this.wipLimit.toString())
                 .build();
     }
 

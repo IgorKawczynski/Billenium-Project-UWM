@@ -14,7 +14,8 @@ public record BoardResponseDTO(String id,
                                List<UserResponseDTO> assignedUsers,
                                List<ColumnResponseDTO> columnList,
                                List<RowResponseDTO> rowList,
-                               List<ColorResponseDTO> colorList) {
+                               List<ColorResponseDTO> colorList,
+                               String wipLimit) {
 
     @Builder public BoardResponseDTO {}
 
