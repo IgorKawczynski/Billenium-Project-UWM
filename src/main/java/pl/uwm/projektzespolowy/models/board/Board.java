@@ -14,7 +14,7 @@ import pl.uwm.projektzespolowy.models.column.ColumnResponseDTO;
 import pl.uwm.projektzespolowy.models.row.Row;
 import pl.uwm.projektzespolowy.models.row.RowResponseDTO;
 import pl.uwm.projektzespolowy.models.user.User;
-import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
+import pl.uwm.projektzespolowy.models.user.UserBoardAssignmentDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
@@ -99,9 +99,9 @@ public class Board extends BasicEntity {
                 .title(this.title.toString())
                 .creatorName(this.creator.getFullName())
                 .assignedUsers(this.assignedUsers.stream()
-                        .map(User::toDto)
-                        .sorted(Comparator.comparing(UserResponseDTO::firstName)
-                                .thenComparing(UserResponseDTO::lastName))
+                        .map((User user) -> user.toBoardDto(this))
+                        .sorted(Comparator.comparing(UserBoardAssignmentDTO::firstName)
+                                .thenComparing(UserBoardAssignmentDTO::lastName))
                         .toList())
                 .columnList(this.columns.stream()
                         .map(Column::toDto)
