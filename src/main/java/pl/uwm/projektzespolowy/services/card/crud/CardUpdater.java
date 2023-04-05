@@ -26,15 +26,17 @@ class CardUpdater {
         return cardRepository.saveAndFlush(cardToChange);
     }
 
-    public Card assignUserToCard(Card card, User userToAssign) {
-        var wipLimit = card.getCell().getColumn().getBoard().getWipLimit();
-        if (userToAssign.calculateRemainingAssignments(card.getCell().getColumn().getBoard()) <= 0) {
+    public Card assignUserToCard(Card card, User userToAssign, Integer wipLimit, Integer userAssignedCards) {
+        if (isWipLimitExceeded(userAssignedCards, wipLimit)) {
             throw new WipLimitExceededException(String.format("User has reached the assignment limit (%d).", wipLimit));
         }
         card.assignUser(userToAssign);
         return cardRepository.saveAndFlush(card);
     }
 
+    private boolean isWipLimitExceeded(Integer amountOfUserAssignedCards, Integer boardWipLimit) {
+        return boardWipLimit - amountOfUserAssignedCards <= 0;
+    }
     public void saveChangedCards(List<Card> cards) {
         cardRepository.saveAll(cards);
     }
