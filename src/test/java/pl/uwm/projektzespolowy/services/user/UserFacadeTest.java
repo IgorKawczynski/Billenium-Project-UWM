@@ -39,7 +39,7 @@ class UserFacadeTest {
                         "lNameTest",
                         rawPassword)
         );
-        var user = userCRUDService.getUserById(userToCreate.getId());
+        var user = userFacade.getUserById(userToCreate.getId());
         // given
         Boolean isEncoded = passwordEncoder.matches(rawPassword, user.getPassword());
         // then
@@ -98,6 +98,12 @@ class UserFacadeTest {
         assertThatThrownBy(() -> userFacade.login(userToLogin))
                 .isInstanceOf(BadCredentialsException.class)
                 .hasMessage("You have written bad email or password.");
+    }
+
+    @Test
+    @Order(6)
+    void shouldReturnAllUsersBoard() {
+
     }
 
     @Test
