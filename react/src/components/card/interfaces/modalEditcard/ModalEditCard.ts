@@ -11,7 +11,9 @@ interface ModalEditCardProps {
         id: string;
         firstName: string;
         lastName: string;
-        avatarPath:string
+        avatarPath: string;
+        avatarColor: string;
+        remainingAssignments: number;
     }[]
     subtasks:{
         id:string
