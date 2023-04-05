@@ -1,7 +1,6 @@
 import {
     addBoardToBackend,
     changeUserAvatarOnBackend,
-    deleteBoardFromBackend,
     deleteUserAvatarOnBackend,
     getUserBoardsFromBackend,
     getUserFromBackend

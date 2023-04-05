@@ -13,7 +13,6 @@ import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
-import {getUsers} from "@/services/utils/boardUtils/boardUtils";
 import {getBoardUsersFromBackend} from "@/services/actions/boardService";
 
 export const removeCard = (

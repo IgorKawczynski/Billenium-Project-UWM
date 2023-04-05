@@ -1,5 +1,5 @@
 import React, {SetStateAction} from "react";
-import {activeUser, assignedUser} from "@/services/utils/boardUtils/DataBoard";
+import {activeUser} from "@/services/utils/boardUtils/DataBoard";
 
 export interface ModalUserEditProfileProps{
     activeUser:activeUser

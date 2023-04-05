@@ -6,15 +6,15 @@ import Fade from "@mui/material/Fade";
 import Stack from "@mui/material/Stack";
 import {modalStyle} from "@/assets/themes/modalStyle";
 import {
-    Grid,
+    Avatar,
     Box,
-    Select,
     FormControl,
+    Grid,
     InputLabel,
-    SelectChangeEvent,
-    OutlinedInput,
     MenuItem,
-    Avatar
+    OutlinedInput,
+    Select,
+    SelectChangeEvent
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -22,7 +22,6 @@ import {ModalLeaveBoardProps} from "@/components/board/interfaces/modalLeaveBoar
 import {leaveBoard} from "@/services/utils/UserUtils/userMainUtils";
 import {assignedUser} from "@/services/utils/boardUtils/DataBoard";
 import {getUsers} from "@/services/utils/boardUtils/boardUtils";
-import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 
 
 const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{

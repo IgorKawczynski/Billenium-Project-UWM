@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {Box, IconButton, Tooltip, Typography, useTheme} from "@mui/material";
 import TextField from "@mui/material/TextField";
-import {updateSubtask} from "@/services/utils/cardUtils/subtaskUtils";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import RedoIcon from "@mui/icons-material/Redo";

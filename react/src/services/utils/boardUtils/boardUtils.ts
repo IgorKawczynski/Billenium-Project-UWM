@@ -3,9 +3,10 @@ import {getColumnsFromBackend} from "@/services/actions/columnService";
 import {moveCardInCell, moveCardToAnotherCell} from "@/services/actions/cardService";
 import {assignUserToCard} from "@/services/utils/cardUtils/cardUtils";
 import {
-    assignUserToBoardToBackend, editBoardWipLimitToBackend,
-    editBoardTitleToBackend, getBoardUsersFromBackend,
-    loadBoardFromBackend,
+    assignUserToBoardToBackend,
+    editBoardTitleToBackend,
+    editBoardWipLimitToBackend,
+    getBoardUsersFromBackend,
     moveColumnToBackend,
     unassignUserFromBoardOnBackend
 } from "@/services/actions/boardService";
@@ -14,7 +15,6 @@ import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
 import {findCellById} from "@/services/utils/cellUtils/cellUtils";
-import {getUserFromBackend} from "@/services/actions/userMainService";
 
 function withPositionInRange(lowerBound: number, upperBound: number, columns:_Data["data"]['columnList']){
     return  Object.values(columns).filter((column) => {
