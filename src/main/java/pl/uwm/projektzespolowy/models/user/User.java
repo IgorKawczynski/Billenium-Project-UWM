@@ -83,6 +83,7 @@ public class User extends BasicEntity {
     public Integer getTasksAssignedCount(Board board) {
         return board.getColumns().stream()
                 .flatMap(column -> column.getCells().stream())
+                .filter(cell -> cell.getCards() != null)
                 .flatMap(cell -> cell.getCards().stream())
                 .filter(card -> card.getAssignedUsers().stream().anyMatch(user -> user.getId().equals(this.getId())))
                 .mapToInt(card -> 1)

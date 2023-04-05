@@ -41,8 +41,12 @@ public class Color extends BasicEntity {
         return this.value.getValue();
     }
 
-    public void changeTitle(Title newTitle) {
-        this.title = newTitle;
+    public Title getTitle() {
+        return title;
+    }
+
+    public void setTitle(Title title) {
+        this.title = title;
     }
 
 }

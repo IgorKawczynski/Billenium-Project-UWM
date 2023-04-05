@@ -22,26 +22,26 @@ import NoPhotographyIcon from '@mui/icons-material/NoPhotography';
 import ModalDeleteAvatar from "@/components/userMain/modalDeleteAvatar/modalDeleteAvatar";
 
 const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
-    const [firstName, setFirstName] = useState(props.firstName);
-    const [lastName, setLastName] = useState(props.lastName);
-    const [email, setEmail] = useState(props.email);
+    const [firstName, setFirstName] = useState(props.activeUser.firstName);
+    const [lastName, setLastName] = useState(props.activeUser.lastName);
+    const [email, setEmail] = useState(props.activeUser.email);
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [passwordToChange, setPasswordToChange] = useState(false);
     const [DeleteAvatar, setDeleteAvatar] = useState(false)
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
-        setFirstName(props.firstName);
-    }, [props.firstName]);
+        setFirstName(props.activeUser.firstName);
+    }, [props.activeUser.firstName]);
 
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
-        setLastName(props.lastName);
-    }, [props.lastName]);
+        setLastName(props.activeUser.lastName);
+    }, [props.activeUser.lastName]);
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
-        setEmail(props.email);
-    }, [props.email]);
+        setEmail(props.activeUser.email);
+    }, [props.activeUser.email]);
 
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
@@ -65,7 +65,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
             const image = new FormData();
             image.append('avatarImage', file)
             changeAvatar(
-                props.userId,
+                props.activeUser.id,
                 image,
                 props.setActiveUser
             )
@@ -95,13 +95,13 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                     >
 
                             <Avatar
-                                src={props.avatarPath && props.avatarPath}
+                                src={props.activeUser.avatarPath && props.activeUser.avatarPath}
                                 sx={{
-                                    bgcolor:props.avatarColor
+                                    bgcolor:props.activeUser.avatarColor
                                 }}
                             >
                                 <Typography variant={"body1"}>
-                                    {props.firstName[0].toUpperCase() + props.lastName[0].toUpperCase()}
+                                    {props.activeUser.firstName[0].toUpperCase() + props.activeUser.lastName[0].toUpperCase()}
                                 </Typography>
                             </Avatar>
                         <Tooltip
@@ -117,7 +117,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                                 <PhotoCamera />
                             </IconButton>
                     </Tooltip>
-                        {props.avatarPath != null && (
+                        {props.activeUser.avatarPath != null && (
                             <Tooltip
                                 title={"Delete avatar"}
                                 placement={"top"}
@@ -206,7 +206,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                             Edit
                         </Button>
                     </Box>
-                    <ModalDeleteAvatar userId={props.userId} modalDeleteAvatar={DeleteAvatar} setModalDeleteAvatar={setDeleteAvatar} setActiveUser={props.setActiveUser}/>
+                    <ModalDeleteAvatar activeUser={props.activeUser} modalDeleteAvatar={DeleteAvatar} setModalDeleteAvatar={setDeleteAvatar} setActiveUser={props.setActiveUser}/>
                 </Stack>
             </Fade>
         </Modal>

@@ -4,7 +4,7 @@ import {onDragEnd} from "@/services/utils/boardUtils/boardUtils";
 import {Box, Stack, useTheme} from "@mui/material";
 import Column from "@/components/column/column";
 import {boardContentProps} from "@/components/board/interfaces/boardContentInterface/BoardContent";
-import BoardUsers from "@/components/users/usersMenu/boardUsers";
+import BoardUsersMenu from "@/components/board/boardUsersMenu/boardUsersMenu";
 import AddRowButton from "@/components/row/addRowButton/addRowButton";
 
 const BoardContent = (props:boardContentProps) =>{
@@ -58,7 +58,7 @@ const BoardContent = (props:boardContentProps) =>{
                         </Stack>
                     )}
                 </Droppable>
-                <BoardUsers setData={props.setData} data={props.data} users={props.users} setUsers={props.setUsers}/>
+                <BoardUsersMenu setData={props.setData} data={props.data} users={props.users} setUsers={props.setUsers}/>
             </DragDropContext>
         </Box>
     )

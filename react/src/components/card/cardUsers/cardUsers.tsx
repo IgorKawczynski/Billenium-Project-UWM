@@ -39,7 +39,6 @@ const CardUsers = (props:CardUsersProps) =>{
                                 </Tooltip>
                             )
                         })}
-                        {props.providedDrop.placeholder}
                     </AvatarGroup>
     )
 }

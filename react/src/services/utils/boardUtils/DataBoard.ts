@@ -4,6 +4,7 @@ export interface _Data {
     data: {
         id:string
         title: string;
+        creatorId:string
         creatorName: string;
         assignedUsers:assignedUser[]
         columnList:Column[];
@@ -11,11 +12,13 @@ export interface _Data {
         rowList: Row[];
 
         colorList:Color[];
+        wipLimit:string
     };
     setData: React.Dispatch<
         React.SetStateAction<{
             id: string
             title: string;
+            creatorId:string
             creatorName: string;
             assignedUsers: assignedUser[]
 
@@ -24,6 +27,7 @@ export interface _Data {
             rowList: Row[];
 
             colorList: Color[];
+            wipLimit:string
         }>>;
 }
 
@@ -77,6 +81,7 @@ export interface assignedUser{
     lastName: string;
     avatarPath:string;
     avatarColor:string;
+    remainingAssignments:number
 }
 export interface activeUser{
     id: string;

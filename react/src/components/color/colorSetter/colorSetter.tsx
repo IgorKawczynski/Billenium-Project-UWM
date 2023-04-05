@@ -12,7 +12,14 @@ const ColorSetter = (props:ColorListProps) =>{
 
             {props.colors.map((color) =>(
                 color.value != 'default' && (
-                        <ColorSetterRow key={color.id} color={color.value} title={color.title} id={color.id} data={props.data} setData={props.setData}/>
+                        <ColorSetterRow
+                            key={color.id}
+                            color={color.value}
+                            title={color.title}
+                            id={color.id}
+                            data={props.data}
+                            setData={props.setData}
+                        />
                     )
             ))}
 

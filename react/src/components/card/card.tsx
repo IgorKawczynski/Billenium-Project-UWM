@@ -119,7 +119,12 @@ const Task = (props:CardProps) => {
                                                 {props.subtasks.length == 0 && (
                                                     <Box/>
                                                 )}
-
+                                                <Box
+                                                    maxHeight={'25px'}
+                                                    maxWidth={'25px'}
+                                                >
+                                                    {providedDrop.placeholder}
+                                                </Box>
                                                 <CardUsers
                                                     providedDrop={providedDrop}
                                                     id={props.id}
