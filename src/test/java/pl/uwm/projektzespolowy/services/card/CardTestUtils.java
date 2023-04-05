@@ -2,8 +2,10 @@ package pl.uwm.projektzespolowy.services.card;
 
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.cell.Cell;
+import pl.uwm.projektzespolowy.models.color.ColorValue;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
+import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,4 +76,16 @@ public class CardTestUtils {
         user.setId(id);
         return user;
     }
+
+    public static Card createCardWithEveryField(String title, String description) {
+        var createdCard = createCard(1L, 0);
+        createdCard.setTitle(new Title(title));
+        createdCard.setDescription(description);
+        createdCard.setAssignedUsers(new HashSet<>());
+        createdCard.setCheckboxes(new ArrayList<>());
+        createdCard.setColor(ColorValue.BLUE);
+        createdCard.setLocked(false);
+        return createdCard;
+    }
+
 }
