@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.atMostOnce;
 import static org.mockito.Mockito.verify;
-import static pl.uwm.projektzespolowy.services.card.crud.CardTestUtils.*;
+import static pl.uwm.projektzespolowy.services.card.CardTestUtils.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CardUpdaterTest {

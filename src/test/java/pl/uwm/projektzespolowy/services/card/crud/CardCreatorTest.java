@@ -11,7 +11,7 @@ import pl.uwm.projektzespolowy.models.card.Card;
 
 import static org.mockito.Mockito.atMostOnce;
 import static org.mockito.Mockito.verify;
-import static pl.uwm.projektzespolowy.services.card.crud.CardTestUtils.createCellWithCards;
+import static pl.uwm.projektzespolowy.services.card.CardTestUtils.createCellWithCards;
 
 @ExtendWith(MockitoExtension.class)
 public class CardCreatorTest {

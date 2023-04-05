@@ -1,4 +1,4 @@
-package pl.uwm.projektzespolowy.services.card.crud;
+package pl.uwm.projektzespolowy.services.card;
 
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.cell.Cell;
