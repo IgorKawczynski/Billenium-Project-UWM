@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
 import pl.uwm.projektzespolowy.exceptions.VOExceptions.InvalidTitleLengthException;
 import pl.uwm.projektzespolowy.models.basic.dto.MoveDTO;
 import pl.uwm.projektzespolowy.models.board.Board;
@@ -115,70 +116,23 @@ class ColumnFacadeTest {
                 .isEqualTo(5);
     }
 
-    // TODO -- do poprawy połączenie z cells i cards (inicjacja całej tablicy z columns, cells, cards i wtedy usuwanie)
-//    @Test
-//    void deleteColumn() {
-//        // when
-//        var columnToCreate = new ColumnCreateDTO(
-//                String.valueOf(boardCreated.getId()),
-//                "columnTest");
-//        var columnCreated = columnFacade.createColumn(columnToCreate);
-//
-//        var columns = new ArrayList<>(boardCreated.getColumns());
-//        columns.add(columnCreated);
-//        boardCreated.setColumns(columns);
-//
-//        var cellToCreate = new Cell(columnCreated, new Position(0));
-//        var cellToCreate2 = new Cell(columnCreated, new Position(1));
-//        var cells = new ArrayList<>(columnCreated.getCells());
-//        cells.add(cellToCreate);
-//        cells.add(cellToCreate2);
-//        columnCreated.setCells(cells);
-//
-//        var cardToCreate1 = new Card(
-//                new Title("columnDeleteTest"),
-//                "test for deleting column",
-//                columnCreated.getCells().get(0),
-//                Position.first()
-//        );
-//
-//        var cardToCreate2 = new Card(
-//                new Title("columnDeleteTest"),
-//                "test for deleting column",
-//                columnCreated.getCells().get(1),
-//                Position.first()
-//        );
-//
-//        var cardToCreate3 = new Card(
-//                new Title("columnDeleteTest"),
-//                "test for deleting column",
-//                columnCreated.getCells().get(2),
-//                Position.first()
-//        );
-//
-//        var cardToCreate4 = new Card(
-//                new Title("columnDeleteTest"),
-//                "test for deleting column",
-//                columnCreated.getCells().get(2),
-//                Position.second()
-//        );
-//
-//        var cards1 = new ArrayList<>(List.of(cardToCreate1));
-//        var cards2 = new ArrayList<>(List.of(cardToCreate2));
-//        var cards3 = new ArrayList<>(List.of(cardToCreate3, cardToCreate4));
-//
-//
-//        columnCreated.getCells().get(0).setCards(cards1);
-//        columnCreated.getCells().get(1).setCards(cards2);
-//        columnCreated.getCells().get(2).setCards(cards3);
-
+    @Test
+    void deleteColumn() {
+        // when
+        var columnToCreate = new ColumnCreateDTO(
+                String.valueOf(boardCreated.getId()),
+                "columnTest");
+        var columnCreated = columnFacade.createColumn(columnToCreate);
+        var columns = new ArrayList<>(boardCreated.getColumns());
+        columns.add(columnCreated);
+        boardCreated.setColumns(columns);
         // given
-//        columnFacade.deleteColumn(columnCreated.getId());
-//        // then
-//        assertThatThrownBy(() -> columnFacade.getColumnById(columnCreated.getId()))
-//                .isInstanceOf(EntityNotFoundException.class)
-//                .hasMessage("Column with id: " + columnCreated.getId() + "does not exist!");
-//    }
+        columnFacade.deleteColumn(columnCreated.getId());
+        // then
+        assertThatThrownBy(() -> columnFacade.getColumnById(columnCreated.getId()))
+                .isInstanceOf(EntityNotFoundException.class)
+                .hasMessage("Column with id: " + columnCreated.getId() + " does not exist!");
+    }
 
     @Test
     void moveColumn() {
