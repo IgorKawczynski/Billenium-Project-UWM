@@ -57,4 +57,11 @@ public class BoardCRUDService {
         return boardDeleter.deleteAssignedUserFromBoard(board, userToDeleteFromBoard).stream().toList();
     }
 
+    public Board getBoardByCardId(Long cardId) {
+        return boardReader.getBoardByCardId(cardId);
+    }
+
+    public Integer getAmountOfAssignedCardsToUser(User user, Long boardId) {
+        return boardReader.getAmountOfAssignedCardsToUser(user, boardId);
+    }
 }

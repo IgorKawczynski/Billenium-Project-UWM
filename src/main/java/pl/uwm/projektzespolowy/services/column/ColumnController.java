@@ -20,7 +20,7 @@ public class ColumnController {
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public ColumnResponseDTO createColumn(@RequestBody ColumnCreateDTO columnCreateDTO) {
-        return columnFacade.createColumn(columnCreateDTO);
+        return columnFacade.createColumn(columnCreateDTO).toDto();
     }
 
     @GetMapping("/{columnId}")

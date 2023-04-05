@@ -20,4 +20,24 @@ interface BoardRepository extends JpaRepository<Board, Long> {
             """)
     List<User> getAllAssignedUsers(@Param("boardId") Long boardId);
 
+    @Query("""
+            SELECT b
+            FROM Board b
+            JOIN Column col ON col.board.id = b.id
+            JOIN Cell cell ON cell.column.id = col.id
+            JOIN Card ca ON ca.cell.id = cell.id
+            WHERE ca.id = :cardId
+            """)
+    Board getBoardByCardId(@Param("cardId") Long cardId);
+
+    @Query("""
+            SELECT count(c)
+            FROM Card c
+            JOIN Cell cell ON cell.id = c.cell.id
+            JOIN Column col ON col.id = cell.column.id
+            JOIN Board boa ON boa.id = col.board.id
+            WHERE boa.id = :boardId
+            AND :user MEMBER OF c.assignedUsers
+            """)
+    Integer getAmountOfAssignedCardsToUser(@Param("user") User user, @Param("boardId") Long boardId);
 }

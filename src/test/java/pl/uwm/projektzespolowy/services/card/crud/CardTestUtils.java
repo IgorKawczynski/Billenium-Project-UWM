@@ -7,6 +7,9 @@ import pl.uwm.projektzespolowy.models.valueobjects.Position;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CardTestUtils {
 
@@ -30,6 +33,15 @@ public class CardTestUtils {
         var card = new Card();
         card.setId(id);
         card.setPosition(new Position(position));
+        return card;
+    }
+
+    public static Card createCardWithAssignedUsers(Long id, int position) {
+        var card = createCard(id, position);
+        var firstUser = createUser(1L);
+        var secondUser = createUser(2L);
+        var assignedUsers = Stream.of(firstUser, secondUser).collect(Collectors.toCollection(HashSet::new));
+        card.setAssignedUsers(assignedUsers);
         return card;
     }
 
