@@ -98,8 +98,8 @@ class ColumnFacadeTest {
                 String.valueOf(boardCreated.getId()),
                 "columnTest");
         var columnCreated = columnFacade.createColumn(columnToCreate);
-        // given
         var columnToUpdate = new ColumnUpdateDTO(String.valueOf(columnCreated.getId()), "columnTestNewTitle", 5, false);
+        // given
         columnFacade.updateColumn(columnToUpdate);
         // then
         assertThat(
