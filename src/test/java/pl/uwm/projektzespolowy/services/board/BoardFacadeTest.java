@@ -114,8 +114,19 @@ public class BoardFacadeTest {
     }
 
     @Test
-    @Transactional
     @Order(9)
+    void shouldChangeBoardWipLimit() {
+        // given
+        var newWipLimit = "6";
+        // when
+        var changedBoard = boardFacade.updateBoardWipLimit(board.getId(), newWipLimit);
+        // then
+        assertThat(changedBoard.wipLimit()).isEqualTo("6");
+    }
+
+    @Test
+    @Transactional
+    @Order(10)
     void shouldReturnAssignedUsers() {
         // when
         var boardTemp = boardFacade.createBoard(new BoardCreateDTO(this.user.getId().toString(), "test title"));
