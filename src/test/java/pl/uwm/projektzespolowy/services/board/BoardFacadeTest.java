@@ -12,6 +12,8 @@ import pl.uwm.projektzespolowy.models.user.UserCreateDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.services.user.UserFacade;
 
+import javax.transaction.Transactional;
+
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
@@ -111,14 +113,17 @@ public class BoardFacadeTest {
         assertThat(changedBoard.newTitle()).isEqualTo("super new board title");
     }
 
-//    @Test
-//    @Order(9)
-//    void shouldReturnAssignedUsers() {
-//        // when
-//        var assignedUsers = boardFacade.getAllAssignedUsersToBoard(board.getId());
-//        // then
-//        assertThat(assignedUsers).containsOnly(user.toBoardDto(board));
-//    }
+    @Test
+    @Transactional
+    @Order(9)
+    void shouldReturnAssignedUsers() {
+        // when
+        var boardTemp = boardFacade.createBoard(new BoardCreateDTO(this.user.getId().toString(), "test title"));
+        var assignedUsers = boardFacade.getAllAssignedUsersToBoard(boardTemp.getId());
+        // then
+        assertThat(assignedUsers).containsOnly(user.toBoardDto(boardTemp));
+    }
+
 
     @Test
     @Order(99999)

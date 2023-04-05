@@ -113,6 +113,8 @@
 						<exclude>pl/uwm/projektzespolowy/**/Card.*</exclude>
 						<exclude>pl/uwm/projektzespolowy/**/Color.*</exclude>
 						<exclude>pl/uwm/projektzespolowy/**/Checkbox.*</exclude>
+						<exclude>pl/uwm/projektzespolowy/services/user/avatar/**</exclude>
+						<exclude>pl/uwm/projektzespolowy/services/checkbox/crud/**</exclude>
 						<exclude>pl/uwm/projektzespolowy/**/*DTO.*</exclude>
 						<exclude>pl/uwm/projektzespolowy/**/*DTOBuilder.*</exclude>
 						<exclude>pl/uwm/projektzespolowy/**/*Controller.*</exclude>
