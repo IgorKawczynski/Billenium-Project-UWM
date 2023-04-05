@@ -5,15 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.uwm.projektzespolowy.models.card.Card;
-import pl.uwm.projektzespolowy.models.card.CardCreateDTO;
-import pl.uwm.projektzespolowy.models.card.CardResponseDTO;
-import pl.uwm.projektzespolowy.models.card.CardUpdateDTO;
+import pl.uwm.projektzespolowy.models.board.Board;
+import pl.uwm.projektzespolowy.models.card.*;
+import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.services.board.crud.BoardCRUDService;
 import pl.uwm.projektzespolowy.services.card.crud.CardCRUDService;
 import pl.uwm.projektzespolowy.services.cell.crud.CellCRUDService;
 import pl.uwm.projektzespolowy.services.user.crud.UserCRUDService;
+
+import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -109,5 +110,51 @@ public class CardFacadeTest {
         assertThat(updatedCard).isInstanceOf(CardResponseDTO.class);
     }
 
+    @Test
+    void shouldMarkCardAsLocked() {
+        // given
+        Long cardId = 1L;
+        // when
+        var card = newLockedCard(cardId, 0);
+        when(cardCRUDService.markAsLocked(cardId)).thenReturn(card);
+        var lockedCard = cardFacade.markAsLocked(cardId);
+        // then
+        assertThat(lockedCard.isLocked()).isTrue();
+    }
+
+    @Test
+    void shouldMarkCardAsUnlocked() {
+        // when
+        var card = newUnlockedCard(1L, 0);
+        when(cardCRUDService.markAsUnlocked(1L)).thenReturn(card);
+        var lockedCard = cardFacade.markAsUnlocked(1L);
+        // then
+        assertThat(lockedCard.isLocked()).isFalse();
+    }
+
+    @Test
+    void shouldAssignUserToCard() {
+        // given
+        var cardUserUpdateDTO = new CardUserUpdateDTO("1", "1");
+        var card = createCardWithEveryField(1L, "some title", "some description", 0);
+        var userToAssign = createUser(1L);
+        var board = createBoard(userToAssign);
+        var assignedUser = userToAssign;
+        HashSet<Board> userBoards = new HashSet<>();
+        userBoards.add(board);
+        assignedUser.setBoards(userBoards);
+        HashSet<User> assignedUsers = new HashSet<>();
+        assignedUsers.add(assignedUser);
+        card.setAssignedUsers(assignedUsers);
+        // when
+        when(userCRUDService.getUserById(1L)).thenReturn(userToAssign);
+        when(boardCRUDService.getBoardByCardId(card.getId())).thenReturn(board);
+        when(boardCRUDService.getAmountOfAssignedCardsToUser(userToAssign, board.getId())).thenReturn(0);
+        when(cardCRUDService.assignUserToCard(card.getId(), userToAssign, board.getWipLimit(), 0)).thenReturn(card);
+        var cardDTO = cardFacade.assignUserToCard(cardUserUpdateDTO);
+        // then
+        assertThat(cardDTO.assignedUsers()).hasSize(1);
+        assertThat(cardDTO).isInstanceOf(CardResponseDTO.class);
+    }
 
 }

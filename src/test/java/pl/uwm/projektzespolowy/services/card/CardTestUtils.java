@@ -1,5 +1,6 @@
 package pl.uwm.projektzespolowy.services.card;
 
+import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.color.ColorValue;
@@ -37,17 +38,13 @@ public class CardTestUtils {
     }
 
     public static Card newLockedCard(Long id, int position) {
-        var card = new Card();
-        card.setId(id);
-        card.setPosition(new Position(position));
+        var card = createCardWithEveryField(id, "some title", "some description", position);
         card.setLocked(true);
         return card;
     }
 
     public static Card newUnlockedCard(Long id, int position) {
-        var card = new Card();
-        card.setId(id);
-        card.setPosition(new Position(position));
+        var card = createCardWithEveryField(id, "some title", "some description", position);
         card.setLocked(false);
         return card;
     }
@@ -92,6 +89,18 @@ public class CardTestUtils {
         createdCard.setColor(ColorValue.BLUE);
         createdCard.setLocked(false);
         return createdCard;
+    }
+
+    public static Board createBoard(User user) {
+        var board = new Board();
+        board.setId(1L);
+        board.setCreator(user);
+        board.setRows(new ArrayList<>());
+        board.setColumns(new ArrayList<>());
+        board.setColors(new ArrayList<>());
+        board.setWipLimit(3);
+        board.setTitle(new Title("nice board"));
+        return board;
     }
 
 }
