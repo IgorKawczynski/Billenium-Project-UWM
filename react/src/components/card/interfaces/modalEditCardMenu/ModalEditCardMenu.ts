@@ -10,7 +10,9 @@ export interface ModalEditCardMenuProps{
         id: string;
         firstName: string;
         lastName: string;
-        avatarPath:string
+        avatarPath: string;
+        avatarColor: string;
+        remainingAssignments: number;
     }[]
     isLocked:boolean
     data:_Data["data"]
