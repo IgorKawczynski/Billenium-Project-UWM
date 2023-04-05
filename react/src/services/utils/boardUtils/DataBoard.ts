@@ -4,34 +4,30 @@ export interface _Data {
     data: {
         id:string
         title: string;
+        creatorId:string
         creatorName: string;
-        assignedUsers: {
-            id: string;
-            firstName: string;
-            lastName:string;
-        }[];
+        assignedUsers:assignedUser[]
         columnList:Column[];
 
         rowList: Row[];
 
         colorList:Color[];
+        wipLimit:string
     };
     setData: React.Dispatch<
         React.SetStateAction<{
             id: string
             title: string;
+            creatorId:string
             creatorName: string;
-            assignedUsers: {
-                id: string;
-                firstName: string;
-                lastName: string;
-            }[];
+            assignedUsers: assignedUser[]
 
             columnList: Column[];
 
             rowList: Row[];
 
             colorList: Color[];
+            wipLimit:string
         }>>;
 }
 
@@ -71,10 +67,28 @@ export interface Card{
     position:number;
     color:string;
 
-    assignedUsers:{
-        id: string;
-        firstName: string;
-        lastName: string;
+    assignedUsers:assignedUser[]
+    checkboxes:{
+        id:number
+        title:string
+        isChecked:boolean
     }[]
+    isLocked:boolean
 };
+export interface assignedUser{
+    id: string;
+    firstName: string;
+    lastName: string;
+    avatarPath:string;
+    avatarColor:string;
+    remainingAssignments:number
+}
+export interface activeUser{
+    id: string;
+    firstName: string;
+    lastName: string;
+    email:string;
+    avatarPath:string;
+    avatarColor:string
+}
 

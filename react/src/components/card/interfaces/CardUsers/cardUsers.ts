@@ -1,11 +1,8 @@
 import {DroppableProvided} from "react-beautiful-dnd";
+import {assignedUser} from "@/services/utils/boardUtils/DataBoard";
 
 export interface CardUsersProps{
     id:string
-    assignedUsers:{
-        id: string;
-        firstName: string;
-        lastName: string;
-    }[]
+    assignedUsers:assignedUser[]
     providedDrop:DroppableProvided
 }

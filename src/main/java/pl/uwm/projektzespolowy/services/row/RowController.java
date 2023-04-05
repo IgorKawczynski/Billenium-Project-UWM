@@ -19,7 +19,7 @@ public class RowController {
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public RowResponseDTO createRow(@RequestBody RowCreateDTO rowCreateDTO) {
-        return rowFacade.createRow(rowCreateDTO);
+        return rowFacade.createRow(rowCreateDTO).toDto();
     }
 
     @GetMapping("/{rowId}")

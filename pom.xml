@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>pl.uwm</groupId>
 	<artifactId>projektzespolowy</artifactId>
-	<version>1.0-CORE-1</version>
+	<version>1.0-TRANSITION-2</version>
 	<name>projektzespolowy</name>
 	<description>Kanban Table implementation</description>
 	<properties>
@@ -54,6 +54,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>31.1-jre</version>
 		</dependency>
 	</dependencies>
 

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pl.uwm.projektzespolowy.models.user.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class UserController {
     @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public UserResponseDTO getUserById(@PathVariable Long userId) {
-        return userFacade.getUserById(userId);
+        return userFacade.getUserById(userId).toDto();
     }
 
     @GetMapping("/{userId}/boards")
@@ -31,7 +32,7 @@ public class UserController {
 
     @PostMapping("/register")
     public UserResponseDTO registerUser(@RequestBody UserCreateDTO userCreateDTO) {
-        return userFacade.createUser(userCreateDTO);
+        return userFacade.createUser(userCreateDTO).toDto();
     }
 
     @PostMapping(
@@ -41,6 +42,18 @@ public class UserController {
     )
     public UserLoginResponseDTO login(@RequestBody UserLoginRequestDTO user) {
         return userFacade.login(user);
+    }
+
+    @PutMapping("/{userId}/avatar")
+    @ResponseStatus(HttpStatus.OK)
+    public UserResponseDTO uploadImage(@PathVariable Long userId, @RequestBody MultipartFile avatarImage) {
+        return userFacade.changeUserAvatar(userId, avatarImage);
+    }
+
+    @DeleteMapping("/{userId}/avatar")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteImage(@PathVariable Long userId) {
+        userFacade.deleteUserAvatar(userId);
     }
 
     @DeleteMapping("/{userId}")

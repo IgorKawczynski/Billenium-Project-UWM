@@ -30,12 +30,17 @@ public class BoardCRUDService {
     }
 
     public List<User> getAllAssignedUsersToBoard(Long boardId) {
-        return boardReader.getBoardById(boardId).getAssignedUsers().stream().toList();
+        return boardReader.getBoardAssignedUsers(boardId);
     }
 
-    public Board updateBoard(Long boardId, String newTitle) {
+    public Board updateBoardTitle(Long boardId, String newTitle) {
         var boardToChange = boardReader.getBoardById(boardId);
-        return boardUpdater.editBoard(boardToChange, newTitle);
+        return boardUpdater.editBoardTitle(boardToChange, newTitle);
+    }
+
+    public Board updateBoardWipLimit(Long boardId, Integer newWipLimit) {
+        var boardToChange = boardReader.getBoardById(boardId);
+        return boardUpdater.editBoardWipLimit(boardToChange, newWipLimit);
     }
 
     public List<User> assignUserToBoard(Long boardId, User userToAssign) {
@@ -52,4 +57,11 @@ public class BoardCRUDService {
         return boardDeleter.deleteAssignedUserFromBoard(board, userToDeleteFromBoard).stream().toList();
     }
 
+    public Board getBoardByCardId(Long cardId) {
+        return boardReader.getBoardByCardId(cardId);
+    }
+
+    public Integer getAmountOfAssignedCardsToUser(User user, Long boardId) {
+        return boardReader.getAmountOfAssignedCardsToUser(user, boardId);
+    }
 }

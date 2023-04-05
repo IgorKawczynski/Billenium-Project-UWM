@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
-import {cardColorPickerItemProps} from "@/components/card/interfaces/cardColorPickerItemInterface/cardColorPickerItem";
+import {cardColorPickerItemProps} from "@/components/card/interfaces/cardColorPickerItem/cardColorPickerItem";
 import {changeCardColor} from "@/services/utils/colorUtils/colorUtils";
 
 const CardColorPickerItem = (props:cardColorPickerItemProps) =>{

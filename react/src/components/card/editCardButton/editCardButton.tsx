@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import {Box, Tooltip, useTheme} from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import EditCardButtonProps from "@/components/card/interfaces/editCardButtonInterface/EditCardButton";
-import ModalEditCard from "@/components/card/modalEditCard/modalEditCard";
-import ModalRemoveCard from "@/components/card/modalRemoveCard/modalRemoveCard";
+import EditCardButtonProps from "@/components/card/interfaces/editCardButton/EditCardButton";
+import ModalEditCard from "@/components/card/modals/modalEditCard/modalEditCard";
+import ModalRemoveCard from "@/components/card/modals/modalRemoveCard/modalRemoveCard";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import IconButton from "@mui/material/IconButton";
 
@@ -44,6 +44,8 @@ export default function EditCardButton(props:EditCardButtonProps) {
                 title={props.title}
                 desc={props.desc}
                 assignedUsers={props.assignedUsers}
+                subtasks={props.subtasks}
+                isLocked={props.isLocked}
                 setModalEdit={setModalEdit}
                 modalEdit={modalEdit}
                 data={props.data}

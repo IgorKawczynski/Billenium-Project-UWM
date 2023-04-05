@@ -46,6 +46,18 @@ public class CardController {
         return cardFacade.updateCard(cardUpdateDTO);
     }
 
+    @PutMapping("/locked/{cardId}")
+    @ResponseStatus(HttpStatus.OK)
+    public CardResponseDTO markAsLocked(@PathVariable Long cardId) {
+        return cardFacade.markAsLocked(cardId);
+    }
+
+    @PutMapping("/unlocked/{cardId}")
+    @ResponseStatus(HttpStatus.OK)
+    public CardResponseDTO markAsUnlocked(@PathVariable Long cardId) {
+        return cardFacade.markAsUnlocked(cardId);
+    }
+
     @PatchMapping("/assign-user")
     @ResponseStatus(HttpStatus.OK)
     public CardResponseDTO assignUserToCard(@RequestBody CardUserUpdateDTO cardUserUpdateDTO) {

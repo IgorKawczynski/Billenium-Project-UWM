@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 import pl.uwm.projektzespolowy.models.user.*;
 import pl.uwm.projektzespolowy.security.SessionRegistry;
+import pl.uwm.projektzespolowy.services.user.avatar.UserAvatarService;
 import pl.uwm.projektzespolowy.services.user.crud.UserCRUDService;
 import pl.uwm.projektzespolowy.services.user.crud.UserLoginService;
 
@@ -17,11 +19,12 @@ public class UserFacade {
 
     private final UserCRUDService userCRUDService;
     private final UserLoginService userLoginService;
+    private final UserAvatarService userAvatarService;
     private final AuthenticationManager authenticationManager;
     private final SessionRegistry sessionRegistry;
 
-    public UserResponseDTO createUser(UserCreateDTO userCreateDTO) {
-        return userCRUDService.createUser(userCreateDTO).toDto();
+    public User createUser(UserCreateDTO userCreateDTO) {
+        return userCRUDService.createUser(userCreateDTO);
     }
 
     public UserLoginResponseDTO login(UserLoginRequestDTO userLoginRequestDTO) {
@@ -39,16 +42,32 @@ public class UserFacade {
                 .lastName(userToLoginInto.getLastName()).build();
     }
 
-    public UserResponseDTO getUserById(Long userId) {
-        return userCRUDService.getUserById(userId).toDto();
+    public User getUserById(Long userId) {
+        return userCRUDService.getUserById(userId);
+    }
+
+    public UserResponseDTO getUserByEmail(String email) {
+        return userCRUDService.getUserByEmail(email).toDto();
     }
 
     public List<UserBoardsDTO> getAllUserBoards(Long userId) {
         return userCRUDService.getAllUserBoardsById(userId);
     }
 
+    public UserResponseDTO changeUserAvatar(Long userId, MultipartFile avatarImage) {
+        var user = userCRUDService.getUserById(userId);
+        userAvatarService.changeUserAvatar(user, avatarImage);
+        userCRUDService.saveChangedUser(user);
+        return user.toDto();
+    }
+
+    public void deleteUserAvatar(Long userId) {
+        var user = userCRUDService.getUserById(userId);
+        userAvatarService.deleteUserAvatar(user);
+        userCRUDService.saveChangedUser(user);
+    }
+
     public void deleteUser(Long userId) {
         userCRUDService.deleteUser(userId);
     }
-
 }

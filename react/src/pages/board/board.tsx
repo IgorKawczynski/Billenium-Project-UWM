@@ -7,7 +7,6 @@ import '@/assets/styles/board.css'
 import ModalEditBoard from "@/components/board/modalEditBoard/modalEditBoard";
 import BoardHeader from "@/components/board/boardHeader/boardHeader";
 import BoardContent from "@/components/board/boardContent/boardContent";
-import AddRowButton from "@/components/row/addRowButton/addRowButton";
 import BoardMenu from "@/components/menus/boardMenu/menu";
 import {useNavigate, useParams} from "react-router-dom";
 
@@ -56,7 +55,6 @@ const Board = () => {
             <Stack spacing={2} width={calculatedWidth}>
                 <BoardHeader data={data} setModalEdit={setModalEdit} setData={setData}/>
                 <BoardContent users={users} setUsers={setUsers} data={data} setData={setData}/>
-                <AddRowButton data={data} setData={setData}/>
                 <ModalEditBoard
                     id={data.id}
                     title={data.title}

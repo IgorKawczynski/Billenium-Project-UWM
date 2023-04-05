@@ -4,22 +4,21 @@ import UserMenu from "@/components/menus/userMenu/menu";
 import BoardCard from "@/components/board/boardCard/boardCard";
 import ModalUserEditProfile from "@/components/userMain/modalUserEditProfile/modalUserEditProfile";
 import {userBoardsData} from "@/services/utils/UserUtils/userBoardsData";
-import {fetchBoardsData} from "@/services/actions/userMainService";
+import {fetchBoardsData, getUserFromBackend} from "@/services/actions/userMainService";
 import ModalAddBoard from "@/components/userMain/modalAddBoard/modalAddBoard";
 import {useNavigate, useParams} from "react-router-dom";
 import {ColorModeContext} from "@/App";
+import {activeUser} from "@/services/utils/boardUtils/DataBoard";
 
 const UserMain = () => {
     const [modalEdit, setModalEdit] = useState(false);
     const [modalAddBoard, setModalAddBoard] = useState(false);
+    const [activeUser, setActiveUser] = useState<activeUser>({ id:"", firstName:"", lastName:"", email:"", avatarPath:"", avatarColor:""})
     const [userBoards, setUserBoards] = useState<userBoardsData['userBoards']>([]);
     const colorMode = React.useContext(ColorModeContext);
     const {userId} = useParams()
     const theme = useTheme()
     const navigate = useNavigate()
-    const userFirstName = sessionStorage.getItem("userName") ?? "";
-    const userLastName = sessionStorage.getItem("userLastName") ?? "";
-    const userEmail = sessionStorage.getItem("userEmail") ?? "";
 
 
     if(userId && userId != sessionStorage.getItem('userId')){
@@ -33,6 +32,12 @@ const UserMain = () => {
     useEffect(() => {
         if(userId && userId === sessionStorage.getItem('userId')){
             fetchBoardsData(setUserBoards, userId)
+            getUserFromBackend(userId)
+                .then(res => {
+                    if(res){
+                        setActiveUser(res)
+                    }
+                })
         }
     },[])
 
@@ -40,7 +45,9 @@ const UserMain = () => {
     return(
         <>
         {sessionStorage.getItem('sessionId') &&
-            userId === sessionStorage.getItem('userId') && (
+            userId === sessionStorage.getItem('userId') &&
+            activeUser.id != "" &&
+            (
                 <Stack
                     spacing={2}
                     direction={'row'}
@@ -66,10 +73,12 @@ const UserMain = () => {
                                 userBoards && userId && (
                                     userBoards.map((board) => (
                                         <BoardCard
-                                            id={board.boardId}
-                                            userId={userId}
+                                            key={board.boardId}
+                                            boardId={board.boardId}
+                                            activeUser={activeUser}
                                             title={board.boardTitle}
                                             creator={board.creatorName}
+                                            creatorId={board.creatorId}
                                             setUserBoards={setUserBoards}
                                         />
                                     ))
@@ -95,11 +104,11 @@ const UserMain = () => {
                     </Box>
 
                     <ModalUserEditProfile
-                        firstName={userFirstName}
-                        lastName={userLastName}
-                        email={userEmail}
+                        key={activeUser.id}
+                        activeUser={activeUser}
                         modalEdit={modalEdit}
                         setModalEdit={setModalEdit}
+                        setActiveUser={setActiveUser}
                     />
                     {userId &&
                         <ModalAddBoard

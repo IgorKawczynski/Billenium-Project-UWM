@@ -1,8 +1,10 @@
 import {
     addCardToBackend,
     assignUserToCardToBackend,
+    lockCardOnBackend,
     removeCardToBackend,
     removeUserFromCardToBackend,
+    unlockCardOnBackend,
     updateCardToBackend
 } from "@/services/actions/cardService";
 import {getColumnsFromBackend} from "@/services/actions/columnService";
@@ -11,6 +13,7 @@ import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
+import {getBoardUsersFromBackend} from "@/services/actions/boardService";
 
 export const removeCard = (
     id:string,
@@ -110,17 +113,77 @@ export function assignUserToCard(
             if(typeof res === 'string'){
                 handleClickVariant(enqueueSnackbar)(res ,'error')
             }else {
-                getColumnsFromBackend(data.id)
-                    .then(resCol => {
-                        setData({
-                            ...data,
-                            columnList:resCol
-                        })
-                        handleClickVariant(enqueueSnackbar)(`Added user to card` ,'success')
+                getBoardUsersFromBackend(data.id)
+                    .then(resUsers => {
+                        getColumnsFromBackend(data.id)
+                            .then(resCol => {
+                                setData({
+                                    ...data,
+                                    columnList:resCol,
+                                    assignedUsers:resUsers
+                                })
+                                handleClickVariant(enqueueSnackbar)(`Assigned user to card` ,'success')
+                            })
                     })
             }
         })
 }
+export const lockCard = (
+    id:string,
+    title:string,
+    data:_Data['data'],
+    setData:_Data['setData']
+) => {
+    lockCardOnBackend(id)
+        .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else{
+                getColumnsFromBackend(data.id)
+                    .then( resCol => {
+                            if(resCol) {
+                                setData({
+                                    ...data,
+                                    columnList: resCol
+
+                                })
+                                handleClickVariant(enqueueSnackbar)(`Card ${title} locked` ,'info')
+                            }
+                        }
+                    )
+                // tutaj możesz wykonywać operacje na otrzymanym id
+            }})
+        .catch(error => {
+        });
+};
+export const unlockCard = (
+    id:string,
+    title:string,
+    data:_Data['data'],
+    setData:_Data['setData']
+) => {
+    unlockCardOnBackend(id)
+        .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else{
+                getColumnsFromBackend(data.id)
+                    .then( resCol => {
+                            if(resCol) {
+                                setData({
+                                    ...data,
+                                    columnList: resCol
+
+                                })
+                                handleClickVariant(enqueueSnackbar)(`Card ${title} unlocked` ,'info')
+                            }
+                        }
+                    )
+                // tutaj możesz wykonywać operacje na otrzymanym id
+            }})
+        .catch(error => {
+        });
+};
 export function removeUserFromCard(
     cardId:string,
     userId:string,
@@ -135,13 +198,17 @@ export function removeUserFromCard(
             if(typeof res === 'string'){
                 handleClickVariant(enqueueSnackbar)(res ,'error')
             }else {
-                getColumnsFromBackend(data.id)
-                    .then(resCol => {
-                        setData({
-                            ...data,
-                            columnList:resCol
-                        })
-                        handleClickVariant(enqueueSnackbar)(`Removed user ${userFirstName} ${userLastName} from card ${cardTitle}` ,'success')
+                getBoardUsersFromBackend(data.id)
+                    .then(resUsers => {
+                        getColumnsFromBackend(data.id)
+                            .then(resCol => {
+                                setData({
+                                    ...data,
+                                    columnList:resCol,
+                                    assignedUsers:resUsers
+                                })
+                                handleClickVariant(enqueueSnackbar)(`Removed user ${userFirstName} ${userLastName} from card ${cardTitle}` ,'success')
+                            })
                     })
             }
         })

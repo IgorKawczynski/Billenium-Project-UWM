@@ -38,4 +38,16 @@ public class EntityExceptions {
         return new ErrorMessage("row", exception.getMessage());
     }
 
+    @ExceptionHandler(value = CardMoveNotAllowedException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage cardMoveNotAllowedException(CardMoveNotAllowedException exception) {
+        return new ErrorMessage("card", exception.getMessage());
+    }
+
+    @ExceptionHandler(value = WipLimitExceededException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage wipLimitExceededException(WipLimitExceededException exception) {
+        return new ErrorMessage("wipLimit", exception.getMessage());
+    }
+
 }
