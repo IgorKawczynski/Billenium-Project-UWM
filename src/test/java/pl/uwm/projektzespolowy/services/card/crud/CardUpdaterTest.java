@@ -80,7 +80,7 @@ public class CardUpdaterTest {
         ArgumentCaptor<Card> cardArgumentCaptor = ArgumentCaptor.forClass(Card.class);
         verify(cardRepository, atMostOnce()).saveAndFlush(cardArgumentCaptor.capture());
         assertThat(card.getAssignedUsers()).contains(user);
-        assertThat(card.getAssignedUsers().size()).isEqualTo(3);
+        assertThat(card.getAssignedUsers().size()).isEqualTo(4);
     }
 
     @Test

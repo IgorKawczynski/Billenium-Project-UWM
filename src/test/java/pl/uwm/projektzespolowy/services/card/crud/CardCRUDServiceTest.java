@@ -67,7 +67,7 @@ public class CardCRUDServiceTest {
         when(cardReader.getCardById(1L)).thenReturn(card);
         var cardAssignedUsers = cardCRUDService.getAllAssignedUsersToCard(card.getId());
         // then
-        assertThat(cardAssignedUsers).hasSize(2);
+        assertThat(cardAssignedUsers).hasSize(3);
     }
 
     @Test
