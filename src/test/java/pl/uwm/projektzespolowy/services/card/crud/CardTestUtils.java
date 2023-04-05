@@ -36,6 +36,30 @@ public class CardTestUtils {
         return card;
     }
 
+    public static Card newLockedCard(Long id, int position) {
+        var card = new Card();
+        card.setId(id);
+        card.setPosition(new Position(position));
+        card.setLocked(true);
+        return card;
+    }
+
+    public static Card newUnlockedCard(Long id, int position) {
+        var card = new Card();
+        card.setId(id);
+        card.setPosition(new Position(position));
+        card.setLocked(false);
+        return card;
+    }
+
+    public static Card cardWithAssignedUser(Long id, int position) {
+        var card = createCard(id, position);
+        var firstUser = createUser(1L);
+        var assignedUser = Stream.of(firstUser).collect(Collectors.toCollection(HashSet::new));
+        card.setAssignedUsers(assignedUser);
+        return card;
+    }
+
     public static Card createCardWithAssignedUsers(Long id, int position) {
         var card = createCard(id, position);
         var firstUser = createUser(1L);
