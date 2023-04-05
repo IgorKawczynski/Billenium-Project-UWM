@@ -40,10 +40,16 @@ public class BoardController {
         return boardFacade.getAllAssignedUsersToBoard(boardId);
     }
 
-    @PutMapping("/{boardId}")
+    @PutMapping("/{boardId}/title")
     @ResponseStatus(HttpStatus.OK)
     public BoardUpdateDTO updateBoardTitle(@PathVariable Long boardId, @RequestParam("newTitle") String newTitle) {
         return boardFacade.updateBoardTitle(boardId, newTitle);
+    }
+
+    @PutMapping("/{boardId}/wipLimit")
+    @ResponseStatus(HttpStatus.OK)
+    public BoardUpdateDTO updateBoardWipLimit(@PathVariable Long boardId, @RequestParam("newWipLimit") String newWipLimit) {
+        return boardFacade.updateBoardWipLimit(boardId, newWipLimit);
     }
 
     @PatchMapping("/assign-user")
