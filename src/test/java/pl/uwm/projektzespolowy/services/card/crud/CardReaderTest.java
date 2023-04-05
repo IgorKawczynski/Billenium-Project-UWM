@@ -13,8 +13,8 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.BDDMockito.given;
-import static pl.uwm.projektzespolowy.services.card.crud.CardTestUtils.createCard;
-import static pl.uwm.projektzespolowy.services.card.crud.CardTestUtils.createCellWithCards;
+import static pl.uwm.projektzespolowy.services.card.CardTestUtils.createCard;
+import static pl.uwm.projektzespolowy.services.card.CardTestUtils.createCellWithCards;
 
 @ExtendWith(MockitoExtension.class)
 public class CardReaderTest {

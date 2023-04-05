@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static pl.uwm.projektzespolowy.services.card.crud.CardTestUtils.*;
+import static pl.uwm.projektzespolowy.services.card.CardTestUtils.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CardCRUDServiceTest {
