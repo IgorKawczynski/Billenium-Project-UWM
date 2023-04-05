@@ -13,6 +13,7 @@ import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
+import {getBoardUsersFromBackend} from "@/services/actions/boardService";
 
 export const removeCard = (
     id:string,
@@ -112,13 +113,17 @@ export function assignUserToCard(
             if(typeof res === 'string'){
                 handleClickVariant(enqueueSnackbar)(res ,'error')
             }else {
-                getColumnsFromBackend(data.id)
-                    .then(resCol => {
-                        setData({
-                            ...data,
-                            columnList:resCol
-                        })
-                        handleClickVariant(enqueueSnackbar)(`Added user to card` ,'success')
+                getBoardUsersFromBackend(data.id)
+                    .then(resUsers => {
+                        getColumnsFromBackend(data.id)
+                            .then(resCol => {
+                                setData({
+                                    ...data,
+                                    columnList:resCol,
+                                    assignedUsers:resUsers
+                                })
+                                handleClickVariant(enqueueSnackbar)(`Assigned user to card` ,'success')
+                            })
                     })
             }
         })
@@ -193,13 +198,17 @@ export function removeUserFromCard(
             if(typeof res === 'string'){
                 handleClickVariant(enqueueSnackbar)(res ,'error')
             }else {
-                getColumnsFromBackend(data.id)
-                    .then(resCol => {
-                        setData({
-                            ...data,
-                            columnList:resCol
-                        })
-                        handleClickVariant(enqueueSnackbar)(`Removed user ${userFirstName} ${userLastName} from card ${cardTitle}` ,'success')
+                getBoardUsersFromBackend(data.id)
+                    .then(resUsers => {
+                        getColumnsFromBackend(data.id)
+                            .then(resCol => {
+                                setData({
+                                    ...data,
+                                    columnList:resCol,
+                                    assignedUsers:resUsers
+                                })
+                                handleClickVariant(enqueueSnackbar)(`Removed user ${userFirstName} ${userLastName} from card ${cardTitle}` ,'success')
+                            })
                     })
             }
         })

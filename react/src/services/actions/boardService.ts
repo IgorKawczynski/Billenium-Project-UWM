@@ -11,15 +11,18 @@ export const urlDomain = 'http://localhost:8080'
 export function loadDefaultData(){
     return {
         id: "0",
+        creatorId: "0",
         title: "Kanban",
         creatorName: "Test",
+        wipLimit:'',
         assignedUsers: [
             {
                 id: "1",
                 firstName: "Test",
                 lastName: "Test",
                 avatarPath: "",
-                avatarColor:""
+                avatarColor:"",
+                remainingAssignments:3
             }
         ],
         columnList: [
@@ -141,11 +144,23 @@ export async function moveColumnToBackend(movedObjectId:string, newPosition:numb
     }
 }
 
-export async function editBoardToBackend(boardId:string, newTitle:string){
-    const apiUrl = urlDomain+`/api/boards`;
-    let response;
+export async function editBoardTitleToBackend(boardId:string, newTitle:string){
+    const apiUrl = urlDomain+`/api/boards/${boardId}/title`;
     try {
-        const response = await axios.put(apiUrl, {boardId, newTitle});
+        const response = await axios.put(apiUrl,null ,{params:{newTitle:newTitle}});
+        console.log(response)
+        return response.data
+    } catch (error: any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+}
+export async function editBoardWipLimitToBackend(boardId:string, newWipLimit:string){
+    const apiUrl = urlDomain+`/api/boards/${boardId}/wipLimit`;
+    try {
+        const response = await axios.put(apiUrl,null ,{params:{newWipLimit:newWipLimit}});
+        console.log(response)
         return response.data
     } catch (error: any) {
         if (error.response && error.response.data && error.response.data.error) {
@@ -167,6 +182,21 @@ export async function getBoardTitleFromBackend(boardId:string){
         }
     }
 }
+
+export async function getBoardUsersFromBackend(boardId:string){
+    const apiUrl = urlDomain+`/api/boards/users/${boardId}`;
+    try {
+        const response = await axios.get(apiUrl);
+        return response.data
+    } catch (error:any) {
+        if(error.data.error){
+            if (error.response && error.response.data && error.response.data.error) {
+                return error.response.data.error;
+            }
+        }
+    }
+}
+
 
 export async function assignUserToBoardToBackend(boardId:string,userEmail:string){
     const apiUrl = urlDomain+`/api/boards/assign-user`;

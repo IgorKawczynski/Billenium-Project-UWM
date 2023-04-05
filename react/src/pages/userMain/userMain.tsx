@@ -39,7 +39,7 @@ const UserMain = () => {
                     }
                 })
         }
-    },[setUserBoards])
+    },[])
 
 
     return(
@@ -74,10 +74,11 @@ const UserMain = () => {
                                     userBoards.map((board) => (
                                         <BoardCard
                                             key={board.boardId}
-                                            id={board.boardId}
-                                            userId={userId}
+                                            boardId={board.boardId}
+                                            activeUser={activeUser}
                                             title={board.boardTitle}
                                             creator={board.creatorName}
+                                            creatorId={board.creatorId}
                                             setUserBoards={setUserBoards}
                                         />
                                     ))
@@ -103,12 +104,8 @@ const UserMain = () => {
                     </Box>
 
                     <ModalUserEditProfile
-                        userId={activeUser.id}
-                        firstName={activeUser.firstName}
-                        lastName={activeUser.lastName}
-                        email={activeUser.email}
-                        avatarPath={activeUser.avatarPath}
-                        avatarColor={activeUser.avatarColor}
+                        key={activeUser.id}
+                        activeUser={activeUser}
                         modalEdit={modalEdit}
                         setModalEdit={setModalEdit}
                         setActiveUser={setActiveUser}

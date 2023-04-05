@@ -1,11 +1,12 @@
-import {_Data, Column} from "@/services/utils/boardUtils/DataBoard";
+import {_Data, assignedUser, Column} from "@/services/utils/boardUtils/DataBoard";
 import {getColumnsFromBackend} from "@/services/actions/columnService";
 import {moveCardInCell, moveCardToAnotherCell} from "@/services/actions/cardService";
 import {assignUserToCard} from "@/services/utils/cardUtils/cardUtils";
 import {
     assignUserToBoardToBackend,
-    editBoardToBackend,
-    loadBoardFromBackend,
+    editBoardTitleToBackend,
+    editBoardWipLimitToBackend,
+    getBoardUsersFromBackend,
     moveColumnToBackend,
     unassignUserFromBoardOnBackend
 } from "@/services/actions/boardService";
@@ -142,43 +143,72 @@ export const onDragEnd = (result: any, columns:Column[], setData:_Data["setData"
         }
     }
 }
-export const editBoard = (id:string,
-                          newTitle:string,
-                          data:_Data['data'],
-                          setData:_Data['setData'],
-                          setModalEdit:React.Dispatch<SetStateAction<boolean>>) =>{
-    editBoardToBackend(id, newTitle)
+export const editBoardTitle = (
+    id:string,
+    newTitle:string,
+    data:_Data['data'],
+    setData:_Data['setData'],
+    setIsEditing:React.Dispatch<SetStateAction<boolean>>
+) =>{
+    editBoardTitleToBackend(id, newTitle)
         .then(res => {
             if(typeof res === 'string'){
                 handleClickVariant(enqueueSnackbar)(res ,'error')
             }else{
-            loadBoardFromBackend(data.id)
-                .then( data => {
-                    if(data) {
-                        setData(data)
+                        setData({
+                            ...data,
+                            title:res.newTitle
+                        })
                         handleClickVariant(enqueueSnackbar)('Success board title edited' ,'success')
+                        closeModal(setIsEditing)
                     }
                 })
-        }})
-    closeModal(setModalEdit)
+};
+export const editWipLimit = (
+    id:string,
+    newWipLimit:string,
+    data:_Data['data'],
+    setData:_Data['setData'],
+    setIsEditing:React.Dispatch<SetStateAction<boolean>>
+) =>{
+    editBoardWipLimitToBackend(id, newWipLimit)
+        .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else{
+                getBoardUsersFromBackend(id)
+                    .then(resUsers => {
+                    setData({
+                                ...data,
+                                wipLimit:res.wipLimit,
+                                assignedUsers:resUsers
+                            })
+                        handleClickVariant(enqueueSnackbar)(`Success board WipLimit edited to ${newWipLimit}` ,'success')
+                        closeModal(setIsEditing)
+                })
+            }
+        })
 };
 
 export function assignUserToBoard(
     boardId:string,
     userEmail:string,
     data:_Data["data"],
-    setData:_Data['setData']
+    setData:_Data['setData'],
 ) {
     assignUserToBoardToBackend(boardId, userEmail)
         .then(res => {
             if(typeof res === 'string'){
                 handleClickVariant(enqueueSnackbar)(res ,'error')
             }else {
-                setData({
-                    ...data,
-                    assignedUsers:res
-                })
-                handleClickVariant(enqueueSnackbar)('Assigned user to board' ,'success')
+                getBoardUsersFromBackend(data.id)
+                    .then(resUsers => {
+                        setData({
+                            ...data,
+                            assignedUsers:resUsers
+                        })
+                        handleClickVariant(enqueueSnackbar)('Assigned user to board' ,'success')
+                    })
             }
         })
 }
@@ -194,11 +224,32 @@ export function unassignUserFromBoard(
             if(typeof res === 'string'){
                 handleClickVariant(enqueueSnackbar)(res ,'error')
             }else {
-                setData({
-                    ...data,
-                    assignedUsers:res
-                })
-                handleClickVariant(enqueueSnackbar)('Unassigned user from board' ,'warning')
+                getBoardUsersFromBackend(data.id)
+                    .then(resUsers => {
+                        getColumnsFromBackend(data.id)
+                            .then(resCol => {
+                                setData({
+                                    ...data,
+                                    columnList:resCol,
+                                    assignedUsers:resUsers
+                                })
+                                handleClickVariant(enqueueSnackbar)('Unassigned user from board' ,'warning')
+                            })
+                    })
+            }
+        })
+}
+
+export function getUsers(
+    boardId:string,
+    setUsers:React.Dispatch<SetStateAction<assignedUser[]>>
+) {
+    getBoardUsersFromBackend(boardId)
+        .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else {
+                setUsers(res)
             }
         })
 }

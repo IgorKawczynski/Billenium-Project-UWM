@@ -1,7 +1,6 @@
 import {
     addBoardToBackend,
     changeUserAvatarOnBackend,
-    deleteBoardFromBackend,
     deleteUserAvatarOnBackend,
     getUserBoardsFromBackend,
     getUserFromBackend
@@ -11,6 +10,7 @@ import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
+import {unassignUserFromBoardOnBackend} from "@/services/actions/boardService";
 
 
 export function getUserBoards  (
@@ -77,18 +77,18 @@ export function addBoard (
         )
 }
 
-export function deleteBoard(
+export function leaveBoard(
     userId:string,
     boardId:string,
     title:string,
     setUserBoards:userBoardsData["setUserBoards"],
     setModalDelete:React.Dispatch<SetStateAction<boolean>>
 ){
-    deleteBoardFromBackend(boardId)
+    unassignUserFromBoardOnBackend(boardId,userId)
         .then(res => {
                 getUserBoards(userId, setUserBoards)
                 closeModal(setModalDelete)
-                handleClickVariant(enqueueSnackbar)(`Board ${title} removed` ,'success')
+                handleClickVariant(enqueueSnackbar)(`Now you are unassigned from board: ${title}` ,'warning')
 
         })
 }
