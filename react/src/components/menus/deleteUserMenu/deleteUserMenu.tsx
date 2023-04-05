@@ -39,6 +39,7 @@ const DeleteUserMenu = (props:DeleteUserMenuProps) => {
                 {props.assignedUsers.map(user => {
                     return(
                         <DeleteUserMenuItem
+                            key={user.id}
                             userId={user.id}
                             userName={user.firstName}
                             userLastName={user.lastName}

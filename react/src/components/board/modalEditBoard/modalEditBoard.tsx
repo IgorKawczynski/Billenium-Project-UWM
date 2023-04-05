@@ -8,15 +8,21 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import ModalEditBoardProps from "@/components/board/interfaces/modalEditBoardInterface/ModalEditBoard";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
-import {editBoard} from "@/services/utils/boardUtils/boardUtils";
+import {editBoardTitle} from "@/services/utils/boardUtils/boardUtils";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import Box from "@mui/material/Box";
 import ColorSetter from "@/components/color/colorSetter/colorSetter";
+import EditBoardTitle from "@/components/board/editBoardTitle/editBoardTitle";
+import EditBoardWipLimit from "@/components/board/editBoardWipLimit/editBoardWipLimit";
 
 const ModalEditBoard = (props:ModalEditBoardProps) => {
     const [title, setTitle] = useState(props.title);
+    const [wipLimit, setWipLimit] = useState(props.data.wipLimit);
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
+    };
+    const handleWipLimitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setWipLimit(event.target.value);
     };
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
@@ -43,24 +49,15 @@ const ModalEditBoard = (props:ModalEditBoardProps) => {
                         spacing={2}
                         direction={'column'}
                     >
-                        <Typography
-                            color={'textPrimary'}
-                            id="transition-modal-title"
-                            variant="h6"
-                            component="h2"
-                        >
-                            Editing Board: {props.title}
-                        </Typography>
+                        <EditBoardTitle text={title} setText={setTitle} handleTextChange={handleTitleChange} data={props.data} setData={props.setData} setModalEdit={props.setModalEdit}/>
                         <Box display={'flex'} width={'100%'}>
-                            <Box  display={'flex'} width={'50%'} sx={{justifyContent:'start'}}>
-                                <TextField
-                                    sx={{margin:'0 0 8px 0'}}
-                                    id="outlined-basic"
-                                    label="Name"
-                                    variant="outlined"
-                                    value={title}
-                                    onChange={handleTitleChange}
-                                />
+                            <Box
+                                display={'flex'}
+                                width={'50%'}
+                                justifyContent={"start"}
+                                flexDirection={"column"}
+                            >
+                                <EditBoardWipLimit text={wipLimit} setText={setWipLimit} handleTextChange={handleWipLimitChange} data={props.data} setData={props.setData}/>
                             </Box>
                             <ColorSetter
                                 colors={props.data.colorList}
@@ -68,19 +65,6 @@ const ModalEditBoard = (props:ModalEditBoardProps) => {
                                 setData={props.setData}
                             />
                         </Box>
-                        <Button
-                            sx={{maxHeight:'50px'}}
-                            onClick={() => editBoard(
-                                                    props.id,
-                                                    title,
-                                                    props.data,
-                                                    props.setData,
-                                                    props.setModalEdit
-                                                )}
-                            variant="contained"
-                        >
-                            Edit
-                        </Button>
                     </Stack>
                 </Fade>
             </Modal>

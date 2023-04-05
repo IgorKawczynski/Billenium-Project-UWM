@@ -12,11 +12,13 @@ export interface _Data {
         rowList: Row[];
 
         colorList:Color[];
+        wipLimit:string
     };
     setData: React.Dispatch<
         React.SetStateAction<{
             id: string
             title: string;
+            creatorId:string
             creatorName: string;
             assignedUsers: assignedUser[]
 
@@ -25,6 +27,7 @@ export interface _Data {
             rowList: Row[];
 
             colorList: Color[];
+            wipLimit:string
         }>>;
 }
 
