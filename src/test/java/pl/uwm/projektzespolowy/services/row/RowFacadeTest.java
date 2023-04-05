@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.uwm.projektzespolowy.exceptions.BoardHasTooFewRowsToDeleteException;
+import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
 import pl.uwm.projektzespolowy.exceptions.RowCantBeDeletedException;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
@@ -101,29 +102,23 @@ class RowFacadeTest {
         assertThat(rowUpdated.title()).isEqualTo("rowTestNewTitle");
     }
 
-    // TODO -- do poprawy połączenie z cells i cards (inicjacja całej tablicy z columns, rows, cells, cards i wtedy usuwanie)
-//    @Test
-//    void shouldDeleteRowWhenBoardHasMoreThanOne() {
-//        // when
-//        var rowToCreate1 = new RowCreateDTO(
-//                String.valueOf(boardCreated.getId()),
-//                "rowTest1");
-//        var rowToCreate2 = new RowCreateDTO(
-//                String.valueOf(boardCreated.getId()),
-//                "rowTest2");
-//        var rowCreated1 = rowFacade.createRow(rowToCreate1);
-//        var rowCreated2 = rowFacade.createRow(rowToCreate2);
-//        var rows = new ArrayList<>(boardCreated.getRows());
-//        rows.add(rowCreated1);
-//        rows.add(rowCreated2);
-//        boardCreated.setRows(rows);
-//        // given
-//        rowFacade.deleteRow(rowCreated2.getId());
-//        // then
-//        assertThatThrownBy(() -> rowFacade.getRowById(rowCreated2.getId()))
-//                .isInstanceOf(EntityNotFoundException.class)
-//                .hasMessage("Row with id: " + rowCreated2.getId() + "does not exist!");
-//    }
+    @Test
+    void shouldDeleteRowWhenBoardHasMoreThanOne() {
+        // when
+        var rowToCreate1 = new RowCreateDTO(
+                String.valueOf(boardCreated.getId()),
+                "rowTest1");
+        var rowCreated = rowFacade.createRow(rowToCreate1);
+        var rows = new ArrayList<>(boardCreated.getRows());
+        rows.add(rowCreated);
+        boardCreated.setRows(rows);
+        // given
+        rowFacade.deleteRow(rowCreated.getId());
+        // then
+        assertThatThrownBy(() -> rowFacade.getRowById(rowCreated.getId()))
+                .isInstanceOf(EntityNotFoundException.class)
+                .hasMessage("Row with id: " + rowCreated.getId() + " does not exist!");
+    }
 
     @Test
     void shouldNotDeleteLastRowWhenBoardHasMoreThanOne() {
