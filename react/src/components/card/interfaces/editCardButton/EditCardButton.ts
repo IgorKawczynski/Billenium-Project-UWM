@@ -11,6 +11,8 @@ interface EditCardButtonProps {
         firstName: string;
         lastName: string;
         avatarPath:string;
+        avatarColor: string;
+        remainingAssignments: number;
     }[]
     subtasks:{
         id:string
