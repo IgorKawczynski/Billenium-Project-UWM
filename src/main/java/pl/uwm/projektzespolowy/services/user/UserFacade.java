@@ -42,8 +42,8 @@ public class UserFacade {
                 .lastName(userToLoginInto.getLastName()).build();
     }
 
-    public UserResponseDTO getUserById(Long userId) {
-        return userCRUDService.getUserById(userId).toDto();
+    public User getUserById(Long userId) {
+        return userCRUDService.getUserById(userId);
     }
 
     public UserResponseDTO getUserByEmail(String email) {

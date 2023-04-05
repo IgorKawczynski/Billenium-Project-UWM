@@ -20,7 +20,7 @@ public class UserController {
     @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public UserResponseDTO getUserById(@PathVariable Long userId) {
-        return userFacade.getUserById(userId);
+        return userFacade.getUserById(userId).toDto();
     }
 
     @GetMapping("/{userId}/boards")
