@@ -59,4 +59,5 @@ public class CardReaderTest {
         // then
         assertThat(foundCard).isNotNull();
     }
+
 }
