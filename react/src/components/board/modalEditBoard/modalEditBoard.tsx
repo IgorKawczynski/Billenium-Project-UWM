@@ -14,13 +14,13 @@ import Box from "@mui/material/Box";
 import ColorSetter from "@/components/color/colorSetter/colorSetter";
 
 const ModalEditBoard = (props:ModalEditBoardProps) => {
-    const [name, setName] = useState(props.title);
-    const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setName(event.target.value);
+    const [title, setTitle] = useState(props.title);
+    const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setTitle(event.target.value);
     };
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
-        setName(props.title);
+        setTitle(props.title);
     }, [props.title]);
 
     return(
@@ -38,8 +38,17 @@ const ModalEditBoard = (props:ModalEditBoardProps) => {
                 }}
             >
                 <Fade in={props.modalEdit}>
-                    <Stack sx={modalBigStyle} spacing={2} direction={'column'}>
-                        <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
+                    <Stack
+                        sx={modalBigStyle}
+                        spacing={2}
+                        direction={'column'}
+                    >
+                        <Typography
+                            color={'textPrimary'}
+                            id="transition-modal-title"
+                            variant="h6"
+                            component="h2"
+                        >
                             Editing Board: {props.title}
                         </Typography>
                         <Box display={'flex'} width={'100%'}>
@@ -49,15 +58,25 @@ const ModalEditBoard = (props:ModalEditBoardProps) => {
                                     id="outlined-basic"
                                     label="Name"
                                     variant="outlined"
-                                    value={name}
-                                    onChange={handleNameChange}
+                                    value={title}
+                                    onChange={handleTitleChange}
                                 />
                             </Box>
-                            <ColorSetter colors={props.data.colorList} data={props.data} setData={props.setData}/>
+                            <ColorSetter
+                                colors={props.data.colorList}
+                                data={props.data}
+                                setData={props.setData}
+                            />
                         </Box>
                         <Button
                             sx={{maxHeight:'50px'}}
-                            onClick={() => editBoard(props.id,name, props.data, props.setData, props.setModalEdit)}
+                            onClick={() => editBoard(
+                                                    props.id,
+                                                    title,
+                                                    props.data,
+                                                    props.setData,
+                                                    props.setModalEdit
+                                                )}
                             variant="contained"
                         >
                             Edit

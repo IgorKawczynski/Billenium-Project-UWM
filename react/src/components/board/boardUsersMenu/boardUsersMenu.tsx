@@ -85,12 +85,13 @@ const BoardUsersMenu = (props:BoardUsersProps) => {
                         />
                     </FormControl>
                 </Stack>
-
-                <Button
-                    onClick={() => openModal(setModalDeleteUser)}
-                >
-                    Delete user from board
-                </Button>
+                {sessionStorage.getItem('userId') == props.data.creatorId && (
+                    <Button
+                        onClick={() => openModal(setModalDeleteUser)}
+                    >
+                        Delete user from board
+                    </Button>
+                )}
 
                 <Typography variant={"caption"}>
                     Drag member to card

@@ -4,7 +4,7 @@ import {onDragEnd} from "@/services/utils/boardUtils/boardUtils";
 import {Box, Stack, useTheme} from "@mui/material";
 import Column from "@/components/column/column";
 import {boardContentProps} from "@/components/board/interfaces/boardContentInterface/BoardContent";
-import BoardUsersMenu from "@/components/board/boardUsers/boardUsersMenu";
+import BoardUsersMenu from "@/components/board/boardUsersMenu/boardUsersMenu";
 import AddRowButton from "@/components/row/addRowButton/addRowButton";
 
 const BoardContent = (props:boardContentProps) =>{

@@ -4,6 +4,7 @@ export interface _Data {
     data: {
         id:string
         title: string;
+        creatorId:string
         creatorName: string;
         assignedUsers:assignedUser[]
         columnList:Column[];

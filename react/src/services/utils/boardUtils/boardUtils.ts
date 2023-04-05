@@ -145,25 +145,26 @@ export const onDragEnd = (result: any, columns:Column[], setData:_Data["setData"
         }
     }
 }
-export const editBoard = (id:string,
-                          newTitle:string,
-                          data:_Data['data'],
-                          setData:_Data['setData'],
-                          setModalEdit:React.Dispatch<SetStateAction<boolean>>) =>{
+export const editBoard = (
+    id:string,
+    newTitle:string,
+    data:_Data['data'],
+    setData:_Data['setData'],
+    setModalEdit:React.Dispatch<SetStateAction<boolean>>
+) =>{
     editBoardToBackend(id, newTitle)
         .then(res => {
             if(typeof res === 'string'){
                 handleClickVariant(enqueueSnackbar)(res ,'error')
             }else{
-            loadBoardFromBackend(data.id)
-                .then( data => {
-                    if(data) {
-                        setData(data)
+                        setData({
+                            ...data,
+                            title:res.title
+                        })
                         handleClickVariant(enqueueSnackbar)('Success board title edited' ,'success')
+                        closeModal(setModalEdit)
                     }
                 })
-        }})
-    closeModal(setModalEdit)
 };
 
 export function assignUserToBoard(

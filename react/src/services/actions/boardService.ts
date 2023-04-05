@@ -143,10 +143,9 @@ export async function moveColumnToBackend(movedObjectId:string, newPosition:numb
 }
 
 export async function editBoardToBackend(boardId:string, newTitle:string){
-    const apiUrl = urlDomain+`/api/boards`;
-    let response;
+    const apiUrl = urlDomain+`/api/boards/${boardId}`;
     try {
-        const response = await axios.put(apiUrl, {boardId, newTitle});
+        const response = await axios.put(apiUrl, {newTitle:newTitle});
         return response.data
     } catch (error: any) {
         if (error.response && error.response.data && error.response.data.error) {
