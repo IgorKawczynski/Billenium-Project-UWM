@@ -53,8 +53,22 @@ public class BoardFacade {
     }
 
     public BoardUpdateDTO updateBoardTitle(Long boardId, String newTitle) {
-        var board = boardCRUDService.updateBoard(boardId, newTitle);
-        return new BoardUpdateDTO(board.getId().toString(), board.getTitle().toString());
+        var board = boardCRUDService.updateBoardTitle(boardId, newTitle);
+        return new BoardUpdateDTO(
+                board.getId().toString(),
+                board.getTitle().toString(),
+                board.getWipLimit().toString()
+        );
+    }
+
+    public BoardUpdateDTO updateBoardWipLimit (Long boardId, String newWipLimit) {
+        var wipLimit = Integer.parseInt(newWipLimit);
+        var board = boardCRUDService.updateBoardWipLimit(boardId, wipLimit);
+        return new BoardUpdateDTO(
+                board.getId().toString(),
+                board.getTitle().toString(),
+                board.getWipLimit().toString()
+        );
     }
 
     public List<UserResponseDTO> assignUserToBoard(BoardUserCreateDTO boardUserCreateDTO) {

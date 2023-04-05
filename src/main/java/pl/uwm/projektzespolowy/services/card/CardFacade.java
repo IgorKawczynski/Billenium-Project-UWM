@@ -6,6 +6,7 @@ import pl.uwm.projektzespolowy.models.basic.dto.MoveDTO;
 import pl.uwm.projektzespolowy.models.card.*;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
+import pl.uwm.projektzespolowy.services.board.crud.BoardCRUDService;
 import pl.uwm.projektzespolowy.services.card.crud.CardCRUDService;
 import pl.uwm.projektzespolowy.services.cell.crud.CellCRUDService;
 import pl.uwm.projektzespolowy.services.user.crud.UserCRUDService;
@@ -21,6 +22,7 @@ public class CardFacade {
     private final CardCRUDService cardCRUDService;
     private final CellCRUDService cellCRUDService;
     private final CardMoverService cardMoverService;
+    private final BoardCRUDService boardCRUDService;
     private final UserCRUDService userCRUDService;
 
     public CardResponseDTO createCard(CardCreateDTO cardCreateDTO) {
@@ -75,8 +77,10 @@ public class CardFacade {
     public CardResponseDTO assignUserToCard(CardUserUpdateDTO cardUserUpdateDTO) {
         var userToAssign = userCRUDService.getUserById(Long.parseLong(cardUserUpdateDTO.userId()));
         var cardId = Long.parseLong(cardUserUpdateDTO.cardId());
+        var board = boardCRUDService.getBoardByCardId(cardId);
+        var userAssignedCards = boardCRUDService.getAmountOfAssignedCardsToUser(userToAssign, board.getId());
         return cardCRUDService
-                .assignUserToCard(cardId, userToAssign)
+                .assignUserToCard(cardId, userToAssign, board.getWipLimit(), userAssignedCards)
                 .toDto();
     }
 
