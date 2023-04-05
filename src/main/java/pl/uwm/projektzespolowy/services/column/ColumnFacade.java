@@ -21,9 +21,9 @@ public class ColumnFacade {
     private final BoardCRUDService boardCRUDService;
     private final ColumnMoverService columnMoverService;
 
-    public ColumnResponseDTO createColumn(ColumnCreateDTO columnCreateDTO) {
+    public Column createColumn(ColumnCreateDTO columnCreateDTO) {
         var board = boardCRUDService.getBoardById(Long.parseLong(columnCreateDTO.boardId()));
-        return columnCRUDService.createColumn(board, columnCreateDTO.title()).toDto();
+        return columnCRUDService.createColumn(board, columnCreateDTO.title());
     }
 
     public ColumnResponseDTO getColumnById(Long columnId) {
