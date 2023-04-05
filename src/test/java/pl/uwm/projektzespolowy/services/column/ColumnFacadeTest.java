@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import pl.uwm.projektzespolowy.exceptions.BoardHasTooFewColumnsToDeleteException;
+import pl.uwm.projektzespolowy.exceptions.ColumnCantBeDeletedException;
 import pl.uwm.projektzespolowy.exceptions.EntityNotFoundException;
 import pl.uwm.projektzespolowy.exceptions.VOExceptions.InvalidTitleLengthException;
 import pl.uwm.projektzespolowy.models.basic.dto.MoveDTO;
@@ -98,8 +100,8 @@ class ColumnFacadeTest {
                 String.valueOf(boardCreated.getId()),
                 "columnTest");
         var columnCreated = columnFacade.createColumn(columnToCreate);
-        // given
         var columnToUpdate = new ColumnUpdateDTO(String.valueOf(columnCreated.getId()), "columnTestNewTitle", 5, false);
+        // given
         columnFacade.updateColumn(columnToUpdate);
         // then
         assertThat(
@@ -132,6 +134,32 @@ class ColumnFacadeTest {
         assertThatThrownBy(() -> columnFacade.getColumnById(columnCreated.getId()))
                 .isInstanceOf(EntityNotFoundException.class)
                 .hasMessage("Column with id: " + columnCreated.getId() + " does not exist!");
+    }
+
+    @Test
+    void shouldNotDeleteFirstOrLastColumn() {
+        // when
+        var columns = new ArrayList<>(boardCreated.getColumns());
+        boardCreated.setColumns(columns);
+        // then
+        assertThatThrownBy(() -> columnFacade.deleteColumn(boardCreated.getColumns().get(0).getId()))
+                .isInstanceOf(ColumnCantBeDeletedException.class)
+                .hasMessage("First column can not be deleted.");
+        assertThatThrownBy(() -> columnFacade.deleteColumn(boardCreated.getColumns().get(2).getId()))
+                .isInstanceOf(ColumnCantBeDeletedException.class)
+                .hasMessage("Last column can not be deleted.");
+    }
+
+    @Test
+    void shouldNotDeleteColumnIfBoardHasNotAtLeastTwo() {
+        var columns = new ArrayList<>(boardCreated.getColumns());
+        boardCreated.setColumns(columns);
+        // given
+        columnFacade.deleteColumn(boardCreated.getColumns().get(1).getId());
+        // then
+        assertThatThrownBy(() -> columnFacade.deleteColumn(boardCreated.getColumns().get(0).getId()))
+                .isInstanceOf(BoardHasTooFewColumnsToDeleteException.class)
+                .hasMessage("Board must have at least two columns.");
     }
 
     @Test
