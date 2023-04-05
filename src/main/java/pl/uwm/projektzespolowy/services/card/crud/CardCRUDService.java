@@ -48,9 +48,9 @@ public class CardCRUDService {
         return cardUpdater.markAsUnlocked(cardToChange);
     }
 
-    public Card assignUserToCard(Long cardId, User userToAssign) {
+    public Card assignUserToCard(Long cardId, User userToAssign, Integer boardWipLimit, Integer userAssignedCards) {
         var card = cardReader.getCardById(cardId);
-        return cardUpdater.assignUserToCard(card, userToAssign);
+        return cardUpdater.assignUserToCard(card, userToAssign, boardWipLimit, userAssignedCards);
     }
 
     public void deleteCard(Cell cell, Long cardId) {
