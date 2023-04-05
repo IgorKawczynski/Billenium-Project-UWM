@@ -39,7 +39,7 @@ const UserMain = () => {
                     }
                 })
         }
-    },[setUserBoards])
+    },[])
 
 
     return(
@@ -103,6 +103,7 @@ const UserMain = () => {
                     </Box>
 
                     <ModalUserEditProfile
+                        key={activeUser.id}
                         userId={activeUser.id}
                         firstName={activeUser.firstName}
                         lastName={activeUser.lastName}

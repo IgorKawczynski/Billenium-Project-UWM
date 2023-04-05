@@ -19,7 +19,8 @@ export function loadDefaultData(){
                 firstName: "Test",
                 lastName: "Test",
                 avatarPath: "",
-                avatarColor:""
+                avatarColor:"",
+                remainingAssignments:3
             }
         ],
         columnList: [
@@ -167,6 +168,21 @@ export async function getBoardTitleFromBackend(boardId:string){
         }
     }
 }
+
+export async function getBoardUsersFromBackend(boardId:string){
+    const apiUrl = urlDomain+`/api/boards/users/${boardId}`;
+    try {
+        const response = await axios.get(apiUrl);
+        return response.data
+    } catch (error:any) {
+        if(error.data.error){
+            if (error.response && error.response.data && error.response.data.error) {
+                return error.response.data.error;
+            }
+        }
+    }
+}
+
 
 export async function assignUserToBoardToBackend(boardId:string,userEmail:string){
     const apiUrl = urlDomain+`/api/boards/assign-user`;

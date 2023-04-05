@@ -4,7 +4,7 @@ import {moveCardInCell, moveCardToAnotherCell} from "@/services/actions/cardServ
 import {assignUserToCard} from "@/services/utils/cardUtils/cardUtils";
 import {
     assignUserToBoardToBackend,
-    editBoardToBackend,
+    editBoardToBackend, getBoardUsersFromBackend,
     loadBoardFromBackend,
     moveColumnToBackend,
     unassignUserFromBoardOnBackend
@@ -14,6 +14,7 @@ import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
 import {findCellById} from "@/services/utils/cellUtils/cellUtils";
+import {getUserFromBackend} from "@/services/actions/userMainService";
 
 function withPositionInRange(lowerBound: number, upperBound: number, columns:_Data["data"]['columnList']){
     return  Object.values(columns).filter((column) => {
@@ -139,6 +140,8 @@ export const onDragEnd = (result: any, columns:Column[], setData:_Data["setData"
             const card = result.destination.droppableId.slice(0,-1)
             const user = result.draggableId.slice(0,-1)
             assignUserToCard(card,user, data, setData)
+            getUsers(data.id, data, setData)
+
         }
     }
 }
@@ -194,11 +197,36 @@ export function unassignUserFromBoard(
             if(typeof res === 'string'){
                 handleClickVariant(enqueueSnackbar)(res ,'error')
             }else {
+                getBoardUsersFromBackend(data.id)
+                    .then(resUsers => {
+                        getColumnsFromBackend(data.id)
+                            .then(resCol => {
+                                setData({
+                                    ...data,
+                                    columnList:resCol,
+                                    assignedUsers:resUsers
+                                })
+                                handleClickVariant(enqueueSnackbar)('Unassigned user from board' ,'warning')
+                            })
+                    })
+            }
+        })
+}
+
+export function getUsers(
+    boardId:string,
+    data:_Data["data"],
+    setData:_Data['setData']
+) {
+    getBoardUsersFromBackend(boardId)
+        .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else {
                 setData({
                     ...data,
                     assignedUsers:res
                 })
-                handleClickVariant(enqueueSnackbar)('Unassigned user from board' ,'warning')
             }
         })
 }
