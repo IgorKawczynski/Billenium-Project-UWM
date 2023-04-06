@@ -91,7 +91,7 @@ public class CardFacade {
 
     public CardResponseDTO moveCard(MoveDTO cardMoveDTO) {
         var card = cardCRUDService.getCardById(Long.parseLong(cardMoveDTO.movedObjectId()));
-        var changedCards = cardMoverService.moveCard(card, cardMoveDTO.newPosition());
+        var changedCards = cardMoverService.moveCard(card, card.getCell(), cardMoveDTO.newPosition());
         cardCRUDService.saveChangedCard(card);
         cardCRUDService.saveChangedCards(changedCards);
         return card.toDto();

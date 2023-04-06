@@ -39,11 +39,13 @@ class UserFacadeTest {
                         "lNameTest",
                         rawPassword)
         );
-        var user = userCRUDService.getUserById(userToCreate.getId());
+        var user = userFacade.getUserById(userToCreate.getId());
+        var usersBoards = userFacade.getAllUserBoards(user.getId());
         // given
         Boolean isEncoded = passwordEncoder.matches(rawPassword, user.getPassword());
         // then
         assertThat(isEncoded).isTrue();
+        assertThat(usersBoards.size()).isEqualTo(0);
     }
 
     @Test

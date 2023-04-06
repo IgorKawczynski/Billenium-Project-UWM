@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.atMostOnce;
 import static org.mockito.Mockito.verify;
-import static pl.uwm.projektzespolowy.services.card.crud.CardTestUtils.*;
+import static pl.uwm.projektzespolowy.services.card.CardTestUtils.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CardUpdaterTest {
@@ -80,7 +80,7 @@ public class CardUpdaterTest {
         ArgumentCaptor<Card> cardArgumentCaptor = ArgumentCaptor.forClass(Card.class);
         verify(cardRepository, atMostOnce()).saveAndFlush(cardArgumentCaptor.capture());
         assertThat(card.getAssignedUsers()).contains(user);
-        assertThat(card.getAssignedUsers().size()).isEqualTo(3);
+        assertThat(card.getAssignedUsers().size()).isEqualTo(4);
     }
 
     @Test

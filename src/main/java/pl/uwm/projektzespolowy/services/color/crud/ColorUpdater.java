@@ -13,7 +13,7 @@ class ColorUpdater {
 
     public Color changeColorTitle(Color colorToChange, String newTitle) {
         if (newTitle != null) {
-            colorToChange.changeTitle(new Title(newTitle));
+            colorToChange.setTitle(new Title(newTitle));
         }
         return colorRepository.save(colorToChange);
     }

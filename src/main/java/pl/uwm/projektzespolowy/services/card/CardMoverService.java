@@ -39,10 +39,10 @@ class CardMoverService {
         cardNewCell.add(card);
     }
 
-    public ArrayList<Card> moveCard(Card card, Integer newPosition) {
+    public ArrayList<Card> moveCard(Card card, Cell cell, Integer newPosition) {
         isMoveAllowed(card);
 
-        var cardsToChange = new PositionableList<>(card.getCell().getCards());
+        var cardsToChange = new PositionableList<>(cell.getCards());
         cardsToChange.moveInRange(card.getPosition(), new Position(newPosition));
 
         card.getPosition().moveTo(newPosition);
