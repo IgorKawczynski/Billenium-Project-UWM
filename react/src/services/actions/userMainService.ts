@@ -9,7 +9,8 @@ export function loadEmptyBoardsList(): { userBoards: userBoardsData["userBoards"
             {
                 boardId: "",
                 boardTitle: "",
-                creatorName: ""
+                creatorName: "",
+                creatorId:""
             }
         ]
     };
