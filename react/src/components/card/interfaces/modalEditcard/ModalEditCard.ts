@@ -1,4 +1,4 @@
-import {_Data} from "@/services/utils/boardUtils/DataBoard";
+import {_Data, assignedUser} from "@/services/utils/boardUtils/DataBoard";
 import React, {SetStateAction} from "react";
 
 interface ModalEditCardProps {
@@ -7,12 +7,7 @@ interface ModalEditCardProps {
     title:string;
     desc:string;
 
-    assignedUsers:{
-        id: string;
-        firstName: string;
-        lastName: string;
-        avatarPath:string
-    }[]
+    assignedUsers:assignedUser[]
     subtasks:{
         id:string
         title:string

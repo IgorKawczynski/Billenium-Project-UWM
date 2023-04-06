@@ -1,4 +1,4 @@
-import {_Data} from "@/services/utils/boardUtils/DataBoard";
+import {_Data, assignedUser} from "@/services/utils/boardUtils/DataBoard";
 
 interface EditCardButtonProps {
 
@@ -6,12 +6,7 @@ interface EditCardButtonProps {
     cellId:string;
     title:string;
     desc:string;
-    assignedUsers:{
-        id: string;
-        firstName: string;
-        lastName: string;
-        avatarPath:string;
-    }[]
+    assignedUsers:assignedUser[]
     subtasks:{
         id:string
         title:string
