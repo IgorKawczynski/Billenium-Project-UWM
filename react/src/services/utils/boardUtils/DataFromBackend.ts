@@ -1,10 +1,10 @@
-import {Card} from "@/services/utils/boardUtils/DataBoard";
+import {assignedUser, Card} from "@/services/utils/boardUtils/DataBoard";
 
 export default interface DataFromBackend {
         id:string
         title: string;
         creatorName: string;
-        assignedUsers: { id: number; name: string }[];
+        assignedUsers: assignedUser[];
         columnList: {
             id: string;
             title: string;

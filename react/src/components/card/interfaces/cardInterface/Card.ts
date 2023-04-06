@@ -1,4 +1,4 @@
-import {_Data, Card} from "@/services/utils/boardUtils/DataBoard";
+import {_Data, assignedUser, Card} from "@/services/utils/boardUtils/DataBoard";
 
 interface CardProps {
     id: string
@@ -6,7 +6,7 @@ interface CardProps {
     desc: string
     index: number
     color:string
-    assignedUsers:Card["assignedUsers"]
+    assignedUsers:assignedUser[]
     subtasks:{
         id:string
         title:string
