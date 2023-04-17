@@ -57,7 +57,8 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
                             sx={{
                                 color:theme.palette.text.secondary,
                                 margin:0,
-                                minWidth:'80%'
+                                minWidth:'80%',
+                                textDecorationLine: isChecked ? 'line-through' : 'none'
                             }}
                             control={
                                 <Checkbox
