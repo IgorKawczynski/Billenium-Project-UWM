@@ -10,22 +10,22 @@ import AddRowButton from "@/components/row/addRowButton/addRowButton";
 const BoardContent = (props:boardContentProps) =>{
     const theme = useTheme();
     return(
-        <Box
-            sx={{overflowX:'auto',
-                transform: 'rotateX(180deg)'
-                }}
-        >
-            <Box
-                sx={{
-                    padding:1,
-                    transform: 'rotateX(180deg)'
-                }}
-            >
             <DragDropContext
                 onDragEnd={(result) =>
                     onDragEnd(result, props.data.columnList, props.setData, props.data)
                 }
             >
+                <Box
+                    sx={{overflowX:'auto',
+                        transform: 'rotateX(180deg)'
+                    }}
+                >
+                <Box
+                    sx={{
+                        padding:1,
+                        transform: 'rotateX(180deg)'
+                    }}
+                >
                 <Droppable
                     droppableId={props.data.id}
                     direction="horizontal"
@@ -66,10 +66,10 @@ const BoardContent = (props:boardContentProps) =>{
                         </Stack>
                     )}
                 </Droppable>
+                </Box>
+                </Box>
                 <BoardUsersMenu setData={props.setData} data={props.data} users={props.users} setUsers={props.setUsers}/>
             </DragDropContext>
-            </Box>
-        </Box>
     )
 }
 
