@@ -11,14 +11,23 @@ import {assignUserToBoard} from "@/services/utils/boardUtils/boardUtils";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import DeleteUserMenu from "@/components/menus/deleteUserMenu/deleteUserMenu";
 import UsersAvatars from "@/components/users/usersAvatars/usersAvatars";
+import EditBoardWipLimit from "@/components/board/editBoardWipLimit/editBoardWipLimit";
 
 const BoardUsersMenu = (props:BoardUsersProps) => {
     const [email, setEmail] = useState("")
     const [modalDeleteUser, setModalDeleteUser] = useState(false)
+    const [wipLimit, setWipLimit] = useState(props.data.wipLimit);
     const theme = useTheme()
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
     }
+    const handleWipLimitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if(parseInt(event.target.value) > 0){
+            setWipLimit(event.target.value);
+        }else{
+            setWipLimit('0')
+        }
+    };
 
     return(
         <Drawer
@@ -55,6 +64,7 @@ const BoardUsersMenu = (props:BoardUsersProps) => {
 
                 </Box>
                 <Stack spacing={2}>
+                    <EditBoardWipLimit text={wipLimit} setText={setWipLimit} handleTextChange={handleWipLimitChange} data={props.data} setData={props.setData}/>
                     <Typography variant={"caption"}>
                             Assign member to board
                     </Typography>

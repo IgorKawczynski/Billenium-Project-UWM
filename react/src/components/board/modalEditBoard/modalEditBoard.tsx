@@ -9,16 +9,11 @@ import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import Box from "@mui/material/Box";
 import ColorSetter from "@/components/color/colorSetter/colorSetter";
 import EditBoardTitle from "@/components/board/editBoardTitle/editBoardTitle";
-import EditBoardWipLimit from "@/components/board/editBoardWipLimit/editBoardWipLimit";
 
 const ModalEditBoard = (props:ModalEditBoardProps) => {
     const [title, setTitle] = useState(props.title);
-    const [wipLimit, setWipLimit] = useState(props.data.wipLimit);
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
-    };
-    const handleWipLimitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setWipLimit(event.target.value);
     };
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
@@ -53,7 +48,6 @@ const ModalEditBoard = (props:ModalEditBoardProps) => {
                                 justifyContent={"start"}
                                 flexDirection={"column"}
                             >
-                                <EditBoardWipLimit text={wipLimit} setText={setWipLimit} handleTextChange={handleWipLimitChange} data={props.data} setData={props.setData}/>
                             </Box>
                             <ColorSetter
                                 colors={props.data.colorList}
