@@ -2,6 +2,7 @@ package pl.uwm.projektzespolowy.services.board.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.uwm.projektzespolowy.exceptions.WipLimitTooLowException;
 import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
@@ -21,9 +22,10 @@ class BoardUpdater {
     }
 
     public Board editBoardWipLimit(Board boardToChange, Integer givenWipLimit) {
-        if (givenWipLimit != null) {
-            boardToChange.setWipLimit(givenWipLimit);
+        if (givenWipLimit <= 0) {
+            throw new WipLimitTooLowException("Wip limit cannot be less than 1.");
         }
+        boardToChange.setWipLimit(givenWipLimit);
         return boardRepository.saveAndFlush(boardToChange);
     }
 

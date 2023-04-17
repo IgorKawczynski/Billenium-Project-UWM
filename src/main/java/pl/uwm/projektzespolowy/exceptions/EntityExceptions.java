@@ -50,4 +50,10 @@ public class EntityExceptions {
         return new ErrorMessage("wipLimit", exception.getMessage());
     }
 
+    @ExceptionHandler(value = WipLimitTooLowException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage wipLimitTooLowException(WipLimitTooLowException exception) {
+        return new ErrorMessage("wipLimit", exception.getMessage());
+    }
+
 }
