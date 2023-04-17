@@ -54,15 +54,28 @@ const ModalEditCardSubtasks = (props:ModalEditCardSubtasksProps) =>{
                 </Box>
             )}
             {props.subtasks.length == 0 && (
-                <Stack
-                    padding={1}
-                    spacing={1}
-                    direction={"column"}
-                    maxHeight={'200px'}
-                    overflow={"auto"}
+                <Box
+                    minHeight={'40px'}
+                    aria-label={'checkboxField'}
+                    display={"flex"}
+                    flexDirection={"column"}
+                    textAlign={"left"}
                 >
-                    <ModalEditCardSubtasksAddButton cardId={props.cardId} data={props.data} setData={props.setData}/>
-                </Stack>
+                    <Box>
+                        <Typography variant={"subtitle1"} sx={{color:theme.palette.text.primary}}>
+                            Subtasks
+                        </Typography>
+                    </Box>
+                        <Stack
+                            padding={1}
+                            spacing={1}
+                            direction={"column"}
+                            maxHeight={'200px'}
+                            overflow={"auto"}
+                        >
+                            <ModalEditCardSubtasksAddButton cardId={props.cardId} data={props.data} setData={props.setData}/>
+                        </Stack>
+                    </Box>
             )}
 
         </>

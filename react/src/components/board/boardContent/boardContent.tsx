@@ -11,8 +11,16 @@ const BoardContent = (props:boardContentProps) =>{
     const theme = useTheme();
     return(
         <Box
-            sx={{overflowX:'auto'}}
+            sx={{overflowX:'auto',
+                transform: 'rotateX(180deg)'
+                }}
         >
+            <Box
+                sx={{
+                    padding:1,
+                    transform: 'rotateX(180deg)'
+                }}
+            >
             <DragDropContext
                 onDragEnd={(result) =>
                     onDragEnd(result, props.data.columnList, props.setData, props.data)
@@ -60,6 +68,7 @@ const BoardContent = (props:boardContentProps) =>{
                 </Droppable>
                 <BoardUsersMenu setData={props.setData} data={props.data} users={props.users} setUsers={props.setUsers}/>
             </DragDropContext>
+            </Box>
         </Box>
     )
 }
