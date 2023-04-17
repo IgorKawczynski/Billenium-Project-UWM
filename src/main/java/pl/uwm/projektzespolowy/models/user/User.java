@@ -77,7 +77,9 @@ public class User extends BasicEntity {
 
     public Integer calculateRemainingAssignments(Board board) {
         var wipLimit = board.getWipLimit();
-        return wipLimit - getTasksAssignedCount(board);
+        int remainingAssignments = wipLimit - getTasksAssignedCount(board);
+        if (remainingAssignments < 0) remainingAssignments = 0;
+        return remainingAssignments;
     }
 
     public Integer getTasksAssignedCount(Board board) {
