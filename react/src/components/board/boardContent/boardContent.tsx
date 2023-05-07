@@ -10,66 +10,61 @@ import AddRowButton from "@/components/row/addRowButton/addRowButton";
 const BoardContent = (props:boardContentProps) =>{
     const theme = useTheme();
     return(
-        <Box
-            sx={{overflowX:'auto',
-                transform: 'rotateX(180deg)'
-                }}
+        <DragDropContext
+            onDragEnd={(result) =>
+                onDragEnd(result, props.data.columnList, props.setData, props.data)
+            }
         >
             <Box
-                sx={{
-                    padding:1,
-                    transform: 'rotateX(180deg)'
+                sx={{overflowX:'auto',
                 }}
             >
-            <DragDropContext
-                onDragEnd={(result) =>
-                    onDragEnd(result, props.data.columnList, props.setData, props.data)
-                }
-            >
-                <Droppable
-                    droppableId={props.data.id}
-                    direction="horizontal"
-                    type="column">
-                    {(provided, snapshot) => (
-                        <Stack
-                            spacing={2}
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-                            marginLeft={props.users ? '250px' : '0'}
-                            sx={{transition: theme.transitions.create(['margin', 'width'], {
-                                    easing: theme.transitions.easing.easeOut,
-                                    duration: theme.transitions.duration.enteringScreen,
-                                }),}}
-                        >
+                <Box
+                >
+                    <Droppable
+                        droppableId={props.data.id}
+                        direction="horizontal"
+                        type="column">
+                        {(provided, snapshot) => (
                             <Stack
                                 spacing={2}
-                                direction={"row"}
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                                marginLeft={props.users ? '250px' : '0'}
+                                sx={{transition: theme.transitions.create(['margin', 'width'], {
+                                        easing: theme.transitions.easing.easeOut,
+                                        duration: theme.transitions.duration.enteringScreen,
+                                    }),}}
                             >
-                            {Object.values(props.data.columnList)
-                                .sort((a, b) => a.position - b.position) // sortowanie po pozycji
-                                .map((column) => (
-                                    <Column
-                                        key={column.id}
-                                        id={column.id}
-                                        title={column.title}
-                                        cardsLimit={column.cardsLimit}
-                                        position={column.position}
-                                        cells={column.cells}
-                                        data={props.data}
-                                        setData={props.setData}
-                                        isDragging={snapshot.isDraggingOver}
-                                    />
-                                ))}
-                            {provided.placeholder}
+                                <Stack
+                                    spacing={2}
+                                    direction={"row"}
+                                >
+                                    {Object.values(props.data.columnList)
+                                        .sort((a, b) => a.position - b.position) // sortowanie po pozycji
+                                        .map((column) => (
+                                            <Column
+                                                key={column.id}
+                                                id={column.id}
+                                                title={column.title}
+                                                cardsLimit={column.cardsLimit}
+                                                position={column.position}
+                                                cells={column.cells}
+                                                data={props.data}
+                                                setData={props.setData}
+                                                isDragging={snapshot.isDraggingOver}
+                                            />
+                                        ))}
+                                    {provided.placeholder}
+                                </Stack>
+                                <AddRowButton data={props.data} setData={props.setData}/>
                             </Stack>
-                            <AddRowButton data={props.data} setData={props.setData}/>
-                        </Stack>
-                    )}
-                </Droppable>
-                <BoardUsersMenu setData={props.setData} data={props.data} users={props.users} setUsers={props.setUsers}/>
-            </DragDropContext>
+                        )}
+                    </Droppable>
+                </Box>
             </Box>
-        </Box>
+            <BoardUsersMenu setData={props.setData} data={props.data} users={props.users} setUsers={props.setUsers}/>
+        </DragDropContext>
     )
 }
 
