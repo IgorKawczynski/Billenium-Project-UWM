@@ -17,14 +17,9 @@ const BoardContent = (props:boardContentProps) =>{
             >
                 <Box
                     sx={{overflowX:'auto',
-                        transform: 'rotateX(180deg)'
                     }}
                 >
                 <Box
-                    sx={{
-                        padding:1,
-                        transform: 'rotateX(180deg)'
-                    }}
                 >
                 <Droppable
                     droppableId={props.data.id}

@@ -52,7 +52,16 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                             justifyContent={"center"}
                             alignItems={"center"}
                         >
-                            <EditCardTitle  handleChangeText={handleNameChange} text={title} isLocked={props.isLocked} setModalEdit={props.setModalEdit}/>
+                            <EditCardTitle
+                                cardId={props.id}
+                                handleChangeText={handleNameChange}
+                                text={title}
+                                desc={desc}
+                                isLocked={props.isLocked}
+                                setModalEdit={props.setModalEdit}
+                                data={props.data}
+                                setData={props.setData}
+                            />
                         </Box>
                         <Box
                             display={'flex'}
@@ -62,7 +71,14 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                             width={'50%'}
                             spacing={2}
                             >
-                                <EditCardDesc text={desc} handleChangeText={handleDescChange}/>
+                                <EditCardDesc cardId={props.id}
+                                              handleChangeText={handleDescChange}
+                                              text={title}
+                                              desc={desc}
+                                              isLocked={props.isLocked}
+                                              setModalEdit={props.setModalEdit}
+                                              data={props.data}
+                                              setData={props.setData}/>
 
                                 <ModalEditCardSubtasks
                                     cardId={props.id}

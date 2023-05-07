@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import {Box, IconButton, TextField, Tooltip, Typography, useTheme} from "@mui/material";
-import {EditCardDescProps} from "@/components/card/interfaces/editCardForm/editCardForm";
+import {EditCardTitleProps} from "@/components/card/interfaces/editCardForm/editCardForm";
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
+import {updateCard} from "@/services/utils/cardUtils/cardUtils";
 
-const EditCardDesc = (props:EditCardDescProps) => {
+const EditCardDesc = (props:EditCardTitleProps) => {
     const theme = useTheme()
     const [isEditing, setIsEditing] = useState(false)
 
@@ -21,7 +22,7 @@ const EditCardDesc = (props:EditCardDescProps) => {
                         variant="outlined"
                         multiline={true}
                         maxRows={5}
-                        value={props.text}
+                        value={props.desc}
                         onChange={props.handleChangeText}
                     />
                     <IconButton
@@ -31,7 +32,7 @@ const EditCardDesc = (props:EditCardDescProps) => {
                             color:theme.palette.primary.main
                         }}
                         size={"small"}
-                        onClick={() => closeModal(setIsEditing)}
+                        onClick={() => updateCard(props.cardId,props.text, props.desc,props.setData,props.data,props.setModalEdit)}
                     >
                         <CheckIcon/>
                     </IconButton>
@@ -66,9 +67,9 @@ const EditCardDesc = (props:EditCardDescProps) => {
                     variant={"caption"}
                     color={theme.palette.text.primary}
                 >
-                    {props.text}
+                    {props.desc}
                 </Typography>
-                <Tooltip title={'Edit Title'}>
+                <Tooltip title={'Edit description'}>
                     <IconButton
                         sx={{
                             maxWidth:'30px',

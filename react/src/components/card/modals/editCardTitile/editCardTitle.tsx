@@ -6,6 +6,7 @@ import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import LockIcon from "@mui/icons-material/Lock";
+import {updateCard} from "@/services/utils/cardUtils/cardUtils";
 
 const EditCardTitle = (props:EditCardTitleProps) => {
     const theme = useTheme()
@@ -30,7 +31,7 @@ const EditCardTitle = (props:EditCardTitleProps) => {
                             color:theme.palette.primary.main
                         }}
                         size={"small"}
-                        onClick={() => closeModal(setIsEditing)}
+                        onClick={() => updateCard(props.cardId,props.text, props.desc,props.setData,props.data,props.setModalEdit)}
                     >
                         <CheckIcon/>
                     </IconButton>
