@@ -13,7 +13,8 @@ public record CardResponseDTO(String id,
                               String color,
                               List<UserResponseDTO> assignedUsers,
                               List<CheckboxResponseDTO> checkboxes,
-                              boolean isLocked) {
+                              boolean isLocked,
+                              List<CardResponseDTO> children) {
 
     @Builder public CardResponseDTO {}
 

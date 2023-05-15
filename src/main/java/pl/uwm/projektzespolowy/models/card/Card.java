@@ -7,10 +7,12 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.Positionable;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
+import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.checkbox.Checkbox;
 import pl.uwm.projektzespolowy.models.checkbox.CheckboxResponseDTO;
 import pl.uwm.projektzespolowy.models.color.ColorValue;
+import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
@@ -88,6 +90,9 @@ public class Card extends BasicEntity implements Positionable {
                         .sorted(Comparator.comparing(CheckboxResponseDTO::id))
                         .toList())
                 .isLocked(this.isLocked)
+                .children(getChildren(this.cell.getColumn().getBoard()).stream()
+                        .map(Card::toDto)
+                        .toList())
                 .build();
     }
 
@@ -97,6 +102,31 @@ public class Card extends BasicEntity implements Positionable {
 
     public void removeUser(User user) {
         this.assignedUsers.remove(user);
+    }
+
+    public List<Card> getChildren(Board board) {
+        List<Card> children = new ArrayList<>();
+        var cardsInBoard = getAllCards(board);
+
+        for (Card card : cardsInBoard) {
+            if (card.getParentCardId() != null && card.getParentCardId().equals(this.getId())) {
+                children.add(card);
+            }
+        }
+
+        return children;
+    }
+
+    public List<Card> getAllCards(Board board) {
+        List<Card> allCards = new ArrayList<>();
+
+        for (Column column : board.getColumns()) {
+            for (Cell cell : column.getCells()) {
+                allCards.addAll(cell.getCards());
+            }
+        }
+
+        return allCards;
     }
 
     @Override
