@@ -122,4 +122,10 @@ public class CardFacade {
                 .toDto();
     }
 
+    public CardResponseDTO addChild(String parentId, String childId) {
+            var longParentId = Long.parseLong(parentId);
+            var longChildId = Long.parseLong(childId);
+            return cardCRUDService.addChild(longParentId, longChildId).toDto();
+    }
+
 }
