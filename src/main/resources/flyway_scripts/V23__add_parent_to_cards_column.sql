@@ -1,0 +1,1 @@
+alter table cards add column parent_card_id BIGINT;
