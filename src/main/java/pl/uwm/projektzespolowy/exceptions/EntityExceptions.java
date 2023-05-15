@@ -56,4 +56,10 @@ public class EntityExceptions {
         return new ErrorMessage("wipLimit", exception.getMessage());
     }
 
+    @ExceptionHandler(value = CardCantBeChildException.class)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    public ErrorMessage cardCantBeChildException(CardCantBeChildException exception) {
+        return new ErrorMessage("card", exception.getMessage());
+    }
+
 }
