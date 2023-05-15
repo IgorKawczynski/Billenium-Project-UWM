@@ -25,6 +25,10 @@ public class CardCRUDService {
         return cardReader.getAllCardsByCellId(cellId);
     }
 
+    public List<Card> getCardChildren(Long parentId) {
+        return cardReader.getCardChildren(parentId);
+    }
+
     public List<User> getAllAssignedUsersToCard(Long cardId) {
         return cardReader.getCardById(cardId).getAssignedUsers().stream().toList();
     }
@@ -74,6 +78,13 @@ public class CardCRUDService {
     public Card changeCardColor(Long cardId, String newColor) {
         var cardToChange = cardReader.getCardById(cardId);
         return cardUpdater.changeCardColor(cardToChange, newColor);
+    }
+
+    public Card addChild(Long parentId, Long childId) {
+        var parent = cardReader.getCardById(parentId);
+        var child = cardReader.getCardById(childId);
+        cardUpdater.addChild(parent, child);
+        return parent;
     }
 
 }
