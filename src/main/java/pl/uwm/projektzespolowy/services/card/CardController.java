@@ -94,4 +94,10 @@ public class CardController {
         return cardFacade.deleteAssignedUserFromCard(cardUserUpdateDTO);
     }
 
+    @PatchMapping("/add-child")
+    @ResponseStatus(HttpStatus.OK)
+    public CardResponseDTO addChild(@RequestParam String parentId, @RequestParam String childId) {
+        return cardFacade.addChild(parentId, childId);
+    }
+
 }
