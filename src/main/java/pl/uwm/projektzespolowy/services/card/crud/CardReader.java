@@ -23,4 +23,8 @@ class CardReader {
         return cardRepository.findAllByCellId(cellId);
     }
 
+    public List<Card> getCardChildren(Long parentId) {
+        return cardRepository.getCardChildren(parentId);
+    }
+
 }
