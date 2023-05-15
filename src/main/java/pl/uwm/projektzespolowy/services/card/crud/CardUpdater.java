@@ -73,6 +73,11 @@ class CardUpdater {
         return cardRepository.saveAndFlush(child);
     }
 
+    public Card removeChild(Card child) {
+        child.setParentCardId(null);
+        return cardRepository.saveAndFlush(child);
+    }
+
     private boolean canBeChild(Card child) {
         var listOfChildren = cardRepository.getCardChildren(child.getId());
         return listOfChildren == null || listOfChildren.isEmpty();

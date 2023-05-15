@@ -87,4 +87,11 @@ public class CardCRUDService {
         return parent;
     }
 
+    public Card removeChild(Long parentId, Long childId) {
+        var parent = cardReader.getCardById(parentId);
+        var child = cardReader.getCardById(childId);
+        cardUpdater.removeChild(child);
+        return parent;
+    }
+
 }

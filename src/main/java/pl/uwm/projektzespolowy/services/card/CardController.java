@@ -100,4 +100,10 @@ public class CardController {
         return cardFacade.addChild(parentId, childId);
     }
 
+    @PatchMapping("/remove-child")
+    @ResponseStatus(HttpStatus.OK)
+    public CardResponseDTO removeChild(@RequestParam String parentId, @RequestParam String childId) {
+        return cardFacade.removeChild(parentId, childId);
+    }
+
 }

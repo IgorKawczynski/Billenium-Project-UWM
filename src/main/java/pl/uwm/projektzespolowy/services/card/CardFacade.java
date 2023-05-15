@@ -128,4 +128,10 @@ public class CardFacade {
             return cardCRUDService.addChild(longParentId, longChildId).toDto();
     }
 
+    public CardResponseDTO removeChild(String parentId, String childId) {
+        var longParentId = Long.parseLong(parentId);
+        var longChildId = Long.parseLong(childId);
+        return cardCRUDService.removeChild(longParentId, longChildId).toDto();
+    }
+
 }
