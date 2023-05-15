@@ -40,6 +40,13 @@ public class CardController {
         return cardFacade.getAllAssignedUsersToCard(cardId);
     }
 
+    @GetMapping("/without-parent/{boardId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CardResponseDTO> getAllCardsInBoardWithoutParent(@PathVariable Long boardId,
+                                                                 @RequestParam Long parentId) {
+        return cardFacade.getAllCardsInBoardWithoutParent(boardId, parentId);
+    }
+
     @PutMapping("")
     @ResponseStatus(HttpStatus.OK)
     public CardResponseDTO updateCard(@RequestBody CardUpdateDTO cardUpdateDTO) {
@@ -96,13 +103,13 @@ public class CardController {
 
     @PatchMapping("/add-child")
     @ResponseStatus(HttpStatus.OK)
-    public CardResponseDTO addChild(@RequestParam String parentId, @RequestParam String childId) {
+    public CardResponseDTO addChild(@RequestParam Long parentId, @RequestParam Long childId) {
         return cardFacade.addChild(parentId, childId);
     }
 
     @PatchMapping("/remove-child")
     @ResponseStatus(HttpStatus.OK)
-    public CardResponseDTO removeChild(@RequestParam String parentId, @RequestParam String childId) {
+    public CardResponseDTO removeChild(@RequestParam Long parentId, @RequestParam Long childId) {
         return cardFacade.removeChild(parentId, childId);
     }
 

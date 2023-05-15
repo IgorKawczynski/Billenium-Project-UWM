@@ -27,4 +27,8 @@ class CardReader {
         return cardRepository.getCardChildren(parentId);
     }
 
+    public List<Card> getAllCardsInBoardWithoutParent(Long boardId, Long parentId) {
+        return cardRepository.getAllCardsInBoardWithoutParent(boardId, parentId);
+    }
+
 }

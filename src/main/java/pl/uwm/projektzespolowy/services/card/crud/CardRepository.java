@@ -20,4 +20,13 @@ interface CardRepository extends JpaRepository<Card, Long> {
             """)
     List<Card> getCardChildren(@Param("parentId") Long parentId);
 
+    @Query("""
+            select c
+            from Card c
+            where c.parentCardId is null
+            and c.id <> :parentId
+            and c.cell.column.board.id = :boardId
+            """)
+    List<Card> getAllCardsInBoardWithoutParent(@Param("boardId") Long boardId, @Param("parentId") Long parentId);
+
 }

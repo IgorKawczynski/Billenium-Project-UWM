@@ -57,6 +57,12 @@ public class CardFacade {
                 .collect(Collectors.toList());
     }
 
+    public List<CardResponseDTO> getAllCardsInBoardWithoutParent(Long boardId, Long parentId) {
+        return cardCRUDService.getAllCardsInBoardWithoutParent(boardId, parentId).stream()
+                .map(Card::toDto)
+                .collect(Collectors.toList());
+    }
+
     public CardResponseDTO updateCard(CardUpdateDTO cardUpdateDTO) {
         var cardId = Long.parseLong(cardUpdateDTO.cardId());
         var newTitle = cardUpdateDTO.title();
@@ -122,16 +128,12 @@ public class CardFacade {
                 .toDto();
     }
 
-    public CardResponseDTO addChild(String parentId, String childId) {
-            var longParentId = Long.parseLong(parentId);
-            var longChildId = Long.parseLong(childId);
-            return cardCRUDService.addChild(longParentId, longChildId).toDto();
+    public CardResponseDTO addChild(Long parentId, Long childId) {
+            return cardCRUDService.addChild(parentId, childId).toDto();
     }
 
-    public CardResponseDTO removeChild(String parentId, String childId) {
-        var longParentId = Long.parseLong(parentId);
-        var longChildId = Long.parseLong(childId);
-        return cardCRUDService.removeChild(longParentId, longChildId).toDto();
+    public CardResponseDTO removeChild(Long parentId, Long childId) {
+        return cardCRUDService.removeChild(parentId, childId).toDto();
     }
 
 }
