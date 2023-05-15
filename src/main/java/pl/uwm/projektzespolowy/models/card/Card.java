@@ -57,6 +57,8 @@ public class Card extends BasicEntity implements Positionable {
 
     boolean isLocked;
 
+    Long parentCardId;
+
     public Card(Title title, String description, Cell cell, Position position) {
         this.title = title;
         this.description = description;
