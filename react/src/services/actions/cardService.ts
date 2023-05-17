@@ -13,6 +13,20 @@ export async function addCardToBackend(cellId:string, title:string, description:
     }
 
 }
+
+export async function getCardsWithoutParentsFromBackend(boardId:string, parentId:string){
+
+    try{
+        const response = await axios.get(urlDomain+`/api/cards/without-parent/${boardId}`, {params:{parentId}})
+        return response.data
+    }catch(error:any){
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+
+}
+
 export async function updateCardToBackend(cardId:string, title:string, description:string){
     try{
         const response = await axios.put(urlDomain+`/api/cards`, {cardId, title, description})
@@ -39,6 +53,29 @@ export async function moveCardInCell(movedObjectId:string, newPosition:number){
     }
 }
 
+export async function addChildToCardToBackend(parentId:string, childId:string){
+    const apiUrl = urlDomain+`/api/cards/add-child`;
+    try {
+        const response = await axios.patch(apiUrl, null ,{params:{parentId:parentId,childId:childId }});
+        return response.data
+    } catch (error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+}
+export async function removeChildFromCardToBackend(parentId:string, childId:string){
+    const apiUrl = urlDomain+`/api/cards/remove-child`;
+    try {
+        const response = await axios.patch(apiUrl, null ,{params:{parentId:parentId,childId:childId }});
+        return response.data
+    } catch (error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+}
+
 export async function assignUserToCardToBackend(cardId:string, userId:string){
     const apiUrl = urlDomain+`/api/cards/assign-user`;
     try {
@@ -62,6 +99,7 @@ export async function removeUserFromCardToBackend(cardId:string, userId:string){
         }
     }
 }
+
 
 export async function removeCardToBackend(cardId:string){
     const apiUrl = urlDomain+`/api/cards/${cardId}`;

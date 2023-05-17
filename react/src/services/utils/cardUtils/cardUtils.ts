@@ -1,8 +1,8 @@
 import {
-    addCardToBackend,
-    assignUserToCardToBackend,
+    addCardToBackend, addChildToCardToBackend,
+    assignUserToCardToBackend, getCardsWithoutParentsFromBackend,
     lockCardOnBackend,
-    removeCardToBackend,
+    removeCardToBackend, removeChildFromCardToBackend,
     removeUserFromCardToBackend,
     unlockCardOnBackend,
     updateCardToBackend
@@ -128,6 +128,19 @@ export function assignUserToCard(
             }
         })
 }
+export function getCardsWithoutParents(
+    boardId:string,
+    parentId:string,
+){
+    getCardsWithoutParentsFromBackend(boardId, parentId)
+        .then(res => {
+            return res
+        }).catch( error => {
+        handleClickVariant(enqueueSnackbar)(`${error}`, 'warning')
+        return []
+    })
+    return[]
+}
 export const lockCard = (
     id:string,
     title:string,
@@ -156,6 +169,66 @@ export const lockCard = (
         .catch(error => {
         });
 };
+
+export const addChild = (
+    parentId:string,
+    childId:string,
+    data:_Data['data'],
+    setData:_Data['setData']
+) => {
+    addChildToCardToBackend(parentId,childId)
+        .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else{
+                getColumnsFromBackend(data.id)
+                    .then( resCol => {
+                            if(resCol) {
+                                setData({
+                                    ...data,
+                                    columnList: resCol
+
+                                })
+                                handleClickVariant(enqueueSnackbar)(`Child added` ,'success')
+                            }
+                        }
+                    )
+                // tutaj możesz wykonywać operacje na otrzymanym id
+            }})
+        .catch(error => {
+        });
+};
+export const removeChild = (
+    parentId:string,
+    childId:string,
+    childTile:string,
+    data:_Data['data'],
+    setData:_Data['setData']
+) => {
+    removeChildFromCardToBackend(parentId,childId)
+        .then(res => {
+            if(typeof res === 'string'){
+                handleClickVariant(enqueueSnackbar)(res ,'error')
+            }else{
+                getColumnsFromBackend(data.id)
+                    .then( resCol => {
+                            if(resCol) {
+                                setData({
+                                    ...data,
+                                    columnList: resCol
+
+                                })
+                                handleClickVariant(enqueueSnackbar)(`Child ${childTile} removed` ,'warning')
+                            }
+                        }
+                    )
+                // tutaj możesz wykonywać operacje na otrzymanym id
+            }})
+        .catch(error => {
+        });
+};
+
+
 export const unlockCard = (
     id:string,
     title:string,

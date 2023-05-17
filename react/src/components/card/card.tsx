@@ -107,9 +107,9 @@ const Task = (props:CardProps) => {
                                                     assignedUsers={props.assignedUsers}
                                                     subtasks={props.subtasks}
                                                     isLocked={props.isLocked}
+                                                    children={props.children}
                                                     data={props.data}
                                                     setData={props.setData}
-
                                                 />
                                             </Box>
                                             <Box display={"flex"} justifyContent={"space-between"} marginTop={1}>

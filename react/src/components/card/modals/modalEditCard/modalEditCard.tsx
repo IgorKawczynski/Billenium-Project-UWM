@@ -7,6 +7,7 @@ import CardMenu from "@/components/card/modals/modalEditCardMenu/modalEditCardMe
 import ModalEditCardSubtasks from "@/components/card/modals/modalEditCardSubtasks/modalEditCardSubtasks";
 import EditCardTitle from "@/components/card/modals/editCardTitile/editCardTitle";
 import EditCardDesc from "@/components/card/modals/editCardDesc/editCardDesc";
+import AddChildComponent from "@/components/card/modals/addChildComponent/addChildComponent";
 
 export default function ModalEditCard(props:ModalEditCardProps) {
     const [title, setTitle] = useState(props.title);
@@ -89,31 +90,41 @@ export default function ModalEditCard(props:ModalEditCardProps) {
                                 window={props.setModalEdit}
                             />
                         </Stack>
-                        <Box
+                        <Stack
                             width={'50%'}
-                            paddingX={1}
                             display={"flex"}
-                            justifyContent={'end'}
+                            justifyContent={"center"}
+                            alignItems={"center"}
                         >
-                            <Box>
+                            <Box
+                                mt={2}
+                            >
                                 <CardMenu
                                     cardId={props.id}
                                     cardTitle={props.title}
                                     assignedUsers={props.assignedUsers}
                                     isLocked={props.isLocked}
+                                    children={props.children}
                                     setModalDelete={props.setModalDelete}
                                     modalDelete={props.modalDelete}
                                     data={props.data}
                                     setData={props.setData}
                                 />
                             </Box>
-                        </Box>
-                    </Box>
-                    <Box
-                        width={'100%'}
-                        display={'flex'}
-                        justifyContent={'center'}
-                    >
+                            <Box
+                                mt={5}
+                                width={'100%'}
+                                display={'flex'}
+                                justifyContent={'center'}
+                            >
+                                <AddChildComponent
+                                    boardId={props.data.id}
+                                    cardId={props.id}
+                                    data={props.data}
+                                    setData={props.setData}
+                                />
+                            </Box>
+                        </Stack>
                     </Box>
                 </Stack>
             </Fade>

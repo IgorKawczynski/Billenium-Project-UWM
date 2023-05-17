@@ -1,4 +1,4 @@
-import {_Data, assignedUser} from "@/services/utils/boardUtils/DataBoard";
+import {_Data, assignedUser, Card} from "@/services/utils/boardUtils/DataBoard";
 
 interface EditCardButtonProps {
 
@@ -13,6 +13,7 @@ interface EditCardButtonProps {
         isChecked:boolean
     }[]
     isLocked:boolean
+    children:Card[]
     data:_Data["data"]
     setData:_Data["setData"]
 }

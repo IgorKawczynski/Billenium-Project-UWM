@@ -1,4 +1,4 @@
-import {_Data, assignedUser} from "@/services/utils/boardUtils/DataBoard";
+import {_Data, assignedUser, Card} from "@/services/utils/boardUtils/DataBoard";
 import React, {SetStateAction} from "react";
 
 interface ModalEditCardProps {
@@ -14,6 +14,7 @@ interface ModalEditCardProps {
         isChecked:boolean
     }[]
     isLocked:boolean
+    children:Card[]
     setModalEdit: React.Dispatch<SetStateAction<boolean>>
     modalEdit:boolean
     setModalDelete:React.Dispatch<SetStateAction<boolean>>

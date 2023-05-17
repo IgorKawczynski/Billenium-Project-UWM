@@ -13,6 +13,7 @@ interface CardProps {
         isChecked:boolean
     }[]
     isLocked:boolean
+    children:Card[]
     cellId:string
     setData:_Data["setData"]
     data:_Data["data"]

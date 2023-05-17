@@ -29,7 +29,7 @@ const ModalEditCardSubtasks = (props:ModalEditCardSubtasksProps) =>{
                         padding={1}
                         spacing={1}
                         direction={"column"}
-                        maxHeight={'200px'}
+                        maxHeight={'230px'}
                         overflow={"auto"}
                     >
                         <ModalEditCardSubtasksAddButton cardId={props.cardId} data={props.data} setData={props.setData}/>

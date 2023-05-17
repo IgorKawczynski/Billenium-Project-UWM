@@ -11,6 +11,7 @@ import {ModalEditCardMenuProps} from "@/components/card/interfaces/modalEditCard
 import ColorPicker from "@/components/card/cardColorPicker/ColorPicker";
 import ModalEditCardUserList from "@/components/card/modals/modalEditCardUserList/modalEditCardUserList";
 import ModalEditCardLockCard from "@/components/card/modals/modalEditCardLockCard/modalEditCardLockCard";
+import ChildrenPicker from "@/components/card/cardChilderPicker/ChildrenPicker";
 
 const CardMenu = (props:ModalEditCardMenuProps) => {
     return (
@@ -28,6 +29,12 @@ const CardMenu = (props:ModalEditCardMenuProps) => {
                     setData={props.setData}
                     cardId={props.cardId}
                     cardTitle={props.cardTitle}/>
+                <ChildrenPicker
+                    cardId={props.cardId}
+                    cardTitle={props.cardTitle}
+                    children={props.children}
+                    data={props.data}
+                    setData={props.setData}/>
                 <ModalEditCardLockCard
                     cardId={props.cardId}
                     title={props.cardTitle}
@@ -35,6 +42,7 @@ const CardMenu = (props:ModalEditCardMenuProps) => {
                     data={props.data}
                     setData={props.setData}
                 />
+
                 <Divider />
                 <MenuItem onClick={() => openModal(props.setModalDelete)}>
                     <ListItemIcon>

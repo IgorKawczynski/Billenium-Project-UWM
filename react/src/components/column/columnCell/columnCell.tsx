@@ -102,6 +102,7 @@ const ColumnCell = (props:ColumnCellProps) =>{
                                         isLocked={item.isLocked}
                                         index={index}
                                         cellId={props.id}
+                                        children={item.children}
                                         setData={props.setData}
                                         data={props.data}
                                     />

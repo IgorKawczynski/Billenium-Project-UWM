@@ -1,32 +1,26 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import {Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import ModalRemoveCardProps from "@/components/card/interfaces/modalRemoveCard/ModalRemoveCard";
 import Stack from "@mui/material/Stack";
 import {modalStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
-import {removeCard} from "@/services/utils/cardUtils/cardUtils";
+import ModalRemoveChildProps from "@/components/card/interfaces/modalRemoveChild/ModalRemoveChild";
+import {removeChild} from "@/services/utils/cardUtils/cardUtils";
 
-export default function ModalRemoveCard(props:ModalRemoveCardProps) {
+export default function ModalRemoveChild(props:ModalRemoveChildProps) {
+
+    const handleClose = () => {
+        props.setAnchorEl(null);
+        closeModal(props.setModalDelete)
+    }
 
     return (
         <Modal
-            style={{zIndex:'1000'}}
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
             open={props.modalDelete}
-            onClose={() => closeModal(props.setModalDelete)}
-            closeAfterTransition
-            slots={{ backdrop: Backdrop }}
-            slotProps={{
-                backdrop: {
-                    timeout: 500,
-                },
-            }}
+            onClose={handleClose}
         >
             <Fade in={props.modalDelete}>
                 <Stack sx={modalStyle} spacing={3}>
@@ -38,7 +32,7 @@ export default function ModalRemoveCard(props:ModalRemoveCardProps) {
                         component="h2"
                         sx={{textAlign:"center"}}
                     >
-                        Are you sure you want to delete card: {props.title}?
+                        Are you sure you want to delete child: {props.childTitle}?
                     </Typography>
                     </Grid>
                     <Grid style={{display:"flex",
@@ -47,18 +41,18 @@ export default function ModalRemoveCard(props:ModalRemoveCardProps) {
                     >
                         <Button
                             sx={{maxHeight:'50px'}}
-                            onClick={() => closeModal(props.setModalDelete)}
+                            onClick={handleClose}
                             variant="outlined"
                         >
                             Close
                         </Button>
                         <Button
                             sx={{maxHeight:'50px'}}
-                            onClick={() => removeCard(props.id,
-                                                    props.title,
-                                                    props.cellId,
-                                                    props.setData,
-                                                    props.data
+                            onClick={() => removeChild(props.id,
+                                                    props.childId,
+                                                    props.childTitle,
+                                                    props.data,
+                                                    props.setData
                                                 )}
                             variant="contained"
                         >

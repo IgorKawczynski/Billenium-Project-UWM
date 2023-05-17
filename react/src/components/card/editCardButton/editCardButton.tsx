@@ -16,14 +16,6 @@ export default function EditCardButton(props:EditCardButtonProps) {
     const [modalDelete, setModalDelete] = React.useState(false);
 
 
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-
     return (
         <Box style={{display:"flex",justifyContent:"flex-end"}}>
             <Tooltip title={"Show more"} placement={"bottom"}>
@@ -46,6 +38,7 @@ export default function EditCardButton(props:EditCardButtonProps) {
                 assignedUsers={props.assignedUsers}
                 subtasks={props.subtasks}
                 isLocked={props.isLocked}
+                children={props.children}
                 setModalEdit={setModalEdit}
                 modalEdit={modalEdit}
                 data={props.data}

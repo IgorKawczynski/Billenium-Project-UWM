@@ -13,6 +13,7 @@ export interface _Data {
 
         colorList:Color[];
         wipLimit:string
+        children:Card[]
     };
     setData: React.Dispatch<
         React.SetStateAction<{
@@ -28,6 +29,7 @@ export interface _Data {
 
             colorList: Color[];
             wipLimit:string
+            children:Card[]
         }>>;
 }
 
@@ -74,7 +76,7 @@ export interface Card{
         isChecked:boolean
     }[]
     isLocked:boolean
-};
+}
 export interface assignedUser{
     id: string;
     firstName: string;
