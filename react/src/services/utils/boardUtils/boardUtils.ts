@@ -91,17 +91,15 @@ export const onDragEnd = (result: any, columns:Column[], setData:_Data["setData"
             destinationCell.cards.splice(destination.index, 0, removed);
             moveCardToAnotherCell(result.draggableId, destination.droppableId, destination.index)
                 .then(res => {
+                    if(typeof res === 'string'){
+                        handleClickVariant(enqueueSnackbar)(res ,'error')
+                    }
                     getColumnsFromBackend(data.id)
                         .then(res => {
-                            if(res ==='string'){
-                                handleClickVariant(enqueueSnackbar)(res ,'error')
-                            }
-                            else{
                                 setData({
                                     ...data,
                                     columnList: res
                                 })
-                            }
                         })
                 })
         } else {
@@ -127,17 +125,15 @@ export const onDragEnd = (result: any, columns:Column[], setData:_Data["setData"
 
             moveCardInCell(result.draggableId, destination.index)
                 .then(res => {
+                    if(typeof res === 'string'){
+                        handleClickVariant(enqueueSnackbar)(res ,'error')
+                    }
                     getColumnsFromBackend(data.id)
                         .then(res => {
-                            if(res ==='string'){
-                                handleClickVariant(enqueueSnackbar)(res ,'error')
-                            }
-                            else{
                                 setData({
                                     ...data,
                                     columnList: res
                                 })
-                            }
                         })
                 })
         }
