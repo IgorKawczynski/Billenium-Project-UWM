@@ -16,7 +16,9 @@ class CardMoverService {
 
     public ArrayList<Card> moveCardToAnotherCell(Card card, Cell cardOldCell, Cell cardNewCell, Integer newPosition) {
         isMoveAllowed(card);
-        areAllChildrenFinished(card);
+        if (isMovingToLastColumn(cardNewCell)) {
+            areAllChildrenFinished(card);
+        }
 
         var cardsFromOldCell = new PositionableList<>(cardOldCell.getCards());
         cardsFromOldCell.withHigherOrEqualPositionThanGiven(card);
@@ -69,6 +71,16 @@ class CardMoverService {
                 throw new CardMoveNotAllowedException("All children of parent card must be in last column before card can be done.");
             }
         }
+    }
+
+    private boolean isMovingToLastColumn(Cell cardNewCell) {
+        var board = cardNewCell.getColumn().getBoard();
+
+        var columns = board.getColumns();
+        var cellsColumnPosition = cardNewCell.getColumn().getPosition().value();
+        var lastColumnPosition = new PositionableList<>(columns).getLastElement().getPosition().value();
+
+        return cellsColumnPosition == lastColumnPosition;
     }
 
 }
