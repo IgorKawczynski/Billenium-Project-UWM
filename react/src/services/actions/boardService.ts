@@ -15,6 +15,7 @@ export function loadDefaultData(){
         title: "Kanban",
         creatorName: "Test",
         wipLimit:'',
+        children:[],
         assignedUsers: [
             {
                 id: "1",
@@ -140,7 +141,10 @@ export async function moveColumnToBackend(movedObjectId:string, newPosition:numb
     const apiUrl = urlDomain+`/api/columns/move`;
     try {
         const response = await axios.put(apiUrl, {movedObjectId, newPosition});
-    } catch (error) {
+    } catch (error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
     }
 }
 

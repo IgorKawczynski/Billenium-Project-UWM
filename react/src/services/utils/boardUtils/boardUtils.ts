@@ -53,12 +53,13 @@ export const onDragEnd = (result: any, columns:Column[], setData:_Data["setData"
                     .then(res => {
                         getColumnsFromBackend(data.id)
                             .then(res => {
-                                if (res) {
-                                    const columns: _Data["data"]['columnList'] = res
+                                if(res ==='string'){
+                                    handleClickVariant(enqueueSnackbar)(res ,'error')
+                                }
+                                else{
                                     setData({
                                         ...data,
-                                        columnList: columns
-
+                                        columnList: res
                                     })
                                 }
                             })
@@ -92,7 +93,10 @@ export const onDragEnd = (result: any, columns:Column[], setData:_Data["setData"
                 .then(res => {
                     getColumnsFromBackend(data.id)
                         .then(res => {
-                            if (res) {
+                            if(res ==='string'){
+                                handleClickVariant(enqueueSnackbar)(res ,'error')
+                            }
+                            else{
                                 setData({
                                     ...data,
                                     columnList: res
@@ -125,7 +129,10 @@ export const onDragEnd = (result: any, columns:Column[], setData:_Data["setData"
                 .then(res => {
                     getColumnsFromBackend(data.id)
                         .then(res => {
-                            if (res) {
+                            if(res ==='string'){
+                                handleClickVariant(enqueueSnackbar)(res ,'error')
+                            }
+                            else{
                                 setData({
                                     ...data,
                                     columnList: res

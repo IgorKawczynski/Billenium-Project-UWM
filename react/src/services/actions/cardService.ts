@@ -42,14 +42,20 @@ export async function moveCardToAnotherCell(cardId:string, newCellId:string, new
     const apiUrl = urlDomain+`/api/cards/another-cell`;
     try {
         const response = await axios.put(apiUrl, {cardId, newCellId,newPosition});
-    } catch (error) {
+    } catch (error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
     }
 }
 export async function moveCardInCell(movedObjectId:string, newPosition:number){
     const apiUrl = urlDomain+`/api/cards/same-cell`;
     try {
         const response = await axios.put(apiUrl, {movedObjectId, newPosition});
-    } catch (error) {
+    } catch (error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
     }
 }
 
