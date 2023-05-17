@@ -14,6 +14,7 @@ public record CardResponseDTO(String id,
                               List<UserResponseDTO> assignedUsers,
                               List<CheckboxResponseDTO> checkboxes,
                               boolean isLocked,
+                              String parentCardId,
                               List<CardResponseDTO> children) {
 
     @Builder public CardResponseDTO {}

@@ -90,6 +90,7 @@ public class Card extends BasicEntity implements Positionable {
                         .sorted(Comparator.comparing(CheckboxResponseDTO::id))
                         .toList())
                 .isLocked(this.isLocked)
+                .parentCardId(this.parentCardId == null ? null : this.parentCardId.toString())
                 .children(getChildren(this.cell.getColumn().getBoard()).stream()
                         .map(Card::toDto)
                         .toList())
