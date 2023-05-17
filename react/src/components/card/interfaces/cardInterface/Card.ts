@@ -15,8 +15,13 @@ interface CardProps {
     isLocked:boolean
     children:Card[]
     cellId:string
+    parentCardId:string
     setData:_Data["setData"]
     data:_Data["data"]
+
+    over:string
+    handleOnMouseOver: (parentId:string) => void
+    handleOnMouseLeave: () => void
 }
 
 export default CardProps

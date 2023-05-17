@@ -59,6 +59,9 @@ const Column = (props:ColumnProps) => {
                                         data={props.data}
                                         setData={props.setData}
                                         isDragging={props.isDragging}
+                                        over={props.over}
+                                        handleOnMouseOver={props.handleOnMouseOver}
+                                        handleOnMouseLeave={props.handleOnMouseLeave}
                                     />
                                     )
                                 ))}

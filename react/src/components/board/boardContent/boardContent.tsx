@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import {onDragEnd} from "@/services/utils/boardUtils/boardUtils";
 import {Box, Stack, useTheme} from "@mui/material";
@@ -9,6 +9,13 @@ import AddRowButton from "@/components/row/addRowButton/addRowButton";
 
 const BoardContent = (props:boardContentProps) =>{
     const theme = useTheme();
+    const [over, setOver] = useState('');
+    const handleOnMouseOver = (parentId:string) => {
+        setOver(parentId)
+    }
+    const handleOnMouseLeave = () => {
+        setOver('')
+    }
     return(
         <DragDropContext
             onDragEnd={(result) =>
@@ -53,6 +60,9 @@ const BoardContent = (props:boardContentProps) =>{
                                                 data={props.data}
                                                 setData={props.setData}
                                                 isDragging={snapshot.isDraggingOver}
+                                                over={over}
+                                                handleOnMouseOver={handleOnMouseOver}
+                                                handleOnMouseLeave={handleOnMouseLeave}
                                             />
                                         ))}
                                     {provided.placeholder}

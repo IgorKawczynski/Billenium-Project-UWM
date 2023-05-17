@@ -17,6 +17,8 @@ const ColumnCell = (props:ColumnCellProps) =>{
     const [modalDeleteRow, setModalDeleteRow] = React.useState(false);
     const theme = useTheme()
     const CustomScrollbar = StyledCardScrollbar()
+
+
     return(
         <Droppable
             droppableId={props.id}
@@ -103,8 +105,12 @@ const ColumnCell = (props:ColumnCellProps) =>{
                                         index={index}
                                         cellId={props.id}
                                         children={item.children}
+                                        parentCardId={item.parentCardId}
                                         setData={props.setData}
                                         data={props.data}
+                                        over={props.over}
+                                        handleOnMouseOver={props.handleOnMouseOver}
+                                        handleOnMouseLeave={props.handleOnMouseLeave}
                                     />
                                 )
                             }

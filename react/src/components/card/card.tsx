@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Draggable, Droppable} from 'react-beautiful-dnd'
 import Card from "@mui/material/Card"
 import {Tooltip, useTheme} from "@mui/material"
@@ -12,6 +12,7 @@ import LockIcon from "@mui/icons-material/Lock";
 
 const Task = (props:CardProps) => {
     const theme = useTheme()
+
     return(
         <Draggable
             key={props.id}
@@ -25,20 +26,30 @@ const Task = (props:CardProps) => {
                         {(providedDrop) => {
                             return(
                                 <Card
+                                    onMouseEnter={() => props.handleOnMouseOver(props.id)}
+                                    onMouseLeave={props.handleOnMouseLeave}
+                                    id={props.id}
                                     variant="outlined"
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
 
                                     sx={{
+                                        filter: props.parentCardId != props.over && props.over != props.id && props.over != '' ? 'grayscale(100%)' : '',
                                         border:'Primary',
                                         userSelect: 'none',
                                         margin: '0 0 8px 0',
                                         minHeight: '50px',
                                         width:230,
                                         flexWrap:'wrap',
-                                        background: snapshot.isDragging ? theme.palette.background.drag : theme.palette.background.default,
-                                        color: 'black',
+                                        background:
+                                            (snapshot.isDragging
+                                                === true && theme.palette.background.drag
+                                                ) ||
+                                            (props.parentCardId !== props.over &&
+                                                props.over !== props.id &&
+                                                props.over !== '' &&
+                                                theme.palette.background.notChild),
                                         ...provided.draggableProps.style,
                                         display:'flex',
 

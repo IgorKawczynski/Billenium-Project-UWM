@@ -11,6 +11,9 @@ interface ColumnProps {
     setData:_Data["setData"];
 
     isDragging:boolean
+    over:string
+    handleOnMouseOver: (parentId:string) => void
+    handleOnMouseLeave: () => void
 }
 
 export default ColumnProps

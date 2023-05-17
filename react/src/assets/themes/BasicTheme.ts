@@ -5,6 +5,7 @@ declare module '@mui/material/styles' {
     interface TypeBackground {
         drag: string;
         cell: string;
+        notChild:string
     }
     interface TypeText {
         menu:string;
@@ -36,6 +37,7 @@ export const lightOptions: ThemeOptions = {
         background: {
             drag: 'rgba(255,90,0,0.26)',
             cell: '#F3F3F3',
+            notChild: '#cacaca'
         },
         divider: 'rgba(208,208,208,0.95)',
     },
@@ -62,6 +64,7 @@ export const darkOptions: ThemeOptions = {
         background: {
             drag: 'rgba(255,90,0,0.26)',
             cell: '#212121',
+            notChild: '#5a5a5a'
         },
         divider: 'rgba(208,208,208,0.95)',
     },

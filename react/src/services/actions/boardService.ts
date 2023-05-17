@@ -15,7 +15,6 @@ export function loadDefaultData(){
         title: "Kanban",
         creatorName: "Test",
         wipLimit:'',
-        children:[],
         assignedUsers: [
             {
                 id: "1",
@@ -45,7 +44,9 @@ export function loadDefaultData(){
                                 color: "default",
                                 assignedUsers:[],
                                 checkboxes:[],
-                                isLocked:false
+                                isLocked:false,
+                                children:[],
+                                parentCardId:'0',
                             },
                             {
                                 id: "10",
@@ -55,7 +56,9 @@ export function loadDefaultData(){
                                 color: "default",
                                 assignedUsers:[],
                                 checkboxes:[],
-                                isLocked:false
+                                isLocked:false,
+                                children:[],
+                                parentCardId:'0',
                             }
                         ]
                     }
