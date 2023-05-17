@@ -51,17 +51,15 @@ export const onDragEnd = (result: any, columns:Column[], setData:_Data["setData"
                 movedColumn.position = destination.index
                 moveColumnToBackend(result.draggableId, destination.index)
                     .then(res => {
+                        if(res ==='string'){
+                            handleClickVariant(enqueueSnackbar)(res ,'error')
+                        }
                         getColumnsFromBackend(data.id)
                             .then(res => {
-                                if(res ==='string'){
-                                    handleClickVariant(enqueueSnackbar)(res ,'error')
-                                }
-                                else{
                                     setData({
                                         ...data,
                                         columnList: res
                                     })
-                                }
                             })
                     })
             }
