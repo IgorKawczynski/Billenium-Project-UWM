@@ -47,9 +47,12 @@ const AddChildComponent = (props:AddChildComponentProps) => {
                     label="Add child"
                     onChange={handleChange}
                 >
-                    {childs.map((child) => (
+                    {childs.length != 0 && childs.map((child) => (
                         <MenuItem key={child.id} value={child.id}>{child.title}</MenuItem>
                     ))}
+                    {childs.length == 0 && (
+                        <MenuItem key={0} value={''}>No children available</MenuItem>
+                    )}
                 </Select>
                 <Button
                     sx={{ marginTop: 1 }}

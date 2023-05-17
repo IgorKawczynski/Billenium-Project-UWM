@@ -5,9 +5,12 @@ import {StyledMenu} from "@/assets/styles/styledMenu";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import EscalatorWarningIcon from '@mui/icons-material/EscalatorWarning';
-import {useTheme} from "@mui/material";
+import {Typography, useTheme} from "@mui/material";
 import {ChildrenPickerProps} from "@/components/card/interfaces/childrenPicker/ChildrenPicker";
 import ChildrenPickerItem from "@/components/card/cardChilderPicker/ChildrenPickerItem/childrenPickerItem";
+import {openModal} from "@/services/utils/modalUtils/modalUtils";
+import RemoveIcon from "@mui/icons-material/Remove";
+import ModalRemoveChild from "@/components/card/modals/modalRemoveChild/modalRemoveChild";
 
 const ChildrenPicker = (props:ChildrenPickerProps) => {
     const theme = useTheme()
@@ -43,7 +46,7 @@ const ChildrenPicker = (props:ChildrenPickerProps) => {
                 open={open}
                 onClose={handleClose}
             >
-                {props.children.map((child) => {
+                {props.children.length !== 0 && props.children.map((child) => {
                     return(
                             <ChildrenPickerItem
                                 cardId={props.cardId}
@@ -55,6 +58,26 @@ const ChildrenPicker = (props:ChildrenPickerProps) => {
                             />
                     )
                 })}
+                {props.children.length == 0 &&
+                        <MenuItem>
+                            <Box
+                                width={'100%'}
+                                display={"flex"}
+                                justifyContent={"space-between"}
+                            >
+                                <Typography variant={"body1"}>
+                                    No children available
+                                </Typography>
+                                <Box
+                                    display={"flex"}
+                                    justifyContent={"end"}
+                                    alignItems={"center"}
+                                    width={'100%'}
+                                >
+                                </Box>
+                            </Box>
+                        </MenuItem>
+                }
 
             </StyledMenu>
         </Box>
