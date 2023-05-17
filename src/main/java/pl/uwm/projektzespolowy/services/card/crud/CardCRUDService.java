@@ -33,8 +33,8 @@ public class CardCRUDService {
         return cardReader.getCardById(cardId).getAssignedUsers().stream().toList();
     }
 
-    public List<Card> getAllCardsInBoardWithoutParent(Long boardId, Long parentId) {
-        return cardReader.getAllCardsInBoardWithoutParent(boardId, parentId);
+    public List<Card> getAllCardsInBoardWithoutParentAndChildren(Long boardId, Long parentId) {
+        return cardReader.getAllCardsInBoardWithoutParentAndChildren(boardId, parentId);
     }
 
     public Card createCard(Cell cell, String title, String description) {

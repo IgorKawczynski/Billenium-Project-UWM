@@ -27,8 +27,11 @@ class CardReader {
         return cardRepository.getCardChildren(parentId);
     }
 
-    public List<Card> getAllCardsInBoardWithoutParent(Long boardId, Long parentId) {
-        return cardRepository.getAllCardsInBoardWithoutParent(boardId, parentId);
+    public List<Card> getAllCardsInBoardWithoutParentAndChildren(Long boardId, Long parentId) {
+        var cardsWithoutParent = cardRepository.getAllCardsInBoardWithoutParent(boardId, parentId);
+        return cardsWithoutParent.stream()
+                .filter(card -> card.getChildren(card.getCell().getColumn().getBoard()).isEmpty())
+                .toList();
     }
 
 }

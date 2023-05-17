@@ -42,9 +42,9 @@ public class CardController {
 
     @GetMapping("/without-parent/{boardId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<CardResponseDTO> getAllCardsInBoardWithoutParent(@PathVariable Long boardId,
+    public List<CardResponseDTO> getAllCardsInBoardWithoutParentAndChildren(@PathVariable Long boardId,
                                                                  @RequestParam Long parentId) {
-        return cardFacade.getAllCardsInBoardWithoutParent(boardId, parentId);
+        return cardFacade.getAllCardsInBoardWithoutParentAndChildren(boardId, parentId);
     }
 
     @PutMapping("")

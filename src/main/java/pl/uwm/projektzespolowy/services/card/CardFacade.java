@@ -57,8 +57,8 @@ public class CardFacade {
                 .collect(Collectors.toList());
     }
 
-    public List<CardResponseDTO> getAllCardsInBoardWithoutParent(Long boardId, Long parentId) {
-        return cardCRUDService.getAllCardsInBoardWithoutParent(boardId, parentId).stream()
+    public List<CardResponseDTO> getAllCardsInBoardWithoutParentAndChildren(Long boardId, Long parentId) {
+        return cardCRUDService.getAllCardsInBoardWithoutParentAndChildren(boardId, parentId).stream()
                 .map(Card::toDto)
                 .collect(Collectors.toList());
     }
