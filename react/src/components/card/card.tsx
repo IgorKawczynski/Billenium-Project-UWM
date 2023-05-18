@@ -26,8 +26,7 @@ const Task = (props:CardProps) => {
                         {(providedDrop) => {
                             return(
                                 <Card
-                                    onMouseEnter={() => props.handleOnMouseOver(props.id)}
-                                    onMouseLeave={props.handleOnMouseLeave}
+                                    onClick={() => props.handleOnMouseOver(props.id)}
                                     id={props.id}
                                     variant="outlined"
                                     ref={provided.innerRef}

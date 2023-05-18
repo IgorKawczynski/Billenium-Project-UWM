@@ -9,12 +9,19 @@ import AddRowButton from "@/components/row/addRowButton/addRowButton";
 
 const BoardContent = (props:boardContentProps) =>{
     const theme = useTheme();
+    const [isOver, setIsOver] = useState(false);
     const [over, setOver] = useState('');
     const handleOnMouseOver = (parentId:string) => {
-        setOver(parentId)
+        if(!isOver){
+            setOver(parentId)
+            setIsOver(true)
+        }else{
+            handleOnMouseLeave()
+        }
     }
     const handleOnMouseLeave = () => {
         setOver('')
+        setIsOver(false)
     }
     return(
         <DragDropContext
