@@ -26,7 +26,6 @@ const Task = (props:CardProps) => {
                         {(providedDrop) => {
                             return(
                                 <Card
-                                    onClick={() => props.handleOnMouseOver(props.id)}
                                     id={props.id}
                                     variant="outlined"
                                     ref={provided.innerRef}
@@ -89,6 +88,7 @@ const Task = (props:CardProps) => {
                                                 width={'100%'}
                                             >
                                                 <Box
+                                                    onClick={() => props.handleOnMouseOver(props.id)}
                                                     display={"flex"}
                                                     alignItems={"center"}
                                                 >
