@@ -102,7 +102,7 @@ const EditBoardWipLimit = (props:EditBoardFormProps) => {
                     >
                         {props.text}
                     </Typography>
-                    <Tooltip title={'Edit subtask'}>
+                    <Tooltip title={t('editWipLimit')}>
                         <IconButton
                             sx={{
                                 maxWidth:'25px',

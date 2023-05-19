@@ -89,7 +89,8 @@ const resources = {
                         color:'Kolor',
                         deleteUserMessage:'Czy na pewno chcesz usunąć użytkownika ',
                         fromCard:'z karty',
-                        selectLanguage:'Wybierz język'
+                        selectLanguage:'Wybierz język',
+                        editWipLimit:'Edytuj limit WIP'
                 }
         },
         en: {
@@ -179,7 +180,8 @@ const resources = {
                         color:'Color',
                         deleteUserMessage:'Are you sure you want to delete user',
                         fromCard:'from card',
-                        selectLanguage:'Select Language'
+                        selectLanguage:'Select Language',
+                        editWipLimit:'Edit WIP limit'
                 }
         }
 }
