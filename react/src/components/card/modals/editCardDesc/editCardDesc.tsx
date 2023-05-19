@@ -6,9 +6,11 @@ import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import {updateCard} from "@/services/utils/cardUtils/cardUtils";
+import {useTranslation} from "react-i18next";
 
 const EditCardDesc = (props:EditCardTitleProps) => {
     const theme = useTheme()
+    const { t } = useTranslation();
     const [isEditing, setIsEditing] = useState(false)
 
     return(
@@ -18,7 +20,7 @@ const EditCardDesc = (props:EditCardTitleProps) => {
                     <TextField
                         sx={{margin:'0 0 8px 0', width:'80%'}}
                         id="outlined-basic"
-                        label="Desc"
+                        label={t('description')}
                         variant="outlined"
                         multiline={true}
                         maxRows={5}
@@ -55,7 +57,7 @@ const EditCardDesc = (props:EditCardTitleProps) => {
                         variant={"subtitle1"}
                         color={theme.palette.text.primary}
                     >
-                        Description
+                        {t('description')}
                     </Typography>
                     <Box
                         display={"flex"}
@@ -69,7 +71,7 @@ const EditCardDesc = (props:EditCardTitleProps) => {
                         >
                             {props.desc}
                         </Typography>
-                        <Tooltip title={'Edit description'}>
+                        <Tooltip title={t('editDescription')}>
                             <IconButton
                                 sx={{
                                     maxWidth:'30px',

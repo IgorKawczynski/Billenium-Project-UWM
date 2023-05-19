@@ -10,9 +10,11 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {ModalDeleteAvatarProps} from "@/components/userMain/interfaces/modalDeleteAvatar/modalDeleteAvatar";
 import {deleteAvatar} from "@/services/utils/UserUtils/userMainUtils";
+import {useTranslation} from "react-i18next";
 
 const ModalDeleteAvatar = (props:ModalDeleteAvatarProps) =>
 {
+    const { t } = useTranslation();
 
     return(
         <Modal
@@ -36,7 +38,7 @@ const ModalDeleteAvatar = (props:ModalDeleteAvatarProps) =>
                     }}
                     >
                         <Typography color={'textPrimary'} variant={'body1'}>
-                            Are you sure you want to delete your avatar?
+                            {t('deleteAvatarMessage')}
                         </Typography>
                     </Grid>
                     <Grid style={{ display:"flex",
@@ -48,7 +50,7 @@ const ModalDeleteAvatar = (props:ModalDeleteAvatarProps) =>
                             onClick={() => closeModal(props.setModalDeleteAvatar)}
                             variant="contained"
                         >
-                            Cancel
+                            {t('cancel')}
                         </Button>
                         <Button
                             sx={{maxHeight:'50px'}}
@@ -58,7 +60,7 @@ const ModalDeleteAvatar = (props:ModalDeleteAvatarProps) =>
                                                         props.setModalDeleteAvatar
                                                          )}
                         >
-                            Delete
+                            {t('delete')}
                         </Button>
                     </Grid>
                 </Stack>

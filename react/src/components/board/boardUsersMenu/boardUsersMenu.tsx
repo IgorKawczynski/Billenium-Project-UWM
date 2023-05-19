@@ -12,12 +12,14 @@ import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import DeleteUserMenu from "@/components/menus/deleteUserMenu/deleteUserMenu";
 import UsersAvatars from "@/components/users/usersAvatars/usersAvatars";
 import EditBoardWipLimit from "@/components/board/editBoardWipLimit/editBoardWipLimit";
+import {useTranslation} from "react-i18next";
 
 const BoardUsersMenu = (props:BoardUsersProps) => {
     const [email, setEmail] = useState("")
     const [modalDeleteUser, setModalDeleteUser] = useState(false)
     const [wipLimit, setWipLimit] = useState(props.data.wipLimit);
     const theme = useTheme()
+    const { t } = useTranslation();
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
     }
@@ -52,7 +54,7 @@ const BoardUsersMenu = (props:BoardUsersProps) => {
                         color={theme.palette.text.primary}
                         width={'100%'}
                     >
-                        Users Management
+                        {t('usersManagement')}
                     </Typography>
                     <IconButton
                         aria-label="toggle password visibility"
@@ -66,7 +68,7 @@ const BoardUsersMenu = (props:BoardUsersProps) => {
                 <Stack spacing={2}>
                     <EditBoardWipLimit text={wipLimit} setText={setWipLimit} handleTextChange={handleWipLimitChange} data={props.data} setData={props.setData}/>
                     <Typography variant={"caption"}>
-                            Assign member to board
+                        {t('assignMemberToBoard')}
                     </Typography>
                     <FormControl variant="outlined">
                         <InputLabel>Email</InputLabel>
@@ -80,7 +82,7 @@ const BoardUsersMenu = (props:BoardUsersProps) => {
                             endAdornment={
                                 <InputAdornment position="end">
                                     <Tooltip
-                                        title={"Add user"}
+                                        title={t('addUser')}
                                         placement={'top'}
                                     >
                                     <IconButton
@@ -99,12 +101,12 @@ const BoardUsersMenu = (props:BoardUsersProps) => {
                     <Button
                         onClick={() => openModal(setModalDeleteUser)}
                     >
-                        Delete user from board
+                        {t('deleteUserFromBoard')}
                     </Button>
                 )}
 
                 <Typography variant={"caption"}>
-                    Drag member to card
+                    {t('dragMemberToCard')}
                 </Typography>
 
                 <UsersAvatars setData={props.setData} data={props.data} setUsers={props.setUsers}/>

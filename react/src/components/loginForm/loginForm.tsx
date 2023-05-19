@@ -24,11 +24,13 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {loginUser} from "@/services/utils/loginUtils/loginUtils";
+import {useTranslation} from "react-i18next";
 
 const LoginForm = (props:LoginFormProps) => {
     const theme = useTheme()
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
+    const { t } = useTranslation();
     const [showPassword, setShowPassword] = React.useState(false);
     const navigate = useNavigate()
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -67,7 +69,7 @@ const LoginForm = (props:LoginFormProps) => {
                         variant="h6"
                         component="h2"
                     >
-                        Login
+                        {t('login')}
                     </Typography>
                             <TextField
                                 sx={{margin:'0 0 8px 0'}}
@@ -85,7 +87,7 @@ const LoginForm = (props:LoginFormProps) => {
                                 }}
                             />
                     <FormControl variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                        <InputLabel htmlFor="outlined-adornment-password">{t('password')}</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
@@ -125,14 +127,14 @@ const LoginForm = (props:LoginFormProps) => {
                             sx={{width:'50%'}}
                             onClick={() => openModal(props.setModalRegister)}
                         >
-                            Register
+                            {t('register')}
                         </Button>
                             <Button
-                            sx={{maxHeight:'50px', width:'100%'}}
+                            sx={{maxHeight:'50px', width:'50%'}}
                             variant="contained"
                             onClick={() => loginUser(mail,password, navigate)}
                             >
-                                Log In
+                                {t('login')}
                             </Button>
                     </Box>
                 </Stack>

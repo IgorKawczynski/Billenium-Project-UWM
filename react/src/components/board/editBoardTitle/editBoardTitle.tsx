@@ -8,11 +8,13 @@ import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import {EditBoardFormProps} from "@/components/board/interfaces/editBoardFroms/editBoardTitle";
 import {editBoardTitle} from "@/services/utils/boardUtils/boardUtils";
 import CloseIcon from "@mui/icons-material/Close";
+import {useTranslation} from "react-i18next";
 
 
 const EditBoardTitle = (props:EditBoardFormProps) => {
     const [isEditing, setIsEditing] = useState(false)
     const theme = useTheme()
+    const { t } = useTranslation();
     const handleRedo = () =>{
         closeModal(setIsEditing)
         props.setText(props.data.title)
@@ -30,14 +32,14 @@ const EditBoardTitle = (props:EditBoardFormProps) => {
                 >
                     <TextField
                         sx={{margin:'0 0 8px 0'}}
-                        label="Title"
+                        label={t('title')}
                         variant="standard"
                         value={props.text}
                         onChange={props.handleTextChange}
                     />
                     <Box display={"flex"}>
                         <Tooltip
-                            title={"Save board title"}
+                            title={t('saveBoardTitle')}
                             placement={'top'}
                         >
                             <IconButton
@@ -53,7 +55,7 @@ const EditBoardTitle = (props:EditBoardFormProps) => {
                                 <SaveOutlinedIcon/>
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title={'Redo'} placement={"top"}>
+                        <Tooltip title={t('undo')} placement={"top"}>
                             <IconButton
                                 size={"small"}
                                 onClick={() => handleRedo()}
@@ -93,7 +95,7 @@ const EditBoardTitle = (props:EditBoardFormProps) => {
                         >
                             {props.text}
                         </Typography>
-                        <Tooltip title={'Edit subtask'}>
+                        <Tooltip title={t('editBoardTitle')}>
                             <IconButton
                                 sx={{
                                     maxWidth:'35px',

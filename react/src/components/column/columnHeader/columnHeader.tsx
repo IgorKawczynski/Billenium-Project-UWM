@@ -6,9 +6,11 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import {columnHeaderProps} from "@/components/column/interfaces/columnHeaderInterface/ColumnHeader";
 import AllInclusiveOutlinedIcon from '@mui/icons-material/AllInclusiveOutlined';
+import {useTranslation} from "react-i18next";
 
 const ColumnHeader = (props:columnHeaderProps) =>{
     const theme = useTheme();
+    const { t } = useTranslation();
 
     return(
         <Box
@@ -115,7 +117,7 @@ const ColumnHeader = (props:columnHeaderProps) =>{
             <Box
             marginRight={'8px'}
             >
-                <Tooltip title={"Edit Column"} placement={"top"}>
+                <Tooltip title={t('editColumn')} placement={"top"}>
                     <IconButton
                         aria-label="settingsColumn"
                         size={"small"}
@@ -125,7 +127,7 @@ const ColumnHeader = (props:columnHeaderProps) =>{
                     </IconButton>
                 </Tooltip>
                 {props.position !== 0 && props.position !== Object.keys(props.data.columnList).length-1 && (
-                    <Tooltip title={"Delete Column"} placement={"top"}>
+                    <Tooltip title={t('deleteColumn')} placement={"top"}>
                         <IconButton
                             aria-label="delete"
                             size={"small"}

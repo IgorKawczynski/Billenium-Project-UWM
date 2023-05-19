@@ -9,9 +9,10 @@ import {modalStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import ModalRemoveChildProps from "@/components/card/interfaces/modalRemoveChild/ModalRemoveChild";
 import {removeChild} from "@/services/utils/cardUtils/cardUtils";
+import {useTranslation} from "react-i18next";
 
 export default function ModalRemoveChild(props:ModalRemoveChildProps) {
-
+    const { t } = useTranslation();
     const handleClose = () => {
         props.setAnchorEl(null);
         closeModal(props.setModalDelete)
@@ -32,7 +33,7 @@ export default function ModalRemoveChild(props:ModalRemoveChildProps) {
                         component="h2"
                         sx={{textAlign:"center"}}
                     >
-                        Are you sure you want to delete child: {props.childTitle}?
+                        {t('deleteChildMessage')}: {props.childTitle}?
                     </Typography>
                     </Grid>
                     <Grid style={{display:"flex",
@@ -44,7 +45,7 @@ export default function ModalRemoveChild(props:ModalRemoveChildProps) {
                             onClick={handleClose}
                             variant="outlined"
                         >
-                            Close
+                            {t('cancel')}
                         </Button>
                         <Button
                             sx={{maxHeight:'50px'}}
@@ -56,7 +57,7 @@ export default function ModalRemoveChild(props:ModalRemoveChildProps) {
                                                 )}
                             variant="contained"
                         >
-                            Delete
+                            {t('delete')}
                         </Button>
                     </Grid>
                 </Stack>

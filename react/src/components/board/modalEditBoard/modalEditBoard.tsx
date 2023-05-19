@@ -9,9 +9,11 @@ import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import Box from "@mui/material/Box";
 import ColorSetter from "@/components/color/colorSetter/colorSetter";
 import EditBoardTitle from "@/components/board/editBoardTitle/editBoardTitle";
+import {useTranslation} from "react-i18next";
 
 const ModalEditBoard = (props:ModalEditBoardProps) => {
     const [title, setTitle] = useState(props.title);
+    const { t } = useTranslation();
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
     };

@@ -7,11 +7,12 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {ChangePasswordProps} from "@/components/userMain/interfaces/changePassword/changePassword";
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
+import {useTranslation} from "react-i18next";
 
 const ChangePassword = (props:ChangePasswordProps) =>{
     const [showPassword, setShowPassword] = React.useState(false);
     const [showRepeatPassword, setShowRepeatPassword] = React.useState(false);
-
+    const { t } = useTranslation()
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleClickShowRepeatPassword = () => setShowRepeatPassword((show) => !show);
 
@@ -27,7 +28,7 @@ const ChangePassword = (props:ChangePasswordProps) =>{
         {props.passwordToChange && (
             <>
                 <FormControl variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                    <InputLabel htmlFor="outlined-adornment-password">{t('password')}</InputLabel>
                     <OutlinedInput
                         value={props.password}
                         id="outlined-adornment-password"
@@ -49,7 +50,7 @@ const ChangePassword = (props:ChangePasswordProps) =>{
                     />
                 </FormControl>
                 <FormControl variant="outlined" sx={{marginTop:1}}>
-                    <InputLabel htmlFor="outlined-adornment-password">Repeat Password</InputLabel>
+                    <InputLabel htmlFor="outlined-adornment-password">{t('repeatPassword')}</InputLabel>
                     <OutlinedInput
                         value={props.repeatPassword}
                         id="outlined-adornment-password"
@@ -67,13 +68,13 @@ const ChangePassword = (props:ChangePasswordProps) =>{
                                 </IconButton>
                             </InputAdornment>
                         }
-                        label="Repeat Password"
+                        label={t('repeatPassword')}
                     />
                 </FormControl>
                 <Button
                     onClick={() => closeModal(props.setPasswordToChange)}
                 >
-                    Cancel
+                    {t('cancel')}
                 </Button>
             </>
 
@@ -82,7 +83,7 @@ const ChangePassword = (props:ChangePasswordProps) =>{
                 <Button
                     onClick={() => openModal(props.setPasswordToChange)}
                 >
-                    Change password
+                    {t('edit')}
                 </Button>
             )}
         </>

@@ -8,14 +8,13 @@ import EscalatorWarningIcon from '@mui/icons-material/EscalatorWarning';
 import {Typography, useTheme} from "@mui/material";
 import {ChildrenPickerProps} from "@/components/card/interfaces/childrenPicker/ChildrenPicker";
 import ChildrenPickerItem from "@/components/card/cardChilderPicker/ChildrenPickerItem/childrenPickerItem";
-import {openModal} from "@/services/utils/modalUtils/modalUtils";
-import RemoveIcon from "@mui/icons-material/Remove";
-import ModalRemoveChild from "@/components/card/modals/modalRemoveChild/modalRemoveChild";
+import {useTranslation} from "react-i18next";
 
 const ChildrenPicker = (props:ChildrenPickerProps) => {
     const theme = useTheme()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    const { t } = useTranslation();
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -35,7 +34,7 @@ const ChildrenPicker = (props:ChildrenPickerProps) => {
             <ListItemIcon>
                 <EscalatorWarningIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText>Children</ListItemText>
+            <ListItemText>{t('children')}</ListItemText>
         </MenuItem>
             <StyledMenu
                 id="demo-customized-menu"
@@ -66,7 +65,7 @@ const ChildrenPicker = (props:ChildrenPickerProps) => {
                                 justifyContent={"space-between"}
                             >
                                 <Typography variant={"body1"}>
-                                    No children available
+                                    {t('noChildrenAvailable')}
                                 </Typography>
                                 <Box
                                     display={"flex"}

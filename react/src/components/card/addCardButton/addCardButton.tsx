@@ -6,21 +6,11 @@ import ModalAddCard from "@/components/card/modals/modalAddCard/modalAddCard";
 import Typography from "@mui/material/Typography";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
-
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+import {useTranslation} from "react-i18next";
 
 export default function AddCardButton(props:AddCardButtonProps) {
     const [open, setOpen] = useState(false);
+    const { t } = useTranslation();
     return (
         <Box>
             <Box
@@ -39,7 +29,7 @@ export default function AddCardButton(props:AddCardButtonProps) {
                     }}
                     variant="text"
                 >
-                    <Typography variant={"button"}> Add CARD </Typography>
+                    <Typography variant={"button"}> {t('addCard')} </Typography>
                     <AddCircleOutlineOutlinedIcon/>
                 </Button>
             </Box>

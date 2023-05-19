@@ -10,20 +10,18 @@ import ModalAddCardProps from "@/components/card/interfaces/modalAddCard/ModalAd
 import {modalStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {addCard} from "@/services/utils/cardUtils/cardUtils";
+import {useTranslation} from "react-i18next";
 
 export default function ModalAddCard(props:ModalAddCardProps) {
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
+    const { t } = useTranslation();
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
     };
 
     const handleDescChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDesc(event.target.value);
-    };
-    const handleSubmit = ({event}: { event: any }) => {
-        event.preventDefault();
-        // możesz tutaj przesłać dane do serwera lub zaktualizować stan aplikacji
     };
 
     return (
@@ -43,13 +41,13 @@ export default function ModalAddCard(props:ModalAddCardProps) {
                 <Fade in={props.open}>
                     <Box sx={modalStyle}>
                         <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
-                            Add card
+                            {t('addCard')}
                         </Typography>
                         <Box style={{display:"flex",flexDirection:'column', justifyContent:"space-between"}}>
                                 <TextField
                                     sx={{margin:'0 0 8px 0'}}
                                     id="outlined-basic"
-                                    label="Name"
+                                    label={t('name')}
                                     variant="outlined"
                                     value={name}
                                     onChange={handleNameChange}
@@ -58,7 +56,7 @@ export default function ModalAddCard(props:ModalAddCardProps) {
                                     sx={{margin:'0 0 8px 0'}}
                                     multiline
                                     id="outlined-basic"
-                                    label="Description"
+                                    label={t('description')}
                                     variant="outlined"
                                     value={desc}
                                     maxRows={5}
@@ -76,7 +74,7 @@ export default function ModalAddCard(props:ModalAddCardProps) {
                                                     )}
                                 variant="contained"
                             >
-                                ADD
+                                {t('add')}
                             </Button>
                         </Box>
                     </Box>

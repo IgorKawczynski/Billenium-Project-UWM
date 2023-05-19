@@ -11,9 +11,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {addRow} from "@/services/utils/rowUtils/rowUtils";
 import {ModalAddRowProps} from "@/components/row/interfaces/modalAddRowInterface/modalAddRow";
+import {useTranslation} from "react-i18next";
 
 const ModalAddRow = (props:ModalAddRowProps) => {
     const [rowName, setRowName] = useState("");
+    const { t } = useTranslation();
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRowName(event.target.value);
     };
@@ -38,11 +40,11 @@ const ModalAddRow = (props:ModalAddRowProps) => {
                 <Fade in={props.open}>
                     <Stack sx={modalStyle} spacing={2}>
                         <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
-                            Add new row
+                            {t('addNewRow')}
                         </Typography>
                         <TextField
                             id="outlined-basic"
-                            label="Name"
+                            label={t('name')}
                             variant="outlined"
                             value={rowName}
                             onChange={handleNameChange}
@@ -58,7 +60,7 @@ const ModalAddRow = (props:ModalAddRowProps) => {
                                 )}
                                 variant="contained"
                             >
-                                Add
+                                {t('add')}
                             </Button>
                         </Box>
                     </Stack>

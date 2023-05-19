@@ -20,6 +20,7 @@ import ChangePassword from "@/components/userMain/changePassword/changePassword"
 import {changeAvatar} from "@/services/utils/UserUtils/userMainUtils";
 import NoPhotographyIcon from '@mui/icons-material/NoPhotography';
 import ModalDeleteAvatar from "@/components/userMain/modalDeleteAvatar/modalDeleteAvatar";
+import {useTranslation} from "react-i18next";
 
 const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     const [firstName, setFirstName] = useState(props.activeUser.firstName);
@@ -29,6 +30,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     const [repeatPassword, setRepeatPassword] = useState("");
     const [passwordToChange, setPasswordToChange] = useState(false);
     const [DeleteAvatar, setDeleteAvatar] = useState(false)
+    const { t } = useTranslation()
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
         setFirstName(props.activeUser.firstName);
@@ -105,7 +107,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                                 </Typography>
                             </Avatar>
                         <Tooltip
-                            title={"Upload your avatar"}
+                            title={t('uploadAvatar')}
                             placement={"top"}
                         >
                             <IconButton
@@ -119,7 +121,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                     </Tooltip>
                         {props.activeUser.avatarPath != null && (
                             <Tooltip
-                                title={"Delete avatar"}
+                                title={t('deleteAvatar')}
                                 placement={"top"}
                             >
                                 <IconButton
@@ -139,7 +141,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                             variant="h6"
                             component="h2"
                         >
-                            Edit Profile
+                            {t('editProfile')}
                         </Typography>
                     </Box>
                     <Box
@@ -154,7 +156,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                             <TextField
                                 sx={{margin:'0 0 8px 0'}}
                                 id="outlined-basic"
-                                label="Name"
+                                label={t('firstName')}
                                 variant="outlined"
                                 value={firstName}
                                 onChange={handleNameChange}
@@ -162,7 +164,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                             <TextField
                                 sx={{margin:'0 0 8px 0'}}
                                 id="outlined-basic"
-                                label="Last Name"
+                                label={t('lastName')}
                                 variant="outlined"
                                 value={lastName}
                                 onChange={handleDescChange}
@@ -203,7 +205,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                             sx={{maxHeight:'50px', width:'100px'}}
                             variant="contained"
                         >
-                            Edit
+                            {t('edit')}
                         </Button>
                     </Box>
                     <ModalDeleteAvatar activeUser={props.activeUser} modalDeleteAvatar={DeleteAvatar} setModalDeleteAvatar={setDeleteAvatar} setActiveUser={props.setActiveUser}/>

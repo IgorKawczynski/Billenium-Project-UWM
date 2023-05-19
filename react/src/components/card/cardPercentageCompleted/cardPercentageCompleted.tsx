@@ -3,6 +3,7 @@ import {Box, CircularProgress, LinearProgress, Tooltip, Typography} from "@mui/m
 import {
     CardPercentageCompletedProps
 } from "@/components/card/interfaces/cardPercentageCompleted/cardPercentageCompleted";
+import {useTranslation} from "react-i18next";
 
 function calculateCompleted(subtasks:CardPercentageCompletedProps["subtasks"]):number {
     let completed = 0
@@ -18,13 +19,13 @@ function calculateCompleted(subtasks:CardPercentageCompletedProps["subtasks"]):n
 }
 
 export const CardPercentageCompleted = (props:CardPercentageCompletedProps) => {
-
+    const { t } = useTranslation();
 
     // @ts-ignore
     return (
         <>
             {props.subtasks && (
-                <Tooltip title={"Progress"}>
+                <Tooltip title={t('progress')}>
                     <Box sx={{ position: 'relative', display: 'inline-flex' }}>
                         <CircularProgress variant="determinate" value={calculateCompleted(props.subtasks)} />
                         <Box

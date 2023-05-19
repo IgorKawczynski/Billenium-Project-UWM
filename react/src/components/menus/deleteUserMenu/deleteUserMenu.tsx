@@ -5,11 +5,12 @@ import DeleteUserMenuItem from "@/components/menus/deleteUserMenuItem/deleteUser
 import {DeleteUserMenuProps} from "@/components/menus/interfaces/deleteUserMenu";
 import CloseIcon from "@mui/icons-material/Close";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
+import {useTranslation} from "react-i18next";
 
 
 const DeleteUserMenu = (props:DeleteUserMenuProps) => {
     const theme = useTheme()
-
+    const { t } = useTranslation();
     return(
         <Drawer
             variant={"persistent"}
@@ -24,7 +25,7 @@ const DeleteUserMenu = (props:DeleteUserMenuProps) => {
             >
                 <Box display={"flex"}>
                 <Typography variant={'h6'} color={theme.palette.text.primary}>
-                    Choose user to remove
+                    {t('chooseUserToRemove')}
                 </Typography>
                     <IconButton
                         sx={{

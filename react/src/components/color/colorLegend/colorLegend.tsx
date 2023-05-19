@@ -5,9 +5,11 @@ import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import CloseIcon from '@mui/icons-material/Close';
 import ColorLegendItem from "@/components/color/colorLegendItem/colorLegendItem";
 import {ColorListProps} from "@/components/color/interfaces/colorListInterface/colorList";
+import {useTranslation} from "react-i18next";
 
 const ColorLegend = (props:ColorListProps) => {
     const [show, setShow] = useState(false)
+    const { t } = useTranslation()
     const theme = useTheme()
     return(
         <Box>
@@ -23,7 +25,7 @@ const ColorLegend = (props:ColorListProps) => {
                 <Button onClick={() => openModal(setShow)}>
                     <ColorLensIcon fontSize="small" />
                     <Typography variant={"button"}>
-                        Show color legend
+                        {t('showColorLegend')}
                     </Typography>
                 </Button>
             </Box>
@@ -43,7 +45,7 @@ const ColorLegend = (props:ColorListProps) => {
                 {props.colors.map((color) => (
                     <Box key={color.id}>
                         {color.value == "default" && (
-                            <ColorLegendItem id={color.id} color={theme.palette.text.secondary} title={"Default"}/>
+                            <ColorLegendItem id={color.id} color={theme.palette.text.secondary} title={t('default')}/>
                         )}
                         {color.value != 'default' &&(
                             <ColorLegendItem id={color.id} color={color.value} title={color.title}/>

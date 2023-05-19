@@ -10,9 +10,10 @@ import {modalStyle} from "@/assets/themes/modalStyle";
 import Typography from "@mui/material/Typography";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {removeColumn} from "@/services/utils/columnUtils/columnUtils";
+import {useTranslation} from "react-i18next";
 
 const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
-
+    const { t } = useTranslation();
     return(
             <Modal
                 aria-labelledby="transition-modal-title"
@@ -35,7 +36,7 @@ const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
                             }}
                         >
                         <Typography color={'textPrimary'} variant={'body1'}>
-                                Are you sure you want to delete column: {props.title}?
+                            {t('deleteColumnMessage')}: {props.title}?
                         </Typography>
                         </Grid>
                             <Grid style={{ display:"flex",
@@ -47,7 +48,7 @@ const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
                                     onClick={() => closeModal(props.setModalDelete)}
                                     variant="contained"
                                 >
-                                    Cancel
+                                    {t('cancel')}
                                 </Button>
                                 <Button
                                     sx={{maxHeight:'50px'}}
@@ -58,7 +59,7 @@ const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
                                                                 )}
                                     variant="contained"
                                 >
-                                    Delete
+                                    {t('delete')}
                                 </Button>
                             </Grid>
                     </Stack>

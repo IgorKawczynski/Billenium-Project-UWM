@@ -11,11 +11,13 @@ import {
     ModalRemoveUserFromCardProps
 } from "@/components/card/interfaces/modalRemoveUserFromCard/modalRemoveUserFromCard";
 import {removeUserFromCard} from "@/services/utils/cardUtils/cardUtils";
+import {useTranslation} from "react-i18next";
 
 const ModalRemoveUserFromCard = (props:ModalRemoveUserFromCardProps) => {
     const handleClose = () => {
         props.setAnchorEl(null);
     };
+    const { t } = useTranslation();
 
     return (
         <Modal
@@ -42,7 +44,7 @@ const ModalRemoveUserFromCard = (props:ModalRemoveUserFromCardProps) => {
                         component="h2"
                         sx={{textAlign:"center"}}
                     >
-                        Are you sure you want to delete user {props.userName} {props.userLastName} from card {props.cardTitle} ?
+                        {t('deleteUserMessage')} {props.userName} {props.userLastName} {t('fromCard')} {props.cardTitle} ?
                     </Typography>
                     </Grid>
                     <Grid style={{display:"flex",
@@ -54,7 +56,7 @@ const ModalRemoveUserFromCard = (props:ModalRemoveUserFromCardProps) => {
                             onClick={() => handleClose()}
                             variant="contained"
                         >
-                            Close
+                            {t('cancel')}
                         </Button>
                         <Button
                             sx={{maxHeight:'50px'}}
@@ -69,7 +71,7 @@ const ModalRemoveUserFromCard = (props:ModalRemoveUserFromCardProps) => {
                                 props.setData
                             )}
                         >
-                            Delete
+                            {t('delete')}
                         </Button>
                     </Grid>
                 </Stack>

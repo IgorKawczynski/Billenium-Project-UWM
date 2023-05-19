@@ -8,11 +8,13 @@ import ListItemText from "@mui/material/ListItemText";
 import CardColorPickerItem from "@/components/card/cardColorPickerItem/cardColorPickerItem";
 import {useTheme} from "@mui/material";
 import {ColorPickerProps} from "@/components/color/interfaces/ColorPicker/colorPicker";
+import {useTranslation} from "react-i18next";
 
 const ColorPicker = (props:ColorPickerProps) => {
     const theme = useTheme()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    const { t } = useTranslation();
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -32,7 +34,7 @@ const ColorPicker = (props:ColorPickerProps) => {
             <ListItemIcon>
                 <ColorLensIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText>Color</ListItemText>
+            <ListItemText>{t('color')}</ListItemText>
         </MenuItem>
             <StyledMenu
                 id="demo-customized-menu"
@@ -52,7 +54,7 @@ const ColorPicker = (props:ColorPickerProps) => {
                         colorId={color.id}
                         colorValue={color.value}
                         color={theme.palette.text.secondary}
-                        title={"Default"}
+                        title={t('default')}
                         setAnchorEl={setAnchorEl}
                         data={props.data}
                         setData={props.setData}

@@ -11,17 +11,14 @@ import ModalAddColumnProps from "@/components/column/interfaces/modalAddColumnIn
 import {modalStyle} from '@/assets/themes/modalStyle'
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {addColumn} from "@/services/utils/columnUtils/columnUtils";
+import {useTranslation} from "react-i18next";
 
 export default function ModalAddColumn(props:ModalAddColumnProps) {
     const [columnName, setColumnName] = useState("");
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setColumnName(event.target.value);
     };
-
-    const handleSubmit = ({event}: { event: any }) => {
-        event.preventDefault();
-        // możesz tutaj przesłać dane do serwera lub zaktualizować stan aplikacji
-    };
+    const { t } = useTranslation();
 
 
     return (
@@ -42,11 +39,11 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
                 <Fade in={props.open}>
                     <Stack sx={modalStyle} spacing={2}>
                         <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
-                            Add new column
+                            {t('addNewColumn')}
                         </Typography>
                         <TextField
                                 id="outlined-basic"
-                                label="Name"
+                                label={t('name')}
                                 variant="outlined"
                                 value={columnName}
                                 onChange={handleNameChange}
@@ -62,7 +59,7 @@ export default function ModalAddColumn(props:ModalAddColumnProps) {
                                                     )}
                             variant="contained"
                         >
-                            Add
+                            {t('add')}
                         </Button>
                         </Box>
                     </Stack>

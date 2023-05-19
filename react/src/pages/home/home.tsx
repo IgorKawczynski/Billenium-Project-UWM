@@ -19,11 +19,14 @@ import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import LoginForm from "@/components/loginForm/loginForm";
 import RegisterForm from "@/components/registerForm/registerForm";
 import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
+import LanguageSwitcher from "@/components/languageSwitcher/languageSwitcher";
 
 const Home = () => {
     const [modalLogin, setModalLogin] = useState(false);
     const [modalRegister, setModalRegister] = useState(false);
     const theme = useTheme();
+    const { t } = useTranslation();
     const colorMode = React.useContext(ColorModeContext);
     const bodyStyle = { backgroundColor: theme.palette.background.default };
     const navigate = useNavigate();
@@ -52,7 +55,7 @@ const Home = () => {
                             variant={"outlined"}
                             onClick={() => navigate(`/userMain/${sessionStorage.getItem('userId')}`)}
                         >
-                            My Panel
+                            {t('myPanel')}
                         </Button>
                     )}
                     {!sessionStorage.getItem('sessionId') &&(
@@ -60,7 +63,7 @@ const Home = () => {
                             <Button
                                 onClick={() => openModal(setModalLogin)}
                                 variant={"contained"}>
-                                Login
+                                {t('login')}
                             </Button>
                         </Typography>
                     )}
@@ -79,20 +82,20 @@ const Home = () => {
                     }}>
                         <Typography color={'textPrimary'} variant={'h2'} >Kanban Board</Typography>
                         <Typography color={'textHard'} variant={'h4'} >by MAGI</Typography>
-                        {theme.palette.mode == 'light' && (<img src={Gif} width={'500px'}/>)}
-                        {!(theme.palette.mode == 'light') && (<img src={TwoPerson} width={'500px'}/>)}
+                        {theme.palette.mode == 'light' && (<img alt={'Main page image'} src={Gif} width={'500px'}/>)}
+                        {!(theme.palette.mode == 'light') && (<img alt={'Main page image'} src={TwoPerson} width={'500px'}/>)}
                     </Box>
                 </Box>
                 <Box sx={{display:'flex', flexDirection:'column' , justifyContent:'center', alignItems:'center'}}>
-                    {theme.palette.mode == 'light' && (<img src={Student} width={'400px'}/>)}
-                    {!(theme.palette.mode == 'light') && (<img src={StudentDark} width={'400px'}/>)}
+                    {theme.palette.mode == 'light' && (<img alt={'Main page image'} src={Student} width={'400px'}/>)}
+                    {!(theme.palette.mode == 'light') && (<img alt={'Main page image'} src={StudentDark} width={'400px'}/>)}
                 </Box>
             </Box>
             <Box sx={{display:'flex', justifyContent:'space-around', color:'white', width:'100%'}}>
-                {theme.palette.mode == 'light' && (<img src={FirmwareGif} width={'200px'}/>)}
-                {!(theme.palette.mode == 'light') && (<img src={FirmwarePng} width={'200px'}/>)}
-                {theme.palette.mode == 'light' && (<img src={ServerGif} width={'200px'}/>)}
-                {!(theme.palette.mode == 'light') && (<img src={ServerPng} width={'200px'}/>)}
+                {theme.palette.mode == 'light' && (<img alt={'Main page image'} src={FirmwareGif} width={'200px'}/>)}
+                {!(theme.palette.mode == 'light') && (<img alt={'Main page image'} src={FirmwarePng} width={'200px'}/>)}
+                {theme.palette.mode == 'light' && (<img alt={'Main page image'} src={ServerGif} width={'200px'}/>)}
+                {!(theme.palette.mode == 'light') && (<img alt={'Main page image'} src={ServerPng} width={'200px'}/>)}
                 <Box sx={{display:'flex', flexDirection:'column'}}>
                 <Typography color={'textTheme'} variant={"h4"}>
                     Makes planning easier
@@ -117,6 +120,7 @@ const Home = () => {
                 {theme.palette.mode == 'light' && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>Dark Mode <Brightness4Icon/></Typography>)}
                 {!(theme.palette.mode == 'light') && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>Light Mode <Brightness4Icon/></Typography>)}
             </Button>
+            <LanguageSwitcher/>
             <LoginForm
                 modalLogin={modalLogin}
                 setModalLogin={setModalLogin}

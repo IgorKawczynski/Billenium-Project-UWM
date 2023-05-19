@@ -6,11 +6,13 @@ import {BoardCardProps} from "@/components/board/interfaces/boardCard/boardCard"
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ModalLeaveBoard from "@/components/board/modalLeaveBoard/modalLeaveBoard";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
+import {useTranslation} from "react-i18next";
 
 
 const BoardCard = (props:BoardCardProps) => {
     const [modalLeaveBoard, setModalLeaveBoard] = useState(false);
     const theme = useTheme()
+    const { t } = useTranslation();
     const colorMode = React.useContext(ColorModeContext);
     React.useEffect(() => {
         // Pobieranie elementu body i ustawienie stylu tła
@@ -40,7 +42,7 @@ const BoardCard = (props:BoardCardProps) => {
                             {props.title}
                         </Typography>
                         <Typography variant={"subtitle1"} color={theme.palette.text.primary}>
-                            Creator: {props.creator}
+                            {t('creator')}: {props.creator}
                         </Typography>
                         </Link>
                     </Box>
@@ -49,7 +51,7 @@ const BoardCard = (props:BoardCardProps) => {
                         display={"flex"}
                         height={'25%'}
                     >
-                        <Tooltip title={'Leave board'} placement={"bottom"}>
+                        <Tooltip title={t('leaveBoard')} placement={"bottom"}>
                             <IconButton
                                 sx={{color:'red'}}
                                 size={"small"}

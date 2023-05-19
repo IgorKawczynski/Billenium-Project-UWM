@@ -11,10 +11,12 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {ModalAddBoardProps} from "@/components/userMain/interfaces/modalAddBoard/modalAddBoard";
 import {addBoard} from "@/services/utils/UserUtils/userMainUtils";
+import {useTranslation} from "react-i18next";
 
 
 const ModalAddBoard = (props:ModalAddBoardProps) => {
     const [boardName, setBoardName] = useState("");
+    const { t } = useTranslation()
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setBoardName(event.target.value);
     };
@@ -39,11 +41,11 @@ const ModalAddBoard = (props:ModalAddBoardProps) => {
                 <Fade in={props.modalAddBoard}>
                     <Stack sx={modalStyle} spacing={2}>
                         <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
-                            Add new board
+                            {t('addNewBoard')}
                         </Typography>
                         <TextField
                             id="outlined-basic"
-                            label="Name"
+                            label={t('name')}
                             variant="outlined"
                             value={boardName}
                             onChange={handleNameChange}
@@ -54,7 +56,7 @@ const ModalAddBoard = (props:ModalAddBoardProps) => {
                                 onClick={() => addBoard(props.userId, boardName, props.setUserBoards, props.setModalAddBoard, setBoardName)}
                                 variant="contained"
                             >
-                                Add
+                                {t('add')}
                             </Button>
                         </Box>
                     </Stack>

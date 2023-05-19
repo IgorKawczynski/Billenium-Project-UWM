@@ -10,11 +10,13 @@ import axios from "axios";
 import { urlDomain } from "@/services/actions/boardService";
 import {addChild} from "@/services/utils/cardUtils/cardUtils";
 import {AddChildComponentProps} from "@/components/card/interfaces/addChildComponent/AddChildComponent";
+import {useTranslation} from "react-i18next";
 
 const AddChildComponent = (props:AddChildComponentProps) => {
     const [child, setChild] = useState('');
     const [childs, setChilds] = useState<Card[]>([]);
     const [childExists, setChildExists] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -41,24 +43,24 @@ const AddChildComponent = (props:AddChildComponentProps) => {
     return (
         <Box sx={{ minWidth: 200 }}>
             <FormControl fullWidth>
-                <InputLabel>Add child</InputLabel>
+                <InputLabel>{t('addChild')}</InputLabel>
                 <Select
                     value={child}
-                    label="Add child"
+                    label={t('addChild')}
                     onChange={handleChange}
                 >
                     {childs.length != 0 && childs.map((child) => (
                         <MenuItem key={child.id} value={child.id}>{child.title}</MenuItem>
                     ))}
                     {childs.length == 0 && (
-                        <MenuItem key={0} value={''}>No children available</MenuItem>
+                        <MenuItem key={0} value={''}>{t('noChildrenAvailable')}</MenuItem>
                     )}
                 </Select>
                 <Button
                     sx={{ marginTop: 1 }}
                     onClick={() => addChild(props.cardId, child, props.data, props.setData)}
                 >
-                    Add child
+                    {t('addChild')}
                 </Button>
             </FormControl>
         </Box>

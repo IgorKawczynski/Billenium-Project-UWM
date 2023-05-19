@@ -10,8 +10,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ModalRemoveRowProps from "@/components/row/interfaces/modalRemoveRowInterface/modalRemoveRow";
 import {removeRow} from "@/services/utils/rowUtils/rowUtils";
+import {useTranslation} from "react-i18next";
 
 const ModalRemoveRow = (props:ModalRemoveRowProps) =>{
+    const { t } = useTranslation();
     return(
         <Modal
             aria-labelledby="transition-modal-title"
@@ -34,7 +36,7 @@ const ModalRemoveRow = (props:ModalRemoveRowProps) =>{
                     }}
                     >
                         <Typography color={'textPrimary'} variant={'body1'}>
-                            Are you sure you want to delete row: {props.title}?
+                            {t('deleteRowMessage')}: {props.title}?
                         </Typography>
                     </Grid>
                     <Grid style={{ display:"flex",
@@ -46,7 +48,7 @@ const ModalRemoveRow = (props:ModalRemoveRowProps) =>{
                             onClick={() => closeModal(props.setModalDelete)}
                             variant="contained"
                         >
-                            Cancel
+                            {t('cancel')}
                         </Button>
                         <Button
                             sx={{maxHeight:'50px'}}
@@ -59,7 +61,7 @@ const ModalRemoveRow = (props:ModalRemoveRowProps) =>{
                             )}
                             variant="contained"
                         >
-                            Delete
+                            {t('delete')}
                         </Button>
                     </Grid>
                 </Stack>

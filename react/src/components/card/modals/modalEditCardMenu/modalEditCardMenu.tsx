@@ -12,8 +12,10 @@ import ColorPicker from "@/components/card/cardColorPicker/ColorPicker";
 import ModalEditCardUserList from "@/components/card/modals/modalEditCardUserList/modalEditCardUserList";
 import ModalEditCardLockCard from "@/components/card/modals/modalEditCardLockCard/modalEditCardLockCard";
 import ChildrenPicker from "@/components/card/cardChilderPicker/ChildrenPicker";
+import {useTranslation} from "react-i18next";
 
 const CardMenu = (props:ModalEditCardMenuProps) => {
+    const { t } = useTranslation();
     return (
         <Paper sx={{ width: 200, maxWidth: '100%'}}>
             <MenuList>
@@ -50,7 +52,7 @@ const CardMenu = (props:ModalEditCardMenuProps) => {
                             fontSize="small"
                         />
                     </ListItemIcon>
-                    <ListItemText>Delete</ListItemText>
+                    <ListItemText>{t('delete')}</ListItemText>
                 </MenuItem>
             </MenuList>
         </Paper>

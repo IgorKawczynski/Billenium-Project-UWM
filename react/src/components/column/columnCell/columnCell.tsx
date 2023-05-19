@@ -11,12 +11,14 @@ import IconButton from "@mui/material/IconButton";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import {useTranslation} from "react-i18next";
 
 const ColumnCell = (props:ColumnCellProps) =>{
     const [modalEditRow, setModalEditRow] = useState(false);
     const [modalDeleteRow, setModalDeleteRow] = React.useState(false);
     const theme = useTheme()
     const CustomScrollbar = StyledCardScrollbar()
+    const { t } = useTranslation();
 
 
     return(
@@ -42,7 +44,7 @@ const ColumnCell = (props:ColumnCellProps) =>{
                                         {props.rowTitle.length <= 18 && (props.rowTitle)}
                                     </Typography>
                                 </Box>
-                                <Tooltip title={"Edit Row"} placement={"top"}>
+                                <Tooltip title={t('editRow')} placement={"top"}>
                                     <IconButton
                                         sx={{maxHeight:'25', maxWidth:'25px'}}
                                         size={"small"}
@@ -54,7 +56,7 @@ const ColumnCell = (props:ColumnCellProps) =>{
                                 </Tooltip>
                                 {props.position != Object.keys(props.data.rowList).length-1 &&
                                     (
-                                        <Tooltip title={"Delete Row"} placement={"top"}>
+                                        <Tooltip title={t('deleteRow')} placement={"top"}>
                                             <IconButton
                                                         sx={{maxHeight:'25', maxWidth:'25px', color:theme.palette.primary.main}}
                                                         size={"small"}

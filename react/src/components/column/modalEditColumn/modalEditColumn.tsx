@@ -12,11 +12,13 @@ import Stack from "@mui/material/Stack";
 import {modalStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {editColumn} from "@/services/utils/columnUtils/columnUtils";
+import {useTranslation} from "react-i18next";
 
 const ModalEditColumn = (props:ModalEditColumnProps) => {
     const [title, setTitle] = useState(props.title);
     const [limit, setLimit] = useState(props.cardsLimit);
     const [checkLimit, setCheckLimit] = useState(false);
+    const { t } = useTranslation();
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
     };
@@ -62,12 +64,12 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
                         direction={'column'}
                     >
                         <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
-                            Editing column: {props.title}
+                            {t('editingColumn')}: {props.title}
                         </Typography>
                                 <TextField
                                     sx={{margin:'0 0 8px 0'}}
                                     id="outlined-basic"
-                                    label="Name"
+                                    label={t('name')}
                                     variant="outlined"
                                     value={title}
                                     onChange={handleNameChange}
@@ -76,7 +78,7 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
                                     disabled={checkLimit}
                                     sx={{margin:'0 0 8px 8px'}}
                                     id="outlined-basic"
-                                    label="Limit"
+                                    label={t('limit')}
                                     variant="outlined"
 
                                     type="number"
@@ -91,7 +93,7 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
                                     }}
                                 >
                                     <Typography color={'textPrimary'}>
-                                        Unlimited
+                                        {t('unlimited')}
                                     </Typography>
                                     <div>
                                     <Checkbox
@@ -112,7 +114,7 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
                                                 )}
                             variant="contained"
                         >
-                            Edit
+                            {t('edit')}
                         </Button>
                     </Stack>
                 </Fade>

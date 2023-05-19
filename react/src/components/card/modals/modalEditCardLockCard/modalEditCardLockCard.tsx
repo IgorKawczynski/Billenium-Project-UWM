@@ -6,10 +6,11 @@ import MenuItem from "@mui/material/MenuItem";
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import {ModalEditCardLockCardProps} from "@/components/card/interfaces/modalEditCardLockCard/modalEditCardLockCard";
 import {lockCard, unlockCard} from "@/services/utils/cardUtils/cardUtils";
+import {useTranslation} from "react-i18next";
 
 
 const ModalEditCardLockCard = (props:ModalEditCardLockCardProps) =>{
-
+    const { t } = useTranslation();
 
     return(
         <>
@@ -27,7 +28,7 @@ const ModalEditCardLockCard = (props:ModalEditCardLockCardProps) =>{
                         fontSize="small"
                     />
                 </ListItemIcon>
-                <ListItemText>Lock card</ListItemText>
+                <ListItemText>{t('lockCard')}</ListItemText>
                 </MenuItem>
             )}
             {props.isLocked && (
@@ -44,7 +45,7 @@ const ModalEditCardLockCard = (props:ModalEditCardLockCardProps) =>{
                             fontSize="small"
                         />
                     </ListItemIcon>
-                    <ListItemText>Unlock card</ListItemText>
+                    <ListItemText>{t('unlockCard')}</ListItemText>
                 </MenuItem>
             )}
         </>

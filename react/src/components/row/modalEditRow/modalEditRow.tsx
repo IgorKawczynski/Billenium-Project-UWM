@@ -10,9 +10,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {ModalEditRowProps} from "@/components/column/interfaces/modalEditRow/modalEditRow";
 import {editRow} from "@/services/utils/rowUtils/rowUtils";
+import {useTranslation} from "react-i18next";
 
 const ModalEditRow = (props:ModalEditRowProps) => {
     const [title, setTitle] = useState(props.title);
+    const { t } = useTranslation();
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
     };
@@ -38,12 +40,12 @@ const ModalEditRow = (props:ModalEditRowProps) => {
                     direction={'column'}
                 >
                     <Typography color={'textPrimary'} id="transition-modal-title" variant="h6" component="h2">
-                        Editing row: {props.title}
+                        {t('editingRow')}: {props.title}
                     </Typography>
                     <TextField
                         sx={{margin:'0 0 8px 0'}}
                         id="outlined-basic"
-                        label="Name"
+                        label={t('name')}
                         variant="outlined"
                         value={title}
                         onChange={handleNameChange}
@@ -59,7 +61,7 @@ const ModalEditRow = (props:ModalEditRowProps) => {
                         )}
                         variant="contained"
                     >
-                        Edit
+                        {t('edit')}
                     </Button>
                 </Stack>
             </Fade>

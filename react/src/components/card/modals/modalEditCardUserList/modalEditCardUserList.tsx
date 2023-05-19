@@ -7,11 +7,13 @@ import {StyledMenu} from "@/assets/styles/styledMenu";
 import {ModalEditCardUserListProps} from "@/components/card/interfaces/modalEditCardUserList/modalEditCardUserList";
 import ModalEditCardUserListItem from "@/components/card/modals/modalEditCardUserListItem/modalEditCardUserListItem";
 import GroupIcon from "@mui/icons-material/Group";
+import {useTranslation} from "react-i18next";
 
 
 const ModalEditCardUserList = (props:ModalEditCardUserListProps) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    const { t } = useTranslation();
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -31,7 +33,7 @@ const ModalEditCardUserList = (props:ModalEditCardUserListProps) => {
             <ListItemIcon>
                 <GroupIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText>Users</ListItemText>
+            <ListItemText>{t('users')}</ListItemText>
         </MenuItem>
         <StyledMenu
             id="demo-customized-menu"

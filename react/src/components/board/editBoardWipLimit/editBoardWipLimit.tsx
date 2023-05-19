@@ -7,11 +7,13 @@ import RedoIcon from "@mui/icons-material/Redo";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import {EditBoardFormProps} from "@/components/board/interfaces/editBoardFroms/editBoardTitle";
 import {editWipLimit} from "@/services/utils/boardUtils/boardUtils";
+import {useTranslation} from "react-i18next";
 
 
 const EditBoardWipLimit = (props:EditBoardFormProps) => {
     const [isEditing, setIsEditing] = useState(false)
     const theme = useTheme()
+    const { t } = useTranslation();
     const handleRedo = () =>{
         closeModal(setIsEditing)
         props.setText(props.data.wipLimit)
@@ -25,7 +27,7 @@ const EditBoardWipLimit = (props:EditBoardFormProps) => {
                 >
                     <TextField
                         sx={{margin:'0 0 8px 0'}}
-                        label="New wip limit"
+                        label={t('newWipLimit')}
                         variant="standard"
                         type={"number"}
                         value={props.text}
@@ -36,7 +38,7 @@ const EditBoardWipLimit = (props:EditBoardFormProps) => {
                         alignItems={"center"}
                     >
                         <Tooltip
-                            title={"Save board wip limit"}
+                            title={t('saveWipLimit')}
                             placement={'top'}
                         >
                             <IconButton
@@ -57,7 +59,7 @@ const EditBoardWipLimit = (props:EditBoardFormProps) => {
                                 <SaveOutlinedIcon/>
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title={'Redo'} placement={"top"}>
+                        <Tooltip title={t('undo')} placement={"top"}>
                             <IconButton
                                 size={"small"}
                                 sx={{

@@ -10,14 +10,17 @@ import {UserMenuProps} from "@/components/menus/interfaces/userMenu";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import {logoutUser} from "@/services/utils/loginUtils/loginUtils";
+import LanguageSwitcher from "@/components/languageSwitcher/languageSwitcher";
+import {useTranslation} from "react-i18next";
 
 const UserMenu = (props:UserMenuProps) => {
     const theme = useTheme()
     const colorMode = React.useContext(ColorModeContext);
+    const { t } = useTranslation();
     return(
         <Box
             minWidth={'64px'}
-            minHeight={'90%'}
+            minHeight={'80%'}
         >
             <Box
                 width={'48px'}
@@ -31,10 +34,10 @@ const UserMenu = (props:UserMenuProps) => {
                 zIndex={10}
             >
                 <Stack
-                    minHeight={'85vh'}
+                    minHeight={'80vh'}
                     spacing={2}
                 >
-                    <Tooltip title={"Edit Profile"} placement={"left"}>
+                    <Tooltip title= {t('editProfile')} placement={"left"}>
                         <IconButton
                             sx={{color:theme.palette.text.theme}}
                             size={"large"}
@@ -43,7 +46,7 @@ const UserMenu = (props:UserMenuProps) => {
                             <AccountCircleIcon/>
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title={"Add board"} placement={"left"}>
+                    <Tooltip title= {t('addBoard')} placement={"left"}>
                         <IconButton
                             sx={{color:theme.palette.text.theme}}
                             size={"large"}
@@ -66,9 +69,10 @@ const UserMenu = (props:UserMenuProps) => {
 
                 <Stack
                     spacing={2}
-                    minHeight={'15vh'}
+                    minHeight={'20vh'}
                 >
-                    <Tooltip title={"Theme mode"} placement={"left"}>
+                    <LanguageSwitcher/>
+                    <Tooltip title= {t('themeMode')} placement={"left"}>
                         <IconButton
                             sx={{color:theme.palette.text.theme}}
                             onClick={colorMode.toggleColorMode}
@@ -77,7 +81,7 @@ const UserMenu = (props:UserMenuProps) => {
                             <Brightness4Icon/>
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title={"Logout"} placement={"left"}>
+                    <Tooltip title= {t('logout')} placement={"left"}>
                         <Link to={'/'}><IconButton
                             sx={{color:theme.palette.text.theme}}
                             size={"large"}

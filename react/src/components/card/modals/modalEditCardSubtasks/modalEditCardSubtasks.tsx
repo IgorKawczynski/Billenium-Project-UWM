@@ -5,9 +5,11 @@ import {ModalEditCardSubtasksProps} from "@/components/card/interfaces/modalEdit
 import {CardPercentageCompletedLinear} from "@/components/card/cardPercentageCompleted/cardPercentageCompleted";
 import ModalEditCardSubtasksAddButton
     from "@/components/card/modals/modalEditCardSubtasksAddButton/modalEditCardSubtasksAddButton";
+import {useTranslation} from "react-i18next";
 
 const ModalEditCardSubtasks = (props:ModalEditCardSubtasksProps) =>{
     const theme = useTheme()
+    const { t } = useTranslation();
 
     return(
         <>
@@ -21,7 +23,7 @@ const ModalEditCardSubtasks = (props:ModalEditCardSubtasksProps) =>{
                 >
                     <Box>
                         <Typography variant={"subtitle1"} sx={{color:theme.palette.text.primary}}>
-                            Subtasks
+                            {t('subtasks')}
                         </Typography>
                         <CardPercentageCompletedLinear subtasks={props.subtasks}/>
                     </Box>

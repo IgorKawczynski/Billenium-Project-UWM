@@ -7,10 +7,12 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import LockIcon from "@mui/icons-material/Lock";
 import {updateCard} from "@/services/utils/cardUtils/cardUtils";
+import {useTranslation} from "react-i18next";
 
 const EditCardTitle = (props:EditCardTitleProps) => {
     const theme = useTheme()
     const [isEditing, setIsEditing] = useState(false)
+    const { t } = useTranslation();
 
     return(
         <>
@@ -19,7 +21,7 @@ const EditCardTitle = (props:EditCardTitleProps) => {
                     <TextField
                         sx={{margin:'0 0 8px 0', width:'80%'}}
                         id="outlined-basic"
-                        label="Title"
+                        label={t('title')}
                         variant="standard"
                         value={props.text}
                         onChange={props.handleChangeText}
@@ -60,7 +62,7 @@ const EditCardTitle = (props:EditCardTitleProps) => {
                         alignItems={"center"}
                     >
                         {props.isLocked && (
-                            <Tooltip title={'Card is Locked'} placement={"top"}>
+                            <Tooltip title={t('cardLocked')} placement={"top"}>
                                 <LockIcon sx={{
                                     color:theme.palette.primary.main,
                                     fontSize:'18px'
@@ -74,7 +76,7 @@ const EditCardTitle = (props:EditCardTitleProps) => {
                         >
                             {props.text}
                         </Typography>
-                        <Tooltip title={'Edit Title'}>
+                        <Tooltip title={t('editTitle')}>
                             <IconButton
                                 sx={{
                                     maxWidth:'30px',

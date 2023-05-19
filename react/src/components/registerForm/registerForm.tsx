@@ -12,7 +12,7 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import {registerUser} from "@/services/utils/registerUtils/registerUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
-import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const RegisterForm = (props:RegisterFormProps) => {
     const theme = useTheme()
@@ -22,7 +22,7 @@ const RegisterForm = (props:RegisterFormProps) => {
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [showPassword, setShowPassword] = React.useState(false);
-    const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -81,26 +81,26 @@ const RegisterForm = (props:RegisterFormProps) => {
                     <Box display={"flex"} alignItems={"center"} color={theme.palette.text.secondary}>
                         <HowToRegIcon/>
                         <Typography color={theme.palette.text.secondary} id="transition-modal-title" variant="h6" component="h2">
-                            Registration
+                            {t('registration')}
                         </Typography>
                     </Box>
                     <FormControl variant="outlined">
-                        <InputLabel>First Name</InputLabel>
+                        <InputLabel>{t('firstName')}</InputLabel>
                         <OutlinedInput
                             sx={{margin:'0 0 8px 0'}}
                             id="outlined-basic"
-                            label="First Name"
+                            label={t('firstName')}
                             inputMode={"text"}
                             value={firstName}
                             onChange={handleFirstNameChange}
                         />
                     </FormControl>
                     <FormControl variant="outlined">
-                        <InputLabel>Last Name</InputLabel>
+                        <InputLabel>{t('lastName')}</InputLabel>
                         <OutlinedInput
                             sx={{margin:'0 0 8px 0'}}
                             id="outlined-basic"
-                            label="Last Name"
+                            label={t('lastName')}
                             inputMode={"text"}
                             value={lastName}
                             onChange={handleLastNameChange}
@@ -118,7 +118,7 @@ const RegisterForm = (props:RegisterFormProps) => {
                         />
                     </FormControl>
                     <FormControl variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                        <InputLabel htmlFor="outlined-adornment-password">{t('password')}</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password"
                             value={password}
@@ -136,11 +136,11 @@ const RegisterForm = (props:RegisterFormProps) => {
                                     </IconButton>
                                 </InputAdornment>
                             }
-                            label="Password"
+                            label={t('password')}
                         />
                     </FormControl>
                     <FormControl variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Repeat password</InputLabel>
+                        <InputLabel htmlFor="outlined-adornment-password">{t('repeatPassword')}</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password"
                             value={repeatPassword}
@@ -158,7 +158,7 @@ const RegisterForm = (props:RegisterFormProps) => {
                                     </IconButton>
                                 </InputAdornment>
                             }
-                            label="Repeat password"
+                            label={t('repeatPassword')}
                         />
                     </FormControl>
                     <Box
@@ -173,18 +173,18 @@ const RegisterForm = (props:RegisterFormProps) => {
 
                     >
                         <Button
-                            sx={{maxHeight:'50px', width:'100px'}}
+                            sx={{maxHeight:'50px', maxWidth:'40%'}}
                             variant="outlined"
                             onClick={() => closeModal(props.setModalRegister)}
                         >
-                            Back
+                            {t('cancel')}
                         </Button>
                         <Button
-                            sx={{maxHeight:'50px', width:'100px'}}
+                            sx={{maxHeight:'50px', maxWidth:'60%'}}
                             variant="contained"
                             onClick={() => handleSentForm()}
                         >
-                                Register
+                            {t('register')}
                         </Button>
                     </Box>
                 </Stack>

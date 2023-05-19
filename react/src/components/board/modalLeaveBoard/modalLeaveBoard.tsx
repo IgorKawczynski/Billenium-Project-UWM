@@ -22,11 +22,13 @@ import {ModalLeaveBoardProps} from "@/components/board/interfaces/modalLeaveBoar
 import {leaveBoard} from "@/services/utils/UserUtils/userMainUtils";
 import {assignedUser} from "@/services/utils/boardUtils/DataBoard";
 import {getUsers} from "@/services/utils/boardUtils/boardUtils";
+import {useTranslation} from "react-i18next";
 
 
 const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
     const [newCreator, setNewCreator] = useState(props.activeUser.id)
     const [users, setUsers] = useState<assignedUser[]>([])
+    const { t } = useTranslation();
     useEffect(() =>{
         getUsers(props.boardId, setUsers)
     },[])
@@ -58,7 +60,7 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                         }}
                     >
                         <Typography color={'textPrimary'} variant={'body1'}>
-                            Are you sure you want to leave board: {props.title}?
+                            {t('leaveBoardMessage')}: {props.title}?
                         </Typography>
                     </Box>
                     <Grid style={{
@@ -73,7 +75,7 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                             onClick={() => closeModal(props.setModalDelete)}
                             variant="contained"
                         >
-                            Cancel
+                            {t('cancel')}
                         </Button>
 
                         {props.activeUser.id != props.creatorId && (
@@ -88,7 +90,7 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                                     props.setModalDelete
                                 )}
                             >
-                                Leave
+                                {t('cancel')}
                             </Button>
                         )}
                         {props.activeUser.id == props.creatorId && (
@@ -98,11 +100,11 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                                 height={'100%'}
                             >
                                 <FormControl sx={{ m: 1, width: 300 }}>
-                                    <InputLabel>Select new owner</InputLabel>
+                                    <InputLabel>{t('selectNewOwner')}</InputLabel>
                                     <Select
                                         value={newCreator}
                                         onChange={handleChange}
-                                        input={<OutlinedInput label="Select new owner" />}
+                                        input={<OutlinedInput label={t('selectNewOwner')}/>}
                                     >
                                         {users.map((user) => (
                                             <MenuItem
@@ -138,7 +140,7 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                                     sx={{maxHeight:'40px'}}
                                     variant="contained"
                                 >
-                                    Leave
+                                    {t('leave')}
                                 </Button>
                             </Box>
                         )}

@@ -10,9 +10,10 @@ import Stack from "@mui/material/Stack";
 import {modalStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {removeCard} from "@/services/utils/cardUtils/cardUtils";
+import {useTranslation} from "react-i18next";
 
 export default function ModalRemoveCard(props:ModalRemoveCardProps) {
-
+    const { t } = useTranslation();
     return (
         <Modal
             style={{zIndex:'1000'}}
@@ -38,7 +39,7 @@ export default function ModalRemoveCard(props:ModalRemoveCardProps) {
                         component="h2"
                         sx={{textAlign:"center"}}
                     >
-                        Are you sure you want to delete card: {props.title}?
+                        {t('deleteCardMessage')}: {props.title}?
                     </Typography>
                     </Grid>
                     <Grid style={{display:"flex",
@@ -50,7 +51,7 @@ export default function ModalRemoveCard(props:ModalRemoveCardProps) {
                             onClick={() => closeModal(props.setModalDelete)}
                             variant="outlined"
                         >
-                            Close
+                            {t('cancel')}
                         </Button>
                         <Button
                             sx={{maxHeight:'50px'}}
@@ -62,7 +63,7 @@ export default function ModalRemoveCard(props:ModalRemoveCardProps) {
                                                 )}
                             variant="contained"
                         >
-                            Delete
+                            {t('delete')}
                         </Button>
                     </Grid>
                 </Stack>

@@ -10,6 +10,7 @@ import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import RedoIcon from "@mui/icons-material/Redo";
 import {checkSubtask, uncheckSubtask, updateSubtask} from "@/services/utils/cardUtils/subtaskUtils";
 import ModalRemoveSubtaskFromCard from "@/components/card/modals/modalRemoveSubtaskFromCard/modalRemoveSubtaskFromCard";
+import {useTranslation} from "react-i18next";
 
 const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
     const theme = useTheme()
@@ -17,6 +18,7 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
     const [modalDelete, setModalDelete] = useState(false)
     const [title, setTitle] = useState(props.title)
     const [open, setOpen] = useState(false)
+    const { t } = useTranslation();
 
 
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +70,7 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
                             }
                             label={props.title}
                         />
-                        <Tooltip title={'Edit subtask'}>
+                        <Tooltip title={t('editSubtask')}>
                             <IconButton
                                 sx={{
                                     maxWidth:'35px',
@@ -80,7 +82,7 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
                                 <BorderColorOutlinedIcon/>
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title={"Delete subtask"}>
+                        <Tooltip title={t('deleteSubtask')}>
                             <IconButton
                                 sx={{
                                     maxWidth:'35px',
@@ -109,7 +111,7 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
                     />
                     <Box display={"flex"}>
                         <Tooltip
-                            title={"Save subtask"}
+                            title={t('saveSubtask')}
                             placement={'top'}
                         >
                             <IconButton
@@ -125,7 +127,7 @@ const ModalEditCardSubtasksItem = (props:ModalEditCardSubtasksItemProps) =>{
                                 <SaveOutlinedIcon/>
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title={'Redo'} placement={"top"}>
+                        <Tooltip title={t('undo')} placement={"top"}>
                             <IconButton
                                 size={"small"}
                                 onClick={() => closeModal(setOpen)}

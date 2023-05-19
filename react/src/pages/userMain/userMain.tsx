@@ -9,6 +9,7 @@ import ModalAddBoard from "@/components/userMain/modalAddBoard/modalAddBoard";
 import {useNavigate, useParams} from "react-router-dom";
 import {ColorModeContext} from "@/App";
 import {activeUser} from "@/services/utils/boardUtils/DataBoard";
+import {useTranslation} from "react-i18next";
 
 const UserMain = () => {
     const [modalEdit, setModalEdit] = useState(false);
@@ -19,6 +20,7 @@ const UserMain = () => {
     const {userId} = useParams()
     const theme = useTheme()
     const navigate = useNavigate()
+    const { t } = useTranslation()
 
 
     if(userId && userId != sessionStorage.getItem('userId')){
@@ -64,7 +66,7 @@ const UserMain = () => {
                     }
                     <Box width={'100%'}>
                         <Typography variant={'h4'} color={theme.palette.text.primary}>
-                            Your Boards:
+                            {t('yourBoards')}:
                         </Typography>
                         <Grid
                             container
@@ -89,10 +91,10 @@ const UserMain = () => {
                                 userBoards == "" && (
                                     <Grid item xs={12}>
                                         <Typography variant={'h6'} color={theme.palette.text.hard}>
-                                            You dont have any boards yet.
+                                            {t('youDontHaveAnyBoardsYet')}.
                                         </Typography>
                                         <Typography variant={'body1'} color={theme.palette.text.primary}>
-                                            Maybe try to add one.
+                                            {t('maybeTryToAddOne')}.
                                         </Typography>
                                     </Grid>
                                 )

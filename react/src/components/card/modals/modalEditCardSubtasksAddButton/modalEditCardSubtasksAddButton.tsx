@@ -8,11 +8,13 @@ import {addSubtask} from "@/services/utils/cardUtils/subtaskUtils";
 import {
     ModalEditCardSubtasksAddButtonProps
 } from "@/components/card/interfaces/ModalEditCardSubtasksAddButton/ModalEditCardSubtasksAddButton";
+import {useTranslation} from "react-i18next";
 
 const ModalEditCardSubtasksAddButton = (props:ModalEditCardSubtasksAddButtonProps) =>{
     const theme = useTheme()
     const [open, setOpen] = useState(false)
     const [title, setTitle] = useState("")
+    const { t } = useTranslation();
 
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value)
@@ -28,7 +30,7 @@ const ModalEditCardSubtasksAddButton = (props:ModalEditCardSubtasksAddButtonProp
                         justifyContent={"space-between"}
                     >
                         <Typography variant={"body2"} color={theme.palette.text.primary}>
-                            Add new subtask
+                            {t('addNewSubtask')}
                         </Typography>
                         <IconButton
                             size={"small"}
@@ -46,14 +48,14 @@ const ModalEditCardSubtasksAddButton = (props:ModalEditCardSubtasksAddButtonProp
                 >
                         <TextField
                             variant={"standard"}
-                            inputMode={"email"}
+                            inputMode={"text"}
                             value={title}
                             onChange={handleTitleChange}
                             label={"Add new subtask"}
                         />
                     <Box>
                         <Tooltip
-                            title={"Add subtask"}
+                            title={t('addSubtask')}
                             placement={'top'}
                         >
                             <IconButton
@@ -71,7 +73,7 @@ const ModalEditCardSubtasksAddButton = (props:ModalEditCardSubtasksAddButtonProp
                                 <AddIcon/>
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title={'Redo'} placement={'top'}>
+                        <Tooltip title={t('undo')} placement={'top'}>
                             <IconButton
                                 size={"small"}
                                 onClick={() => closeModal(setOpen)}
