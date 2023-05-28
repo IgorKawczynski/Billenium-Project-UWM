@@ -2,6 +2,7 @@ package pl.uwm.projektzespolowy.services.column;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.projektzespolowy.models.basic.dto.MoveDTO;
 import pl.uwm.projektzespolowy.models.column.ColumnCreateDTO;
@@ -30,9 +31,9 @@ public class ColumnController {
     }
 
     @GetMapping("/{boardId}/all")
-    @ResponseStatus(HttpStatus.OK)
-    public List<ColumnResponseDTO> getAllColumnsByBoardId(@PathVariable Long boardId) {
-        return columnFacade.getAllColumnsByBoardId(boardId);
+    public ResponseEntity<List<ColumnResponseDTO>> getAllColumnsByBoardId(@PathVariable Long boardId) {
+        var columns = columnFacade.getAllColumnsByBoardId(boardId);
+        return columns.size() > 0 ? ResponseEntity.ok(columns) : ResponseEntity.noContent().build();
     }
 
     @PutMapping("")
