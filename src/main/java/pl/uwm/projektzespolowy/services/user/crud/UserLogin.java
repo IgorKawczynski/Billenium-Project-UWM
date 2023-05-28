@@ -7,7 +7,7 @@ import pl.uwm.projektzespolowy.models.user.UserLoginRequestDTO;
 
 @Component
 @RequiredArgsConstructor
-public class UserLogin {
+class UserLogin {
 
     private final UserRepository userRepository;
     private final UserValidator userValidator;
