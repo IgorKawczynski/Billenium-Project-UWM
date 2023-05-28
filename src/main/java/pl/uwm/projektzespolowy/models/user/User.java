@@ -22,9 +22,13 @@ import java.util.Set;
 public class User extends BasicEntity {
 
     String email;
+
     String password;
+
     String firstName;
+
     String lastName;
+
     String avatarPath;
 
     @Enumerated(EnumType.STRING)
@@ -32,6 +36,7 @@ public class User extends BasicEntity {
 
     @ManyToMany(mappedBy = "assignedUsers")
     Set<Board> boards;
+
     @ManyToMany(mappedBy = "assignedUsers")
     Set<Card> cards;
 

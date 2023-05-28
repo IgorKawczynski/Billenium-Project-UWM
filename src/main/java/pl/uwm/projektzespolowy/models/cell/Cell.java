@@ -58,7 +58,7 @@ public class Cell extends BasicEntity implements Positionable {
     }
 
     public void addAll(List<Card> cards) {
-        if(cards != null) { // TODO - nullpointer causes problem with column deleter and row deleter in unit tests
+        if(cards != null) {
             cards.forEach(card -> {
                 card.setPosition(this.getPositionForNewCard());
                 this.add(card);

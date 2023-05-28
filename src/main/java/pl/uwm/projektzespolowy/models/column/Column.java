@@ -26,17 +26,21 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Column extends BasicEntity implements Positionable {
 
+    public final static int UNLIMITED_SIZE = 0;
+    public final static int DEFAULT_SIZE = 3;
+
     Title title;
+
     Integer cardsLimit;
+
     Position position;
+
     @ManyToOne
     @JoinColumn(name = "board_id", referencedColumnName = "id")
     Board board;
+
     @OneToMany(mappedBy = "column", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Cell> cells;
-
-    public final static int UNLIMITED_SIZE = 0;
-    public final static int DEFAULT_SIZE = 3;
 
     public Column(Title title, Integer cardsLimit, Position position, Board board) {
         this.title = title;

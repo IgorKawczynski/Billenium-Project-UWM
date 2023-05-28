@@ -31,7 +31,9 @@ import java.util.stream.Collectors;
 public class Card extends BasicEntity implements Positionable {
 
     Title title;
+
     String description;
+
     Position position;
 
     @ManyToMany(cascade = {
