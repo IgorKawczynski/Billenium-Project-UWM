@@ -45,6 +45,12 @@ public class UserController {
         return userFacade.login(user);
     }
 
+    @PatchMapping("/password")
+    @ResponseStatus(HttpStatus.OK)
+    public void changePassword(@RequestBody UserChangePasswordDTO userChangePasswordDTO) {
+        userFacade.changePassword(userChangePasswordDTO);
+    }
+
     @PutMapping("/{userId}/avatar")
     @ResponseStatus(HttpStatus.OK)
     public UserResponseDTO uploadImage(@PathVariable Long userId, @RequestBody MultipartFile avatarImage) {

@@ -29,17 +29,21 @@ public class UserFacade {
 
     public UserLoginResponseDTO login(UserLoginRequestDTO userLoginRequestDTO) {
 
-        var userToLoginInto = userLoginService.login(userLoginRequestDTO);
+        var userToLoginInTo = userLoginService.login(userLoginRequestDTO);
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userLoginRequestDTO.email(), userLoginRequestDTO.password()));
         final String sessionId = sessionRegistry.registerSession(userLoginRequestDTO.email());
 
         return UserLoginResponseDTO.builder()
-                .userId(String.valueOf(userToLoginInto.getId()))
+                .userId(String.valueOf(userToLoginInTo.getId()))
                 .sessionId(sessionId)
-                .email(userToLoginInto.getEmail())
-                .firstName(userToLoginInto.getFirstName())
-                .lastName(userToLoginInto.getLastName()).build();
+                .email(userToLoginInTo.getEmail())
+                .firstName(userToLoginInTo.getFirstName())
+                .lastName(userToLoginInTo.getLastName()).build();
+    }
+
+    public void changePassword(UserChangePasswordDTO userChangePasswordDTO) {
+        userCRUDService.changePassword(userChangePasswordDTO);
     }
 
     public User getUserById(Long userId) {

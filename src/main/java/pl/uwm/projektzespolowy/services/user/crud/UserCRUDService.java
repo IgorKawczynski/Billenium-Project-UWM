@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.user.UserBoardsDTO;
+import pl.uwm.projektzespolowy.models.user.UserChangePasswordDTO;
 import pl.uwm.projektzespolowy.models.user.UserCreateDTO;
 
 import java.util.List;
@@ -20,6 +21,12 @@ public class UserCRUDService {
 
     public User createUser(UserCreateDTO userCreateDTO) {
         return userCreator.createUser(userCreateDTO);
+    }
+
+    public void changePassword(UserChangePasswordDTO userChangePasswordDTO) {
+        var userId = Long.parseLong(userChangePasswordDTO.userId());
+        var user = userReader.getUserById(userId);
+        userUpdater.changePassword(user, userChangePasswordDTO.oldPassword(), userChangePasswordDTO.newPassword());
     }
 
     public User getUserById(Long userId) {
