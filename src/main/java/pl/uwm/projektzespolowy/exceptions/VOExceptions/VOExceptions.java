@@ -61,7 +61,7 @@ public class VOExceptions {
     @ExceptionHandler(value = BadCredentialsException.class)
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     public ErrorMessage badCredentialsException() {
-        return new ErrorMessage("password", "You have written wrong email or password.");
+        return new ErrorMessage("password", "You have written incorrect credentials.");
     }
 
 }

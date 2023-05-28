@@ -61,7 +61,7 @@ class UserValidator {
 
     public void checkIfCredentialsAreProper(String email, String password) {
         if (!passwordEncoder.matches(password, userRepository.findRegisteredUserByEmail(email).getPassword())) {
-            throw new BadCredentialsException("You have written bad email or password.");
+            throw new BadCredentialsException("You have written incorrect credentials.");
         }
     }
 
