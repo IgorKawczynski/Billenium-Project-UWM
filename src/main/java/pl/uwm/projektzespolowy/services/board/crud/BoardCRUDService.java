@@ -64,4 +64,5 @@ public class BoardCRUDService {
     public Integer getAmountOfAssignedCardsToUser(User user, Long boardId) {
         return boardReader.getAmountOfAssignedCardsToUser(user, boardId);
     }
+
 }
