@@ -5,6 +5,7 @@ import AddColumnButtonProps from "@/components/column/interfaces/addColumnButton
 import ModalAddColumn from "@/components/column/modalAddColumn/modalAddColumn";
 import Typography from "@mui/material/Typography";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
+import AddIcon from '@mui/icons-material/Add';
 import {useTranslation} from "react-i18next";
 
 export default function AddColumnButton(props:AddColumnButtonProps) {
@@ -27,8 +28,8 @@ export default function AddColumnButton(props:AddColumnButtonProps) {
                     }}
                     variant="contained"
                 >
-                <Typography variant={'h6'}>+</Typography>
-                <Typography variant={"button"}> {t('addColumn')} </Typography>
+                <AddIcon/>
+                <Typography variant={"button"}> &nbsp; {t('addColumn')} </Typography>
 
                 </Button>
             </Box>

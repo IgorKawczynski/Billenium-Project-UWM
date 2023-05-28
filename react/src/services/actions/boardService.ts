@@ -155,7 +155,6 @@ export async function editBoardTitleToBackend(boardId:string, newTitle:string){
     const apiUrl = urlDomain+`/api/boards/${boardId}/title`;
     try {
         const response = await axios.put(apiUrl,null ,{params:{newTitle:newTitle}});
-        console.log(response)
         return response.data
     } catch (error: any) {
         if (error.response && error.response.data && error.response.data.error) {
@@ -167,7 +166,6 @@ export async function editBoardWipLimitToBackend(boardId:string, newWipLimit:str
     const apiUrl = urlDomain+`/api/boards/${boardId}/wipLimit`;
     try {
         const response = await axios.put(apiUrl,null ,{params:{newWipLimit:newWipLimit}});
-        console.log(response)
         return response.data
     } catch (error: any) {
         if (error.response && error.response.data && error.response.data.error) {

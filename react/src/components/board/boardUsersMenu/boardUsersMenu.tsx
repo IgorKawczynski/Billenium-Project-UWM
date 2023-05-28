@@ -57,7 +57,6 @@ const BoardUsersMenu = (props:BoardUsersProps) => {
                         {t('usersManagement')}
                     </Typography>
                     <IconButton
-                        aria-label="toggle password visibility"
                         edge="end"
                         onClick={() => props.setUsers( false)}
                     >

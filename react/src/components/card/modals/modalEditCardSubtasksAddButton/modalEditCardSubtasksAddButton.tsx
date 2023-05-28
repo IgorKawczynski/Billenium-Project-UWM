@@ -51,7 +51,7 @@ const ModalEditCardSubtasksAddButton = (props:ModalEditCardSubtasksAddButtonProp
                             inputMode={"text"}
                             value={title}
                             onChange={handleTitleChange}
-                            label={"Add new subtask"}
+                            label={t('addNewSubtask')}
                         />
                     <Box>
                         <Tooltip

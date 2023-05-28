@@ -12,10 +12,11 @@ import {removeSubtask} from "@/services/utils/cardUtils/subtaskUtils";
 import {
     ModalRemoveSubtaskFromCardProps
 } from "@/components/card/interfaces/modalRemoveSubtaskFromCard/modalRemoveSubtaskFromCard";
+import {useTranslation} from "react-i18next";
 
 
 const ModalRemoveSubtaskFromCard = (props:ModalRemoveSubtaskFromCardProps) =>{
-
+    const { t } = useTranslation();
     return (
         <Modal
             style={{zIndex:'13'}}
@@ -41,7 +42,7 @@ const ModalRemoveSubtaskFromCard = (props:ModalRemoveSubtaskFromCardProps) =>{
                             component="h2"
                             sx={{textAlign:"center"}}
                         >
-                            Are you sure you want to delete subtask {props.title} from card {props.cardTitle} ?
+                            {t('DeleteSubtask')} {props.title} {t('fromCard')} {props.cardTitle} ?
                         </Typography>
                     </Grid>
                     <Grid style={{display:"flex",
@@ -51,9 +52,9 @@ const ModalRemoveSubtaskFromCard = (props:ModalRemoveSubtaskFromCardProps) =>{
                         <Button
                             sx={{maxHeight:'50px'}}
                             onClick={() => closeModal(props.setModalDelete)}
-                            variant="contained"
+                            variant="outlined"
                         >
-                            Close
+                            {t('cancel')}
                         </Button>
                         <Button
                             sx={{maxHeight:'50px'}}
@@ -65,7 +66,7 @@ const ModalRemoveSubtaskFromCard = (props:ModalRemoveSubtaskFromCardProps) =>{
                                 props.setData
                             )}
                         >
-                            Delete
+                            {t('delete')}
                         </Button>
                     </Grid>
                 </Stack>

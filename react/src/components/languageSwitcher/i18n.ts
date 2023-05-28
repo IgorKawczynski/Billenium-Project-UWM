@@ -22,6 +22,7 @@ const resources = {
                         leaveBoardMessage: 'Czy na pewno chcesz opuścić tablicę',
                         selectNewOwner: 'Wybierz nowego właściciela',
                         editBoardTitle:'Edytuj tytuł tablicy',
+                        editBoard:'Edytuj tablicę',
                         saveBoardTitle:'Zapisz nowy tytuł',
                         addNewBoard: 'Dodaj nową tablicę',
                         name: 'Nazwa',
@@ -90,7 +91,18 @@ const resources = {
                         deleteUserMessage:'Czy na pewno chcesz usunąć użytkownika ',
                         fromCard:'z karty',
                         selectLanguage:'Wybierz język',
-                        editWipLimit:'Edytuj limit WIP'
+                        editWipLimit:'Edytuj limit WIP',
+                        MakesPlanningEasier: 'Ułatwia planowanie',
+                        HelpfulInLearning:'Pomocne w nauce',
+                        BetterInOrganization:'Świetne w organizacji',
+                        MakesSharingEasier:'Ułatwia dzielenie się',
+                        DarkMode:"Motyw ciemny",
+                        LightMode:'Motyw jasny',
+                        DeleteSubtask:'Czy na pewno chcesz usunąć podzadanie',
+                        UserListEmpty:'Brak przypisanych użytkowników',
+                        deleteUserFromBoardMessage: 'Czy na pewno chcesz usunąć użytkownika',
+                        fromBoard:'z tablicy',
+                        owner:'Właściciel'
                 }
         },
         en: {
@@ -111,6 +123,7 @@ const resources = {
                         leave: 'Leave',
                         selectNewOwner: 'Select new owner',
                         editBoardTitle:'Edit board title',
+                        editBoard:'Edit board',
                         saveBoardTitle:'Save board title',
                         leaveBoard: 'Leave board',
                         leaveBoardMessage: 'Are you sure you want to leave board',
@@ -166,6 +179,8 @@ const resources = {
                         noChildrenAvailable: 'No children available',
                         deleteChildMessage: 'Are you sure you want to delete child',
                         deleteCardMessage: 'Are you sure you want to delete card',
+                        deleteUserFromBoardMessage: 'Are you sure you want to delete user',
+                        fromBoard:'from board',
                         progress: 'Progress',
                         usersManagement: 'Users management',
                         addUser: 'Add user',
@@ -181,7 +196,16 @@ const resources = {
                         deleteUserMessage:'Are you sure you want to delete user',
                         fromCard:'from card',
                         selectLanguage:'Select Language',
-                        editWipLimit:'Edit WIP limit'
+                        editWipLimit:'Edit WIP limit',
+                        MakesPlanningEasier: 'Makes planning easier',
+                        HelpfulInLearning:'Helpful in learning',
+                        BetterInOrganization:'Better in organization',
+                        MakesSharingEasier:'Makes sharing easier',
+                        DarkMode:"Dark Mode",
+                        LightMode:'Light Mode',
+                        DeleteSubtask:'Are you sure you want to delete subtask',
+                        UserListEmpty:'No assigned users',
+                        owner:'Owner'
                 }
         }
 }

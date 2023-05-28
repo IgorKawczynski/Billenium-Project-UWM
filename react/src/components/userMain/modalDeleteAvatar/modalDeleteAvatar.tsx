@@ -48,7 +48,7 @@ const ModalDeleteAvatar = (props:ModalDeleteAvatarProps) =>
                         <Button
                             sx={{maxHeight:'50px'}}
                             onClick={() => closeModal(props.setModalDeleteAvatar)}
-                            variant="contained"
+                            variant="outlined"
                         >
                             {t('cancel')}
                         </Button>

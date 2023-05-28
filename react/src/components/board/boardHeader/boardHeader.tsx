@@ -6,11 +6,12 @@ import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import AddColumnButton from "@/components/column/addColumnButton/addColumnButton";
 import {boardHeaderProps} from "@/components/board/interfaces/boardHeaderInterface/BoardHeader";
 import ColorLegend from "@/components/color/colorLegend/colorLegend";
+import {useTranslation} from "react-i18next";
 
 
 const BoardHeader = (props:boardHeaderProps) => {
     const theme = useTheme();
-
+    const { t } = useTranslation();
 
     return(
         <Box>
@@ -23,7 +24,7 @@ const BoardHeader = (props:boardHeaderProps) => {
                     style={{textAlign:"center"}}
                 >
                     {props.data.title}
-                    <Tooltip title={"Edit Board"} placement={"bottom"}>
+                    <Tooltip title={t('editBoard')} placement={"bottom"}>
                         <IconButton
                             aria-label="settingsColumn"
                             onClick={() => openModal(props.setModalEdit)}

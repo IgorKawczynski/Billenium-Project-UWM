@@ -8,6 +8,7 @@ import {ModalEditCardUserListProps} from "@/components/card/interfaces/modalEdit
 import ModalEditCardUserListItem from "@/components/card/modals/modalEditCardUserListItem/modalEditCardUserListItem";
 import GroupIcon from "@mui/icons-material/Group";
 import {useTranslation} from "react-i18next";
+import {Typography} from "@mui/material";
 
 
 const ModalEditCardUserList = (props:ModalEditCardUserListProps) => {
@@ -45,7 +46,7 @@ const ModalEditCardUserList = (props:ModalEditCardUserListProps) => {
             onClose={handleClose}
             sx={{zIndex:'10'}}
         >
-            {props.assignedUsers.map((user) => (
+            {props.assignedUsers.length !== 0 && props.assignedUsers.map((user) => (
                 <Box key={user.id}>
                     <ModalEditCardUserListItem
                         userId={user.id}
@@ -60,7 +61,28 @@ const ModalEditCardUserList = (props:ModalEditCardUserListProps) => {
                         setData={props.setData}
                     />
                 </Box>
-            ))}
+            ))
+            }
+            {props.assignedUsers.length === 0 && (
+                <MenuItem>
+                    <Box
+                        width={'100%'}
+                        display={"flex"}
+                        justifyContent={"space-between"}
+                    >
+                        <Typography variant={"body1"}>
+                            {t('UserListEmpty')}
+                        </Typography>
+                        <Box
+                            display={"flex"}
+                            justifyContent={"end"}
+                            alignItems={"center"}
+                            width={'100%'}
+                        >
+                        </Box>
+                    </Box>
+                </MenuItem>
+            )}
 
 
         </StyledMenu>

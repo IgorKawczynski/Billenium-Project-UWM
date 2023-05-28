@@ -65,7 +65,7 @@ const ModalEditCardSubtasks = (props:ModalEditCardSubtasksProps) =>{
                 >
                     <Box>
                         <Typography variant={"subtitle1"} sx={{color:theme.palette.text.primary}}>
-                            Subtasks
+                            {t('subtasks')}
                         </Typography>
                     </Box>
                         <Stack

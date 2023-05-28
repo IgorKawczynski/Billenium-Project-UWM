@@ -4,7 +4,7 @@ import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import Stack from "@mui/material/Stack";
 import ModalEditBoardProps from "@/components/board/interfaces/modalEditBoardInterface/ModalEditBoard";
-import {modalBigStyle} from "@/assets/themes/modalStyle";
+import {modalBigStyle, modalStyle} from "@/assets/themes/modalStyle";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import Box from "@mui/material/Box";
 import ColorSetter from "@/components/color/colorSetter/colorSetter";
@@ -24,8 +24,6 @@ const ModalEditBoard = (props:ModalEditBoardProps) => {
 
     return(
             <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
                 open={props.modalEdit}
                 onClose={() => closeModal(props.setModalEdit)}
                 closeAfterTransition
@@ -38,19 +36,12 @@ const ModalEditBoard = (props:ModalEditBoardProps) => {
             >
                 <Fade in={props.modalEdit}>
                     <Stack
-                        sx={modalBigStyle}
+                        sx={modalStyle}
                         spacing={2}
                         direction={'column'}
                     >
                         <EditBoardTitle text={title} setText={setTitle} handleTextChange={handleTitleChange} data={props.data} setData={props.setData} setModalEdit={props.setModalEdit}/>
-                        <Box display={'flex'} width={'100%'}>
-                            <Box
-                                display={'flex'}
-                                width={'50%'}
-                                justifyContent={"start"}
-                                flexDirection={"column"}
-                            >
-                            </Box>
+                        <Box display={'flex'} width={'100%'} justifyContent={"end"}>
                             <ColorSetter
                                 colors={props.data.colorList}
                                 data={props.data}

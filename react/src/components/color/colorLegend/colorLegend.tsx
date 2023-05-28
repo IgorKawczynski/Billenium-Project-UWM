@@ -25,7 +25,7 @@ const ColorLegend = (props:ColorListProps) => {
                 <Button onClick={() => openModal(setShow)}>
                     <ColorLensIcon fontSize="small" />
                     <Typography variant={"button"}>
-                        {t('showColorLegend')}
+                        &nbsp; {t('showColorLegend')}
                     </Typography>
                 </Button>
             </Box>

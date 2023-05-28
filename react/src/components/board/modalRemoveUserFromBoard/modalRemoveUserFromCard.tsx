@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {SetStateAction} from 'react';
 import Button from '@mui/material/Button';
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
@@ -12,11 +12,21 @@ import {
 } from "@/components/card/interfaces/modalRemoveUserFromCard/modalRemoveUserFromCard";
 import {removeUserFromCard} from "@/services/utils/cardUtils/cardUtils";
 import {useTranslation} from "react-i18next";
+import {unassignUserFromBoard} from "@/services/utils/boardUtils/boardUtils";
+import {_Data} from "@/services/utils/boardUtils/DataBoard";
+import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 
-const ModalRemoveUserFromCard = (props:ModalRemoveUserFromCardProps) => {
-    const handleClose = () => {
-        props.setAnchorEl(null);
-    };
+interface ModalRemove{
+    userId:string,
+    firstName:string,
+    lastName:string,
+    data:_Data["data"]
+    setData:_Data["setData"]
+    modalDelete:boolean
+    setModalDelete:React.Dispatch<SetStateAction<boolean>>
+}
+
+const ModalRemoveUserFromBoard = (props:ModalRemove) => {
     const { t } = useTranslation();
 
     return (
@@ -25,7 +35,7 @@ const ModalRemoveUserFromCard = (props:ModalRemoveUserFromCardProps) => {
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             open={props.modalDelete}
-            onClose={handleClose}
+            onClose={() => closeModal(props.setModalDelete)}
             closeAfterTransition
             slots={{ backdrop: Backdrop }}
             slotProps={{
@@ -44,7 +54,7 @@ const ModalRemoveUserFromCard = (props:ModalRemoveUserFromCardProps) => {
                         component="h2"
                         sx={{textAlign:"center"}}
                     >
-                        {t('deleteUserMessage')} {props.userName} {props.userLastName} {t('fromCard')} {props.cardTitle} ?
+                        {t('deleteUserFromBoardMessage')} {props.firstName} {props.lastName} {t('fromBoard')} ?
                     </Typography>
                     </Grid>
                     <Grid style={{display:"flex",
@@ -53,7 +63,7 @@ const ModalRemoveUserFromCard = (props:ModalRemoveUserFromCardProps) => {
                     >
                         <Button
                             sx={{maxHeight:'50px'}}
-                            onClick={() => handleClose()}
+                            onClick={() => closeModal(props.setModalDelete)}
                             variant="outlined"
                         >
                             {t('cancel')}
@@ -61,12 +71,9 @@ const ModalRemoveUserFromCard = (props:ModalRemoveUserFromCardProps) => {
                         <Button
                             sx={{maxHeight:'50px'}}
                             variant="contained"
-                            onClick={() => removeUserFromCard(
-                                props.cardId,
+                            onClick={() => unassignUserFromBoard(
+                                props.data.id,
                                 props.userId,
-                                props.userName,
-                                props.userLastName,
-                                props.cardTitle,
                                 props.data,
                                 props.setData
                             )}
@@ -79,4 +86,4 @@ const ModalRemoveUserFromCard = (props:ModalRemoveUserFromCardProps) => {
         </Modal>
     );
 }
-export default ModalRemoveUserFromCard
+export default ModalRemoveUserFromBoard

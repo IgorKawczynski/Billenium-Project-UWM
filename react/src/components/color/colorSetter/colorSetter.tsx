@@ -8,7 +8,7 @@ const ColorSetter = (props:ColorListProps) =>{
     const theme = useTheme()
 
     return(
-        <Box width={'50%'}>
+        <Box maxWidth={'100%'}>
 
             {props.colors.map((color) =>(
                 color.value != 'default' && (

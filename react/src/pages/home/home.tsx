@@ -42,9 +42,12 @@ const Home = () => {
                 sx={{
                     width:'100%',
                     display:'flex',
-                    justifyContent:'end'
+                    justifyContent:'space-between'
                 }}
             >
+                <Box width={'50px'}>
+                    <LanguageSwitcher/>
+                </Box>
                 <Box
                     padding={2}
                 >
@@ -98,16 +101,16 @@ const Home = () => {
                 {!(theme.palette.mode == 'light') && (<img alt={'Main page image'} src={ServerPng} width={'200px'}/>)}
                 <Box sx={{display:'flex', flexDirection:'column'}}>
                 <Typography color={'textTheme'} variant={"h4"}>
-                    Makes planning easier
+                    {t('MakesPlanningEasier')}
                 </Typography>
                 <Typography color={'textTheme'} variant={"h4"}>
-                    Helpful in learning
+                    {t('HelpfulInLearning')}
                 </Typography>
                 <Typography color={'textTheme'} variant={"h4"}>
-                    Better in organization
+                    {t('BetterInOrganization')}
                 </Typography>
                 <Typography color={'textTheme'} variant={"h4"}>
-                    Makes sharing easier
+                    {t('MakesSharingEasier')}
                 </Typography>
                 </Box>
             </Box>
@@ -117,10 +120,9 @@ const Home = () => {
                 </Typography>
             </Box>
             <Button sx={{position:'absolute', bottom:'0', left:'0'}} onClick={colorMode.toggleColorMode}>
-                {theme.palette.mode == 'light' && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>Dark Mode <Brightness4Icon/></Typography>)}
-                {!(theme.palette.mode == 'light') && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>Light Mode <Brightness4Icon/></Typography>)}
+                {theme.palette.mode == 'light' && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>{t('DarkMode')} <Brightness4Icon/></Typography>)}
+                {!(theme.palette.mode == 'light') && (<Typography sx={{display:'flex', justifyContent:'center', alignItems:"center" }}>{t('LightMode')} <Brightness4Icon/></Typography>)}
             </Button>
-            <LanguageSwitcher/>
             <LoginForm
                 modalLogin={modalLogin}
                 setModalLogin={setModalLogin}

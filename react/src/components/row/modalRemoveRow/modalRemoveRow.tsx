@@ -46,7 +46,7 @@ const ModalRemoveRow = (props:ModalRemoveRowProps) =>{
                         <Button
                             sx={{maxHeight:'50px'}}
                             onClick={() => closeModal(props.setModalDelete)}
-                            variant="contained"
+                            variant="outlined"
                         >
                             {t('cancel')}
                         </Button>

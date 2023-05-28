@@ -1,13 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import {Avatar, Box, IconButton, useTheme} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import {DeleteUserMenuItemProps} from "@/components/menus/interfaces/deleteUserMenuItem";
 import {unassignUserFromBoard} from "@/services/utils/boardUtils/boardUtils";
+import ModalRemoveUserFromBoard from "@/components/board/modalRemoveUserFromBoard/modalRemoveUserFromCard";
+import {openModal} from "@/services/utils/modalUtils/modalUtils";
+import {useTranslation} from "react-i18next";
 
 const DeleteUserMenuItem = (props:DeleteUserMenuItemProps) =>{
     const theme = useTheme()
-
+    const [deleteUser, setDeleteUser] = useState(false)
+    const { t } = useTranslation();
     return(
         <Box
             display={"flex"}
@@ -31,25 +35,34 @@ const DeleteUserMenuItem = (props:DeleteUserMenuItemProps) =>{
             <Typography variant={"subtitle1"} color={theme.palette.text.primary}>
             {props.userName + " " + props.userLastName}
             </Typography>
-            <IconButton
-                size={"small"}
-                sx={{
-                    maxWidth:'35px',
-                    maxHeight:'35px',
-                }}
-                onClick={() => unassignUserFromBoard(
-                                                        props.data.id,
-                                                        props.userId,
-                                                        props.data,
-                                                        props.setData
-                                                    )}
-            >
-                <PersonRemoveIcon
+            {props.userId !== props.data.creatorId && (
+                <IconButton
+                    size={"small"}
                     sx={{
-                        color:theme.palette.primary.main,
+                        maxWidth:'35px',
+                        maxHeight:'35px',
                     }}
+                    onClick={() => openModal(setDeleteUser)}
+                >
+                    <PersonRemoveIcon
+                        sx={{
+                            color:theme.palette.primary.main,
+                        }}
+                    />
+                </IconButton>
+            )}
+            {props.userId === props.data.creatorId && (
+                <Typography variant={"body1"}> {t('owner')} </Typography>
+            )}
+            <ModalRemoveUserFromBoard
+                userId={props.userId}
+                firstName={props.userName}
+                lastName={props.userLastName}
+                data={props.data}
+                setData={props.setData}
+                modalDelete={deleteUser}
+                setModalDelete={setDeleteUser}
                 />
-            </IconButton>
         </Box>
     )
 }

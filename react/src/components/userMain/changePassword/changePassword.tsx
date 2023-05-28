@@ -73,6 +73,7 @@ const ChangePassword = (props:ChangePasswordProps) =>{
                 </FormControl>
                 <Button
                     onClick={() => closeModal(props.setPasswordToChange)}
+                    variant={'outlined'}
                 >
                     {t('cancel')}
                 </Button>

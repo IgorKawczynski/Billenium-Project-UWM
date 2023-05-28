@@ -9,10 +9,11 @@ import Typography from "@mui/material/Typography";
 import CardUsers from "@/components/card/cardUsers/cardUsers";
 import {CardPercentageCompleted} from "@/components/card/cardPercentageCompleted/cardPercentageCompleted";
 import LockIcon from "@mui/icons-material/Lock";
+import {useTranslation} from "react-i18next";
 
 const Task = (props:CardProps) => {
     const theme = useTheme()
-
+    const { t } = useTranslation();
     return(
         <Draggable
             key={props.id}
@@ -93,7 +94,7 @@ const Task = (props:CardProps) => {
                                                     alignItems={"center"}
                                                 >
                                                     {props.isLocked && (
-                                                        <Tooltip title={'Card is Locked'} placement={"top"}>
+                                                        <Tooltip title={t('cardLocked')} placement={"top"}>
                                                             <LockIcon sx={{
                                                                 color:theme.palette.primary.main,
                                                                 fontSize:'14px'

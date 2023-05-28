@@ -73,7 +73,7 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                         <Button
                             sx={{maxHeight:'40px'}}
                             onClick={() => closeModal(props.setModalDelete)}
-                            variant="contained"
+                            variant="outlined"
                         >
                             {t('cancel')}
                         </Button>
@@ -90,7 +90,7 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                                     props.setModalDelete
                                 )}
                             >
-                                {t('cancel')}
+                                {t('leave')}
                             </Button>
                         )}
                         {props.activeUser.id == props.creatorId && (
@@ -137,8 +137,15 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                                     </Select>
                                 </FormControl>
                                 <Button
-                                    sx={{maxHeight:'40px'}}
+                                    sx={{maxHeight:'50px'}}
                                     variant="contained"
+                                    onClick={() => leaveBoard(
+                                        props.activeUser.id,
+                                        props.boardId,
+                                        props.title,
+                                        props.setUserBoards,
+                                        props.setModalDelete
+                                    )}
                                 >
                                     {t('leave')}
                                 </Button>

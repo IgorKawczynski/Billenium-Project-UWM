@@ -46,7 +46,7 @@ const ModalRemoveColumn = (props:ModalRemoveColumnProps) => {
                                 <Button
                                     sx={{maxHeight:'50px'}}
                                     onClick={() => closeModal(props.setModalDelete)}
-                                    variant="contained"
+                                    variant="outlined"
                                 >
                                     {t('cancel')}
                                 </Button>

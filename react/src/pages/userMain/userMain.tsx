@@ -66,7 +66,7 @@ const UserMain = () => {
                     }
                     <Box width={'100%'}>
                         <Typography variant={'h4'} color={theme.palette.text.primary}>
-                            {t('yourBoards')}:
+                            {t('yourBoards')}
                         </Typography>
                         <Grid
                             container

@@ -29,7 +29,7 @@ export default function AddCardButton(props:AddCardButtonProps) {
                     }}
                     variant="text"
                 >
-                    <Typography variant={"button"}> {t('addCard')} </Typography>
+                    <Typography variant={"button"}> {t('addCard')} &nbsp;</Typography>
                     <AddCircleOutlineOutlinedIcon/>
                 </Button>
             </Box>
