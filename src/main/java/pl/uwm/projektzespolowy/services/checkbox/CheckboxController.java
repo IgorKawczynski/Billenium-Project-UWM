@@ -2,6 +2,7 @@ package pl.uwm.projektzespolowy.services.checkbox;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.projektzespolowy.models.checkbox.CheckboxCreateDTO;
 import pl.uwm.projektzespolowy.models.checkbox.CheckboxResponseDTO;
@@ -29,9 +30,9 @@ public class CheckboxController {
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"cardId"})
-    @ResponseStatus(HttpStatus.OK)
-    public List<CheckboxResponseDTO> getAllCheckboxesByCardId(@RequestParam Long cardId) {
-        return checkboxFacade.getAllCheckboxesByCardId(cardId);
+    public ResponseEntity<List<CheckboxResponseDTO>> getAllCheckboxesByCardId(@RequestParam Long cardId) {
+        var checkboxes = checkboxFacade.getAllCheckboxesByCardId(cardId);
+        return checkboxes.size() > 0 ? ResponseEntity.ok(checkboxes) : ResponseEntity.noContent().build();
     }
 
     @PutMapping("")
