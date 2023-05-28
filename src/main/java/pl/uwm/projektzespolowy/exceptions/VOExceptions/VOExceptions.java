@@ -17,13 +17,13 @@ public class VOExceptions {
     }
 
     @ExceptionHandler(value = InvalidTitleLengthException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     public ErrorMessage invalidTitleLengthHandler(InvalidTitleLengthException exception) {
         return new ErrorMessage("title", exception.getMessage());
     }
 
     @ExceptionHandler(value = InvalidColorValueException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     public ErrorMessage invalidColorValueHandler(InvalidColorValueException exception) {
         return new ErrorMessage("color", exception.getMessage());
     }
@@ -35,28 +35,27 @@ public class VOExceptions {
     }
 
     @ExceptionHandler(value = InvalidEmailException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     public ErrorMessage invalidEmailException(InvalidEmailException exception) {
         return new ErrorMessage("email", exception.getMessage());
     }
 
     @ExceptionHandler(value = EmailAlreadyExistsException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
     public ErrorMessage emailAlreadyExistsException(EmailAlreadyExistsException exception) {
         return new ErrorMessage("email", exception.getMessage());
     }
 
-    // TODO -- detailing of fieldName for 2 below methods
     @ExceptionHandler(value = RegexMatchException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     public ErrorMessage regexMatchException(RegexMatchException exception) {
-        return new ErrorMessage("", exception.getMessage());
+        return new ErrorMessage(exception.getFieldName(), exception.getMessage());
     }
 
     @ExceptionHandler(value = FieldLengthException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     public ErrorMessage fieldLengthException(FieldLengthException exception) {
-        return new ErrorMessage("", exception.getMessage());
+        return new ErrorMessage(exception.getFieldName(), exception.getMessage());
     }
 
     @ExceptionHandler(value = BadCredentialsException.class)
@@ -64,6 +63,5 @@ public class VOExceptions {
     public ErrorMessage badCredentialsException() {
         return new ErrorMessage("password", "You have written wrong email or password.");
     }
-
 
 }

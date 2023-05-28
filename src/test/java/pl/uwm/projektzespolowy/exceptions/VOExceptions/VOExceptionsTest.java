@@ -21,8 +21,8 @@ public class VOExceptionsTest {
     private final EmailNotFoundException emailNotFoundException = new EmailNotFoundException("Failed to find user with email: " + EMAIL);
     private final InvalidEmailException invalidEmailException = new InvalidEmailException("Email must contain '@' sign.");
     private final EmailAlreadyExistsException emailAlreadyExistsException = new EmailAlreadyExistsException("User with given email already exists.");
-    private final RegexMatchException regexMatchException = new RegexMatchException(String.format("%s includes not allowed characters.", FIELD_NAME));
-    private final FieldLengthException fieldLengthException = new FieldLengthException(String.format("%s must contain between %d and %d characters.", FIELD_NAME, MIN_LENGTH, MAX_LENGTH));
+    private final RegexMatchException regexMatchException = new RegexMatchException("fieldName", String.format("%s includes not allowed characters.", FIELD_NAME));
+    private final FieldLengthException fieldLengthException = new FieldLengthException("fieldName", String.format("%s must contain between %d and %d characters.", FIELD_NAME, MIN_LENGTH, MAX_LENGTH));
     private final BadCredentialsException badCredentialsException = new BadCredentialsException("You have written wrong email or password.");
 
 
@@ -90,7 +90,7 @@ public class VOExceptionsTest {
         // when
         ErrorMessage errorMessage = voExceptions.regexMatchException(regexMatchException);
         // then
-        assertThat(errorMessage.fieldName()).isEqualTo("");
+        assertThat(errorMessage.fieldName()).isEqualTo("fieldName");
         assertThat(errorMessage.error()).isEqualTo(regexMatchException.getMessage());
     }
 
@@ -99,7 +99,7 @@ public class VOExceptionsTest {
         // when
         ErrorMessage errorMessage = voExceptions.fieldLengthException(fieldLengthException);
         // then
-        assertThat(errorMessage.fieldName()).isEqualTo("");
+        assertThat(errorMessage.fieldName()).isEqualTo("fieldName");
         assertThat(errorMessage.error()).isEqualTo(fieldLengthException.getMessage());
     }
 
