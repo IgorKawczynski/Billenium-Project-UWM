@@ -70,4 +70,5 @@ public class UserFacade {
     public void deleteUser(Long userId) {
         userCRUDService.deleteUser(userId);
     }
+
 }

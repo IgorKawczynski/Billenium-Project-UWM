@@ -24,13 +24,13 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/boards")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<UserBoardsDTO>> getAllUserBoards(@PathVariable Long userId) {
         var userBoards = userFacade.getAllUserBoards(userId);
         return userBoards.size() > 0 ? ResponseEntity.ok(userBoards) : ResponseEntity.noContent().build();
     }
 
     @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDTO registerUser(@RequestBody UserCreateDTO userCreateDTO) {
         return userFacade.createUser(userCreateDTO).toDto();
     }
@@ -40,6 +40,7 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
+    @ResponseStatus(HttpStatus.OK)
     public UserLoginResponseDTO login(@RequestBody UserLoginRequestDTO user) {
         return userFacade.login(user);
     }

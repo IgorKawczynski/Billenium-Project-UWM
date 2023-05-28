@@ -13,4 +13,5 @@ public class UserUpdater {
     public void saveChangedUser(User user) {
         userRepository.saveAndFlush(user);
     }
+
 }
