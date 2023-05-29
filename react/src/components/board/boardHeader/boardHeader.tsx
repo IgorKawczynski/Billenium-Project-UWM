@@ -38,7 +38,7 @@ const BoardHeader = (props:boardHeaderProps) => {
                         color={'textPrimary'}
                         variant={'h4'}
                     >
-                        Kanban Board
+                        {t('kanbanBoard')}
                     </Typography>
                     <Typography
                         color={theme.palette.primary.main}
