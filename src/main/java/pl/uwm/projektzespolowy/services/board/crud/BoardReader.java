@@ -30,4 +30,5 @@ class BoardReader {
     public Integer getAmountOfAssignedCardsToUser(User user, Long boardId) {
         return boardRepository.getAmountOfAssignedCardsToUser(user, boardId);
     }
+
 }

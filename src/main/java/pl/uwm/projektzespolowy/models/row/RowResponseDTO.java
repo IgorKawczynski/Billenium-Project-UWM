@@ -8,4 +8,5 @@ public record RowResponseDTO(String id,
 
     @Builder
     public RowResponseDTO {}
+
 }

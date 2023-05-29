@@ -2,6 +2,7 @@ package pl.uwm.projektzespolowy.services.color;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.projektzespolowy.models.color.ColorResponseDTO;
 import pl.uwm.projektzespolowy.models.color.ColorUpdateDTO;
@@ -22,9 +23,9 @@ public class ColorController {
     }
 
     @GetMapping("/{boardId}/all")
-    @ResponseStatus(HttpStatus.OK)
-    public List<ColorResponseDTO> getAllColorsByBoardId(@PathVariable Long boardId) {
-        return colorFacade.getAllColorsByBoardId(boardId);
+    public ResponseEntity<List<ColorResponseDTO>> getAllColorsByBoardId(@PathVariable Long boardId) {
+        var colors = colorFacade.getAllColorsByBoardId(boardId);
+        return colors.size() > 0 ? ResponseEntity.ok(colors) : ResponseEntity.noContent().build();
     }
 
     @PutMapping("")

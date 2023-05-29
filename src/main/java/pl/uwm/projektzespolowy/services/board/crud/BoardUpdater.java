@@ -34,4 +34,11 @@ class BoardUpdater {
         return boardRepository.saveAndFlush(board).getAssignedUsers();
     }
 
+    public void passAndLeaveBoard(Board board, User userToDeleteFromBoard, User userToPassBoard) {
+        board.setCreator(userToPassBoard);
+
+        board.removeUser(userToDeleteFromBoard);
+        boardRepository.saveAndFlush(board);
+    }
+
 }

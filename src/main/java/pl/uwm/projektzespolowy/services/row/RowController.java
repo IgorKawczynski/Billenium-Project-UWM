@@ -2,6 +2,7 @@ package pl.uwm.projektzespolowy.services.row;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.projektzespolowy.models.row.RowCreateDTO;
 import pl.uwm.projektzespolowy.models.row.RowResponseDTO;
@@ -29,9 +30,9 @@ public class RowController {
     }
 
     @GetMapping("/{boardId}/all")
-    @ResponseStatus(HttpStatus.OK)
-    public List<RowResponseDTO> getAllRowsByBoardId(@PathVariable Long boardId) {
-        return rowFacade.getAllRowsByBoardId(boardId);
+    public ResponseEntity<List<RowResponseDTO>> getAllRowsByBoardId(@PathVariable Long boardId) {
+        var rows = rowFacade.getAllRowsByBoardId(boardId);
+        return rows.size() > 0 ? ResponseEntity.ok(rows) : ResponseEntity.noContent().build();
     }
 
     @PutMapping("")
@@ -45,6 +46,5 @@ public class RowController {
     public void deleteRowById(@PathVariable Long rowId) {
         rowFacade.deleteRow(rowId);
     }
-
 
 }

@@ -2,6 +2,7 @@ package pl.uwm.projektzespolowy.services.card;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.projektzespolowy.models.basic.dto.MoveDTO;
 import pl.uwm.projektzespolowy.models.card.*;
@@ -29,22 +30,22 @@ public class CardController {
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"cellId"})
-    @ResponseStatus(HttpStatus.OK)
-    public List<CardResponseDTO> getAllCardsByCellId(@RequestParam Long cellId) {
-        return cardFacade.getAllCardsByCellId(cellId);
+    public ResponseEntity<List<CardResponseDTO>> getAllCardsByCellId(@RequestParam Long cellId) {
+        var cards = cardFacade.getAllCardsByCellId(cellId);
+        return cards.size() > 0 ? ResponseEntity.ok(cards) : ResponseEntity.noContent().build();
     }
 
     @GetMapping("/users/{cardId}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<UserResponseDTO> getAllAssignedUsersToCard(@PathVariable Long cardId) {
-        return cardFacade.getAllAssignedUsersToCard(cardId);
+    public ResponseEntity<List<UserResponseDTO>> getAllAssignedUsersToCard(@PathVariable Long cardId) {
+        var users = cardFacade.getAllAssignedUsersToCard(cardId);
+        return users.size() > 0 ? ResponseEntity.ok(users) : ResponseEntity.noContent().build();
     }
 
     @GetMapping("/without-parent/{boardId}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<CardResponseDTO> getAllCardsInBoardWithoutParentAndChildren(@PathVariable Long boardId,
+    public ResponseEntity<List<CardResponseDTO>> getAllCardsInBoardWithoutParentAndChildren(@PathVariable Long boardId,
                                                                  @RequestParam Long parentId) {
-        return cardFacade.getAllCardsInBoardWithoutParentAndChildren(boardId, parentId);
+        var cards =  cardFacade.getAllCardsInBoardWithoutParentAndChildren(boardId, parentId);
+        return cards.size() > 0 ? ResponseEntity.ok(cards) : ResponseEntity.noContent().build();
     }
 
     @PutMapping("")

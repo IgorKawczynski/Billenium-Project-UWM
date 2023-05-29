@@ -28,7 +28,10 @@
   </a> <b> Spring Boot 3.0.2 </b> <br>
   <a href=https://www.postgresql.org>
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-plain-wordmark.svg" alt="postgresql" width="35" height="35" />
-  </a> <b> PostgreSQL </b>
+  </a> <b> PostgreSQL </b> <br>
+  <a href=https://flywaydb.org>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Flyway_logo.svg" alt="flyway" width="35" height="35" />
+  </a> <b> Flyway </b>
 </p>
 <br> 
 <h4>FRONTEND :</h4> 

@@ -9,4 +9,5 @@ public record UserCreateDTO(String email,
 
     @Builder
     public UserCreateDTO {}
+
 }

@@ -40,4 +40,5 @@ interface BoardRepository extends JpaRepository<Board, Long> {
             AND :user MEMBER OF c.assignedUsers
             """)
     Integer getAmountOfAssignedCardsToUser(@Param("user") User user, @Param("boardId") Long boardId);
+
 }

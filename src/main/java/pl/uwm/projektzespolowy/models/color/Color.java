@@ -16,6 +16,7 @@ import javax.persistence.*;
 public class Color extends BasicEntity {
 
     Title title;
+
     @Enumerated(EnumType.STRING)
     ColorValue value;
 

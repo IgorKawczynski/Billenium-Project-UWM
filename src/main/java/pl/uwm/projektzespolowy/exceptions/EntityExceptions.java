@@ -57,9 +57,15 @@ public class EntityExceptions {
     }
 
     @ExceptionHandler(value = CardCantBeChildException.class)
-    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ErrorMessage cardCantBeChildException(CardCantBeChildException exception) {
         return new ErrorMessage("card", exception.getMessage());
+    }
+
+    @ExceptionHandler(value = BoardCantBeDeletedException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage boardCantBeDeletedException(BoardCantBeDeletedException exception) {
+        return new ErrorMessage("board", exception.getMessage());
     }
 
 }

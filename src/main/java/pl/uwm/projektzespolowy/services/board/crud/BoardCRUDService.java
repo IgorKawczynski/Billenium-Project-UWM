@@ -49,7 +49,8 @@ public class BoardCRUDService {
     }
 
     public void deleteBoard(Long boardId) {
-        boardDeleter.deleteBoardById(boardId);
+        var board = boardReader.getBoardById(boardId);
+        boardDeleter.deleteBoardById(board);
     }
 
     public List<User> deleteAssignedUserFromBoard(Long boardId, User userToDeleteFromBoard) {
@@ -64,4 +65,9 @@ public class BoardCRUDService {
     public Integer getAmountOfAssignedCardsToUser(User user, Long boardId) {
         return boardReader.getAmountOfAssignedCardsToUser(user, boardId);
     }
+
+    public void passAndLeaveBoard(Board board, User userToDeleteFromBoard, User userToPassBoard) {
+        boardUpdater.passAndLeaveBoard(board, userToDeleteFromBoard, userToPassBoard);
+    }
+
 }

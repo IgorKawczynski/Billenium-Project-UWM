@@ -34,24 +34,15 @@ class UserValidator {
 
     public void validateFieldRegex(String fieldName, String fieldValue, String regex) {
         if (!fieldValue.matches(regex)) {
-            throw new RegexMatchException(
-                    String.format(
-                            "%s includes not allowed characters.",
-                            fieldName
-                    )
-            );
+            throw new RegexMatchException(fieldName, String.format("%s includes not allowed characters.", fieldName));
         }
     }
 
     public void validateFieldLength(String fieldName, String fieldValue, Integer minLength, Integer maxLength) {
         if (fieldValue.length() > maxLength || fieldValue.length() < minLength) {
             throw new FieldLengthException(
-                    String.format(
-                            "%s must contain between %d and %d characters.",
-                            fieldName,
-                            minLength,
-                            maxLength
-                    )
+                    fieldName,
+                    String.format("%s must contain between %d and %d characters.", fieldName, minLength, maxLength)
             );
         }
     }
@@ -70,7 +61,7 @@ class UserValidator {
 
     public void checkIfCredentialsAreProper(String email, String password) {
         if (!passwordEncoder.matches(password, userRepository.findRegisteredUserByEmail(email).getPassword())) {
-            throw new BadCredentialsException("You have written bad email or password.");
+            throw new BadCredentialsException("You have written incorrect credentials.");
         }
     }
 

@@ -2,6 +2,7 @@ package pl.uwm.projektzespolowy.services.board;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.projektzespolowy.models.board.*;
 import pl.uwm.projektzespolowy.models.user.UserBoardAssignmentDTO;
@@ -35,9 +36,9 @@ public class BoardController {
     }
 
     @GetMapping("/users/{boardId}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<UserBoardAssignmentDTO> getAllAssignedUsersToBoard(@PathVariable Long boardId) {
-        return boardFacade.getAllAssignedUsersToBoard(boardId);
+    public ResponseEntity<List<UserBoardAssignmentDTO>> getAllAssignedUsersToBoard(@PathVariable Long boardId) {
+        var assignedUsersToBoard =  boardFacade.getAllAssignedUsersToBoard(boardId);
+        return assignedUsersToBoard.size() > 0 ? ResponseEntity.ok(assignedUsersToBoard) : ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{boardId}/title")
@@ -65,9 +66,15 @@ public class BoardController {
     }
 
     @PatchMapping("/delete-user")
-    @ResponseStatus(HttpStatus.OK)
-    public List<UserResponseDTO> deleteAssignedUserFromBoard(@RequestBody BoardUserDeleteDTO boardUserDeleteDTO) {
-        return boardFacade.deleteAssignedUserFromBoard(boardUserDeleteDTO);
+    public ResponseEntity<List<UserResponseDTO>> deleteAssignedUserFromBoard(@RequestBody BoardUserDeleteDTO boardUserDeleteDTO) {
+        var users = boardFacade.deleteAssignedUserFromBoard(boardUserDeleteDTO);
+        return users.size() > 0 ? ResponseEntity.ok(users) : ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/pass-leave")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void passAndLeaveBoard(@RequestBody BoardPassDTO boardPassDTO) {
+        boardFacade.passAndLeaveBoard(boardPassDTO);
     }
 
 }
