@@ -160,4 +160,5 @@ public class CardUpdaterTest {
         verify(cardRepository, atMostOnce()).saveAndFlush(cardArgumentCaptor.capture());
         assertThat(card.isLocked()).isFalse();
     }
+
 }

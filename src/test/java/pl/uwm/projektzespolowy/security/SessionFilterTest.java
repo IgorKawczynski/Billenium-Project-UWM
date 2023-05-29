@@ -40,4 +40,5 @@ class SessionFilterTest {
         verify(filterChain).doFilter(request, response);
         verifyNoMoreInteractions(filterChain);
     }
+
 }

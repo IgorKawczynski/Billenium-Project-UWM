@@ -93,7 +93,9 @@ public class Card extends BasicEntity implements Positionable {
                         .toList())
                 .isLocked(this.isLocked)
                 .parentCardId(this.parentCardId == null ? null : this.parentCardId.toString())
-                .children(getChildren(this.cell.getColumn().getBoard()).stream()
+                .children(this.cell == null ? Collections.emptyList() :
+                        getChildren(this.cell.getColumn().getBoard())
+                        .stream()
                         .map(Card::toDto)
                         .toList())
                 .build();

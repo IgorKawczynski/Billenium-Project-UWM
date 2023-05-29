@@ -62,5 +62,4 @@ public class CardDeleterTest {
         assertThat(firstUser).isNotIn(card.getAssignedUsers());
     }
 
-
 }

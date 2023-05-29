@@ -37,4 +37,5 @@ public class CardCreatorTest {
         ArgumentCaptor<Card> cardArgumentCaptor = ArgumentCaptor.forClass(Card.class);
         verify(cardRepository, atMostOnce()).saveAndFlush(cardArgumentCaptor.capture());
     }
+
 }
