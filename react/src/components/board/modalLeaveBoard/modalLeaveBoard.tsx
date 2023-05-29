@@ -34,6 +34,17 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
     useEffect(() =>{
         getUsers(props.boardId, setUsers, setNewCreator)
     },[])
+    useEffect(() =>{
+        if(users.length > 1){
+            users.map(user => {
+                if(user.id !== props.activeUser.id){
+                    setNewCreator(user.id)
+                }
+
+            })
+        }
+    },[users])
+
     const handleChange = (event: SelectChangeEvent) => {
         const user = event.target.value
         setNewCreator(user);
@@ -41,7 +52,7 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
     const handleChangeCreator = () =>{
         if(newCreator === ''){
             handleClickVariant(enqueueSnackbar)('Select new owner' ,'error')
-        }else if(newCreator.length > 1){
+        }else if(newCreator.length > 1 && newCreator !== ''){
             passAndLeave(
                 t,
                 props.activeUser.id,
@@ -76,9 +87,21 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                         alignItems:"center"
                         }}
                     >
-                        <Typography color={'textPrimary'} variant={'body1'}>
-                            {t('leaveBoardMessage')}: {props.title}?
-                        </Typography>
+                            {props.activeUser.id === props.creatorId  && users.length === 1 && (
+                                <Typography color={'textPrimary'} variant={'body1'}>
+                                {t('deletingMess')}: {props.title}?
+                                </Typography>
+                            )}
+                            {props.activeUser.id !== props.creatorId && (
+                                <Typography color={'textPrimary'} variant={'body1'}>
+                                {t('leaveBoardMessage')}: {props.title}?
+                                </Typography>
+                                )}
+                        {props.activeUser.id === props.creatorId  && users.length > 1 && (
+                            <Typography color={'textPrimary'} variant={'body1'}>
+                                {t('leaveBoardMessage')}: {props.title}?
+                            </Typography>
+                        )}
                     </Box>
                     <Grid style={{
                         display:"flex",

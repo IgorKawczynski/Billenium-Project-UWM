@@ -108,6 +108,7 @@ const resources = {
                         differentPasswords:'Błędnie powtórzone hasło ',
                         unassignedMess:'Nie jesteś już przypisany do tablicy',
                         boardDeletedMess:'Usunięto tablicę ',
+                        deletingMess:'Czy na pewno chcesz usunąć tablicę',
                 }
         },
         en: {
@@ -216,6 +217,7 @@ const resources = {
                         differentPasswords:'Incorrectly repeated password',
                         unassignedMess:'Now you are unassigned from board',
                         boardDeletedMess:'Deleted board',
+                        deletingMess:'Are you sure you want to delete board',
                 }
         }
 }
