@@ -71,4 +71,10 @@ public class BoardController {
         return users.size() > 0 ? ResponseEntity.ok(users) : ResponseEntity.noContent().build();
     }
 
+    @PatchMapping("/pass-leave")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void passAndLeaveBoard(@RequestBody BoardPassDTO boardPassDTO) {
+        boardFacade.passAndLeaveBoard(boardPassDTO);
+    }
+
 }
