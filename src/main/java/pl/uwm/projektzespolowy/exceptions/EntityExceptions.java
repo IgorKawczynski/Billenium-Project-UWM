@@ -62,4 +62,10 @@ public class EntityExceptions {
         return new ErrorMessage("card", exception.getMessage());
     }
 
+    @ExceptionHandler(value = BoardCantBeDeletedException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage boardCantBeDeletedException(BoardCantBeDeletedException exception) {
+        return new ErrorMessage("board", exception.getMessage());
+    }
+
 }
