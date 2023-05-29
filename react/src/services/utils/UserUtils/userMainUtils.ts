@@ -10,10 +10,12 @@ import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
-import {unassignUserFromBoardOnBackend} from "@/services/actions/boardService";
-import {useTranslation} from "react-i18next";
+import {
+    deleteBoardOnBackend,
+    passAndLeaveOnBackend,
+    unassignUserFromBoardOnBackend
+} from "@/services/actions/boardService";
 import {TFunction} from "i18next";
-
 
 export function getUserBoards  (
     userId:string,
@@ -103,6 +105,7 @@ export function changePassword(
 }
 
 export function leaveBoard(
+    t: TFunction<"translation", undefined, "translation">,
     userId:string,
     boardId:string,
     title:string,
@@ -113,6 +116,39 @@ export function leaveBoard(
         .then(res => {
                 getUserBoards(userId, setUserBoards)
                 closeModal(setModalDelete)
-                handleClickVariant(enqueueSnackbar)(`Now you are unassigned from board: ${title}` ,'warning')
+                handleClickVariant(enqueueSnackbar)(t('unassignedMess') +`${title}` ,'warning')
         })
 }
+
+export const passAndLeave = (
+    t: TFunction<"translation", undefined, "translation">,
+    creatorId:string,
+    boardId:string,
+    userIdToPassBoard:string,
+    title:string,
+    setUserBoards:userBoardsData["setUserBoards"],
+    setModalDelete:React.Dispatch<SetStateAction<boolean>>
+) =>{
+    passAndLeaveOnBackend(creatorId, boardId,userIdToPassBoard)
+        .then(res => {
+            getUserBoards(creatorId, setUserBoards)
+            closeModal(setModalDelete)
+            handleClickVariant(enqueueSnackbar)(t('unassignedMess') +`${title}` ,'warning')
+        })
+};
+
+export const deleteBoard = (
+    t: TFunction<"translation", undefined, "translation">,
+    userId:string,
+    boardId:string,
+    title:string,
+    setUserBoards:userBoardsData["setUserBoards"],
+    setModalDelete:React.Dispatch<SetStateAction<boolean>>
+) =>{
+    deleteBoardOnBackend(boardId)
+        .then(res => {
+            getUserBoards(userId, setUserBoards)
+            closeModal(setModalDelete)
+            handleClickVariant(enqueueSnackbar)(t('boardDeletedMess') +`${title}`,'warning')
+        })
+};

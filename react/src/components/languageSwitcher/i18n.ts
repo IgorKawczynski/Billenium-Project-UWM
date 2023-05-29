@@ -105,7 +105,9 @@ const resources = {
                         owner:'Właściciel',
                         oldPassword:'Stare hasło',
                         passwordChanged:'Hasło zostało zmienione',
-                        differentPasswords:'Błędnie powtórzone hasło '
+                        differentPasswords:'Błędnie powtórzone hasło ',
+                        unassignedMess:'Nie jesteś już przypisany do tablicy',
+                        boardDeletedMess:'Usunięto tablicę ',
                 }
         },
         en: {
@@ -211,7 +213,9 @@ const resources = {
                         owner:'Owner',
                         oldPassword:'Old password',
                         passwordChanged:'Password changed',
-                        differentPasswords:'Incorrectly repeated password'
+                        differentPasswords:'Incorrectly repeated password',
+                        unassignedMess:'Now you are unassigned from board',
+                        boardDeletedMess:'Deleted board',
                 }
         }
 }

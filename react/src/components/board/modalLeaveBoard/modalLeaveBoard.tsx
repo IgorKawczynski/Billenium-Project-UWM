@@ -19,7 +19,7 @@ import {
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {ModalLeaveBoardProps} from "@/components/board/interfaces/modalLeaveBoard/modalLeaveBoard";
-import {leaveBoard} from "@/services/utils/UserUtils/userMainUtils";
+import {deleteBoard, leaveBoard, passAndLeave} from "@/services/utils/UserUtils/userMainUtils";
 import {assignedUser} from "@/services/utils/boardUtils/DataBoard";
 import {getUsers} from "@/services/utils/boardUtils/boardUtils";
 import {useTranslation} from "react-i18next";
@@ -78,11 +78,12 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                             {t('cancel')}
                         </Button>
 
-                        {props.activeUser.id != props.creatorId && (
+                        {props.activeUser.id !== props.creatorId && (
                             <Button
                                 sx={{maxHeight:'50px'}}
                                 variant="contained"
                                 onClick={() => leaveBoard(
+                                    t,
                                     props.activeUser.id,
                                     props.boardId,
                                     props.title,
@@ -93,7 +94,7 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                                 {t('leave')}
                             </Button>
                         )}
-                        {props.activeUser.id == props.creatorId && (
+                        {props.activeUser.id === props.creatorId  && users.length > 1 && (
                             <Box
                                 display={"flex"}
                                 sx={{alignItems:"center"}}
@@ -107,41 +108,45 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                                         input={<OutlinedInput label={t('selectNewOwner')}/>}
                                     >
                                         {users.map((user) => (
-                                            <MenuItem
-                                                key={user.id}
-                                                value={user.id}
-                                            >
-                                                <Box
-                                                    display={"flex"}
-                                                    width={'100%'}
-                                                    justifyContent={"space-between"}
-                                                    alignItems={"center"}
-                                                >
-                                                    <Avatar
-                                                        src={user.avatarPath && user.avatarPath }
-                                                        sx={{
-                                                            width: 35,
-                                                            height: 35,
-                                                            marginRight:1,
-                                                            bgcolor:user.avatarColor
-                                                        }}
+                                            user.id !== props.activeUser.id && (
+                                                    <MenuItem
+                                                        key={user.id}
+                                                        value={user.id}
                                                     >
-                                                        <Typography variant={"body1"}>
-                                                            {user.firstName[0].toUpperCase() + user.lastName[0].toUpperCase()}
-                                                        </Typography>
-                                                    </Avatar>
-                                                    {user.firstName + " " + user.lastName}
-                                                </Box>
-                                            </MenuItem>
+                                                        <Box
+                                                            display={"flex"}
+                                                            width={'100%'}
+                                                            justifyContent={"space-between"}
+                                                            alignItems={"center"}
+                                                        >
+                                                            <Avatar
+                                                                src={user.avatarPath && user.avatarPath }
+                                                                sx={{
+                                                                    width: 35,
+                                                                    height: 35,
+                                                                    marginRight:1,
+                                                                    bgcolor:user.avatarColor
+                                                                }}
+                                                            >
+                                                                <Typography variant={"body1"}>
+                                                                    {user.firstName[0].toUpperCase() + user.lastName[0].toUpperCase()}
+                                                                </Typography>
+                                                            </Avatar>
+                                                            {user.firstName + " " + user.lastName}
+                                                        </Box>
+                                                    </MenuItem>
+                                                )
                                         ))}
                                     </Select>
                                 </FormControl>
                                 <Button
                                     sx={{maxHeight:'50px'}}
                                     variant="contained"
-                                    onClick={() => leaveBoard(
+                                    onClick={() => passAndLeave(
+                                        t,
                                         props.activeUser.id,
                                         props.boardId,
+                                        newCreator,
                                         props.title,
                                         props.setUserBoards,
                                         props.setModalDelete
@@ -151,7 +156,22 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                                 </Button>
                             </Box>
                         )}
-
+                        {props.activeUser.id === props.creatorId  && users.length === 1 && (
+                                <Button
+                                    sx={{maxHeight:'50px'}}
+                                    variant="contained"
+                                    onClick={() => deleteBoard(
+                                        t,
+                                        props.activeUser.id,
+                                        props.boardId,
+                                        props.title,
+                                        props.setUserBoards,
+                                        props.setModalDelete
+                                    )}
+                                >
+                                    {t('delete')}
+                                </Button>
+                        )}
                     </Grid>
                 </Stack>
             </Fade>

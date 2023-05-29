@@ -7,7 +7,7 @@ import {
     editBoardTitleToBackend,
     editBoardWipLimitToBackend,
     getBoardUsersFromBackend,
-    moveColumnToBackend,
+    moveColumnToBackend, passAndLeaveOnBackend,
     unassignUserFromBoardOnBackend
 } from "@/services/actions/boardService";
 import React, {SetStateAction} from "react";
@@ -190,6 +190,8 @@ export const editWipLimit = (
             }
         })
 };
+
+
 
 export function assignUserToBoard(
     boardId:string,

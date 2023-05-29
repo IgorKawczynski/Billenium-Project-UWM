@@ -227,6 +227,29 @@ export async function unassignUserFromBoardOnBackend(boardId:string,userId:strin
     }
 }
 
+export async function passAndLeaveOnBackend(creatorId:string,boardId:string, userIdToPassBoard:string){
+    const apiUrl = urlDomain+`/api/boards/pass-leave`;
+    try {
+        const response = await axios.patch(apiUrl, {creatorId, boardId,userIdToPassBoard});
+        return response.data
+    } catch (error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+}
+
+export async function deleteBoardOnBackend(boardId:string){
+    const apiUrl = urlDomain+`/api/boards/${boardId}`;
+    try {
+        const response = await axios.delete(apiUrl);
+        return response.data
+    } catch (error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+}
 
 export async function fetchData(
     setData:_Data['setData'],
