@@ -26,6 +26,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     const [firstName, setFirstName] = useState(props.activeUser.firstName);
     const [lastName, setLastName] = useState(props.activeUser.lastName);
     const [email, setEmail] = useState(props.activeUser.email);
+    const [oldPassword, setOldPassword] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [passwordToChange, setPasswordToChange] = useState(false);
@@ -50,6 +51,9 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     };
     const handleRepeatPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRepeatPassword(event.target.value);
+    };
+    const handleOldPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setOldPassword(event.target.value);
     };
 
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -186,12 +190,18 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                             />
 
                             <ChangePassword
+                                userId={props.activeUser.id}
+                                oldPassword={oldPassword}
                                 password={password}
                                 repeatPassword={repeatPassword}
+                                handleOldPasswordChange={handleOldPasswordChange}
                                 handlePasswordChange={handlePasswordChange}
                                 handleRepeatPasswordChange={handleRepeatPasswordChange}
                                 passwordToChange={passwordToChange}
                                 setPasswordToChange={setPasswordToChange}
+                                setOldPassword={setOldPassword}
+                                setPassword={setPassword}
+                                setRepeatPassword={setRepeatPassword}
                             />
 
                         </Box>

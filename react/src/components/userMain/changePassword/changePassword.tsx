@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, FormControl, InputLabel} from "@mui/material";
+import {Button, FormControl, InputLabel, Box} from "@mui/material";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
@@ -8,26 +8,67 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {ChangePasswordProps} from "@/components/userMain/interfaces/changePassword/changePassword";
 import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import {useTranslation} from "react-i18next";
+import {changePassword} from "@/services/utils/UserUtils/userMainUtils";
+import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
+import {enqueueSnackbar} from "notistack";
 
 const ChangePassword = (props:ChangePasswordProps) =>{
+    const [showOldPassword, setShowOldPassword] = React.useState(false);
     const [showPassword, setShowPassword] = React.useState(false);
     const [showRepeatPassword, setShowRepeatPassword] = React.useState(false);
     const { t } = useTranslation()
+    const handleClickShowOldPassword = () => setShowOldPassword((show) => !show);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleClickShowRepeatPassword = () => setShowRepeatPassword((show) => !show);
 
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
-    const handleMouseDownRepeatPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
+
+    const checkPasswords = () => {
+        if(props.password === props.repeatPassword){
+            changePassword(
+                t,
+                props.userId,
+                props.oldPassword,
+                props.password,
+                props.setPasswordToChange,
+                props.setOldPassword,
+                props.setPassword,
+                props.setRepeatPassword
+            );
+        }else{
+            handleClickVariant(enqueueSnackbar)(t('differentPasswords'),'error')
+        }
+    }
 
     return(
         <>
         {props.passwordToChange && (
             <>
-                <FormControl variant="outlined">
+                <FormControl variant="outlined" sx={{marginTop:1}}>
+                    <InputLabel htmlFor="outlined-adornment-password">{t('oldPassword')}</InputLabel>
+                    <OutlinedInput
+                        value={props.oldPassword}
+                        id="outlined-adornment-password"
+                        type={showOldPassword ? 'text' : 'password'}
+                        onChange={props.handleOldPasswordChange}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowOldPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showOldPassword ?  <Visibility /> :<VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                        label="Old Password"
+                    />
+                </FormControl>
+                <FormControl variant="outlined" sx={{marginTop:1}}>
                     <InputLabel htmlFor="outlined-adornment-password">{t('password')}</InputLabel>
                     <OutlinedInput
                         value={props.password}
@@ -61,7 +102,7 @@ const ChangePassword = (props:ChangePasswordProps) =>{
                                 <IconButton
                                     aria-label="toggle password visibility"
                                     onClick={handleClickShowRepeatPassword}
-                                    onMouseDown={handleMouseDownRepeatPassword}
+                                    onMouseDown={handleMouseDownPassword}
                                     edge="end"
                                 >
                                     {showRepeatPassword ?  <Visibility /> :<VisibilityOff />}
@@ -71,12 +112,25 @@ const ChangePassword = (props:ChangePasswordProps) =>{
                         label={t('repeatPassword')}
                     />
                 </FormControl>
-                <Button
-                    onClick={() => closeModal(props.setPasswordToChange)}
-                    variant={'outlined'}
+                <Box
+                    display={"flex"}
+                    justifyContent={"space-between"}
                 >
-                    {t('cancel')}
-                </Button>
+                    <Button
+                        sx={{marginTop:1}}
+                        onClick={() => closeModal(props.setPasswordToChange)}
+                        variant={'outlined'}
+                    >
+                        {t('cancel')}
+                    </Button>
+                    <Button
+                        sx={{marginTop:1}}
+                        onClick={() => checkPasswords()}
+                        variant={'contained'}
+                    >
+                        {t('edit')}
+                    </Button>
+                </Box>
             </>
 
             )}
@@ -84,7 +138,7 @@ const ChangePassword = (props:ChangePasswordProps) =>{
                 <Button
                     onClick={() => openModal(props.setPasswordToChange)}
                 >
-                    {t('edit')}
+                    {t('changePassword')}
                 </Button>
             )}
         </>

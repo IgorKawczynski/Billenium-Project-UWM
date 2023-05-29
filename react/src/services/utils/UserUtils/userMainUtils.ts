@@ -1,5 +1,5 @@
 import {
-    addBoardToBackend,
+    addBoardToBackend, changePasswordOnBackend,
     changeUserAvatarOnBackend,
     deleteUserAvatarOnBackend,
     getUserBoardsFromBackend,
@@ -11,6 +11,8 @@ import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
 import {unassignUserFromBoardOnBackend} from "@/services/actions/boardService";
+import {useTranslation} from "react-i18next";
+import {TFunction} from "i18next";
 
 
 export function getUserBoards  (
@@ -76,6 +78,29 @@ export function addBoard (
             }
         )
 }
+export function changePassword(
+    t: TFunction<"translation", undefined, "translation">,
+    userId:string,
+    oldPassword:string,
+    newPassword:string,
+    passwordToChange: React.Dispatch<SetStateAction<boolean>>,
+    setOldPassword:React.Dispatch<SetStateAction<string>>,
+    setPassword:React.Dispatch<SetStateAction<string>>,
+    setRepeatPassword:React.Dispatch<SetStateAction<string>>
+){
+    changePasswordOnBackend(userId,oldPassword,newPassword)
+        .then(res => {
+            if (typeof res === 'string') {
+                handleClickVariant(enqueueSnackbar)(res, 'error')
+            } else {
+                handleClickVariant(enqueueSnackbar)(t('passwordChanged'),'success')
+                setOldPassword('')
+                setPassword('')
+                setRepeatPassword('')
+                closeModal(passwordToChange)
+            }
+        })
+}
 
 export function leaveBoard(
     userId:string,
@@ -89,6 +114,5 @@ export function leaveBoard(
                 getUserBoards(userId, setUserBoards)
                 closeModal(setModalDelete)
                 handleClickVariant(enqueueSnackbar)(`Now you are unassigned from board: ${title}` ,'warning')
-
         })
 }

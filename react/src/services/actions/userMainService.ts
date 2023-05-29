@@ -91,6 +91,18 @@ export async function deleteBoardFromBackend(boardId:string){
 
 }
 
+export async function changePasswordOnBackend(userId:string, oldPassword:string, newPassword:string){
+    try{
+        const response = await axios.patch(urlDomain+`/api/users/password`, {userId, oldPassword,newPassword})
+        return response
+    }catch(error:any){
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+
+}
+
 export async function fetchBoardsData(setUserBoards:userBoardsData['setUserBoards'], userId:string) {
     const result = await getUserBoardsFromBackend(userId);
     if (result) {

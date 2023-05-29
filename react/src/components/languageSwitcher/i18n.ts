@@ -102,7 +102,10 @@ const resources = {
                         UserListEmpty:'Brak przypisanych użytkowników',
                         deleteUserFromBoardMessage: 'Czy na pewno chcesz usunąć użytkownika',
                         fromBoard:'z tablicy',
-                        owner:'Właściciel'
+                        owner:'Właściciel',
+                        oldPassword:'Stare hasło',
+                        passwordChanged:'Hasło zostało zmienione',
+                        differentPasswords:'Błędnie powtórzone hasło '
                 }
         },
         en: {
@@ -205,7 +208,10 @@ const resources = {
                         LightMode:'Light Mode',
                         DeleteSubtask:'Are you sure you want to delete subtask',
                         UserListEmpty:'No assigned users',
-                        owner:'Owner'
+                        owner:'Owner',
+                        oldPassword:'Old password',
+                        passwordChanged:'Password changed',
+                        differentPasswords:'Incorrectly repeated password'
                 }
         }
 }
