@@ -23,19 +23,36 @@ import {deleteBoard, leaveBoard, passAndLeave} from "@/services/utils/UserUtils/
 import {assignedUser} from "@/services/utils/boardUtils/DataBoard";
 import {getUsers} from "@/services/utils/boardUtils/boardUtils";
 import {useTranslation} from "react-i18next";
+import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
+import {enqueueSnackbar} from "notistack";
 
 
 const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
-    const [newCreator, setNewCreator] = useState(props.activeUser.id)
     const [users, setUsers] = useState<assignedUser[]>([])
+    const [newCreator, setNewCreator] = useState('')
     const { t } = useTranslation();
     useEffect(() =>{
-        getUsers(props.boardId, setUsers)
+        getUsers(props.boardId, setUsers, setNewCreator)
     },[])
-    const handleChange = (event: SelectChangeEvent<string>) => {
-        const x = event.target.value
-        setNewCreator(x);
+    const handleChange = (event: SelectChangeEvent) => {
+        const user = event.target.value
+        setNewCreator(user);
     };
+    const handleChangeCreator = () =>{
+        if(newCreator === ''){
+            handleClickVariant(enqueueSnackbar)('Select new owner' ,'error')
+        }else if(newCreator.length > 1){
+            passAndLeave(
+                t,
+                props.activeUser.id,
+                props.boardId,
+                newCreator,
+                props.title,
+                props.setUserBoards,
+                props.setModalDelete
+            )
+        }
+    }
     return(
         <Modal
             aria-labelledby="transition-modal-title"
@@ -142,15 +159,7 @@ const ModalLeaveBoard = (props:ModalLeaveBoardProps) =>{
                                 <Button
                                     sx={{maxHeight:'50px'}}
                                     variant="contained"
-                                    onClick={() => passAndLeave(
-                                        t,
-                                        props.activeUser.id,
-                                        props.boardId,
-                                        newCreator,
-                                        props.title,
-                                        props.setUserBoards,
-                                        props.setModalDelete
-                                    )}
+                                    onClick={() => handleChangeCreator()}
                                 >
                                     {t('leave')}
                                 </Button>

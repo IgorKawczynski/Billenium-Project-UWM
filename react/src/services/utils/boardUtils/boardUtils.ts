@@ -245,7 +245,8 @@ export function unassignUserFromBoard(
 
 export function getUsers(
     boardId:string,
-    setUsers:React.Dispatch<SetStateAction<assignedUser[]>>
+    setUsers:React.Dispatch<SetStateAction<assignedUser[]>>,
+    setNewCreator:React.Dispatch<SetStateAction<string>>,
 ) {
     getBoardUsersFromBackend(boardId)
         .then(res => {
@@ -253,6 +254,7 @@ export function getUsers(
                 handleClickVariant(enqueueSnackbar)(res ,'error')
             }else {
                 setUsers(res)
+                setNewCreator(res[0].id)
             }
         })
 }
