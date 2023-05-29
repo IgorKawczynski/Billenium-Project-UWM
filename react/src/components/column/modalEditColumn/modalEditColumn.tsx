@@ -18,13 +18,16 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
     const [title, setTitle] = useState(props.title);
     const [limit, setLimit] = useState(props.cardsLimit);
     const [checkLimit, setCheckLimit] = useState(false);
+    const [lockedLimit, setLockedLimit] = useState(false)
     const { t } = useTranslation();
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
     };
     const handleLimitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(event.target.value);
-        setLimit(value);
+        if(value > 0){
+            setLimit(value);
+        }
     };
 
     useEffect(() => {
@@ -39,7 +42,10 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
 
     useEffect(() => {
         if(props.position == 0 || props.position == Object.keys(props.data.columnList).length-1){
-            setCheckLimit(true)
+            setLockedLimit(true)
+        }
+        if(props.position != 0 && props.position != Object.keys(props.data.columnList).length-1){
+            setLockedLimit(false)
         }
     })
 
@@ -97,6 +103,7 @@ const ModalEditColumn = (props:ModalEditColumnProps) => {
                                     </Typography>
                                     <div>
                                     <Checkbox
+                                        disabled={lockedLimit}
                                         checked={checkLimit}
                                         onChange={handleCheckLimitChange}
                                     />

@@ -56,8 +56,8 @@ const ColumnHeader = (props:columnHeaderProps) =>{
                     && props.position !== Object.keys(props.data.columnList).length-1 &&
                     (<Box
                         border={`1px ${theme.palette.text.primary} solid`}
-                        width={20}
-                        height={20}
+                        minWidth={20}
+                        minHeight={20}
                         borderRadius={100}
                         textAlign={"center"}
                         marginRight={'8px'}
