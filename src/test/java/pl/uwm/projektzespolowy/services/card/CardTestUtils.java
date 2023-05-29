@@ -4,6 +4,7 @@ import pl.uwm.projektzespolowy.models.board.Board;
 import pl.uwm.projektzespolowy.models.card.Card;
 import pl.uwm.projektzespolowy.models.cell.Cell;
 import pl.uwm.projektzespolowy.models.color.ColorValue;
+import pl.uwm.projektzespolowy.models.column.Column;
 import pl.uwm.projektzespolowy.models.user.AvatarColor;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.valueobjects.Position;
@@ -34,6 +35,14 @@ public class CardTestUtils {
         var card = new Card();
         card.setId(id);
         card.setPosition(new Position(position));
+        return card;
+    }
+
+    public static Card createCardWithCell(Long id, int position, Cell cell) {
+        var card = new Card();
+        card.setId(id);
+        card.setPosition(new Position(position));
+        card.setCell(cell);
         return card;
     }
 
@@ -101,6 +110,16 @@ public class CardTestUtils {
         board.setWipLimit(3);
         board.setTitle(new Title("nice board"));
         return board;
+    }
+
+    public static Column createColumn(Integer positionInt, Board board) {
+        var position = new Position(positionInt);
+
+        var column = new Column();
+        column.setId(1L);
+        column.setPosition(position);
+        column.setBoard(board);
+        return column;
     }
 
 }

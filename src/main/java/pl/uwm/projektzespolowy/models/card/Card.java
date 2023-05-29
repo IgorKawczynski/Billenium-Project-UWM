@@ -125,6 +125,10 @@ public class Card extends BasicEntity implements Positionable {
     public List<Card> getAllCards(Board board) {
         List<Card> allCards = new ArrayList<>();
 
+        if (board.getColumns() == null) {
+            return allCards;
+        }
+
         for (Column column : board.getColumns()) {
             for (Cell cell : column.getCells()) {
                 allCards.addAll(cell.getCards());
