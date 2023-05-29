@@ -49,7 +49,8 @@ public class BoardCRUDService {
     }
 
     public void deleteBoard(Long boardId) {
-        boardDeleter.deleteBoardById(boardId);
+        var board = boardReader.getBoardById(boardId);
+        boardDeleter.deleteBoardById(board);
     }
 
     public List<User> deleteAssignedUserFromBoard(Long boardId, User userToDeleteFromBoard) {
