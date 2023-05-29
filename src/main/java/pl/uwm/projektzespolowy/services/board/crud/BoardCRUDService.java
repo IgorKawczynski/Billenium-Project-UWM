@@ -66,4 +66,8 @@ public class BoardCRUDService {
         return boardReader.getAmountOfAssignedCardsToUser(user, boardId);
     }
 
+    public void passAndLeaveBoard(Board board, User userToDeleteFromBoard, User userToPassBoard) {
+        boardUpdater.passAndLeaveBoard(board, userToDeleteFromBoard, userToPassBoard);
+    }
+
 }

@@ -89,20 +89,12 @@ public class BoardFacade {
 
     public List<UserResponseDTO> deleteAssignedUserFromBoard(BoardUserDeleteDTO boardUserDeleteDTO) {
         var boardId = Long.parseLong(boardUserDeleteDTO.boardId());
-        var userToDeleteFromBoard = userCRUDService.getUserById(Long.parseLong(boardUserDeleteDTO.userId()));
+        var userIdToDeleteFromBoard = Long.parseLong(boardUserDeleteDTO.userId());
 
         var board = boardCRUDService.getBoardById(boardId);
-        var columns = board.getColumns();
-        var cells = new ArrayList<Cell>();
+        var userToDeleteFromBoard = userCRUDService.getUserById(userIdToDeleteFromBoard);
 
-        for(Column column: columns) {
-            cells.addAll(column.getCells());
-        }
-        for(Cell cell: cells){
-            for(Card card: cell.getCards()){
-               cardCRUDService.deleteAssignedUserFromCard(card.getId(), userToDeleteFromBoard) ;
-            }
-        }
+        deleteUserFromAssignedCards(board, userToDeleteFromBoard);
 
         return boardCRUDService
                 .deleteAssignedUserFromBoard(boardId, userToDeleteFromBoard)
@@ -111,6 +103,34 @@ public class BoardFacade {
                 .sorted(Comparator.comparing(UserResponseDTO::firstName)
                         .thenComparing(UserResponseDTO::lastName))
                 .collect(Collectors.toList());
+    }
+
+    public void passAndLeaveBoard(BoardPassDTO boardPassDTO) {
+        var boardId = Long.parseLong(boardPassDTO.boardId());
+        var userIdToDeleteFromBoard = Long.parseLong(boardPassDTO.creatorId());
+        var userIdToPassBoard = Long.parseLong(boardPassDTO.userIdToPassBoard());
+
+        var board = boardCRUDService.getBoardById(boardId);
+        var userToDeleteFromBoard = userCRUDService.getUserById(userIdToDeleteFromBoard);
+        var userToPassBoard = userCRUDService.getUserById(userIdToPassBoard);
+
+        deleteUserFromAssignedCards(board, userToDeleteFromBoard);
+        boardCRUDService.passAndLeaveBoard(board, userToDeleteFromBoard, userToPassBoard);
+    }
+
+    private void deleteUserFromAssignedCards(Board board, User userToDeleteFromBoard) {
+        var columns = board.getColumns();
+        var cells = new ArrayList<Cell>();
+
+        for(Column column: columns) {
+            cells.addAll(column.getCells());
+        }
+
+        for(Cell cell: cells){
+            for(Card card: cell.getCards()){
+                cardCRUDService.deleteAssignedUserFromCard(card.getId(), userToDeleteFromBoard) ;
+            }
+        }
     }
 
 }
