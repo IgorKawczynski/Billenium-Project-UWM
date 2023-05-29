@@ -42,12 +42,9 @@ const Home = () => {
                 sx={{
                     width:'100%',
                     display:'flex',
-                    justifyContent:'space-between'
+                    justifyContent:'end'
                 }}
             >
-                <Box width={'50px'}>
-                    <LanguageSwitcher/>
-                </Box>
                 <Box
                     padding={2}
                 >
@@ -71,6 +68,9 @@ const Home = () => {
                         </Typography>
                     )}
 
+                </Box>
+                <Box width={'50px'}>
+                    <LanguageSwitcher/>
                 </Box>
             </Box>
             <Box sx={{display:'flex', justifyContent:'space-around'}}>

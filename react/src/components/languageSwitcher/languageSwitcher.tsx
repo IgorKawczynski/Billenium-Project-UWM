@@ -23,8 +23,16 @@ function LanguageSwitcher() {
                 onChange={handleChangeLanguage}
                 value={localStorage.getItem('lng') || 'en'}
              >
-                <MenuItem value="en"><Avatar sx={{maxHeight:'20px', maxWidth:'20px'}} src={english}/></MenuItem>
-                <MenuItem value="pl"><Avatar sx={{maxHeight:'20px', maxWidth:'20px'}}  src={polish}/></MenuItem>
+                <MenuItem value="en">
+                    <Tooltip title={'English'} placement={'right'}>
+                        <Avatar sx={{maxHeight:'20px', maxWidth:'20px'}} src={english}/>
+                    </Tooltip>
+                </MenuItem>
+                <MenuItem value="pl">
+                    <Tooltip title={'Polski'} placement={'right'}>
+                        <Avatar sx={{maxHeight:'20px', maxWidth:'20px'}}  src={polish}/>
+                    </Tooltip>
+                </MenuItem>
             </Select>
         </Tooltip>
     );
