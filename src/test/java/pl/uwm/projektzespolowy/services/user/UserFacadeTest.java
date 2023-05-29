@@ -99,7 +99,7 @@ class UserFacadeTest {
         // then
         assertThatThrownBy(() -> userFacade.login(userToLogin))
                 .isInstanceOf(BadCredentialsException.class)
-                .hasMessage("You have written bad email or password.");
+                .hasMessage("You have written incorrect credentials.");
     }
 
     @Test

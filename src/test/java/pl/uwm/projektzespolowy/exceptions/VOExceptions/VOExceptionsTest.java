@@ -23,7 +23,7 @@ public class VOExceptionsTest {
     private final EmailAlreadyExistsException emailAlreadyExistsException = new EmailAlreadyExistsException("User with given email already exists.");
     private final RegexMatchException regexMatchException = new RegexMatchException("fieldName", String.format("%s includes not allowed characters.", FIELD_NAME));
     private final FieldLengthException fieldLengthException = new FieldLengthException("fieldName", String.format("%s must contain between %d and %d characters.", FIELD_NAME, MIN_LENGTH, MAX_LENGTH));
-    private final BadCredentialsException badCredentialsException = new BadCredentialsException("You have written wrong email or password.");
+    private final BadCredentialsException badCredentialsException = new BadCredentialsException("You have written incorrect credentials.");
 
 
     @BeforeEach

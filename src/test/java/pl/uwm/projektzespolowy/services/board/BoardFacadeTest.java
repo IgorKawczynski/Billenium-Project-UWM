@@ -29,11 +29,12 @@ public class BoardFacadeTest {
 
     @BeforeAll
     void createUser() {
-        this.user = userFacade.createUser(new UserCreateDTO("test@email.pl", "passwordtest", "firstName", "lastName"));
+        this.user = userFacade.createUser(new UserCreateDTO("testingemailwhichshouldnotexists27@email.pl", "passwordtest", "firstName", "lastName"));
     }
 
     @AfterAll
-    void deleteUser() {
+    void deleteBoardAndUser() {
+        boardFacade.deleteBoard(this.board.getId());
         userFacade.deleteUser(this.user.getId());
     }
 
@@ -137,6 +138,7 @@ public class BoardFacadeTest {
 
 
     @Test
+    @Transactional
     @Order(99999)
     void shouldDeleteBoard() {
         // when
