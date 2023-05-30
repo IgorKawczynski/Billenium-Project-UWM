@@ -38,10 +38,10 @@ public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(currentUserService).passwordEncoder(passwordEncoder);
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.httpFirewall(new DefaultHttpFirewall());
-    }
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.httpFirewall(new DefaultHttpFirewall());
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
