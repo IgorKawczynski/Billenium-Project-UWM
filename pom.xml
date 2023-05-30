@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>pl.uwm</groupId>
 	<artifactId>projektzespolowy</artifactId>
-	<version>1.0-TRANSITION-2</version>
+	<version>1.0-TRANSITION-3</version>
 	<name>projektzespolowy</name>
 	<description>Kanban Table implementation</description>
 	<properties>
@@ -39,10 +39,6 @@
 			<artifactId>assertj-core</artifactId>
 			<version>3.23.1</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -79,62 +75,6 @@
 						</exclude>
 					</excludes>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.flywaydb</groupId>
-				<artifactId>flyway-maven-plugin</artifactId>
-				<version>8.0.0</version>
-				<configuration>
-					<user>postgres</user>
-					<password>qwerty</password>
-					<sqlMigrationSeparator>__</sqlMigrationSeparator>
-					<locations>
-						<location>filesystem:src/main/resources/flyway_scripts</location>
-					</locations>
-					<mixed>true</mixed> <!--> needed to create sequence <!-->
-					<url>jdbc:postgresql://localhost:5432/kanban</url>
-					<schemas>
-						<schema>public</schema>
-					</schemas>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.7</version>
-				<configuration>
-					<excludes>
-						<exclude>pl/uwm/projektzespolowy/**/BasicEntity.*</exclude>
-						<exclude>pl/uwm/projektzespolowy/**/User.*</exclude>
-						<exclude>pl/uwm/projektzespolowy/**/Board.*</exclude>
-						<exclude>pl/uwm/projektzespolowy/**/Column.*</exclude>
-						<exclude>pl/uwm/projektzespolowy/**/Row.*</exclude>
-						<exclude>pl/uwm/projektzespolowy/**/Cell.*</exclude>
-						<exclude>pl/uwm/projektzespolowy/**/Card.*</exclude>
-						<exclude>pl/uwm/projektzespolowy/**/Color.*</exclude>
-						<exclude>pl/uwm/projektzespolowy/**/Checkbox.*</exclude>
-						<exclude>pl/uwm/projektzespolowy/services/user/avatar/**</exclude>
-						<exclude>pl/uwm/projektzespolowy/services/checkbox/crud/**</exclude>
-						<exclude>pl/uwm/projektzespolowy/services/checkbox/**</exclude>
-						<exclude>pl/uwm/projektzespolowy/**/*DTO.*</exclude>
-						<exclude>pl/uwm/projektzespolowy/**/*DTOBuilder.*</exclude>
-						<exclude>pl/uwm/projektzespolowy/**/*Controller.*</exclude>
-					</excludes>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
