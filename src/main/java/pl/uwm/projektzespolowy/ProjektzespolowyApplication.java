@@ -20,7 +20,7 @@ public class ProjektzespolowyApplication {
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowCredentials(true);
-		corsConfiguration.setAllowedOrigins(Arrays.asList("https://react-frontend-production-cfc6.up.railway.app/", "https://react-frontend-production-cfc6.up.railway.app//**"));
+		corsConfiguration.setAllowedOrigins(Arrays.asList("https://react-frontend-production-cfc6.up.railway.app/", "https://react-frontend-production-cfc6.up.railway.app/**"));
 		corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
 				"Accept", "Authorization", "Origin, Accept", "X-Requested-With",
 				"Access-Control-Request-Method", "Access-Control-Request-Headers"));
