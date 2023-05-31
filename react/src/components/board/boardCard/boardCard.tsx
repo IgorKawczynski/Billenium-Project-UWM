@@ -35,7 +35,7 @@ const BoardCard = (props:BoardCardProps) => {
                     borderRadius={'10px 0 0 10px'}
                 >
                     <Box height={'75%'}>
-                        <Link to={`/board/${props.id}`} style={{textDecoration:'none'}}>
+                        <Link to={`/board/${props.boardId}`} style={{textDecoration:'none'}}>
                         <Typography variant={"h5"} color={theme.palette.text.primary}>
                             {props.title}
                         </Typography>
@@ -58,13 +58,14 @@ const BoardCard = (props:BoardCardProps) => {
                                 <ExitToAppIcon/>
                             </IconButton>
                         </Tooltip>
-                    </Box>
 
+                    </Box>
                 </Box>
                 <ModalLeaveBoard
-                    id={props.id}
-                    userId={props.userId}
+                    boardId={props.boardId}
+                    activeUser={props.activeUser}
                     title={props.title}
+                    creatorId={props.creatorId}
                     modalDelete={modalLeaveBoard}
                     setModalDelete={setModalLeaveBoard}
                     setUserBoards={props.setUserBoards}

@@ -69,14 +69,14 @@ public class PositionableList<T extends Positionable> implements Iterable<T>{
         return this.positionables.stream()
                 .filter(element -> element.getPosition().value() == previousPosition)
                 .findFirst()
-                .orElseThrow(() -> new ElementDoesNotExists("Element with position " + previousPosition + " doesn't exists!"));
+                .orElseThrow(() -> new ElementDoesNotExists("Element with position " + previousPosition + " does not exist!"));
     }
 
     public T get(int position) {
         return this.positionables.stream()
                 .filter(positionable -> positionable.getPosition().value() == position)
                 .findFirst()
-                .orElseThrow(() -> new ElementDoesNotExists("Element with position " + position + " doesn't exists!"));
+                .orElseThrow(() -> new ElementDoesNotExists("Element with position " + position + " does not exist!"));
     }
 
     public T getFirstElement() {

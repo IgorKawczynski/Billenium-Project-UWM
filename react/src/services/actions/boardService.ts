@@ -11,13 +11,18 @@ export const urlDomain = 'https://billenium-project-uwm-production-b520.up.railw
 export function loadDefaultData(){
     return {
         id: "0",
+        creatorId: "0",
         title: "Kanban",
         creatorName: "Test",
+        wipLimit:'',
         assignedUsers: [
             {
                 id: "1",
                 firstName: "Test",
-                lastName: "Test"
+                lastName: "Test",
+                avatarPath: "",
+                avatarColor:"",
+                remainingAssignments:3
             }
         ],
         columnList: [
@@ -37,7 +42,9 @@ export function loadDefaultData(){
                                 description: "Jakis Opis",
                                 position: 0,
                                 color: "default",
-                                assignedUsers:[]
+                                assignedUsers:[],
+                                checkboxes:[],
+                                isLocked:false
                             },
                             {
                                 id: "10",
@@ -45,7 +52,9 @@ export function loadDefaultData(){
                                 description: "Jakis Opis",
                                 position: 1,
                                 color: "default",
-                                assignedUsers:[]
+                                assignedUsers:[],
+                                checkboxes:[],
+                                isLocked:false
                             }
                         ]
                     }
@@ -135,11 +144,23 @@ export async function moveColumnToBackend(movedObjectId:string, newPosition:numb
     }
 }
 
-export async function editBoardToBackend(boardId:string, newTitle:string){
-    const apiUrl = urlDomain+`/api/boards`;
-    let response;
+export async function editBoardTitleToBackend(boardId:string, newTitle:string){
+    const apiUrl = urlDomain+`/api/boards/${boardId}/title`;
     try {
-        const response = await axios.put(apiUrl, {boardId, newTitle});
+        const response = await axios.put(apiUrl,null ,{params:{newTitle:newTitle}});
+        console.log(response)
+        return response.data
+    } catch (error: any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+}
+export async function editBoardWipLimitToBackend(boardId:string, newWipLimit:string){
+    const apiUrl = urlDomain+`/api/boards/${boardId}/wipLimit`;
+    try {
+        const response = await axios.put(apiUrl,null ,{params:{newWipLimit:newWipLimit}});
+        console.log(response)
         return response.data
     } catch (error: any) {
         if (error.response && error.response.data && error.response.data.error) {
@@ -162,10 +183,37 @@ export async function getBoardTitleFromBackend(boardId:string){
     }
 }
 
+export async function getBoardUsersFromBackend(boardId:string){
+    const apiUrl = urlDomain+`/api/boards/users/${boardId}`;
+    try {
+        const response = await axios.get(apiUrl);
+        return response.data
+    } catch (error:any) {
+        if(error.data.error){
+            if (error.response && error.response.data && error.response.data.error) {
+                return error.response.data.error;
+            }
+        }
+    }
+}
+
+
 export async function assignUserToBoardToBackend(boardId:string,userEmail:string){
     const apiUrl = urlDomain+`/api/boards/assign-user`;
     try {
         const response = await axios.patch(apiUrl, {boardId, userEmail});
+        return response.data
+    } catch (error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+}
+
+export async function unassignUserFromBoardOnBackend(boardId:string,userId:string){
+    const apiUrl = urlDomain+`/api/boards/delete-user`;
+    try {
+        const response = await axios.patch(apiUrl, {boardId, userId});
         return response.data
     } catch (error:any) {
         if (error.response && error.response.data && error.response.data.error) {

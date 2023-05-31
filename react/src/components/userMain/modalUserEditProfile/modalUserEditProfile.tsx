@@ -1,33 +1,47 @@
 import React, {useEffect, useState} from 'react';
-import {Backdrop, Box, Button, Fade, Modal, Stack, TextField, Typography, useTheme} from "@mui/material";
+import {
+    Avatar,
+    Backdrop,
+    Box,
+    Button,
+    Fade,
+    IconButton,
+    Modal,
+    Stack,
+    TextField,
+    Tooltip,
+    Typography,
+} from "@mui/material";
 import {modalBigStyle} from "@/assets/themes/modalStyle";
-import {closeModal} from "@/services/utils/modalUtils/modalUtils";
+import {closeModal, openModal} from "@/services/utils/modalUtils/modalUtils";
 import {ModalUserEditProfileProps} from "@/components/userMain/interfaces/modalUserEditProfile/modalUserEditProfile";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import {PhotoCamera} from "@mui/icons-material";
 import ChangePassword from "@/components/userMain/changePassword/changePassword";
+import {changeAvatar} from "@/services/utils/UserUtils/userMainUtils";
+import NoPhotographyIcon from '@mui/icons-material/NoPhotography';
+import ModalDeleteAvatar from "@/components/userMain/modalDeleteAvatar/modalDeleteAvatar";
 
 const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
-    const [firstName, setFirstName] = useState(props.firstName);
-    const [lastName, setLastName] = useState(props.lastName);
-    const [email, setEmail] = useState(props.email);
+    const [firstName, setFirstName] = useState(props.activeUser.firstName);
+    const [lastName, setLastName] = useState(props.activeUser.lastName);
+    const [email, setEmail] = useState(props.activeUser.email);
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
-    const [passwordToChange, setPasswordToChange] =useState(false);
-    const theme = useTheme()
+    const [passwordToChange, setPasswordToChange] = useState(false);
+    const [DeleteAvatar, setDeleteAvatar] = useState(false)
+    useEffect(() => {
+        // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
+        setFirstName(props.activeUser.firstName);
+    }, [props.activeUser.firstName]);
 
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
-        setFirstName(props.firstName);
-    }, [props.firstName]);
-
+        setLastName(props.activeUser.lastName);
+    }, [props.activeUser.lastName]);
     useEffect(() => {
         // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
-        setLastName(props.lastName);
-    }, [props.lastName]);
-    useEffect(() => {
-        // kiedy zadanie zostanie załadowane, ustawiamy jego wartość w stanie
-        setEmail(props.email);
-    }, [props.email]);
+        setEmail(props.activeUser.email);
+    }, [props.activeUser.email]);
 
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
@@ -45,6 +59,18 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
     };const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
     };
+    function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) {
+        if(event.target.files){
+            const file = event.target.files[0];
+            const image = new FormData();
+            image.append('avatarImage', file)
+            changeAvatar(
+                props.activeUser.id,
+                image,
+                props.setActiveUser
+            )
+        }
+    }
 
     return (
         <Modal
@@ -67,9 +93,46 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                         display={"flex"}
                         alignItems={"center"}
                     >
-                        <AccountCircleIcon
-                            sx={{color:theme.palette.text.primary}}
-                        />
+
+                            <Avatar
+                                src={props.activeUser.avatarPath && props.activeUser.avatarPath}
+                                sx={{
+                                    bgcolor:props.activeUser.avatarColor
+                                }}
+                            >
+                                <Typography variant={"body1"}>
+                                    {props.activeUser.firstName[0].toUpperCase() + props.activeUser.lastName[0].toUpperCase()}
+                                </Typography>
+                            </Avatar>
+                        <Tooltip
+                            title={"Upload your avatar"}
+                            placement={"top"}
+                        >
+                            <IconButton
+                                color="primary"
+                                aria-label="upload picture"
+                                component="label"
+                            >
+                                <input hidden accept="image/*" type="file" onChange={handleFileUpload}/>
+                                <PhotoCamera />
+                            </IconButton>
+                    </Tooltip>
+                        {props.activeUser.avatarPath != null && (
+                            <Tooltip
+                                title={"Delete avatar"}
+                                placement={"top"}
+                            >
+                                <IconButton
+                                    color="primary"
+                                    aria-label="Delete avatar"
+                                    component="label"
+                                    onClick={() => openModal(setDeleteAvatar)}
+                                >
+                                    <NoPhotographyIcon />
+                                </IconButton>
+                            </Tooltip>
+                        )}
+
                         <Typography
                             color={'textPrimary'}
                             id="transition-modal-title"
@@ -143,6 +206,7 @@ const ModalUserEditProfile = (props:ModalUserEditProfileProps) => {
                             Edit
                         </Button>
                     </Box>
+                    <ModalDeleteAvatar activeUser={props.activeUser} modalDeleteAvatar={DeleteAvatar} setModalDeleteAvatar={setDeleteAvatar} setActiveUser={props.setActiveUser}/>
                 </Stack>
             </Fade>
         </Modal>

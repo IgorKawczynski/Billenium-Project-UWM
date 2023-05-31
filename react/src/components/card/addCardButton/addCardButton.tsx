@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import Button from '@mui/material/Button';
 import Box from "@mui/material/Box";
-import AddCardButtonProps from "@/components/card/interfaces/addCardButtonInterface/AddCardButton";
-import ModalAddCard from "@/components/card/modalAddCard/modalAddCard";
+import AddCardButtonProps from "@/components/card/interfaces/addCardButton/AddCardButton";
+import ModalAddCard from "@/components/card/modals/modalAddCard/modalAddCard";
 import Typography from "@mui/material/Typography";
 import {openModal} from "@/services/utils/modalUtils/modalUtils";
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';

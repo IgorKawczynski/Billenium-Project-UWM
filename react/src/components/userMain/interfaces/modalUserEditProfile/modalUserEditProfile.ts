@@ -1,9 +1,9 @@
 import React, {SetStateAction} from "react";
+import {activeUser} from "@/services/utils/boardUtils/DataBoard";
 
 export interface ModalUserEditProfileProps{
-    firstName:string
-    lastName:string
-    email:string
+    activeUser:activeUser
     modalEdit:boolean
     setModalEdit: React.Dispatch<SetStateAction<boolean>>
+    setActiveUser:any
 }

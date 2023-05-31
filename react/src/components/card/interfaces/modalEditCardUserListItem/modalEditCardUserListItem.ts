@@ -6,6 +6,8 @@ export interface ModalEditCardUserListItemProps{
     userId:string
     userName:string
     userLastName:string
+    userAvatarPath:string
+    userAvatarColor:string
     cardId:string
     cardTitle:string
     setAnchorEl:  React.Dispatch<SetStateAction<null | HTMLElement>>

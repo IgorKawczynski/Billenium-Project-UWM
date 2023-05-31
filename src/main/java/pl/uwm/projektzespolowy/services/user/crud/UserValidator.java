@@ -15,21 +15,20 @@ import pl.uwm.projektzespolowy.exceptions.VOExceptions.RegexMatchException;
 class UserValidator {
 
     private final UserRepository userRepository;
-    public static final String NAME_REGEX = "[\\p{Alpha}\\p{Space}-.']++";
+    public static final String NAME_REGEX = "^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]*$";
     public static final String EMAIL_REGEX = "[\\p{Alpha}\\p{Digit}]++@[\\p{Alpha}\\p{Digit}]++.[\\p{Alpha}\\p{Digit}]++";
     public static final String PASSWORD_REGEX = "[\\p{Alnum}\\p{Punct}]++";
-
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public void isNull(String fieldName, Object fieldValue) {
         if (fieldValue == null) {
-            throw new NullPointerException(String.format("Field %s cannot be empty!", fieldName));
+            throw new NullPointerException(String.format("Field %s cannot be empty.", fieldName));
         }
     }
 
     public void emailContainsAtSign(String email) {
         if(email != null && !email.contains("@")) {
-            throw new InvalidEmailException("Email must contain '@' sign !");
+            throw new InvalidEmailException("Email must contain '@' sign.");
         }
     }
 
@@ -37,7 +36,7 @@ class UserValidator {
         if (!fieldValue.matches(regex)) {
             throw new RegexMatchException(
                     String.format(
-                            "%s includes not allowed characters",
+                            "%s includes not allowed characters.",
                             fieldName
                     )
             );
@@ -48,7 +47,7 @@ class UserValidator {
         if (fieldValue.length() > maxLength || fieldValue.length() < minLength) {
             throw new FieldLengthException(
                     String.format(
-                            "%s must contain between %d and %d characters",
+                            "%s must contain between %d and %d characters.",
                             fieldName,
                             minLength,
                             maxLength
@@ -59,19 +58,19 @@ class UserValidator {
 
     public void checkIfUserExists(String email) {
         if (!userRepository.existsByEmail(email)) {
-            throw new BadCredentialsException("There is no such user with given email");
+            throw new BadCredentialsException("There is no such user with given email.");
         }
     }
 
     public void checkIfUserAlreadyExists(String email) {
         if (userRepository.existsByEmail(email)) {
-            throw new EmailAlreadyExistsException("User with given email already exists");
+            throw new EmailAlreadyExistsException("User with given email already exists.");
         }
     }
 
     public void checkIfCredentialsAreProper(String email, String password) {
         if (!passwordEncoder.matches(password, userRepository.findRegisteredUserByEmail(email).getPassword())) {
-            throw new BadCredentialsException("You have written bad email or password");
+            throw new BadCredentialsException("You have written bad email or password.");
         }
     }
 

@@ -1,9 +1,16 @@
-import {addBoardToBackend, deleteBoardFromBackend, getUserBoardsFromBackend} from "@/services/actions/userMainService";
+import {
+    addBoardToBackend,
+    changeUserAvatarOnBackend,
+    deleteUserAvatarOnBackend,
+    getUserBoardsFromBackend,
+    getUserFromBackend
+} from "@/services/actions/userMainService";
 import {userBoardsData} from "@/services/utils/UserUtils/userBoardsData";
 import React, {SetStateAction} from "react";
 import {closeModal} from "@/services/utils/modalUtils/modalUtils";
 import {handleClickVariant} from "@/services/utils/toastUtils/toastUtils";
 import {enqueueSnackbar} from "notistack";
+import {unassignUserFromBoardOnBackend} from "@/services/actions/boardService";
 
 
 export function getUserBoards  (
@@ -13,6 +20,38 @@ export function getUserBoards  (
     getUserBoardsFromBackend(userId)
         .then( res => {
             setUserBoards(res)
+        })
+}
+export function changeAvatar  (
+    userId:string,
+    avatarImage:FormData,
+    setActiveUser:any
+)  {
+    changeUserAvatarOnBackend(userId, avatarImage)
+        .then( res => {
+            if (typeof res === 'string') {
+                handleClickVariant(enqueueSnackbar)(res, 'error')
+            } else {
+                getUserFromBackend(userId)
+                    .then(res => {
+                        setActiveUser(res)
+                        handleClickVariant(enqueueSnackbar)(`User avatar added, please refresh page.` ,'success')
+                    })
+            }
+        })
+}
+export function deleteAvatar(
+    userId:string,
+    setActiveUser:any,
+    setAvatarDelete:React.Dispatch<SetStateAction<boolean>>
+)  {
+    deleteUserAvatarOnBackend(userId)
+        .then( res => {
+            getUserFromBackend(userId)
+                .then(res => {
+                    setActiveUser(res)
+                    closeModal(setAvatarDelete)
+                })
         })
 }
 
@@ -38,18 +77,18 @@ export function addBoard (
         )
 }
 
-export function deleteBoard(
+export function leaveBoard(
     userId:string,
     boardId:string,
     title:string,
     setUserBoards:userBoardsData["setUserBoards"],
     setModalDelete:React.Dispatch<SetStateAction<boolean>>
 ){
-    deleteBoardFromBackend(boardId)
+    unassignUserFromBoardOnBackend(boardId,userId)
         .then(res => {
                 getUserBoards(userId, setUserBoards)
                 closeModal(setModalDelete)
-                handleClickVariant(enqueueSnackbar)(`Board ${title} removed` ,'success')
+                handleClickVariant(enqueueSnackbar)(`Now you are unassigned from board: ${title}` ,'warning')
 
         })
 }

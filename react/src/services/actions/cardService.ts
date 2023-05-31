@@ -70,3 +70,27 @@ export async function removeCardToBackend(cardId:string){
     } catch (error) {
     }
 }
+
+export async function unlockCardOnBackend(cardId:string){
+    const apiUrl = urlDomain+`/api/cards/unlocked/${cardId}`;
+    try {
+        const response = await axios.put(apiUrl);
+        return response.data
+    } catch (error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+}
+
+export async function lockCardOnBackend(cardId:string){
+    const apiUrl = urlDomain+`/api/cards/locked/${cardId}`;
+    try {
+        const response = await axios.put(apiUrl);
+        return response.data
+    } catch (error:any) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return error.response.data.error;
+        }
+    }
+}

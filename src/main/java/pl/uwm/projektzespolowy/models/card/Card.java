@@ -8,6 +8,8 @@ import lombok.experimental.FieldDefaults;
 import pl.uwm.projektzespolowy.models.Positionable;
 import pl.uwm.projektzespolowy.models.basic.BasicEntity;
 import pl.uwm.projektzespolowy.models.cell.Cell;
+import pl.uwm.projektzespolowy.models.checkbox.Checkbox;
+import pl.uwm.projektzespolowy.models.checkbox.CheckboxResponseDTO;
 import pl.uwm.projektzespolowy.models.color.ColorValue;
 import pl.uwm.projektzespolowy.models.user.User;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
@@ -15,9 +17,7 @@ import pl.uwm.projektzespolowy.models.valueobjects.Position;
 import pl.uwm.projektzespolowy.models.valueobjects.Title;
 
 import javax.persistence.*;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -50,6 +50,13 @@ public class Card extends BasicEntity implements Positionable {
     @JoinColumn(name = "cell_id", referencedColumnName = "id")
     Cell cell;
 
+    @OneToMany(mappedBy = "card",
+               cascade = CascadeType.ALL,
+               orphanRemoval = true)
+    List<Checkbox> checkboxes;
+
+    boolean isLocked;
+
     public Card(Title title, String description, Cell cell, Position position) {
         this.title = title;
         this.description = description;
@@ -57,6 +64,8 @@ public class Card extends BasicEntity implements Positionable {
         this.position = position;
         this.assignedUsers = new HashSet<>();
         this.color = ColorValue.DEFAULT;
+        this.checkboxes = new ArrayList<>();
+        this.isLocked = false;
     }
 
     public CardResponseDTO toDto() {
@@ -72,6 +81,11 @@ public class Card extends BasicEntity implements Positionable {
                         .sorted(Comparator.comparing(UserResponseDTO::firstName)
                                 .thenComparing(UserResponseDTO::lastName))
                         .collect(Collectors.toList()))
+                .checkboxes(this.checkboxes.stream()
+                        .map(Checkbox::toDto)
+                        .sorted(Comparator.comparing(CheckboxResponseDTO::id))
+                        .toList())
+                .isLocked(this.isLocked)
                 .build();
     }
 

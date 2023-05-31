@@ -3,10 +3,8 @@ package pl.uwm.projektzespolowy.services.board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.projektzespolowy.models.board.BoardCreateDTO;
-import pl.uwm.projektzespolowy.models.board.BoardResponseDTO;
-import pl.uwm.projektzespolowy.models.board.BoardUpdateDTO;
-import pl.uwm.projektzespolowy.models.board.BoardUserUpdateDTO;
+import pl.uwm.projektzespolowy.models.board.*;
+import pl.uwm.projektzespolowy.models.user.UserBoardAssignmentDTO;
 import pl.uwm.projektzespolowy.models.user.UserResponseDTO;
 
 import java.util.List;
@@ -21,13 +19,13 @@ public class BoardController {
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public BoardResponseDTO createBoard(@RequestBody BoardCreateDTO boardCreateDTO) {
-        return boardFacade.createBoard(boardCreateDTO);
+        return boardFacade.createBoard(boardCreateDTO).toDto();
     }
 
     @GetMapping("/{boardId}")
     @ResponseStatus(HttpStatus.OK)
     public BoardResponseDTO getBoardById(@PathVariable Long boardId) {
-        return boardFacade.getBoardById(boardId);
+        return boardFacade.getBoardById(boardId).toDto();
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"boardId"})
@@ -38,20 +36,26 @@ public class BoardController {
 
     @GetMapping("/users/{boardId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponseDTO> getAllAssignedUsersToBoard(@PathVariable Long boardId) {
+    public List<UserBoardAssignmentDTO> getAllAssignedUsersToBoard(@PathVariable Long boardId) {
         return boardFacade.getAllAssignedUsersToBoard(boardId);
     }
 
-    @PutMapping("")
+    @PutMapping("/{boardId}/title")
     @ResponseStatus(HttpStatus.OK)
-    public BoardResponseDTO updateBoard(@RequestBody BoardUpdateDTO boardUpdateDTO) {
-        return boardFacade.updateBoard(boardUpdateDTO);
+    public BoardUpdateDTO updateBoardTitle(@PathVariable Long boardId, @RequestParam("newTitle") String newTitle) {
+        return boardFacade.updateBoardTitle(boardId, newTitle);
+    }
+
+    @PutMapping("/{boardId}/wipLimit")
+    @ResponseStatus(HttpStatus.OK)
+    public BoardUpdateDTO updateBoardWipLimit(@PathVariable Long boardId, @RequestParam("newWipLimit") String newWipLimit) {
+        return boardFacade.updateBoardWipLimit(boardId, newWipLimit);
     }
 
     @PatchMapping("/assign-user")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponseDTO> assignUserToBoard(@RequestBody BoardUserUpdateDTO boardUserUpdateDTO) {
-        return boardFacade.assignUserToBoard(boardUserUpdateDTO);
+    public List<UserResponseDTO> assignUserToBoard(@RequestBody BoardUserCreateDTO boardUserCreateDTO) {
+        return boardFacade.assignUserToBoard(boardUserCreateDTO);
     }
 
     @DeleteMapping("/{boardId}")
@@ -60,10 +64,10 @@ public class BoardController {
         boardFacade.deleteBoard(boardId);
     }
 
-    @PatchMapping("/users")
+    @PatchMapping("/delete-user")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponseDTO> deleteAssignedUserFromBoard(@RequestBody BoardUserUpdateDTO boardUserUpdateDTO) {
-        return boardFacade.deleteAssignedUserFromBoard(boardUserUpdateDTO);
+    public List<UserResponseDTO> deleteAssignedUserFromBoard(@RequestBody BoardUserDeleteDTO boardUserDeleteDTO) {
+        return boardFacade.deleteAssignedUserFromBoard(boardUserDeleteDTO);
     }
 
 }

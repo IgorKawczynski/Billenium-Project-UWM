@@ -10,6 +10,15 @@ const CardUsers = (props:CardUsersProps) =>{
     return(
                     <AvatarGroup
                         max={4}
+                        sx={{
+                            '.MuiAvatarGroup-more':{
+                            fontSize: 12
+                            },
+                            '.MuiAvatarGroup-avatar': {
+                                width: 30,
+                                height: 30,
+                            },
+                        }}
                     >
                         {props.assignedUsers.map(user => {
                             return(
@@ -18,10 +27,9 @@ const CardUsers = (props:CardUsersProps) =>{
                                     title={user.firstName + " " +user.lastName}
                                     placement={"bottom"}>
                                     <Avatar
+                                        src={user.avatarPath && user.avatarPath}
                                         sx={{
-                                            width: 35,
-                                            height: 35,
-                                            bgcolor:theme.palette.primary.main
+                                            bgcolor:user.avatarColor
                                         }}
                                     >
                                         <Typography variant={"body1"}>
@@ -31,7 +39,6 @@ const CardUsers = (props:CardUsersProps) =>{
                                 </Tooltip>
                             )
                         })}
-                        {props.providedDrop.placeholder}
                     </AvatarGroup>
     )
 }

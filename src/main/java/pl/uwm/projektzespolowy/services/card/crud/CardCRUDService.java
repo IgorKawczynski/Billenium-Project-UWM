@@ -38,9 +38,19 @@ public class CardCRUDService {
         return cardUpdater.editCard(cardToChange, newTitle, newDescription);
     }
 
-    public Card assignUserToCard(Long cardId, User userToAssign) {
+    public Card markAsLocked(Long cardId) {
+        var cardToChange = cardReader.getCardById(cardId);
+        return cardUpdater.markAsLocked(cardToChange);
+    }
+
+    public Card markAsUnlocked(Long cardId) {
+        var cardToChange = cardReader.getCardById(cardId);
+        return cardUpdater.markAsUnlocked(cardToChange);
+    }
+
+    public Card assignUserToCard(Long cardId, User userToAssign, Integer boardWipLimit, Integer userAssignedCards) {
         var card = cardReader.getCardById(cardId);
-        return cardUpdater.assignUserToCard(card, userToAssign);
+        return cardUpdater.assignUserToCard(card, userToAssign, boardWipLimit, userAssignedCards);
     }
 
     public void deleteCard(Cell cell, Long cardId) {

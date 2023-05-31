@@ -19,9 +19,9 @@ public class RowFacade {
     private final RowCRUDService rowCRUDService;
     private final BoardCRUDService boardCRUDService;
 
-    public RowResponseDTO createRow(RowCreateDTO rowCreateDTO) {
+    public Row createRow(RowCreateDTO rowCreateDTO) {
         var board = boardCRUDService.getBoardById(Long.parseLong(rowCreateDTO.boardId()));
-        return rowCRUDService.createRow(board, rowCreateDTO.title()).toDto();
+        return rowCRUDService.createRow(board, rowCreateDTO.title());
     }
 
     public RowResponseDTO getRowById(Long rowId) {

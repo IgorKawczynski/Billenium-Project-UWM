@@ -13,9 +13,16 @@ import java.util.Set;
 class BoardUpdater {
     private final BoardRepository boardRepository;
 
-    public Board editBoard(Board boardToChange, String givenTitle) {
+    public Board editBoardTitle(Board boardToChange, String givenTitle) {
         if (givenTitle != null) {
             boardToChange.setTitle(new Title(givenTitle));
+        }
+        return boardRepository.saveAndFlush(boardToChange);
+    }
+
+    public Board editBoardWipLimit(Board boardToChange, Integer givenWipLimit) {
+        if (givenWipLimit != null) {
+            boardToChange.setWipLimit(givenWipLimit);
         }
         return boardRepository.saveAndFlush(boardToChange);
     }
