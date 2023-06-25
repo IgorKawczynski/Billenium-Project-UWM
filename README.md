@@ -1,5 +1,18 @@
 # MAGI - Team Project for Billenium ( Kanban Table )
 
+<div align='center'>
+<p>
+  <a href=https://magikanban.up.railway.app/>
+    <b>Kanban Board MAGI - railway</b>
+  </a>
+</p>
+<p>
+  <a href=https://igor121681.smallhost.pl/>
+    <b>Kanban Board MAGI - smallhost</b>
+  </a>
+</p>
+</div>
+
 <p>
   <br>Adam Trentowski - backend dev - Scrum Master 👷‍♂️
   <br>Igor Kawczyński - backend dev
